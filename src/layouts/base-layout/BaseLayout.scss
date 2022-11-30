@@ -1,0 +1,24 @@
+.base-layout-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+
+  & > div:nth-child(1) {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 25%;
+    max-width: 450px;
+    min-width: 360px;
+  }
+
+  & > div:nth-child(2) {
+    width: 60%;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+  }
+}
