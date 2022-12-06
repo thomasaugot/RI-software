@@ -21,52 +21,44 @@ const SingUpForm = () => {
     <div className="registration-Div">
       <form className="registration-form">
         <header>
-          <h2>Create an account</h2>
-          <h4>
-            Do you already have a account? <a href="Login">Login</a>
+          <h2 className="registration-header">Create an account
+          </h2>
+          <br/>
+          <h4 className="registration-header">
+            Have an account? <a href="Login">Sing in</a>
           </h4>
         </header>
         <div className="registration-info">
-          <label>Company Name</label>
           <input
             name={information.companyName.name}
-            value={information.companyName.value}
             type="text"
             placeholder="Company Name"
             required
           />
 
-          <label>Full Company Name</label>
           <input
             name={information.fullCompanyName.name}
-            value={information.fullCompanyName.value}
             type="text"
             placeholder="Full Company Name"
             required
           />
 
-          <label>Login</label>
           <input
             name={information.login.name}
-            value={information.login.value}
             type="text"
             placeholder="Enter Username here"
             required
           />
-          <label>E-mail address</label>
 
           <input
             name={information.email.name}
-            value={information.email.value}
             type="text"
             placeholder="rni.software@gmail.com"
             required
           />
-          <label>Password</label>
           <div className="field-container">
             <input
               name={information.password.name}
-              value={information.password.value}
               type={passwordVisible ? "text" : "password"}
               placeholder="min. 6 charcters"
               minLength={6}
@@ -92,11 +84,9 @@ const SingUpForm = () => {
             </span>
           </div>
 
-          <label>Repeat Password</label>
           <div className="field-container">
             <input
               name={information.repeatPassword.name}
-              value={information.repeatPassword.value}
               minLength={6}
               type={rPasswordVisible ? "text" : "password"}
               placeholder="Retype password"
@@ -121,16 +111,12 @@ const SingUpForm = () => {
               <FontAwesomeIcon icon={rPasswordVisible ? faEyeSlash : faEye} />
             </span>
           </div>
-
-          <label>Phone number</label>
           <input
             name={information.phoneNumber.name}
-            value={information.phoneNumber.value}
-            type="number"
-            placeholder="+xxxxxxxxxxx NO symbols"
+            type="tel"
+            placeholder="Phone number"
             required
           />
-
           <div className="register-button">
             <button>Create an account</button>
           </div>
