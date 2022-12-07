@@ -1,27 +1,29 @@
 
-// import './confirmation-email-form.styles.scss'
-import "../../routes/registration/Registration.scss";
+import './ConfimationEmailForm.scss'
 
 const ConfirmationForm = () => {
     return (
-      <div className="registration-Div">
-        <form className="registration-form">
+      <div className="verification-div">
+        <form className="verification-form">
           <div>
-           <h2>Email verification</h2>
-           <h4>
-            Do you want to return? <a href="registrationPage">Go</a>
+           <h3 className="first-verifi-title">Verify Your Email Address</h3>
+           <h4 className="second-verifi-title">
+            Do you want to return? <a href="registrationPage">Return</a>
            </h4>
-            <h4>a confirmation code has been sent to *emile from db</h4>
+            <h4 className="third-verifi-title">We sent a confirmation code to </h4>
+            <h4 className="verifi-email">jsmaylovrustam05@gmail.com </h4>
+            <br />
           </div>
-          <div className="registration-info">
-           <label>Enter code</label>
+          <div className="verification-info">
            <input
               type="text"
               required
-              placeholder="The code"
+              placeholder="Enter code"
             />
           </div>
-          <button className="registration-button">Send</button>
+          <div className="verification-button">
+            <button>Send</button>
+          </div>
           </form>
       </div>
     )

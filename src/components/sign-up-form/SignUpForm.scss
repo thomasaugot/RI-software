@@ -4,11 +4,14 @@
   width: 100%;
   min-height: 100vh;
   background-color: #3d72bf;
-  padding: 4rem 0.75rem;
   overflow: hidden;
+  display: flex;
+  position: absolute;
+  align-items: center;
 
   .registration-form {
-    max-width: 500px;
+    width: 530px;
+    height: 675px;
     padding: 3rem 3%;
     border-radius: 1rem;
     background-color: #fff;
@@ -30,6 +33,11 @@
 
       h4 {
         font-weight: 500;
+
+        a{
+          text-decoration: none;
+          margin-left: 0.3rem;
+        }
       }
     }
 
@@ -75,7 +83,7 @@
         border-radius: 10px;
         box-shadow: 7px 5px 5px rgb(230, 230, 230);
         transition: all 0.3s ease-in-out;
-        font-size: 18px;
+        font-size: 16px;
         padding: 5px 15px;
         background: none;
         color: #1a3b5d;
