@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&family=Poppins:wght@200;300;400&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
 
+$fonts: 'Poppins', sans-serif;
 
 .registration-Div {
   width: 100%;
@@ -8,19 +10,21 @@
   display: flex;
   position: absolute;
   align-items: center;
+  font-family: $fonts;
 
   .registration-form {
     width: 530px;
-    height: 675px;
-    padding: 3rem 3%;
+    height: fit-content;
+    padding: 20px 30px;
     border-radius: 1rem;
     background-color: #fff;
     margin: 0 auto;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
-    .registration-header{
+    .registration-header {
       display: flex;
       justify-content: center;
+      
     }
 
     header {
@@ -34,7 +38,7 @@
       h4 {
         font-weight: 500;
 
-        a{
+        a {
           text-decoration: none;
           margin-left: 0.3rem;
         }
@@ -65,7 +69,7 @@
           background-color: #4970B5;
           color: #fff;
         }
-      
+
       }
     }
 
@@ -87,7 +91,7 @@
         padding: 5px 15px;
         background: none;
         color: #1a3b5d;
-        font-family: "Source Sans Pro", sans-serif;
+        font-family: $fonts;
         margin-bottom: 22px;
       }
 
@@ -119,6 +123,18 @@
       }
     }
   }
+}
+
+.checkBox {
+  display: flex;
+  justify-content: space-between;
+  font-family: $fonts;
+}
+
+input, #rememberme {
+  box-shadow: none;
+  width: 15px;
+  height: 12px;
 }
 
 @media screen and (max-width: 560px) {
