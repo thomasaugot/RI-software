@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import "../sign-up-form/SignUpForm.scss";
+import Input, { Type } from "../Input";
 
 const LoginForm = () => {
     const [login, setLogin] = useState({
@@ -17,7 +18,6 @@ const LoginForm = () => {
                 <header>
                     <h2 className="registration-header">Sign In
                     </h2>
-                    <br />
                     <h4 className="registration-header">
                         Don have an account yet? <a href="registrationPage">Register</a>
                     </h4>
@@ -26,19 +26,16 @@ const LoginForm = () => {
                     <p>Wrong User info please check</p>
                 </div> */}
                 <div className="registration-info">
-                    <input
+                    <Input
                         name={login.userId.name}
-                        type="text"
                         placeholder="User ID"
-                        required
                     />
                     <div className="field-container">
-                        <input
+                        <Input
                             name={login.password.name}
-                            type={passwordVisible ? "text" : "password"}
+                            type={passwordVisible ? Type.text : Type.password}
                             placeholder="min. 6 charcters"
                             minLength={6}
-                            required
                             onChange={(e) => {
                                 setLogin((prev) => ({
                                     ...prev,
