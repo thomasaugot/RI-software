@@ -15,11 +15,10 @@ $fonts: 'Poppins', sans-serif;
   .registration-form {
     width: 530px;
     height: fit-content;
-    padding: 20px 30px;
-    border-radius: 1rem;
+    padding: 1.875em 3.3125em;
+    border-radius: 20px;
     background-color: #fff;
     margin: 0 auto;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
     .registration-header {
       display: flex;
@@ -29,15 +28,17 @@ $fonts: 'Poppins', sans-serif;
 
     header {
       margin-bottom: 2.5rem;
-
+      display: flex;
+      flex-direction: column;
+      gap: 2.1875em;
       h2 {
-        font-size: 24px;
-        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: 600;
       }
 
       h4 {
         font-weight: 500;
-
+        font-size: 1rem;
         a {
           text-decoration: none;
           margin-left: 0.3rem;
@@ -48,37 +49,30 @@ $fonts: 'Poppins', sans-serif;
     .register-button {
       width: 100%;
       display: flex;
-
-
       button {
         width: 100%;
         background: none;
-        color: rgb(0, 0, 0);
-        font-size: 13px;
-        font-weight: bold;
-        text-align: center;
+        color: #444444;
+        font-size: 1rem;
         border: 2px solid #4970B5;
-        border-radius: 0.65rem;
+        border-radius: 0.625rem;
         margin-top: 1rem;
-        padding: 0.7rem 1rem;
-        transition: transform 0.3s ease;
-        will-change: transform;
+        padding: 0.8rem 0;
+        $fonts: 'Poppins', sans-serif;
+        transition: 0.3s ease;
         cursor: pointer;
-
         &:hover {
           background-color: #4970B5;
           color: #fff;
         }
-
       }
     }
 
     .registration-info {
       display: flex;
       flex-direction: column;
-      width: 100%;
-      justify-content: center;
-
+      // width: 100%;
+      // justify-content: center;
 
       input,
       textarea {

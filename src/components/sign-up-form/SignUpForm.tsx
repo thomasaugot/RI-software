@@ -23,7 +23,6 @@ const SingUpForm = () => {
         <header>
           <h2 className="registration-header">Create an account
           </h2>
-          <br />
           <h4 className="registration-header">
             Have an account? <a href="Login">Sing in</a>
           </h4>
