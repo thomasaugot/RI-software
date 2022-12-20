@@ -8,12 +8,11 @@ $fonts: 'Poppins', sans-serif;
   background-color: #3d72bf;
   overflow: hidden;
   display: flex;
-  position: absolute;
   align-items: center;
   font-family: $fonts;
 
   .registration-form {
-    width: 530px;
+    width: 36.625em;
     height: fit-content;
     padding: 1.875em 3.3125em;
     border-radius: 20px;
@@ -23,7 +22,6 @@ $fonts: 'Poppins', sans-serif;
     .registration-header {
       display: flex;
       justify-content: center;
-      
     }
 
     header {
@@ -58,7 +56,7 @@ $fonts: 'Poppins', sans-serif;
         border-radius: 0.625rem;
         margin-top: 1rem;
         padding: 0.8rem 0;
-        $fonts: 'Poppins', sans-serif;
+        font-family: $fonts;
         transition: 0.3s ease;
         cursor: pointer;
         &:hover {
@@ -71,49 +69,19 @@ $fonts: 'Poppins', sans-serif;
     .registration-info {
       display: flex;
       flex-direction: column;
-      // width: 100%;
-      // justify-content: center;
-
-      input,
-      textarea {
-        width: 100%;
-        height: 37px;
-        border-radius: 10px;
-        box-shadow: 7px 5px 5px rgb(230, 230, 230);
-        transition: all 0.3s ease-in-out;
-        font-size: 16px;
-        padding: 5px 15px;
-        background: none;
-        color: #1a3b5d;
-        font-family: $fonts;
-        margin-bottom: 22px;
-      }
-
+      gap: 1.875em;
       .field-container {
         width: 100%;
         position: relative;
-
         .input-icon {
           position: absolute;
           right: 0;
-          top: 25%;
+          top: 35%;
+          margin-right: 2.3px;
           transform: translateY(-25%);
-          font-size: 16px;
+          font-size: 1rem;
           cursor: pointer;
         }
-      }
-    }
-
-    input {
-      background: transparent;
-      border: none;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      outline: none;
-      transition: border-bottom-color 0.35s ease;
-
-      &:focus {
-        border-color: #3360a3;
       }
     }
   }

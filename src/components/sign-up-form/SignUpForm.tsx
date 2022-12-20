@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import "./SignUpForm.scss";
+import Input, { Type } from "../Input";
 
 const SingUpForm = () => {
   const [information, setInformation] = useState({
@@ -28,40 +29,28 @@ const SingUpForm = () => {
           </h4>
         </header>
         <div className="registration-info">
-          <input
+          <Input
             name={information.companyName.name}
-            type="text"
             placeholder="Company Name"
-            required
           />
-
-          <input
+          <Input
             name={information.fullCompanyName.name}
-            type="text"
             placeholder="Full Company Name"
-            required
           />
-
-          <input
+          <Input
             name={information.login.name}
-            type="text"
             placeholder="Enter Username here"
-            required
           />
-
-          <input
+          <Input
             name={information.email.name}
-            type="text"
             placeholder="rni.software@gmail.com"
-            required
           />
           <div className="field-container">
-            <input
+            <Input
               name={information.password.name}
-              type={passwordVisible ? "text" : "password"}
+              type={passwordVisible ? Type.text : Type.password}
               placeholder="min. 6 charcters"
               minLength={6}
-              required
               onChange={(e) => {
                 setInformation((prev) => ({
                   ...prev,
@@ -84,10 +73,10 @@ const SingUpForm = () => {
           </div>
 
           <div className="field-container">
-            <input
+            <Input
               name={information.repeatPassword.name}
               minLength={6}
-              type={rPasswordVisible ? "text" : "password"}
+              type={rPasswordVisible ? Type.text : Type.password}
               placeholder="Retype password"
               onChange={(e) => {
                 setInformation((prev) => ({
@@ -98,7 +87,6 @@ const SingUpForm = () => {
                   },
                 }));
               }}
-              required
             />
             <span
               title={rPasswordVisible ? "hide password" : "show password"}
@@ -110,11 +98,9 @@ const SingUpForm = () => {
               <FontAwesomeIcon icon={rPasswordVisible ? faEyeSlash : faEye} />
             </span>
           </div>
-          <input
+          <Input
             name={information.phoneNumber.name}
-            type="tel"
             placeholder="Phone number"
-            required
           />
           <div className="register-button">
             <button>Create an account</button>
