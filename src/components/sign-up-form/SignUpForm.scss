@@ -16,6 +16,9 @@ $fonts: 'Poppins', sans-serif;
     height: fit-content;
     padding: 1.875em 3.3125em;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
     background-color: #fff;
     margin: 0 auto;
 
@@ -25,7 +28,6 @@ $fonts: 'Poppins', sans-serif;
     }
 
     header {
-      margin-bottom: 2.5rem;
       display: flex;
       flex-direction: column;
       gap: 2.1875em;
@@ -41,6 +43,20 @@ $fonts: 'Poppins', sans-serif;
           text-decoration: none;
           margin-left: 0.3rem;
         }
+      }
+    }
+
+    .class-error {
+      display: none;
+    }
+
+    .error{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #F61D1D;
+      p{
+        font-size: 1rem;
       }
     }
 

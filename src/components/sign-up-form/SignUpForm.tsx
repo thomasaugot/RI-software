@@ -1,112 +1,142 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
+import { useFormik } from "formik";
 import "./SignUpForm.scss";
 import Input, { Type } from "../Input";
+import { BiErrorCircle } from "react-icons/bi";
+import { SignupSchema } from "../../validateSchema";
+
+type MyFormValues = {
+  companyName: string
+  fullCompanyName: string
+  login: string
+  email: string
+  password: string
+  confirmPassword: string
+  phoneNumber:string
+}
 
 const SingUpForm = () => {
-  const [information, setInformation] = useState({
-    companyName: { name: "companyName", value: "" },
-    fullCompanyName: { name: "fullCompanyName", value: "" },
-    login: { name: "login", value: "" },
-    email: { name: "email", value: "" },
-    password: { name: "password", value: "" },
-    repeatPassword: { name: "repeatPassword", value: "" },
-    phoneNumber: { name: "number", value: "" },
-  });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rPasswordVisible, setRPasswordVisible] = useState(false);
+  const initialValues: MyFormValues = {
+    companyName:'',
+    fullCompanyName: '',
+    login: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    phoneNumber: ''
+  }
+  const onSubmit = (values: any) => {
+    console.log("submit",values)
+  }
+  const {values, handleSubmit, errors,touched, handleChange, handleBlur} = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema: SignupSchema
+  })
+  
 
   return (
     <div className="registration-Div">
-      <form className="registration-form">
-        <header>
-          <h2 className="registration-header">Create an account
-          </h2>
-          <h4 className="registration-header">
-            Have an account? <a href="Login">Sing in</a>
-          </h4>
-        </header>
-        <div className="registration-info">
-          <Input
-            name={information.companyName.name}
-            placeholder="Company Name"
-          />
-          <Input
-            name={information.fullCompanyName.name}
-            placeholder="Full Company Name"
-          />
-          <Input
-            name={information.login.name}
-            placeholder="Enter Username here"
-          />
-          <Input
-            name={information.email.name}
-            placeholder="rni.software@gmail.com"
-          />
-          <div className="field-container">
-            <Input
-              name={information.password.name}
-              type={passwordVisible ? Type.text : Type.password}
-              placeholder="min. 6 charcters"
-              minLength={6}
-              onChange={(e) => {
-                setInformation((prev) => ({
-                  ...prev,
-                  password: {
-                    ...information.password,
-                    value: e.target.value,
-                  },
-                }));
-              }}
-            />
-            <span
-              title={passwordVisible ? "hide password" : "show password"}
-              className="input-icon"
-              onClick={() => {
-                setPasswordVisible(!passwordVisible);
-              }}
-            >
-              <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
-            </span>
-          </div>
-
-          <div className="field-container">
-            <Input
-              name={information.repeatPassword.name}
-              minLength={6}
-              type={rPasswordVisible ? Type.text : Type.password}
-              placeholder="Retype password"
-              onChange={(e) => {
-                setInformation((prev) => ({
-                  ...prev,
-                  repeatPassword: {
-                    ...information.repeatPassword,
-                    value: e.target.value,
-                  },
-                }));
-              }}
-            />
-            <span
-              title={rPasswordVisible ? "hide password" : "show password"}
-              className="input-icon"
-              onClick={() => {
-                setRPasswordVisible(!rPasswordVisible);
-              }}
-            >
-              <FontAwesomeIcon icon={rPasswordVisible ? faEyeSlash : faEye} />
-            </span>
-          </div>
-          <Input
-            name={information.phoneNumber.name}
-            placeholder="Phone number"
-          />
-          <div className="register-button">
-            <button>Create an account</button>
-          </div>
+       <form 
+       onSubmit={handleSubmit}
+       className="registration-form">
+       <header>
+         <h2 className="registration-header">Create an account
+         </h2>
+         <h4 className="registration-header">
+           Have an account? <a href="Login">Sign in</a>
+         </h4>
+       </header>
+       <div className={(errors.email && touched.email) || (errors.confirmPassword && touched.confirmPassword) ? "error" : "class-error"}>
+           <BiErrorCircle/>
+           <p>{errors.email || errors.confirmPassword}</p>
         </div>
-      </form>
+       <div className="registration-info">
+         <Input
+           name='companyName'
+           placeholder="Company Name"
+           value={values.companyName}
+           onBlur={handleBlur}
+           onChange={handleChange}
+         />
+         <Input
+           name='fullCompanyName'
+           placeholder="Full Company Name"
+           onBlur={handleBlur}
+           value={values.fullCompanyName}
+           onChange={handleChange}
+         />
+         <Input
+           name='login'
+           placeholder="Enter Username here"
+           onBlur={handleBlur}
+           value={values.login}
+           onChange={handleChange}
+         />
+         <Input
+           name='email'
+           placeholder="rni.software@gmail.com"
+           onBlur={handleBlur}
+           value={values.email}
+           onChange={handleChange}
+         />
+         <div className="field-container">
+           <Input
+             name='password'
+             type={passwordVisible ? Type.text : Type.password}
+             placeholder="min. 6 charcters"
+             onBlur={handleBlur}
+             minLength={6}
+             value={values.password}
+             onChange={handleChange}
+           />
+           <span
+             title={passwordVisible ? "hide password" : "show password"}
+             className="input-icon"
+             onClick={() => {
+               setPasswordVisible(!passwordVisible);
+             }}
+           >
+             <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
+           </span>
+         </div>
+
+         <div className="field-container">
+           <Input
+             name='confirmPassword'
+             onBlur={handleBlur}
+             minLength={6}
+             type={rPasswordVisible ? Type.text : Type.password}
+             placeholder="Retype password"
+             value={values.confirmPassword}
+             onChange={handleChange}
+           />
+           <span
+             title={rPasswordVisible ? "hide password" : "show password"}
+             className="input-icon"
+             onClick={() => {
+               setRPasswordVisible(!rPasswordVisible);
+             }}
+           >
+             <FontAwesomeIcon icon={rPasswordVisible ? faEyeSlash : faEye} />
+           </span>
+         </div>
+         <Input
+           name='phoneNumber'
+           placeholder="Phone number"
+           onBlur={handleBlur}
+           value={values.phoneNumber}
+           onChange={handleChange}
+         />
+         <div className="register-button">
+           <button type="submit">Create an account</button>
+         </div>
+       </div>
+     </form>
     </div>
   );
 };
