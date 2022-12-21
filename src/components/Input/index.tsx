@@ -13,6 +13,8 @@ type inputProp = {
     type? : Type | 'text'
     placeholder: string
     minLength?: number
+    onBlur?: (e: React.FocusEvent<any, Element>) => void
+    value?: string | number
     onChange?: (e:React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -21,6 +23,8 @@ function Input({
     type,
     placeholder,
     minLength,
+    onBlur,
+    value,
     onChange
 }: inputProp) {
   return (
@@ -30,6 +34,8 @@ function Input({
       name={name}
       placeholder={placeholder}
       minLength={minLength}
+      value={value}
+      onBlur={onBlur}
       onChange={onChange}
       required
       />
