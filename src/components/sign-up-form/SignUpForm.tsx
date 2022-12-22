@@ -33,7 +33,6 @@ const SingUpForm = () => {
     phoneNumber: ''
   }
   const onSubmit = async (values: any) => {
-    console.log("submit",values)
     setTimeout(()=> navigate(`/confirmation/${values.email}`),1000)
   }
   const {values, handleSubmit, errors,touched, handleChange, handleBlur} = useFormik({
