@@ -1,10 +1,11 @@
 import { BiErrorCircle } from 'react-icons/bi'
-import { Link } from 'react-router-dom'
+import { Link,useParams } from 'react-router-dom'
 import Input from '../Input'
 import SignButton from '../SignButton'
 import './ConfimationEmailForm.scss'
 
 const ConfirmationForm = () => {
+  const { email } = useParams()
     return (
       <div className="verification-div">
         <form className="verification-form">
@@ -21,7 +22,7 @@ const ConfirmationForm = () => {
             </div>
             <div className='form-email-info'>
               <p>We sent a confirmation code to </p>
-              <p className='email'>jsmaylovrustam05@gmail.com </p>
+              <p className='email'>{email}</p>
             </div>
           </div>
           <div className="form-control">

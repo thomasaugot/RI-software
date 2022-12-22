@@ -7,11 +7,12 @@ import Input, { Type } from "../Input";
 import { BiErrorCircle} from 'react-icons/bi'
 import { SignInSchema } from "../../validateSchema";
 import { Link } from "react-router-dom";
+import SignButton from "../SignButton";
 
 const LoginForm = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [isError, setIsError] = useState(false);
-    const onSubmit = (values : any)=>{
+    const onSubmit = async (values : any)=>{
         console.log(values)
         setIsError(false)
     }
@@ -70,9 +71,7 @@ const LoginForm = () => {
                         <label><input id="rememberme" name="rememberme" value="remember" type="checkbox" /> &nbsp;Remember me</label>
                         <a href="#">Forget Password</a>
                     </div>
-                    <div className="register-button">
-                        <button type="submit">Sign In</button>
-                    </div>
+                   <SignButton text="Sign In"/>
                 </div>
             </form>
         </div>

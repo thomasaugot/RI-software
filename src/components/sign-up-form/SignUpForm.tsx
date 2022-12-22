@@ -6,7 +6,8 @@ import "./SignUpForm.scss";
 import Input, { Type } from "../Input";
 import { BiErrorCircle } from "react-icons/bi";
 import { SignupSchema } from "../../validateSchema";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import SignButton from "../SignButton";
 
 type MyFormValues = {
   companyName: string
@@ -21,6 +22,7 @@ type MyFormValues = {
 const SingUpForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rPasswordVisible, setRPasswordVisible] = useState(false);
+  const navigate = useNavigate()
   const initialValues: MyFormValues = {
     companyName:'',
     fullCompanyName: '',
@@ -30,8 +32,9 @@ const SingUpForm = () => {
     confirmPassword: '',
     phoneNumber: ''
   }
-  const onSubmit = (values: any) => {
+  const onSubmit = async (values: any) => {
     console.log("submit",values)
+    setTimeout(()=> navigate(`/confirmation/${values.email}`),1000)
   }
   const {values, handleSubmit, errors,touched, handleChange, handleBlur} = useFormik({
     initialValues,
@@ -133,9 +136,7 @@ const SingUpForm = () => {
            value={values.phoneNumber}
            onChange={handleChange}
          />
-         <div className="register-button">
-           <button type="submit">Create an account</button>
-         </div>
+         <SignButton text="Create"/>
        </div>
      </form>
     </div>
