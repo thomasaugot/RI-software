@@ -11,7 +11,7 @@ function App() {
       <div>
         <Routes>
           <Route path="/registration" element={<Registration />} />
-          <Route path="/confirmation" element={<Confirmation />} />
+          <Route path="/confirmation/:email" element={<Confirmation />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/hierarchy" element={<Hierachy />} />
           <Route path="/chats" element={<Chats />} />
