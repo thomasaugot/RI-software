@@ -6,6 +6,7 @@ import "../sign-up-form/SignUpForm.scss";
 import Input, { Type } from "../Input";
 import { BiErrorCircle} from 'react-icons/bi'
 import { SignInSchema } from "../../validateSchema";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -31,7 +32,7 @@ const LoginForm = () => {
                     <h2 className="registration-header">Sign In
                     </h2>
                     <h4 className="registration-header">
-                        Don't have an account yet? <a href="registrationPage">Register</a>
+                        Don't have an account yet? <Link to="/registration">Register</Link>
                     </h4>
                 </header>
                 <div className={isError ?"error" : "class-error"}>
@@ -67,7 +68,7 @@ const LoginForm = () => {
                     </div>
                     <div className="checkBox">
                         <label><input id="rememberme" name="rememberme" value="remember" type="checkbox" /> &nbsp;Remember me</label>
-                        <a href="/hierarchy">Forget Password</a>
+                        <a href="#">Forget Password</a>
                     </div>
                     <div className="register-button">
                         <button type="submit">Sign In</button>
