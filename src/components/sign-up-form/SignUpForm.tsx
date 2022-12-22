@@ -11,7 +11,6 @@ import SignButton from "../SignButton";
 
 type MyFormValues = {
   companyName: string
-  fullCompanyName: string
   login: string
   email: string
   password: string
@@ -25,7 +24,6 @@ const SingUpForm = () => {
   const navigate = useNavigate()
   const initialValues: MyFormValues = {
     companyName:'',
-    fullCompanyName: '',
     login: '',
     email: '',
     password: '',
@@ -64,13 +62,6 @@ const SingUpForm = () => {
            placeholder="Company Name"
            value={values.companyName}
            onBlur={handleBlur}
-           onChange={handleChange}
-         />
-         <Input
-           name='fullCompanyName'
-           placeholder="Full Company Name"
-           onBlur={handleBlur}
-           value={values.fullCompanyName}
            onChange={handleChange}
          />
          <Input
