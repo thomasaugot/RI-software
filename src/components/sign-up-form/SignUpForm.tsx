@@ -6,6 +6,7 @@ import "./SignUpForm.scss";
 import Input, { Type } from "../Input";
 import { BiErrorCircle } from "react-icons/bi";
 import { SignupSchema } from "../../validateSchema";
+import { Link } from "react-router-dom";
 
 type MyFormValues = {
   companyName: string
@@ -48,7 +49,7 @@ const SingUpForm = () => {
          <h2 className="registration-header">Create an account
          </h2>
          <h4 className="registration-header">
-           Have an account? <a href="Login">Sign in</a>
+           Have an account? <Link to="/login">Sign in</Link>
          </h4>
        </header>
        <div className={(errors.email && touched.email) || (errors.confirmPassword && touched.confirmPassword) ? "error" : "class-error"}>
