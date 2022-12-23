@@ -21,7 +21,7 @@ const LoginForm = () => {
     }
     const { values, handleChange, handleSubmit,handleBlur} = useFormik({
         initialValues: {
-            userId:'',
+            email:'',
             password: ''
         },
         onSubmit,
@@ -45,10 +45,11 @@ const LoginForm = () => {
                 </div>
                 <div className="registration-info">
                     <Input
-                        name='userId'
-                        placeholder="User ID"
+                        name='email'
+                        placeholder="Email"
                         onBlur={handleBlur}
-                        value={values.userId}
+                        type={Type.email}
+                        value={values.email}
                         onChange={handleChange}
                     />
                     <div className="field-container">

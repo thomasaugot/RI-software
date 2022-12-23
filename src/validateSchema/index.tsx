@@ -10,6 +10,6 @@ export const SignupSchema = yup.object().shape({
 });
 
 export const SignInSchema = yup.object().shape({
-    userId: yup.string().required("Required"),
+    email: yup.string().email("Enter valid email").required("Required"),
     password: yup.string().min(6).required("required"),
 })
