@@ -66,14 +66,14 @@ const SingUpForm = () => {
          />
          <Input
            name='login'
-           placeholder="Enter Username here"
+           placeholder="Login"
            onBlur={handleBlur}
            value={values.login}
            onChange={handleChange}
          />
          <Input
            name='email'
-           placeholder="rni.software@gmail.com"
+           placeholder="Email"
            onBlur={handleBlur}
            value={values.email}
            onChange={handleChange}
@@ -82,7 +82,7 @@ const SingUpForm = () => {
            <Input
              name='password'
              type={passwordVisible ? Type.text : Type.password}
-             placeholder="min. 6 charcters"
+             placeholder="Password(min. 6 charcters)"
              onBlur={handleBlur}
              minLength={6}
              value={values.password}
@@ -95,7 +95,7 @@ const SingUpForm = () => {
                setPasswordVisible(!passwordVisible);
              }}
            >
-             <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
+             <FontAwesomeIcon icon={rPasswordVisible ? faEye : faEyeSlash} />
            </span>
          </div>
 
@@ -105,7 +105,7 @@ const SingUpForm = () => {
              onBlur={handleBlur}
              minLength={6}
              type={rPasswordVisible ? Type.text : Type.password}
-             placeholder="Retype password"
+             placeholder="Repeat password"
              value={values.confirmPassword}
              onChange={handleChange}
            />
@@ -116,7 +116,7 @@ const SingUpForm = () => {
                setRPasswordVisible(!rPasswordVisible);
              }}
            >
-             <FontAwesomeIcon icon={rPasswordVisible ? faEyeSlash : faEye} />
+             <FontAwesomeIcon icon={rPasswordVisible ? faEye : faEyeSlash} />
            </span>
          </div>
          <Input

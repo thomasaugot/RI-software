@@ -103,16 +103,51 @@ $fonts: 'Poppins', sans-serif;
   }
 }
 
-.checkBox {
+.reminder-section {
   display: flex;
   justify-content: space-between;
   font-family: $fonts;
-}
+  .check-container{
+    display: flex;
+    align-items: center;
+    gap: 1.18em;
+    .check-box{
+      width: 15px;
+      height: 15px;
+      border: 2px solid #444444;
+      cursor: pointer;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-input, #rememberme {
-  box-shadow: none;
-  width: 15px;
-  height: 12px;
+    .checked{
+      background-color: #444444;
+      width: 7px;
+      height: 7px;
+      border-radius: 5px;
+    }
+
+    .unchecked{
+      background-color: #fff;
+      width: 7px;
+      height: 7px;
+      border-radius: 5px;
+    }
+
+    p{
+      font-size: 0.875rem;
+      color: #444;
+    }
+  }
+
+  a{
+    text-decoration: none;
+    color: #0B8FEF;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
 }
 
 @media screen and (max-width: 560px) {

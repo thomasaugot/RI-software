@@ -12,6 +12,9 @@ import SignButton from "../SignButton";
 const LoginForm = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [isError, setIsError] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
+
+    const check = () => setIsChecked(!isChecked);
     const onSubmit = async (values : any)=>{
         console.log(values)
         setIsError(false)
@@ -64,11 +67,16 @@ const LoginForm = () => {
                                 setPasswordVisible(!passwordVisible);
                             }}
                         >
-                            <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
+                            <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
                         </span>
                     </div>
-                    <div className="checkBox">
-                        <label><input id="rememberme" name="rememberme" value="remember" type="checkbox" /> &nbsp;Remember me</label>
+                    <div className="reminder-section">
+                        <div className="check-container">
+                            <div className="check-box" onClick={check}>
+                                <span className={isChecked ? "checked": "unchecked"}></span>
+                            </div>
+                            <p>Remember me</p>
+                        </div>
                         <Link to="#">Forget Password</Link>
                     </div>
                    <SignButton text="Sign In"/>
