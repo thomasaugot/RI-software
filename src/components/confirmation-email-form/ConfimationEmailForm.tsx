@@ -1,14 +1,30 @@
 import { BiErrorCircle } from 'react-icons/bi'
 import { Link,useParams } from 'react-router-dom'
-import Input from '../Input'
+import { useFormik } from 'formik'
+import Input, { Type } from '../Input'
 import SignButton from '../SignButton'
 import './ConfimationEmailForm.scss'
 
+type codeProps = {
+  code: number 
+}
+
 const ConfirmationForm = () => {
   const { email } = useParams()
+  const initialValues: codeProps = {
+    code: 0
+  }
+  const {values, handleChange, handleSubmit} = useFormik({
+    initialValues,
+    onSubmit: (values) =>{
+      console.log(values);
+    }
+  })
     return (
       <div className="verification-div">
-        <form className="verification-form">
+        <form 
+        onSubmit={handleSubmit}
+        className="verification-form">
           <div>
             <div className='form-header'>
             <h3>Verify Your Email Address</h3>
@@ -28,7 +44,9 @@ const ConfirmationForm = () => {
           <div className="form-control">
            <Input
               name="code"
-              type="text"
+              type={Type.number}
+              value={values.code}
+              onChange={handleChange}
               placeholder="Enter code"
             />
           </div>
