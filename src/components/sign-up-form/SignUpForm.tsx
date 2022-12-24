@@ -2,12 +2,14 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
+import { useMutation } from 'react-query'
 import "./SignUpForm.scss";
 import Input, { Type } from "../Input";
 import { BiErrorCircle } from "react-icons/bi";
 import { SignupSchema } from "../../validateSchema";
 import { Link, useNavigate } from "react-router-dom";
 import SignButton from "../SignButton";
+import axios from "axios";
 
 type MyFormValues = {
   companyName: string
@@ -18,10 +20,43 @@ type MyFormValues = {
   phoneNumber:string
 }
 
+ // register method
+ const register = async (
+  { 
+    companyName,
+    login,
+    email,
+    password,
+    phoneNumber
+  }: MyFormValues) => {
+  const newData = {
+    companyName,
+    login,
+    email,
+    password,
+    phoneNumber
+  }
+  const {data: response } = await axios.post('http://127.0.0.1:5000/api/signup', newData,{
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': '*',
+    },
+  })
+
+  return response.data
+}
+
 const SingUpForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [rPasswordVisible, setRPasswordVisible] = useState(false);
+  const [isError, setIsError] = useState(false)
   const navigate = useNavigate()
+  const { mutate, isLoading} = useMutation(register,{
+    onError :(error)=>{
+      setIsError(true)
+      console.log(error)
+    }
+  })
   const initialValues: MyFormValues = {
     companyName:'',
     login: '',
@@ -30,8 +65,11 @@ const SingUpForm = () => {
     confirmPassword: '',
     phoneNumber: ''
   }
-  const onSubmit = async (values: any) => {
-    setTimeout(()=> navigate(`/confirmation/${values.email}`),1000)
+  const onSubmit = async (values: MyFormValues) => {
+    mutate(values)
+    if(!isLoading && !isError){
+      setTimeout(()=> navigate(`/confirmation/${values.email}`),1000)
+    }
   }
   const {values, handleSubmit, errors,touched, handleChange, handleBlur} = useFormik({
     initialValues,
@@ -52,9 +90,9 @@ const SingUpForm = () => {
            Have an account? <Link to="/login">Sign in</Link>
          </h4>
        </header>
-       <div className={(errors.email && touched.email) || (errors.confirmPassword && touched.confirmPassword) ? "error" : "class-error"}>
+       <div className={(errors.email && touched.email) || (errors.confirmPassword && touched.confirmPassword) || isError ? "error" : "class-error"}>
            <BiErrorCircle/>
-           <p>{errors.email || errors.confirmPassword}</p>
+           <p>{errors.email || errors.confirmPassword || `email address already exists`}</p>
         </div>
        <div className="registration-info">
          <Input
@@ -95,7 +133,7 @@ const SingUpForm = () => {
                setPasswordVisible(!passwordVisible);
              }}
            >
-             <FontAwesomeIcon icon={rPasswordVisible ? faEye : faEyeSlash} />
+             <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
            </span>
          </div>
 
