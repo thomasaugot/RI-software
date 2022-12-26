@@ -4,6 +4,8 @@ import { useFormik } from 'formik'
 import Input, { Type } from '../Input'
 import SignButton from '../SignButton'
 import './ConfimationEmailForm.scss'
+import { useState } from 'react'
+
 
 type codeProps = {
   code: number 
@@ -11,13 +13,15 @@ type codeProps = {
 
 const ConfirmationForm = () => {
   const { email } = useParams()
+  const [isError, setIsError] = useState(false)
   const initialValues: codeProps = {
-    code: 0
+    code: Number()
   }
   const {values, handleChange, handleSubmit} = useFormik({
     initialValues,
     onSubmit: (values) =>{
       console.log(values);
+      setIsError(false)
     }
   })
     return (
@@ -32,7 +36,7 @@ const ConfirmationForm = () => {
               Do you want to go back? <Link to="/registration">Return</Link>
             </p>
             </div>
-            <div className="error">
+            <div className={isError ? 'error': 'class-error'}>
               <BiErrorCircle/>
               <p>Wrong verification code</p>
             </div>

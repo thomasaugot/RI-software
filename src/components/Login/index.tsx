@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash,  } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from 'formik'
-import "../sign-up-form/SignUpForm.scss";
+import "../SignUp/SignUpForm.scss";
 import Input, { Type } from "../Input";
 import { BiErrorCircle} from 'react-icons/bi'
 import { SignInSchema } from "../../validateSchema";

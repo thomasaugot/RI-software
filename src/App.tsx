@@ -1,20 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Registration from "./routes/registration/Registration";
-import Confirmation from "./routes/confirmation-email/ConfirmationEmail";
-import Hierachy from "./routes/hierarchy/Hierarchy";
-import Chats from "./routes/chats/Chats";
-import LoginForm from "./components/Login/Login";
+import Confirmation from "./components/Confirmation"
+import SignUp from './components/SignUp'
+import Login from "./components/Login";
 
 function App() {
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/registration" element={<Registration />} />
+          <Route path="/registration" element={<SignUp />} />
           <Route path="/confirmation/:email" element={<Confirmation />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/hierarchy" element={<Hierachy />} />
-          <Route path="/chats" element={<Chats />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>

@@ -10,9 +10,11 @@ import { SignupSchema } from "../../validateSchema";
 import { Link, useNavigate } from "react-router-dom";
 import SignButton from "../SignButton";
 import axios from "axios";
+import { baseUrl } from "../../axios";
 
 type MyFormValues = {
   companyName: string
+  companyLegalName: string
   login: string
   email: string
   password: string
@@ -24,6 +26,7 @@ type MyFormValues = {
  const register = async (
   { 
     companyName,
+    companyLegalName,
     login,
     email,
     password,
@@ -31,34 +34,33 @@ type MyFormValues = {
   }: MyFormValues) => {
   const newData = {
     companyName,
+    companyLegalName,
     login,
     email,
     password,
     phoneNumber
   }
-  const {data: response } = await axios.post('http://127.0.0.1:5000/api/signup', newData,{
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': '*',
-    },
-  })
+  const {data: response } = await baseUrl.post('api/signup', newData)
 
+  return response.data
+}
+
+// send email 
+const verification = async (email: string) =>{
+  const response = await baseUrl.post('/api/send-otp-email', {email})
   return response.data
 }
 
 const SingUpForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [rPasswordVisible, setRPasswordVisible] = useState(false);
-  const [isError, setIsError] = useState(false)
+  const [isError, setError] = useState(false);
   const navigate = useNavigate()
-  const { mutate, isLoading} = useMutation(register,{
-    onError :(error)=>{
-      setIsError(true)
-      console.log(error)
-    }
-  })
+  const { mutate:signup, isError: signError } = useMutation(register)
+  const { mutate: verify } = useMutation(verification)
+
   const initialValues: MyFormValues = {
     companyName:'',
+    companyLegalName: '',
     login: '',
     email: '',
     password: '',
@@ -66,11 +68,15 @@ const SingUpForm = () => {
     phoneNumber: ''
   }
   const onSubmit = async (values: MyFormValues) => {
-    mutate(values)
-    if(!isLoading && !isError){
-      setTimeout(()=> navigate(`/confirmation/${values.email}`),1000)
+    await signup(values)
+    await verify(values.email)
+    if(!signError){
+      setTimeout(()=> navigate(`/confirmation/${values.email}`),2000)
+    } else {
+      setError(true)
     }
   }
+
   const {values, handleSubmit, errors,touched, handleChange, handleBlur} = useFormik({
     initialValues,
     onSubmit,
@@ -95,9 +101,16 @@ const SingUpForm = () => {
            <p>{errors.email || errors.confirmPassword || `email address already exists`}</p>
         </div>
        <div className="registration-info">
+          <Input
+           name='companyLegalName'
+           placeholder="Company legal name"
+           value={values.companyLegalName}
+           onBlur={handleBlur}
+           onChange={handleChange}
+          />
          <Input
            name='companyName'
-           placeholder="Company Name"
+           placeholder="Company name"
            value={values.companyName}
            onBlur={handleBlur}
            onChange={handleChange}
@@ -142,19 +155,19 @@ const SingUpForm = () => {
              name='confirmPassword'
              onBlur={handleBlur}
              minLength={6}
-             type={rPasswordVisible ? Type.text : Type.password}
+             type={passwordVisible ? Type.text : Type.password}
              placeholder="Repeat password"
              value={values.confirmPassword}
              onChange={handleChange}
            />
            <span
-             title={rPasswordVisible ? "hide password" : "show password"}
+             title={passwordVisible ? "hide password" : "show password"}
              className="input-icon"
              onClick={() => {
-               setRPasswordVisible(!rPasswordVisible);
+              setPasswordVisible(!passwordVisible);
              }}
            >
-             <FontAwesomeIcon icon={rPasswordVisible ? faEye : faEyeSlash} />
+             <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
            </span>
          </div>
          <Input
