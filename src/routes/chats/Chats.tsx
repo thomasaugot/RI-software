@@ -6,7 +6,7 @@ import BaseLayout from "../../layouts/base-layout/BaseLayout";
 
 import "./Chats.scss";
 
-const chats: FC = () => {
+const Chats: FC = () => {
   return (
   <BaseLayout>
     <div className="chat">
@@ -38,4 +38,4 @@ const chats: FC = () => {
   );
 };
 
-export default chats;
+export default Chats;

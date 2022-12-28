@@ -9,10 +9,10 @@ import { BiErrorCircle } from "react-icons/bi";
 import { SignupSchema } from "../../validateSchema";
 import { Link, useNavigate } from "react-router-dom";
 import SignButton from "../SignButton";
-import axios from "axios";
-import { baseUrl } from "../../axios";
+import { register, verification } from "../../queries";
 
-type MyFormValues = {
+
+export type MyFormValues = {
   companyName: string
   companyLegalName: string
   login: string
@@ -20,35 +20,6 @@ type MyFormValues = {
   password: string
   confirmPassword: string
   phoneNumber:string
-}
-
- // register method
- const register = async (
-  { 
-    companyName,
-    companyLegalName,
-    login,
-    email,
-    password,
-    phoneNumber
-  }: MyFormValues) => {
-  const newData = {
-    companyName,
-    companyLegalName,
-    login,
-    email,
-    password,
-    phoneNumber
-  }
-  const {data: response } = await baseUrl.post('api/signup', newData)
-
-  return response.data
-}
-
-// send email 
-const verification = async (email: string) =>{
-  const response = await baseUrl.post('/api/send-otp-email', {email})
-  return response.data
 }
 
 const SingUpForm = () => {

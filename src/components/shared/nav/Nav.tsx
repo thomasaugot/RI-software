@@ -9,8 +9,9 @@ import {
   IconDefinition,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
-
+import { useQuery } from 'react-query'
 import "./Nav.scss";
+import { navbar } from "../../../queries";
 
 interface NavProps {
   heading: string;
@@ -76,6 +77,9 @@ const navItems: Array<{ item: string; route: string; icon?: IconDefinition }> =
   ];
 
 const Nav: FC<NavProps> = ({ heading }) => {
+  let id = 1
+  const { data } = useQuery('navbar-items',()=>{ 
+    navbar(id) })
   return (
     <div className="Nav">
       <header>
