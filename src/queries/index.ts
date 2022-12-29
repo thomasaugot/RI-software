@@ -32,8 +32,9 @@ export const register = async (
       password,
       phoneNumber
     }
+    console.log("new Data",newData)
     const {data: response } = await baseUrl.post('api/signup', newData)
-  
+    console.log(response.data)
     return response.data
   }
   
