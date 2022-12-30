@@ -3,7 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 23.1em;
+  gap: 24.1em;
   background-color: #fff;
   align-items: center;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -25,11 +25,12 @@
         font-weight: 500;
       }
   
-      .sidebar-logo-container{
+      .siderbar-logo-contain{
         width: 2.7em;
         height: 2.34em;
         img{
           width: 100%;
+          height: 100%;
         }
       }
     }
@@ -42,7 +43,7 @@
         width: 100%;
         height: 4.5625em;
         padding: 1.3em 1.8em;
-        transition: height .7s;
+        transition: height .7s ease-out;
         cursor: pointer;
         display: flex;
         flex-direction: column;

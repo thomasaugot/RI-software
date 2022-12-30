@@ -18,13 +18,13 @@ function NavItem({ index, item, icon }: navitemProp) {
     }
   };
   return (
-    <div className={toggle ? "open": "sidebar-item"}>
+    <div onClick={() => handleToggle(index)} className={toggle ? "open": "sidebar-item"}>
       <div className="sidebar-main-item">
         <div className="main-item-text">
           {icon && <span className="nav-item-icon">{icon}</span>}
           <p>{item}</p>
         </div>
-        <div className="item-arrow" onClick={() => handleToggle(index)}>
+        <div className="item-arrow">
           <FontAwesomeIcon
             className={toggle ? `turn-${index}` : "roll-back"}
             icon={faAngleRight}
