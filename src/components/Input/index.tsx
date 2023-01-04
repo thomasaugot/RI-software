@@ -30,6 +30,7 @@ function Input({
   return (
     <>
       <input
+      className='input__text'
       type={type}
       name={name}
       placeholder={placeholder}
