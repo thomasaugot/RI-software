@@ -1,0 +1,41 @@
+.input__container{
+    width: 18.125em;
+    .input__label{
+        color: #444;
+        font-size: 1rem;
+        font-weight: 400;
+    }
+
+    .update__input{
+        height: 2.75em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #4272C0;
+        input{
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            color: #444;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+        .uinput__icon{
+            display: flex;
+            gap: 1.2em;
+            .icon{
+                cursor: pointer;
+            }
+        }
+    }
+
+    .update_input_container{
+        height: 2.75em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .icon{
+            cursor: pointer;
+        }
+    }
+}
