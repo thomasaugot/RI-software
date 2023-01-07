@@ -10,17 +10,10 @@ import { SignupSchema } from "../../validateSchema";
 import { Link, useNavigate } from "react-router-dom";
 import SignButton from "../SignButton";
 import { register, verification } from "../../queries";
+import { MyFormValues } from "../../queries/types";
 
 
-export type MyFormValues = {
-  companyName: string
-  companyLegalName: string
-  login: string
-  email: string
-  password: string
-  confirmPassword: string
-  phoneNumber:string
-}
+
 
 const SingUpForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
