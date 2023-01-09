@@ -1,29 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import { QueryClientProvider as QueryProvider, QueryClient } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import "./index.scss";
-import { StateContextProvider } from "./utils/store";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.scss';
+import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { QueryClientProvider as QueryProvider, QueryClient} from 'react-query'
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 1000,
-    }
-  }
-})
+const queryClient = new QueryClient()
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <QueryProvider client={queryClient}>
-      <StateContextProvider>
-      <App />
-      </StateContextProvider>
-      <ReactQueryDevtools initialIsOpen={false}/>
+      <Router>
+        <App />
+      </Router>
     </QueryProvider>
   </React.StrictMode>
 );
