@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { BiErrorCircle } from 'react-icons/bi'
 import CheckBox from "../CheckBox";
 import Field from "../Field";
 import Heading from "../Heading";
@@ -25,6 +26,7 @@ const Login = () => {
         </div>
         {isError ? (
           <div className="login__error">
+            <BiErrorCircle size={"1.25rem"}/>
             <Text color="#F61D1D" text={errorText} />
           </div>
         ) : null}

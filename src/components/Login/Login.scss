@@ -24,6 +24,12 @@
                 gap: .1em;
             }
         }
+        .login__error{
+            display: flex;
+            color: #F61D1D;
+            align-items: center;
+            gap: 0.75em;
+        }
         .login__form{
             display: flex;
             flex-direction: column;
