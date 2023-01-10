@@ -18,3 +18,8 @@ export type SubmitbuttonProps = {
     text: string
     type?: buttonType 
 }
+
+export type TextProps = {
+    text: string
+    color?: string
+}
