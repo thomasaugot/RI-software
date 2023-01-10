@@ -31,3 +31,8 @@ export type checkboxProps = {
     setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
     text: string
 }
+
+export type LoginType = {
+    email: string
+    password: string
+}
