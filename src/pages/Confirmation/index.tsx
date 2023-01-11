@@ -49,7 +49,7 @@ const ConfirmationForm = () => {
           <div className="form-control">
            <Field
               name="code"
-              type="number"
+              type="text"
               value={values.code}
               onChange={handleChange}
               placeholder="Enter code"
