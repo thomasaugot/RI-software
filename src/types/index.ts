@@ -10,16 +10,26 @@ export type fieldType = {
 
 export enum buttonType {
     button = 'button',
-    submit= 'submit',
-    reset='reset'
+    submit = 'submit',
+    reset = 'reset'
 }
 
 export type SubmitbuttonProps = {
     text: string
-    type?: buttonType 
+    type?: buttonType
 }
 
 export type TextProps = {
     text: string
     color?: string
+}
+
+export interface MyFormValues {
+    companyName: string
+    companyLegalName: string
+    login: string
+    email: string
+    password: string
+    confirmPassword: string
+    phoneNumber: string
 }
