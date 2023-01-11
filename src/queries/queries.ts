@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { baseUrl } from "../axios";
-import { MyFormValues } from "../types";
+import { MyFormValues } from "../types/types";
 
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { fieldType } from '../../types'
+import { fieldType } from '../../types/types'
 import './Field.scss'
 
 const Field = ({
