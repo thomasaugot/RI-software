@@ -1,5 +1,5 @@
 import  { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { BiErrorCircle } from 'react-icons/bi'
 import { useFormik } from 'formik'
 import CheckBox from "../CheckBox";
@@ -20,9 +20,9 @@ const baseURl = process.env.REACT_APP_URL;
 
 const Login = () => {
   const [isError, setIsError] = useState(false);
-  const [errorText, setErrorText] = useState("Wrong email or password");
-  const [logRes, setLogRes] = useState()
+  const [errorText, setErrorText] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const navigate = useNavigate()
   // login method
   const loginMutation = async (values: LoginType) => {
     let data = {
@@ -37,26 +37,35 @@ const Login = () => {
     .then((res) => {
       if(res.status === 400){
         setIsError(true)
+        setErrorText("Wrong email or password")
       } else if(res.status === 200){
         setIsError(false)
       }
       return res.json()
     }
     )
-    .then((data) => setLogRes(data))
+    .then((data) => localStorage.setItem("token", data.result.access_token))
     .catch((err)=> {
-      setErrorText("Wrong email or password")
       setIsError(true) 
     })
   }
 
   // mutation with react-query
-  const { mutate:login } = useMutation(loginMutation)
+  const { mutate:login , isLoading} = useMutation(loginMutation)
 
   // onSubmit
   const onSubmit = (values:LoginType) => {
     login(values)
-    console.log(logRes)
+   
+    if(!isLoading){
+      if(isChecked){
+        localStorage.setItem("isLogged", "true")
+      }
+      if(!isError){
+        navigate('/')
+      }
+    }
+   
   }
 
   // handling form with formik
@@ -64,6 +73,8 @@ const Login = () => {
     initialValues,
     onSubmit
   })
+
+  if(localStorage.getItem("isLogged")==="true") return <Navigate to='/' replace/>
 
   return (
     <div className="login">
