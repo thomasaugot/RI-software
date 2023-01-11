@@ -1,4 +1,4 @@
-import React from "react";
+import  { useState } from "react";
 import { Link } from "react-router-dom";
 import { BiErrorCircle } from 'react-icons/bi'
 import { useFormik } from 'formik'
@@ -9,24 +9,57 @@ import Submitbutton from "../Submitbutton";
 import Text from "../Text";
 import "./Login.scss";
 import { buttonType, LoginType } from "../../types";
+import { useMutation } from "react-query";
 
 const initialValues: LoginType = {
   email: '',
   password:''
 }
 
-const Login = () => {
-  const [isError, setIsError] = React.useState(false);
-  const [errorText, setErrorText] = React.useState("Wrong user id or password");
-  const [isChecked, setIsChecked] = React.useState(false);
+const baseURl = process.env.REACT_APP_URL;
 
-  const onSubmit = (values:LoginType) => {
-    console.log(values)
-    setIsError(true)
-    setErrorText("Wrong user id or password")
-    
+const Login = () => {
+  const [isError, setIsError] = useState(false);
+  const [errorText, setErrorText] = useState("Wrong email or password");
+  const [logRes, setLogRes] = useState()
+  const [isChecked, setIsChecked] = useState(false);
+  // login method
+  const loginMutation = async (values: LoginType) => {
+    let data = {
+      email: values.email,
+      password: values.password
+    }
+    return await  fetch(`${baseURl}/api/login`,{
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then((res) => {
+      if(res.status === 400){
+        setIsError(true)
+      } else if(res.status === 200){
+        setIsError(false)
+      }
+      return res.json()
+    }
+    )
+    .then((data) => setLogRes(data))
+    .catch((err)=> {
+      setErrorText("Wrong email or password")
+      setIsError(true) 
+    })
   }
 
+  // mutation with react-query
+  const { mutate:login } = useMutation(loginMutation)
+
+  // onSubmit
+  const onSubmit = (values:LoginType) => {
+    login(values)
+    console.log(logRes)
+  }
+
+  // handling form with formik
   const {values, handleSubmit, handleChange} = useFormik({
     initialValues,
     onSubmit
@@ -57,7 +90,7 @@ const Login = () => {
           </div>
           <div className="login__options">
             <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} text="Remember me"/>
-            <Link to="#" className="login__forget">Forget password?</Link>
+            <Link to="/forget" className="login__forget">Forget password?</Link>
           </div>
           <Submitbutton type={buttonType.submit} text="Sign In" />
         </form>
