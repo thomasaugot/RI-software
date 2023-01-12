@@ -2,11 +2,11 @@ import  { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { BiErrorCircle } from 'react-icons/bi'
 import {eye, eyeoff} from '../../assets/Icons'
-import CheckBox from "../CheckBox/CheckBox";
-import Field from "../InputField/InputField";
-import Heading from "../Title/Title";
-import Submitbutton from "../SubmitButton/SubmitButton";
-import Text from "../Text/Text";
+import CheckBox from "../../components/CheckBox/CheckBox";
+import Field from "../../components/InputField/InputField";
+import Heading from "../../components/Title/Title";
+import Submitbutton from "../../components/SubmitButton/SubmitButton";
+import Text from "../../components/Text/Text";
 import "./Login.scss";
 import { buttonType } from "../../types";
 
