@@ -5,55 +5,87 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { BiErrorCircle,  } from "react-icons/bi";
+import { BiErrorCircle, } from "react-icons/bi";
 import Field from "../../components/Field";
 import Submitbutton from "../../components/Submitbutton";
 import { useMutation } from "react-query";
 import Heading from "../../components/Heading";
+import { ErrorProps, MyFormProps } from "../../types/types";
 
 
+//--//check password Minlenght
 
-export type MyFormValues = {
-  companyName: string
-  companyLegalName: string
-  login: string
-  email: string
-  password: string
-  confirmPassword: string
-  phoneNumber: string
-}
+
 
 const SingUpForm = () => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [isError, setError] = useState(false);
-  const navigate = useNavigate()
-  const { mutate: signup, isError: signError } = useMutation("")
-  const { mutate: verify } = useMutation("")
-
-  const initialValues: MyFormValues = {
-    companyName: '',
+  const [formData, setFormData] = useState<MyFormProps>({
+    firstName: '',
+    lastName: '',
     companyLegalName: '',
     login: '',
     email: '',
     password: '',
     confirmPassword: '',
     phoneNumber: ''
-  }
-  const onSubmit = async (values: MyFormValues) => {
-    await signup()
-    await verify()
-    if (!signError) {
-      setTimeout(() => navigate(`/confirmation/${values.email}`), 2000)
-    } else {
-      setError(true)
+  })
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isError, setError] = useState(false);
+  const [errors, setErrors] = useState<ErrorProps>({});
+  const navigate = useNavigate()
+  const { mutate: signup, isError: signError } = useMutation("")
+  const { mutate: verify } = useMutation("")
+
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault()
+    if (!errors.email && !errors.password && !errors.confirmPassword) {
+      await signup()
+      await verify()
+      if (!signError) {
+        setTimeout(() => navigate(`/confirmation/${formData.email}`), 2000)
+      } else {
+        setError(true)
+      }
     }
   }
 
-  const { values, handleSubmit, errors, touched, handleChange, handleBlur } = useFormik({
-    initialValues,
-    onSubmit,
-    // validationSchema: SignupSchema
-  })
+
+  const handleChange = (e: any) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e?.target.value
+    })
+  }
+
+  const handleBlur = (e: any) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'email':
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
+          setErrors({ ...errors, [name]: 'Invalid email address' });
+        } else {
+          setErrors({ ...errors, [name]: '' });
+        }
+        break;
+      case 'password':
+      case 'confirmPassword':
+        if (value.length < 3) {
+          setErrors({ ...errors, [name]: 'Password must be at least 5 characters ' });
+        } else {
+          setErrors({ ...errors, [name]: '' })
+        }
+        break;
+      case 'confirmPassword':
+        if (value !== formData.password) {
+          setErrors({ ...errors, [name]: 'Passwords do not match' })
+        } else {
+          setErrors({ ...errors, [name]: '' });
+        }
+        break
+      default:
+        break;
+    }
+  }
 
 
   return (
@@ -68,15 +100,22 @@ const SingUpForm = () => {
             Have an account? <Link to="/login">Sign in</Link>
           </h4>
         </header>
-        <div className={(errors.email && touched.email) || (errors.confirmPassword && touched.confirmPassword) || isError ? "error" : "class-error"}>
+        <div className={(errors.email) || (errors.confirmPassword) || isError ? "error" : "class-error"}>
           <BiErrorCircle />
           <p>{errors.email || errors.confirmPassword || `email address already exists`}</p>
         </div>
         <div className="registration-info">
           <Field
-            name='fullname'
-            placeholder="Full name"
-            value={values.companyLegalName}
+            name='firstname'
+            placeholder="First name"
+            value={formData.firstName}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            type="text" />
+            <Field
+            name='lastname'
+            placeholder="Last name"
+            value={formData.lastName}
             onBlur={handleBlur}
             onChange={handleChange}
             type="text" />
@@ -84,7 +123,7 @@ const SingUpForm = () => {
             name='email'
             placeholder="Email"
             onBlur={handleBlur}
-            value={values.email}
+            value={formData.email}
             onChange={handleChange}
             type="email" />
           <div className="field-container">
@@ -93,8 +132,8 @@ const SingUpForm = () => {
               type="password"
               placeholder="Password"
               onBlur={handleBlur}
-              minLength={6}
-              value={values.password}
+              minLength={3}
+              value={formData.password}
               onChange={handleChange}
             />
             <span
@@ -112,10 +151,10 @@ const SingUpForm = () => {
             <Field
               name='confirmPassword'
               onBlur={handleBlur}
-              minLength={6}
+              minLength={3}
               type="password"
               placeholder="Repeat password"
-              value={values.confirmPassword}
+              value={formData.confirmPassword}
               onChange={handleChange}
             />
             <span
@@ -132,7 +171,7 @@ const SingUpForm = () => {
             name='phoneNumber'
             placeholder="Phone number"
             onBlur={handleBlur}
-            value={values.phoneNumber}
+            value={formData.phoneNumber}
             onChange={handleChange}
             type="number" />
           <Submitbutton text="Create" />

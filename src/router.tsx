@@ -1,7 +1,8 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
-import ConfirmationForm from "./pages/Confirmation";
-import SingUpForm from "./pages/SignUp";
+import ConfirmationForm from "./pages/Confirmation/ConfirmationEmail";
+import SingUpForm from "./pages/SignUp/SignUpForm";
+
 
 
 const Router: FC = () => {

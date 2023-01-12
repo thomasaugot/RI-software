@@ -1,21 +1,23 @@
 import { Navigate } from "react-router-dom";
-import { baseUrl } from "../axios";
-import { MyFormValues } from "../types/types";
+import { baseUrl } from "../axios/axios";
+import { MyFormProps } from "../types/types";
 
 
 
 // register method
 export const register = async (
   {
-    companyName,
+    firstName,
+    lastName,
     companyLegalName,
     login,
     email,
     password,
     phoneNumber
-  }: MyFormValues) => {
+  }: MyFormProps) => {
   const newData = {
-    companyName,
+    firstName,
+    lastName,
     companyLegalName,
     login,
     email,

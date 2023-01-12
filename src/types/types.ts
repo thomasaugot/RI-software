@@ -24,12 +24,19 @@ export type TextProps = {
     color?: string
 }
 
-export interface MyFormValues {
-    companyName: string
+export interface MyFormProps {
+    firstName: string,
+    lastName: string,
     companyLegalName: string
     login: string
     email: string
     password: string
     confirmPassword: string
     phoneNumber: string
+}
+
+export interface ErrorProps {
+    email? : string;
+    password? : string;
+    confirmPassword?: string;
 }
