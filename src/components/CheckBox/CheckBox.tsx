@@ -1,4 +1,4 @@
-import './Checkbox.scss'
+import './CheckBox.scss'
 import { checkboxProps } from "../../types";
 
 

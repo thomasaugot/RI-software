@@ -1,12 +1,12 @@
 import  { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { BiErrorCircle } from 'react-icons/bi'
-import {IoIosEyeOff, IoIosEye} from 'react-icons/io'
-import CheckBox from "../CheckBox";
-import Field from "../Field";
-import Heading from "../Heading";
-import Submitbutton from "../Submitbutton";
-import Text from "../Text";
+import {eye, eyeoff} from '../../assets/Icons'
+import CheckBox from "../CheckBox/CheckBox";
+import Field from "../InputField/InputField";
+import Heading from "../Title/Title";
+import Submitbutton from "../SubmitButton/SubmitButton";
+import Text from "../Text/Text";
 import "./Login.scss";
 import { buttonType } from "../../types";
 
@@ -20,7 +20,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate()
   // login method
   const onSumit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -42,9 +41,7 @@ const Login = () => {
         if(isChecked){
           localStorage.setItem("isLogged", "true")
         }
-        setTimeout(()=>{
-          navigate('/')
-        }, 2000)
+        console.log("isLogged")
       }
       return res.json()
     }
@@ -87,7 +84,7 @@ const Login = () => {
                   setIsVisible(!isVisible);
                 }}
               >
-             {isVisible ? <IoIosEye size={"1.5rem"}/> : <IoIosEyeOff size={"1.5rem"}/>}
+             {isVisible ? eye : eyeoff}
            </span>
             </div>
           </div>
