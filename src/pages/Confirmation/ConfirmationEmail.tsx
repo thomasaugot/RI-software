@@ -15,7 +15,7 @@ type codeProps = {
 const ConfirmationForm = () => {
   const { email } = useParams()
   const [isError, setIsError] = useState(false)
-  const [formData, setFormData] = useState<codeProps>({code : 0})
+  const [formData, setFormData] = useState<codeProps>({code : ''})
  
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
