@@ -2,7 +2,7 @@ import { BiErrorCircle } from 'react-icons/bi'
 import { Link,useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import './ConfimationEmailForm.scss'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Field from '../../components/Field'
 import Submitbutton from '../../components/Submitbutton'
 import Heading from '../../components/Heading'
@@ -15,16 +15,21 @@ type codeProps = {
 const ConfirmationForm = () => {
   const { email } = useParams()
   const [isError, setIsError] = useState(false)
-  const initialValues: codeProps = {
-    code: Number()
+  const [formData, setFormData] = useState<codeProps>({code : 0})
+ 
+
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = e.target;
+    setFormData({ ...formData, [name]: Number(value) })
   }
-  const {values, handleChange, handleSubmit} = useFormik({
-    initialValues,
-    onSubmit: (values) =>{
-      console.log(values);
-      setIsError(false)
-    }
-  })
+
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
+    setIsError(false)
+  }
+  
+ 
     return (
       <div className="verification-div">
         <form 
@@ -50,7 +55,7 @@ const ConfirmationForm = () => {
            <Field
               name="code"
               type="text"
-              value={values.code}
+              value={formData.code}
               onChange={handleChange}
               placeholder="Enter code"
             />
