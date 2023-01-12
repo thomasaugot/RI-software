@@ -1,8 +1,7 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login/Login';
-import Protected from './components/Protected';
+import Protected from './components/Protected/ProtectedRoute';
 
 function App() {
   return (

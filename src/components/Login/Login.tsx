@@ -1,20 +1,13 @@
 import  { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { BiErrorCircle } from 'react-icons/bi'
-import { useFormik } from 'formik'
 import CheckBox from "../CheckBox";
 import Field from "../Field";
 import Heading from "../Heading";
 import Submitbutton from "../Submitbutton";
 import Text from "../Text";
 import "./Login.scss";
-import { buttonType, LoginType } from "../../types";
-import { useMutation } from "react-query";
-
-const initialValues: LoginType = {
-  email: '',
-  password:''
-}
+import { buttonType } from "../../types";
 
 const baseURl = process.env.REACT_APP_URL;
 
@@ -22,12 +15,16 @@ const Login = () => {
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [isChecked, setIsChecked] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const navigate = useNavigate()
   // login method
-  const loginMutation = async (values: LoginType) => {
+  const onSumit = async (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     let data = {
-      email: values.email,
-      password: values.password
+      email,
+      password
     }
     return await  fetch(`${baseURl}/api/login`,{
       method: 'POST',
@@ -40,6 +37,12 @@ const Login = () => {
         setErrorText("Wrong email or password")
       } else if(res.status === 200){
         setIsError(false)
+        if(isChecked){
+          localStorage.setItem("isLogged", "true")
+        }
+        setTimeout(()=>{
+          navigate('/')
+        }, 2000)
       }
       return res.json()
     }
@@ -49,30 +52,6 @@ const Login = () => {
       setIsError(true) 
     })
   }
-
-  // mutation with react-query
-  const { mutate:login , isLoading} = useMutation(loginMutation)
-
-  // onSubmit
-  const onSubmit = (values:LoginType) => {
-    login(values)
-   
-    if(!isLoading){
-      if(isChecked){
-        localStorage.setItem("isLogged", "true")
-      }
-      if(!isError){
-        navigate('/')
-      }
-    }
-   
-  }
-
-  // handling form with formik
-  const {values, handleSubmit, handleChange} = useFormik({
-    initialValues,
-    onSubmit
-  })
 
   if(localStorage.getItem("isLogged")==="true") return <Navigate to='/' replace/>
 
@@ -94,10 +73,10 @@ const Login = () => {
             <Text color="#F61D1D" text={errorText} />
           </div>
         ) : null}
-        <form onSubmit={handleSubmit} className="login__form">
+        <form onSubmit={onSumit} className="login__form">
           <div className="form-controls">
-            <Field type="email" onChange={handleChange} value={values.email} placeholder="Email" name="email" />
-            <Field type="password" onChange={handleChange} value={values.password} placeholder="Password" name="password" />
+            <Field type="email" onChange={(e)=> setEmail(e.target.value)} value={email} placeholder="Email" name="email" />
+            <Field type="password" onChange={(e)=> setPassword(e.target.value)} value={password} placeholder="Password" name="password" />
           </div>
           <div className="login__options">
             <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} text="Remember me"/>
