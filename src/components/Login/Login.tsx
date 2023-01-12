@@ -1,8 +1,7 @@
 import  { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { BiErrorCircle } from 'react-icons/bi'
+import {IoIosEyeOff, IoIosEye} from 'react-icons/io'
 import CheckBox from "../CheckBox";
 import Field from "../Field";
 import Heading from "../Heading";
@@ -88,7 +87,7 @@ const Login = () => {
                   setIsVisible(!isVisible);
                 }}
               >
-             <FontAwesomeIcon icon={isVisible ? faEye : faEyeSlash} />
+             {isVisible ? <IoIosEye size={"1.5rem"}/> : <IoIosEyeOff size={"1.5rem"}/>}
            </span>
             </div>
           </div>
