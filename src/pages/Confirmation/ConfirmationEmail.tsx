@@ -18,8 +18,8 @@ const ConfirmationForm = () => {
   const [formData, setFormData] = useState<codeProps>({code : ''})
  
 
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.target;
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
     setFormData({ ...formData, [name]: Number(value) })
   }
 
