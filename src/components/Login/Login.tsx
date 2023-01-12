@@ -1,5 +1,7 @@
 import  { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { BiErrorCircle } from 'react-icons/bi'
 import CheckBox from "../CheckBox";
 import Field from "../Field";
@@ -13,6 +15,7 @@ const baseURl = process.env.REACT_APP_URL;
 
 const Login = () => {
   const [isError, setIsError] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
   const [errorText, setErrorText] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [email, setEmail] = useState("");
@@ -76,7 +79,18 @@ const Login = () => {
         <form onSubmit={onSumit} className="login__form">
           <div className="form-controls">
             <Field type="email" onChange={(e)=> setEmail(e.target.value)} value={email} placeholder="Email" name="email" />
-            <Field type="password" onChange={(e)=> setPassword(e.target.value)} value={password} placeholder="Password" name="password" />
+            <div className="password_control">
+              <Field type={isVisible ? "text": "password"} onChange={(e)=> setPassword(e.target.value)} value={password} placeholder="Password" name="password" />
+              <span
+                title={isVisible ? "hide password" : "show password"}
+                className="input-icon"
+                onClick={() => {
+                  setIsVisible(!isVisible);
+                }}
+              >
+             <FontAwesomeIcon icon={isVisible ? faEye : faEyeSlash} />
+           </span>
+            </div>
           </div>
           <div className="login__options">
             <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} text="Remember me"/>

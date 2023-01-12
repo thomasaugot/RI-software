@@ -38,6 +38,14 @@
                 display: flex;
                 flex-direction: column;
                 gap: 1.875em;
+                .password_control{
+                    display: flex;
+                    align-items: center;
+                    .input-icon{
+                        cursor: pointer;
+                        margin-left: -2em;
+                    }
+                }
             }
             .login__options{
                 display: flex;
