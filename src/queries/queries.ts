@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
-import { baseUrl } from "../axios/axios";
 import { MyFormProps } from "../types/types";
+import { RegisterUrl } from "../utils/network";
 
 
 
@@ -25,7 +25,19 @@ export const register = async (
     phoneNumber
   }
   console.log("new Data", newData)
-  const { data: response } = await baseUrl.post('api/signup', newData)
-  console.log(response.data)
-  return response.data
+  try {
+    const response = await fetch(`${RegisterUrl}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newData)
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
 }
