@@ -21,8 +21,6 @@ const SingUpForm = () => {
   const [formData, setFormData] = useState<MyFormProps>({
     firstName: '',
     lastName: '',
-    companyLegalName: '',
-    login: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -94,8 +92,8 @@ const SingUpForm = () => {
         onSubmit={handleSubmit}
         className="registration-form">
         <header>
-          <h2 className="registration-header"><Heading text="Create an account" />
-          </h2>
+          <div className="registration-header"><Heading text="Create an account" />
+          </div>
           <h4 className="registration-header">
             Have an account? <Link to="/login">Sign in</Link>
           </h4>
@@ -106,14 +104,14 @@ const SingUpForm = () => {
         </div>
         <div className="registration-info">
           <Field
-            name='firstname'
+            name='firstName'
             placeholder="First name"
             value={formData.firstName}
             onBlur={handleBlur}
             onChange={handleChange}
             type="text" />
             <Field
-            name='lastname'
+            name='lastName'
             placeholder="Last name"
             value={formData.lastName}
             onBlur={handleBlur}

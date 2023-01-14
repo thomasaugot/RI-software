@@ -10,6 +10,7 @@ const Router: FC = () => {
 
         <Route path="/register" element={<SingUpForm />} />
         <Route path='/confirm' element={<ConfirmationForm/>} />
+        <Route path="/confirmation/:email" element={<ConfirmationForm />} />
 
     </Routes>
 

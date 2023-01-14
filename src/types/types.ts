@@ -27,8 +27,6 @@ export type TextProps = {
 export interface MyFormProps {
     firstName: string,
     lastName: string,
-    companyLegalName: string
-    login: string
     email: string
     password: string
     confirmPassword: string
@@ -39,4 +37,9 @@ export interface ErrorProps {
     email? : string;
     password? : string;
     confirmPassword?: string;
+    code? : any;
 }
+
+export interface codeProps {
+    code: any
+  }
