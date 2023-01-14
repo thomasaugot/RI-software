@@ -1,43 +1,44 @@
 import { BiErrorCircle } from 'react-icons/bi'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik'
 import './ConfimationEmailForm.scss'
 import React, { useState } from 'react'
-import Field from '../../components/Field'
-import Submitbutton from '../../components/Submitbutton'
-import Heading from '../../components/Heading'
 import { VerifyRegUrl } from '../../utils/network'
 import { codeProps, ErrorProps } from '../../types/types'
 import { useMutation } from 'react-query'
+import Heading from '../../components/Title/Title'
+import Submitbutton from '../../components/SubmitButton/SubmitButton'
+import Field from '../../components/InputField/InputField'
+import { verification } from '../../queries/queries'
 
 
 
 const ConfirmationForm = () => {
-    const { email } = useParams();
-    const [isError, setIsError] = useState(false);
-    const [formData, setFormData] = useState<codeProps>({ code: "" });
-    const navigate = useNavigate();
-    const { mutate: verify, isError: verifyError } = useMutation("");
-  
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = event.target;
-      setFormData({ ...formData, [name]: value });
-    };
-  
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (!formData.code) {
-        setIsError(true);
+  const { email } = useParams();
+  const [isError, setIsError] = useState(false);
+  const [formData, setFormData] = useState<codeProps>({ code: "" });
+  const navigate = useNavigate();
+  const { mutate: verify, isError: verifyError } = useMutation(verification);
+
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formData.code) {
+      setIsError(true);
+    } else {
+      const { data, error, message } = await verify({ variables: { code: formData.code } });
+      if (!error) {
+        navigate("/profile");
       } else {
-        await verify();
-        if (!verifyError) {
-          navigate("/profile");
-        } else {
-          setIsError(true);
-        }
+        setIsError(true);
+        console.log(message);
       }
-      setIsError(false);
-    };
+    }
+  };
 
 
   return (

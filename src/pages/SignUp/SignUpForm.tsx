@@ -1,16 +1,15 @@
 
 import "./SignUpForm.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BiErrorCircle, } from "react-icons/bi";
-import Field from "../../components/Field";
-import Submitbutton from "../../components/Submitbutton";
 import { useMutation } from "react-query";
-import Heading from "../../components/Heading";
-import { ErrorProps, MyFormProps } from "../../types/types";
+import { buttonType, ErrorProps, MyFormProps } from "../../types/types";
+import Heading from "../../components/Title/Title";
+import Field from "../../components/InputField/InputField";
+import Submitbutton from "../../components/SubmitButton/SubmitButton";
+import { eye, eyeoff } from "../../assets/Icons";
+import { register, verification } from "../../queries/queries";
 
 
 //--//check password Minlenght
@@ -19,27 +18,27 @@ import { ErrorProps, MyFormProps } from "../../types/types";
 
 const SingUpForm = () => {
   const [formData, setFormData] = useState<MyFormProps>({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    phoneNumber: ''
+    phone_number: ''
   })
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
   const [errors, setErrors] = useState<ErrorProps>({});
   const navigate = useNavigate()
-  const { mutate: signup, isError: signError } = useMutation("")
-  const { mutate: verify } = useMutation("")
-
+  const { mutate: signup, isError: signError } = useMutation(register)
+  const { mutate: verify } = useMutation(verification)
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     if (!errors.email && !errors.password && !errors.confirmPassword) {
-      await signup()
-      await verify()
+      await signup(formData)
+      await verify(formData.email)
       if (!signError) {
+        // await code_verify(e)
         setTimeout(() => navigate(`/confirmation/${formData.email}`), 2000)
       } else {
         setError(true)
@@ -104,16 +103,16 @@ const SingUpForm = () => {
         </div>
         <div className="registration-info">
           <Field
-            name='firstName'
+            name='first_name'
             placeholder="First name"
-            value={formData.firstName}
+            value={formData.first_name}
             onBlur={handleBlur}
             onChange={handleChange}
             type="text" />
-            <Field
-            name='lastName'
+          <Field
+            name='last_name'
             placeholder="Last name"
-            value={formData.lastName}
+            value={formData.last_name}
             onBlur={handleBlur}
             onChange={handleChange}
             type="text" />
@@ -127,7 +126,7 @@ const SingUpForm = () => {
           <div className="field-container">
             <Field
               name='password'
-              type="password"
+              type={passwordVisible? "text" : "password"}
               placeholder="Password"
               onBlur={handleBlur}
               minLength={3}
@@ -141,7 +140,7 @@ const SingUpForm = () => {
                 setPasswordVisible(!passwordVisible);
               }}
             >
-              <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
+              {passwordVisible ? eye : eyeoff}
             </span>
           </div>
 
@@ -150,7 +149,7 @@ const SingUpForm = () => {
               name='confirmPassword'
               onBlur={handleBlur}
               minLength={3}
-              type="password"
+              type={passwordVisible? "text" : "password"}
               placeholder="Repeat password"
               value={formData.confirmPassword}
               onChange={handleChange}
@@ -162,17 +161,17 @@ const SingUpForm = () => {
                 setPasswordVisible(!passwordVisible);
               }}
             >
-              <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
+              {passwordVisible ? eye : eyeoff}
             </span>
           </div>
           <Field
-            name='phoneNumber'
+            name='phone_number'
             placeholder="Phone number"
             onBlur={handleBlur}
-            value={formData.phoneNumber}
+            value={formData.phone_number}
             onChange={handleChange}
             type="number" />
-          <Submitbutton text="Create" />
+          <Submitbutton type={buttonType.submit} text="Create" />
         </div>
       </form>
     </div>
