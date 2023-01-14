@@ -1,12 +1,12 @@
-import { SubmitbuttonProps } from '../../types/types'
-import './Submitbutton.scss'
+import { SubmitbuttonProps } from '../../types'
+import './SubmitButton.scss'
 
 const Submitbutton = ({
     text,
     type
 }: SubmitbuttonProps) => {
   return (
-    <button className='submitbutton' type={type}>
+    <button className='submit-button' type={type}>
       {text}
     </button>
   )
