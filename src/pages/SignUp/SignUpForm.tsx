@@ -9,7 +9,7 @@ import Heading from "../../components/Title/Title";
 import Field from "../../components/InputField/InputField";
 import Submitbutton from "../../components/SubmitButton/SubmitButton";
 import { eye, eyeoff } from "../../assets/Icons";
-import { register, verification } from "../../queries/queries";
+import { register, verification } from "../../queries/SignUpQueries";
 
 
 //--//check password Minlenght
@@ -36,7 +36,7 @@ const SingUpForm = () => {
     e.preventDefault()
     if (!errors.email && !errors.password && !errors.confirmPassword) {
       await signup(formData)
-      await verify(formData.email)
+      // await verify(formData.email)
       if (!signError) {
         // await code_verify(e)
         setTimeout(() => navigate(`/confirmation/${formData.email}`), 2000)
@@ -75,6 +75,13 @@ const SingUpForm = () => {
       case 'confirmPassword':
         if (value !== formData.password) {
           setErrors({ ...errors, [name]: 'Passwords do not match' })
+        } else {
+          setErrors({ ...errors, [name]: '' });
+        }
+        break
+        case 'phone_number':
+        if (value.length !== Number(value)) {
+          setErrors({ ...errors, [name]: 'Phone Numbers must be Number' })
         } else {
           setErrors({ ...errors, [name]: '' });
         }
@@ -154,15 +161,6 @@ const SingUpForm = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
             />
-            <span
-              title={passwordVisible ? "hide password" : "show password"}
-              className="input-icon"
-              onClick={() => {
-                setPasswordVisible(!passwordVisible);
-              }}
-            >
-              {passwordVisible ? eye : eyeoff}
-            </span>
           </div>
           <Field
             name='phone_number'

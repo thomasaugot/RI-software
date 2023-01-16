@@ -1,4 +1,4 @@
-import { codeProps, EmailProps } from './../types/types';
+import { codeProps, EmailProps } from '../types/types';
 import { Navigate } from "react-router-dom";
 import { MyFormProps } from "../types/types";
 import { RegisterUrl, VerifyRegUrl } from "../utils/network";
@@ -41,7 +41,6 @@ export const register = async (
 
 //verify
 
-
 export const verification = async (code: any) => {
   try {
     const response = await fetch(`${VerifyRegUrl}`, {
@@ -53,34 +52,16 @@ export const verification = async (code: any) => {
         code: code
       }),
     });
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.message);
+    if (response.ok === true) {
+      return true
     }
-    return { data, error: null, message: 'success' };
-  } catch (error) {
+    else {
+      return false
+    }
+  }
+  catch (error) {
     console.error(error);
-    return { data: null, error, message: 'failed' };
+    return error
   }
 }
-
-
-// email verification code
-
-// export const send_verify = async(email: any) => {
-//   try {
-//     const response = await fetch(`${SendVerifyRegUrl}`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify({email: email}),
-//     })
-//     const data = await response.json();
-//     return data
-//   } catch (error) {
-//     console.error(error);
-//     return error;
-//   }
-// }
 
