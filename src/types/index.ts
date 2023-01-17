@@ -36,3 +36,16 @@ export type LoginType = {
     email: string
     password: string
 }
+
+export type navMenuItem = {
+    icon: JSX.Element
+    text: string
+    url: string
+}
+
+export type NavItemProps = {
+    index?: number
+    icon?: JSX.Element
+    text?: string
+    menuItems?: navMenuItem[]
+}
