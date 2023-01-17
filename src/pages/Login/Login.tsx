@@ -92,13 +92,13 @@ const Login = () => {
               </span>
             </div>
           </div>
-          <div className="login__options">
+          <div className="login-options">
             <CheckBox
               isChecked={isChecked}
               setIsChecked={setIsChecked}
               text="Remember me"
             />
-            <Link to="/forget" className="login__forget">
+            <Link to="/forget" className="login-forget">
               Forget password?
             </Link>
           </div>
