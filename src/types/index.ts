@@ -1,3 +1,5 @@
+import React from "react"
+
 export type fieldType = {
     type: string
     placeholder?: string
@@ -22,4 +24,15 @@ export type SubmitbuttonProps = {
 export type TextProps = {
     text: string
     color?: string
+}
+
+export type checkboxProps = {
+    isChecked: boolean
+    setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
+    text: string
+}
+
+export type LoginType = {
+    email: string
+    password: string
 }
