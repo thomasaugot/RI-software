@@ -1,0 +1,8 @@
+.base-layout{
+    display: flex;
+    
+    .content{
+        flex: 1;
+        max-height: 100vh;
+    }
+}
