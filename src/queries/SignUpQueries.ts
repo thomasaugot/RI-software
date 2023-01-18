@@ -1,5 +1,4 @@
-import { codeProps, EmailProps } from '../types/types';
-import { Navigate } from "react-router-dom";
+
 import { MyFormProps } from "../types/types";
 import { RegisterUrl, VerifyRegUrl } from "../utils/network";
 
@@ -41,27 +40,48 @@ export const register = async (
 
 //verify
 
+// export const verification = async (code: any) => {
+//   try {
+//     const response = await fetch("http://localhost:5000/api/verification/email/verify", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify({
+//         code: code
+//       }),
+//     });
+//     console.log(response)
+//     if (response.ok === true) {
+//       return true
+//     }
+//     else {
+//       return false
+//     }
+//   }
+//   catch (error) {
+//     console.error(error);
+//     return error
+//   }
+// }
+
 export const verification = async (code: any) => {
-  try {
-    const response = await fetch(`${VerifyRegUrl}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        code: code
-      }),
-    });
-    if (response.ok === true) {
-      return true
-    }
-    else {
-      return false
-    }
-  }
-  catch (error) {
-    console.error(error);
-    return error
+  let data = { code }
+  const response = await fetch(`${VerifyRegUrl}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data),
+  });
+  if (response.ok) {
+    const resp = await response.json();
+    console.log(resp)
+    return resp
+  } else {
+    return false;
   }
 }
+
+
 

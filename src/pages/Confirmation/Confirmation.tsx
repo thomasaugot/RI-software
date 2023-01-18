@@ -1,10 +1,8 @@
 import { BiErrorCircle } from 'react-icons/bi'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import './ConfimationEmailForm.scss'
+import './Confimation.scss'
 import React, { useState } from 'react'
-import { VerifyRegUrl } from '../../utils/network'
-import { buttonType, codeProps, ErrorProps } from '../../types/types'
-import { useMutation } from 'react-query'
+import { buttonType, codeProps } from '../../types/types'
 import Heading from '../../components/Title/Title'
 import Submitbutton from '../../components/SubmitButton/SubmitButton'
 import Field from '../../components/InputField/InputField'
@@ -17,8 +15,21 @@ const ConfirmationForm = () => {
   const [isError, setIsError] = useState(false);
   const [formData, setFormData] = useState<codeProps>({ code: "" });
   const navigate = useNavigate();
-  const { mutate: verify, isError: verifyError } = useMutation(verification);
 
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const confirm = await verification(formData.code)
+    if (!confirm) {
+      setIsError(true)
+    } else if (!formData.code) {
+      setIsError(true)
+    } else {
+      setIsError(false);
+      navigate("/login")
+    }
+    
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -28,22 +39,6 @@ const ConfirmationForm = () => {
       setFormData({ ...formData, [name]: value });
     }
   };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!formData.code) {
-      setIsError(true);
-    }
-    else {
-      await verify(formData.code);
-      if (!verifyError) {
-        navigate("/profile");
-      } else {
-        setIsError(true);
-      }
-    }
-  };
-
 
   return (
     <div className="verification-div">

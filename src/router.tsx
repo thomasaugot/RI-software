@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
-import ConfirmationForm from "./pages/Confirmation/ConfirmationEmail";
+import Confirmation from "./pages/Confirmation/Confirmation";
 import Login from "./pages/Login/Login";
-import SingUpForm from "./pages/SignUp/SignUpForm";
+import SingUpForm from "./pages/SignUp/SignUp";
 
 
 
@@ -10,8 +10,8 @@ const Router: FC = () => {
     return <Routes>
 
         <Route path="/register" element={<SingUpForm />} />
-        <Route path='/confirm' element={<ConfirmationForm/>} />
-        <Route path="/confirmation/:email" element={<ConfirmationForm />} />
+        <Route path='/confirm' element={<Confirmation/>} />
+        <Route path="/confirmation/:email" element={<Confirmation />} />
         <Route path='/login' element={<Login/>}/>
 
     </Routes>

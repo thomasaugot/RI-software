@@ -51,6 +51,7 @@ export interface ErrorProps {
     email?: string;
     password?: string;
     confirmPassword?: string;
+    phone_number?:string
     code?: any;
 }
 
