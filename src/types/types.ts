@@ -62,3 +62,16 @@ export interface codeProps {
 export interface EmailProps {
     email: any
 }
+
+export type navMenuItem = {
+    icon: JSX.Element
+    text: string
+    url: string
+}
+
+export type NavItemProps = {
+    index?: number
+    icon?: JSX.Element
+    text?: string
+    menuItems?: navMenuItem[]
+}

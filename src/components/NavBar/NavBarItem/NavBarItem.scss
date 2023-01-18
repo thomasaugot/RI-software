@@ -1,0 +1,109 @@
+
+.navitem{
+    background-color: #FFF;
+    width: 100%;
+    color: #4970B5;
+    fill: #4970B5;
+    height: 4.5625em;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+    border-radius: 0px 15px 15px 0px;
+    .hide{
+        display: none;
+    }
+    .nav-item-top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em 1.875em 1em 3.0975em;
+        .nav-item-top-text{
+            display: flex;
+            align-items: center;
+            gap: 1.4em;
+            p{
+                font-family: 'Inter', sans-serif;
+                font-weight: 400;
+                font-size: 1rem;
+            }
+        }
+        
+    }
+    &:hover{
+        background-color: #4970B5;
+        color: #FFF;
+        fill: #FFF !important;
+    }
+}
+
+
+.rotate{
+    transform: rotate(90deg);
+    transition: .3s ease-in-out;
+}
+
+.rotate-0{
+    transform: rotate(0);
+    transition: .3s ease-in-out;
+}
+
+
+.navitem-expand{
+    height: 9.5625rem;
+    min-width: 9.5625rem;
+    background-color: #4970B5;
+    width: 100%;
+    border-radius: 0px 15px 15px 0px;
+    transition: .3s ease-in-out;
+    color: #FFF;
+    .hide{
+        display: block;
+    }
+    
+    .nav-item-top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1em 1.875em 1em 3.0975em;
+        .nav-item-top-text{
+            display: flex;
+            align-items: center;
+            gap: 1.4em;
+            svg{
+                fill: #fff;
+            }
+            p{
+                font-family: 'Inter', sans-serif;
+                font-weight: 400;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .nav-item-menu{
+        
+        .nav-menu-link{
+            height: 2.825em;
+            display: flex;
+            width: 100%;
+            transition: .3s ease-in-out;
+            padding: .625em 5.45em .625em 6.45em;
+            text-decoration: none;
+            gap: 1.4em;
+            p{
+                font-size: 16px;
+                font-weight: 400;
+                color: #EDEDED;
+                font-family: 'Inter', sans-serif;
+            }
+
+            &:hover{
+                background-color: #6F8FCC;
+            }
+        }
+
+        :last-child{
+            border-radius: 0px 0 15px 0px;
+        }
+    }
+
+}
