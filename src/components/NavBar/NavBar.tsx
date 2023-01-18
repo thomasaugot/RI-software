@@ -1,40 +1,24 @@
 import React from 'react'
 import './NavBar.scss'
-import { navlogo, people, organize, settings, product, Message, Information, Logout } from '../../assets/Icons'
+import { navlogo, Logout } from '../../assets/Icons'
 import NavBarItem from './NavBarItem/NavBarItem'
-import { NavItemProps } from '../../types'
+import { navbarProps } from '../../types'
+import { navbars } from '../../queries'
 
-const navItems: Array<NavItemProps>=[
-    {
-      text: "People",
-      icon: people,
-      menuItems: [
-        {
-            text: "Message",
-            icon: Message,
-            url: ""
-        },
-        {
-            text: "Information",
-            icon: Information,
-            url: ""
-        }
-      ]
-    },
-    {
-      text: "Organize",
-      icon: organize,
-    },
-    {
-      text: "Setting",
-      icon: settings,
-    },
-    {
-      text: "Products",
-      icon: product,
-    },
-  ];
+
 function NavBar() {
+  const [navData, setNavData] = React.useState<Array<navbarProps>>([])
+
+  
+  React.useEffect(()=>{
+    const getNavData = async () => {
+     const datas =  await navbars(1)
+     setNavData(datas)
+    }
+    getNavData()
+  },[])
+  
+  console.log(navData)
   return (
     <div className='navbar'>
         <div className="navbar-header">
@@ -42,8 +26,8 @@ function NavBar() {
             <p className='navbar-head-text'>Store Panel</p>
         </div>
       <div className="navbar-container">
-        {navItems.map((item, i)=>(
-            <NavBarItem text={item.text} icon={item.icon} menuItems={item.menuItems} index={i+1}/>
+        {navData.map((item, i)=>(
+            <NavBarItem key={i} text={item.name} menuItems={item.subitems} index={i+1}/>
         ))}
       </div>
       <div className="navbar-bottom">

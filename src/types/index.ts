@@ -38,9 +38,9 @@ export type LoginType = {
 }
 
 export type navMenuItem = {
-    icon: JSX.Element
-    text: string
-    url: string
+    icon?: JSX.Element
+    name?: string
+    url?: string
 }
 
 export type NavItemProps = {
@@ -48,4 +48,23 @@ export type NavItemProps = {
     icon?: JSX.Element
     text?: string
     menuItems?: navMenuItem[]
+}
+
+type subItemProps = {
+    name: string
+    url: string
+    enabled: boolean
+}
+
+export type navBarResponse = {
+    ok?: boolean
+    description?: string
+    result: navbarProps[]
+}
+  
+export type navbarProps = {
+    name: string
+    url: string
+    enabled: boolean
+    subitems: subItemProps[]
 }
