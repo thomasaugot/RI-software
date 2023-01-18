@@ -5,7 +5,6 @@ import NavBarItem from './NavBarItem/NavBarItem'
 import { navbarProps } from '../../types'
 import { navbars } from '../../queries'
 
-
 function NavBar() {
   const [navData, setNavData] = React.useState<Array<navbarProps>>([])
 
@@ -17,7 +16,7 @@ function NavBar() {
     }
     getNavData()
   },[])
-  
+
   console.log(navData)
   return (
     <div className='navbar'>
