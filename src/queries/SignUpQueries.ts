@@ -1,4 +1,5 @@
-
+import { codeProps, EmailProps } from './../types/types';
+import { Navigate } from "react-router-dom";
 import { MyFormProps } from "../types/types";
 import { RegisterUrl, VerifyRegUrl } from "../utils/network";
 
@@ -7,18 +8,18 @@ import { RegisterUrl, VerifyRegUrl } from "../utils/network";
 // register method
 export const register = async (
   {
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     email,
     password,
-    phone_number
+    phoneNumber
   }: MyFormProps) => {
   const newData = {
-    first_name,
-    last_name,
+    firstName,
+    lastName,
     email,
     password,
-    phone_number
+    phoneNumber
   }
   console.log("new Data", newData)
   try {
@@ -40,48 +41,46 @@ export const register = async (
 
 //verify
 
-// export const verification = async (code: any) => {
-//   try {
-//     const response = await fetch("http://localhost:5000/api/verification/email/verify", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify({
-//         code: code
-//       }),
-//     });
-//     console.log(response)
-//     if (response.ok === true) {
-//       return true
-//     }
-//     else {
-//       return false
-//     }
-//   }
-//   catch (error) {
-//     console.error(error);
-//     return error
-//   }
-// }
 
 export const verification = async (code: any) => {
-  let data = { code }
-  const response = await fetch(`${VerifyRegUrl}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data),
-  });
-  if (response.ok) {
-    const resp = await response.json();
-    console.log(resp)
-    return resp
-  } else {
-    return false;
+  try {
+    const response = await fetch(`${VerifyRegUrl}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        code: code
+      }),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+    return { data, error: null, message: 'success' };
+  } catch (error) {
+    console.error(error);
+    return { data: null, error, message: 'failed' };
   }
 }
 
 
+// email verification code
+
+// export const send_verify = async(email: any) => {
+//   try {
+//     const response = await fetch(`${SendVerifyRegUrl}`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify({email: email}),
+//     })
+//     const data = await response.json();
+//     return data
+//   } catch (error) {
+//     console.error(error);
+//     return error;
+//   }
+// }
 

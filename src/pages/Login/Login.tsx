@@ -1,20 +1,13 @@
 import { useState } from "react";
-<<<<<<<<< Temporary merge branch 1
 import { Link, Navigate } from "react-router-dom";
 import { BiErrorCircle } from 'react-icons/bi'
 import { eye, eyeoff } from '../../assets/Icons'
-=========
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import { BiErrorCircle } from "react-icons/bi";
-import { eye, eyeoff } from "../../assets/Icons";
->>>>>>>>> Temporary merge branch 2
 import CheckBox from "../../components/CheckBox/CheckBox";
 import Field from "../../components/InputField/InputField";
 import Heading from "../../components/Title/Title";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import Text from "../../components/Text/Text";
 import "./Login.scss";
-<<<<<<<<< Temporary merge branch 1
 import { buttonType } from "../../types/types";
 
 const baseURl = process.env.REACT_APP_URL;
@@ -33,64 +26,37 @@ const Login = () => {
   const navigate = useNavigate();
   // login method
   const onSumit = async (e: React.FormEvent<HTMLFormElement>) => {
-<<<<<<<<< Temporary merge branch 1
     e.preventDefault()
     let data = {
       email,
       password
     }
-    return await fetch(`${baseURl}/api/login`, {
+    return await  fetch(`${baseURl}/api/login`,{
       method: 'POST',
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" }
     })
-      .then((res) => {
-        if (res.status === 400) {
-          setIsError(true)
-          setErrorText("Wrong email or password")
-        } else if (res.status === 200) {
-          setIsError(false)
-          if (isChecked) {
-            localStorage.setItem("isLogged", "true")
-          }
-          console.log("isLogged")
-        }
-        return res.json()
-      }
-      )
-      .then((data) => localStorage.setItem("token", data.result.access_token))
-      .catch((err) => {
+    .then((res) => {
+      if(res.status === 400){
         setIsError(true)
-      })
+        setErrorText("Wrong email or password")
+      } else if(res.status === 200){
+        setIsError(false)
+        if(isChecked){
+          localStorage.setItem("isLogged", "true")
+        }
+        console.log("isLogged")
+      }
+      return res.json()
+    }
+    )
+    .then((data) => localStorage.setItem("token", data.result.access_token))
+    .catch((err)=> {
+      setIsError(true) 
+    })
   }
 
   if (localStorage.getItem("isLogged") === "true") return <Navigate to='/' replace />
-=========
-    e.preventDefault();
-    return await login({ email, password })
-      .then((res) => {
-        if (res.status === 400) {
-          setIsError(true);
-          setErrorText("Wrong email or password");
-        } else if (res.status === 200) {
-          setIsError(false);
-          if (isChecked) {
-            localStorage.setItem("isLogged", "true");
-          }
-          console.log("isLogged");
-          navigate("/");
-        }
-        return res.json();
-      })
-      .then((data) => localStorage.setItem("token", data.result.access_token))
-      .catch((err) => {
-        setIsError(true);
-      });
-  };
-
-  if (localStorage.getItem("isLogged") === "true")
-    return <Navigate to="/" replace />;
->>>>>>>>> Temporary merge branch 2
 
   return (
     <div className="login">
@@ -107,9 +73,6 @@ const Login = () => {
         {isError ? (
 <<<<<<<<< Temporary merge branch 1
           <div className="login__error">
-=========
-          <div className="login-error">
->>>>>>>>> Temporary merge branch 2
             <BiErrorCircle size={"1.25rem"} />
             <Text color="#F61D1D" text={errorText} />
           </div>
@@ -118,28 +81,13 @@ const Login = () => {
           <div className="form-controls">
             <Field
               type="email"
-<<<<<<<<< Temporary merge branch 1
               onChange={(e: any) => setEmail(e.target.value)}
-=========
-              onChange={(e) => setEmail(e.target.value)}
->>>>>>>>> Temporary merge branch 2
               value={email}
               placeholder="Email"
               name="email"
             />
-<<<<<<<<< Temporary merge branch 1
             <div className="password_control">
               <Field type={isVisible ? "text" : "password"} onChange={(e: any) => setPassword(e.target.value)} value={password} placeholder="Password" name="password" />
-=========
-            <div className="password-control">
-              <Field
-                type={isVisible ? "text" : "password"}
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                placeholder="Password"
-                name="password"
-              />
->>>>>>>>> Temporary merge branch 2
               <span
                 title={isVisible ? "hide password" : "show password"}
                 className="input-icon"
@@ -147,13 +95,13 @@ const Login = () => {
                   setIsVisible(!isVisible);
                 }}
               >
-                {isVisible ? eye : eyeoff}
-              </span>
+             {isVisible ? eye : eyeoff}
+           </span>
             </div>
           </div>
 <<<<<<<<< Temporary merge branch 1
           <div className="login__options">
-            <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} text="Remember me" />
+            <CheckBox isChecked={isChecked} setIsChecked={setIsChecked} text="Remember me"/>
             <Link to="/forget" className="login__forget">Forget password?</Link>
 =========
           <div className="login-options">

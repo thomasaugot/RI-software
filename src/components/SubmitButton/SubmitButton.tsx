@@ -1,5 +1,4 @@
-
-import { SubmitbuttonProps } from '../../types/types'
+import { SubmitbuttonProps } from '../../types'
 import './SubmitButton.scss'
 import { SubmitbuttonProps } from "../../types";
 import "./SubmitButton.scss";

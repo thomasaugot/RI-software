@@ -1,15 +1,16 @@
 
-import "./SignUp.scss";
+import "./SignUpForm.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BiErrorCircle, } from "react-icons/bi";
-import { buttonType, MyFormProps } from "../../types/types";
+import { useMutation } from "react-query";
+import { buttonType, ErrorProps, MyFormProps } from "../../types/types";
 import Heading from "../../components/Title/Title";
 import Field from "../../components/InputField/InputField";
 import Submitbutton from "../../components/SubmitButton/SubmitButton";
 import { eye, eyeoff } from "../../assets/Icons";
-import { register } from "../../queries/SignUpQueries";
-import Text from "../../components/Text/Text";
+import { register, verification } from "../../queries/queries";
+
 
 //--//check password Minlenght
 
@@ -17,32 +18,31 @@ import Text from "../../components/Text/Text";
 
 const SingUpForm = () => {
   const [formData, setFormData] = useState<MyFormProps>({
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
-    phone_number: ''
+    phoneNumber: ''
   })
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
   const [errorText, setErrorText] = useState("");
   const navigate = useNavigate()
-
+  const { mutate: signup, isError: signError } = useMutation(register)
+  const { mutate: verify } = useMutation(verification)
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const registerResponse = await register(formData)
-    if (registerResponse.status === 400) {
-      setError(true);
-      setErrorText("This email is already use by another account.")
-    }
-    else if (formData.password !== formData.confirmPassword) {
-      setError(true);
-      setErrorText("Passwords do not match.")
-    } else {
-      setError(false);
-      setTimeout(() => navigate(`/confirmation/${formData.email}`), 2000)
+    if (!errors.email && !errors.password && !errors.confirmPassword) {
+      await signup(formData)
+      await verify(formData.email)
+      if (!signError) {
+        // await code_verify(e)
+        setTimeout(() => navigate(`/confirmation/${formData.email}`), 2000)
+      } else {
+        setError(true)
+      }
     }
   }
 
@@ -76,15 +76,17 @@ const SingUpForm = () => {
         ) : null}
         <div className="registration-info">
           <Field
-            name='first_name'
+            name='firstName'
             placeholder="First name"
             value={formData.first_name}
+            onBlur={handleBlur}
             onChange={handleChange}
             type="text" />
-          <Field
-            name='last_name'
+            <Field
+            name='lastName'
             placeholder="Last name"
             value={formData.last_name}
+            onBlur={handleBlur}
             onChange={handleChange}
             type="text" />
           <Field
@@ -96,7 +98,7 @@ const SingUpForm = () => {
           <div className="field-container">
             <Field
               name='password'
-              type={passwordVisible ? "text" : "password"}
+              type={passwordVisible? "text" : "password"}
               placeholder="Password"
               minLength={3}
               value={formData.password}
@@ -109,7 +111,7 @@ const SingUpForm = () => {
                 setPasswordVisible(!passwordVisible);
               }}
             >
-              {passwordVisible ? eye : eyeoff}
+              <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
             </span>
           </div>
 
@@ -117,19 +119,29 @@ const SingUpForm = () => {
             <Field
               name='confirmPassword'
               minLength={3}
-              type={passwordVisible ? "text" : "password"}
+              type={passwordVisible? "text" : "password"}
               placeholder="Repeat password"
               value={formData.confirmPassword}
               onChange={handleChange}
             />
+            <span
+              title={passwordVisible ? "hide password" : "show password"}
+              className="input-icon"
+              onClick={() => {
+                setPasswordVisible(!passwordVisible);
+              }}
+            >
+              {passwordVisible ? eye : eyeoff}
+            </span>
           </div>
           <Field
-            name='phone_number'
+            name='phoneNumber'
             placeholder="Phone number"
+            onBlur={handleBlur}
             value={formData.phone_number}
             onChange={handleChange}
             type="number" />
-          <Submitbutton type={buttonType.submit} text="Create" />
+          <Submitbutton text="Create" />
         </div>
       </form>
     </div>

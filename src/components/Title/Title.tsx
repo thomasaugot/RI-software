@@ -1,4 +1,4 @@
-import { TextProps } from '../../types/types'
+import { TextProps } from '../../types'
 import './Title.scss'
 
 const Heading = ({text}: TextProps) => {

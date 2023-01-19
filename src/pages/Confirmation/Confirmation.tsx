@@ -1,12 +1,14 @@
 import { BiErrorCircle } from 'react-icons/bi'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import './Confimation.scss'
+import './ConfimationEmailForm.scss'
 import React, { useState } from 'react'
-import { buttonType, codeProps } from '../../types/types'
+import { VerifyRegUrl } from '../../utils/network'
+import { codeProps, ErrorProps } from '../../types/types'
+import { useMutation } from 'react-query'
 import Heading from '../../components/Title/Title'
 import Submitbutton from '../../components/SubmitButton/SubmitButton'
 import Field from '../../components/InputField/InputField'
-import { verification } from '../../queries/SignUpQueries'
+import { verification } from '../../queries/queries'
 
 
 
@@ -15,30 +17,29 @@ const ConfirmationForm = () => {
   const [isError, setIsError] = useState(false);
   const [formData, setFormData] = useState<codeProps>({ code: "" });
   const navigate = useNavigate();
+  const { mutate: verify, isError: verifyError } = useMutation(verification);
 
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const confirm = await verification(formData.code)
-    if (!confirm) {
-      setIsError(true)
-    } else if (!formData.code) {
-      setIsError(true)
-    } else {
-      setIsError(false);
-      navigate("/login")
-    }
-    
-  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    if (isNaN(Number(value))) {
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!formData.code) {
       setIsError(true);
     } else {
-      setFormData({ ...formData, [name]: value });
+      const { data, error, message } = await verify({ variables: { code: formData.code } });
+      if (!error) {
+        navigate("/profile");
+      } else {
+        setIsError(true);
+        console.log(message);
+      }
     }
   };
+
 
   return (
     <div className="verification-div">
