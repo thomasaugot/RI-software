@@ -36,3 +36,35 @@ export type LoginType = {
     email: string
     password: string
 }
+
+export type navMenuItem = {
+    icon?: JSX.Element
+    name?: string
+    url?: string
+}
+
+export type NavItemProps = {
+    index?: number
+    icon?: JSX.Element
+    text?: string
+    menuItems?: navMenuItem[]
+}
+
+type subItemProps = {
+    name: string
+    url: string
+    enabled: boolean
+}
+
+export type navBarResponse = {
+    ok?: boolean
+    description?: string
+    result: navbarProps[]
+}
+  
+export type navbarProps = {
+    name: string
+    url: string
+    enabled: boolean
+    subitems: subItemProps[]
+}
