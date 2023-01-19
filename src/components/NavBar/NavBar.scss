@@ -2,24 +2,24 @@
 .navbar{
     height: 100vh;
     width: 20.31em;
-    padding: 3.5em 0 3.1em 0;
+    padding: 2.75em 0 3.1em 0;
     box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.15);
     .navbar-header{
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: .9em;
-        padding-bottom: 3.5em;
+        gap: .875em;
+        padding-bottom: 4.18735em;
         justify-content: center;
         .navbar-head-text {
             font-size: 1.25rem;
             color: #4970B5;
-            font-family: 'Inter', sans-serif;
             font-weight: 500;
         }
     }
 
     .navbar-container{
-        height: 39.6em;
+        height: 65%;
         width: 100%;
         display: flex;
         flex-direction: column;

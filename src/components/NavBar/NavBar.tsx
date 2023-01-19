@@ -22,7 +22,7 @@ function NavBar() {
     <div className='navbar'>
         <div className="navbar-header">
             <span>{navlogo}</span>
-            <p className='navbar-head-text'>Store Panel</p>
+            <p className='navbar-head-text'>Company Name</p>
         </div>
       <div className="navbar-container">
         {navData.map((item, i)=>(
