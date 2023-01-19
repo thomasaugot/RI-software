@@ -12,13 +12,13 @@ export type fieldType = {
 
 export enum buttonType {
     button = 'button',
-    submit= 'submit',
-    reset='reset'
+    submit = 'submit',
+    reset = 'reset'
 }
 
 export type SubmitbuttonProps = {
     text: string
-    type?: buttonType 
+    type?: buttonType
 }
 
 export type TextProps = {
@@ -37,34 +37,28 @@ export type LoginType = {
     password: string
 }
 
-export type navMenuItem = {
-    icon?: JSX.Element
-    name?: string
-    url?: string
+
+export interface MyFormProps {
+    first_name: string,
+    last_name: string,
+    email: string,
+    password: string,
+    confirmPassword: string,
+    phone_number:string
 }
 
-export type NavItemProps = {
-    index?: number
-    icon?: JSX.Element
-    text?: string
-    menuItems?: navMenuItem[]
+export interface ErrorProps {
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+    phone_number?:string
+    code?: any;
 }
 
-type subItemProps = {
-    name: string
-    url: string
-    enabled: boolean
+export interface codeProps {
+    code: any
 }
 
-export type navBarResponse = {
-    ok?: boolean
-    description?: string
-    result: navbarProps[]
-}
-  
-export type navbarProps = {
-    name: string
-    url: string
-    enabled: boolean
-    subitems: subItemProps[]
+export interface EmailProps {
+    email: any
 }

@@ -1,5 +1,5 @@
 import './Text.scss'
-import { TextProps } from '../../types'
+import { TextProps } from '../../types/types'
 
 const Text = ({
   color,
