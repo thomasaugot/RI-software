@@ -8,8 +8,8 @@ import Heading from "../../components/Title/Title";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import Text from "../../components/Text/Text";
 import "./Login.scss";
-import { buttonType } from "../../types";
 import { login } from "../../queries";
+import { buttonType } from "../../types/types";
 
 const Login = () => {
   const [isError, setIsError] = useState(false);
