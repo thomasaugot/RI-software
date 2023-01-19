@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavItemProps } from '../../../types'
 import './NavBarItem.scss'
 import {FiChevronRight} from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import { NavItemProps } from '../../../types/types'
 
 function NavBarItem({index, text,icon, menuItems}: NavItemProps) {
     const [isOpen, setIsOpen] = React.useState(false)

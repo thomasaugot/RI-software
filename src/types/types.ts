@@ -61,4 +61,36 @@ export interface codeProps {
 
 export interface EmailProps {
     email: any
+=========
+export type navMenuItem = {
+    icon?: JSX.Element
+    name?: string
+    url?: string
+}
+
+export type NavItemProps = {
+    index?: number
+    icon?: JSX.Element
+    text?: string
+    menuItems?: navMenuItem[]
+}
+
+type subItemProps = {
+    name: string
+    url: string
+    enabled: boolean
+}
+
+export type navBarResponse = {
+    ok?: boolean
+    description?: string
+    result: navbarProps[]
+}
+  
+export type navbarProps = {
+    name: string
+    url: string
+    enabled: boolean
+    subitems: subItemProps[]
+>>>>>>>>> Temporary merge branch 2:src/types/index.ts
 }

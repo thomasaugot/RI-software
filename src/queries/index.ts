@@ -1,4 +1,4 @@
-import { LoginType, navBarResponse  } from "../types";
+import { LoginType, navBarResponse } from "../types/types";
 
 const baseURl = process.env.REACT_APP_URL;
 
