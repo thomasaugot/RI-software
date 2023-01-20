@@ -8,12 +8,15 @@ const BaseLayout: FC<
 > = ({ children }) => {
   return (
     <div className="base-layout">
-      <div className="base-layout-sidebar">
+      <div>
         <NavBar />
       </div>
-      <div className="content">
+      <div className="base-layout-content">
         <Header/>
-        {children ?? <></>}</div>
+          <div className="base-layout-container">
+            {children ?? <></>}
+          </div>
+        </div>
     </div>
   );
 };
