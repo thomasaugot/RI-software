@@ -2,6 +2,7 @@ import { FC, FormEvent, useState, useEffect } from "react";
 import "./Hierarchy.scss";
 import BaseLayout from "../../layouts/BaseLayout";
 import { adduser, moveWorker, options, profile, userx } from "../../assets/Icons";
+import Header from "../../components/Header/Header";
 
 
 
@@ -91,23 +92,14 @@ const Hierachy: FC = () => {
   return (
     <BaseLayout>
       <div className="Hierarchy">
-        {/* <h1>Иерархия</h1> */}
-
+        <header>
+         
+            <Header/>
+        
+        </header>
 
         <div className="container custom-scroll">
           <div>
-            {/* <div className="company-details custom-scroll">
-              <div>
-                <div className="company-logo">
-                  <FontAwesomeIcon icon={faHouse} />
-                </div>
-                <div>
-                  <h2>{data.companyName}</h2>
-                  <p>Владелец</p>
-                </div>
-              </div>
-            </div> */}
-
             <div className="employee-details custom-scroll">
               {/* all employees */}
               {employees.map((e, j) => (
@@ -129,18 +121,20 @@ const Hierachy: FC = () => {
                       <div>
                         <button
                           className="remove"
-                          onClick={() => setSelectedUser(e.name)}
-                        >
+                          onClick={() => setSelectedUser(e.name)}>
                           {userx}
                         </button>
-                        <button className="expand">
-                          {moveWorker}
+                        <div>
+                          <button className="expand">
+                            {moveWorker}
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <button className="options">
+                          {options}
                         </button>
                       </div>
-
-                      <button className="options">
-                        {options}
-                      </button>
                     </div>
                   </div>
                   <div className="divide" />
@@ -155,6 +149,103 @@ const Hierachy: FC = () => {
                   )}
                 </div>
               ))}
+            </div>
+
+            <div className="employee-details custom-scroll">
+              {/* all employees */}
+              {leads.map((e, j) => (
+                <div key={`e-d-${j}`} className="employee-detail">
+                  <div>
+                    <div className="left">
+                      <div>
+                        <div className="profile-image">
+                          {profile}
+                        </div>
+                      </div>
+                      <div className="name-role">
+                        <p>{e.name}</p>
+                        <p>{e.role}</p>
+                      </div>
+                    </div>
+
+                    <div className="right">
+                      <div>
+                        <button
+                          className="remove"
+                          onClick={() => setSelectedUser(e.name)}>
+                          {userx}
+                        </button>
+                        <div>
+                          <button className="expand">
+                            {moveWorker}
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                        <button className="options">
+                          {options}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="divide" />
+
+                  {j === employees.length - 1 && (
+                    <button
+                      className="add"
+                      onClick={() => setModalOpen(!modalOpen)}
+                    >
+                      {adduser}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div className="employee-details custom-scroll">
+              <div className="employee-detail">
+                <div>
+                  <div className="left">
+                    <div>
+                      <div className="profile-image">
+                        {profile}
+                      </div>
+                    </div>
+
+                    <div className="name-role">
+                      <p>{teamLead?.name ?? ""}</p>
+                      <p>{teamLead?.role ?? ""}</p>
+                    </div>
+                  </div>
+
+                  <div className="right">
+                    <div>
+                      <button
+                        className="remove"
+                        onClick={() => setSelectedUser(teamLead?.name ?? "")}>
+                        {userx}
+                      </button>
+                      <div>
+                        <button className="expand">
+                          {moveWorker}
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <button className="options">
+                        {options}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="divide" />
+
+                <button
+                  className="add"
+                  onClick={() => setModalOpen(!modalOpen)}
+                >
+                </button>
+              </div>
             </div>
 
           </div>
