@@ -53,7 +53,7 @@ const Login = () => {
           <Heading text="Sign In" />
           <div className="login-text">
             <Text text="Don’t have an account yet?" />
-            <Link to="/registration">
+            <Link to="/register">
               <Text text=" Register" color="#0B8FEF" />
             </Link>
           </div>

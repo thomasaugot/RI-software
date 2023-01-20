@@ -4,18 +4,18 @@ import { RegisterUrl, VerifyRegUrl } from "../utils/network";
 // register method
 export const register = async (
   {
-    firstName,
-    lastName,
+    first_name,
+    last_name,
     email,
     password,
-    phoneNumber
+    phone_number
   }: MyFormProps) => {
   const newData = {
-    firstName,
-    lastName,
+    first_name,
+    last_name,
     email,
     password,
-    phoneNumber
+    phone_number
   }
   console.log("new Data", newData)
   try {
