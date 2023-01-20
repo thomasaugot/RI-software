@@ -3,15 +3,13 @@ import "./SignUp.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BiErrorCircle, } from "react-icons/bi";
-import { useMutation } from "react-query";
-import { MyFormProps } from "../../types/types";
+import { buttonType, MyFormProps } from "../../types/types";
 import Heading from "../../components/Title/Title";
 import Field from "../../components/InputField/InputField";
-import Text from "../../components/Text/Text";
 import Submitbutton from "../../components/SubmitButton/SubmitButton";
 import { eye, eyeoff } from "../../assets/Icons";
-import { register, verification } from "../../queries/SignUpQueries";
-
+import { register } from "../../queries/SignUpQueries";
+import Text from "../../components/Text/Text";
 
 //--//check password Minlenght
 
@@ -19,31 +17,32 @@ import { register, verification } from "../../queries/SignUpQueries";
 
 const SingUpForm = () => {
   const [formData, setFormData] = useState<MyFormProps>({
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    phoneNumber: ''
+    phone_number: ''
   })
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isError, setError] = useState(false);
   const [errorText, setErrorText] = useState("");
   const navigate = useNavigate()
-  const { mutate: signup, isError: signError } = useMutation(register)
-  const { mutate: verify } = useMutation(verification)
+
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    if (isError) {
-      await signup(formData)
-      await verify(formData.email)
-      if (!signError) {
-        // await code_verify(e)
-        setTimeout(() => navigate(`/confirmation/${formData.email}`), 2000)
-      } else {
-        setError(true)
-      }
+    const registerResponse = await register(formData)
+    if (registerResponse.status === 400) {
+      setError(true);
+      setErrorText("This email is already use by another account.")
+    }
+    else if (formData.password !== formData.confirmPassword) {
+      setError(true);
+      setErrorText("Passwords do not match.")
+    } else {
+      setError(false);
+      setTimeout(() => navigate(`/confirmation/${formData.email}`), 2000)
     }
   }
 
@@ -77,15 +76,15 @@ const SingUpForm = () => {
         ) : null}
         <div className="registration-info">
           <Field
-            name='firstName'
+            name='first_name'
             placeholder="First name"
-            value={formData.firstName}
+            value={formData.first_name}
             onChange={handleChange}
             type="text" />
-            <Field
-            name='lastName'
+          <Field
+            name='last_name'
             placeholder="Last name"
-            value={formData.lastName}
+            value={formData.last_name}
             onChange={handleChange}
             type="text" />
           <Field
@@ -97,7 +96,7 @@ const SingUpForm = () => {
           <div className="field-container">
             <Field
               name='password'
-              type={passwordVisible? "text" : "password"}
+              type={passwordVisible ? "text" : "password"}
               placeholder="Password"
               minLength={3}
               value={formData.password}
@@ -118,28 +117,19 @@ const SingUpForm = () => {
             <Field
               name='confirmPassword'
               minLength={3}
-              type={passwordVisible? "text" : "password"}
+              type={passwordVisible ? "text" : "password"}
               placeholder="Repeat password"
               value={formData.confirmPassword}
               onChange={handleChange}
             />
-            <span
-              title={passwordVisible ? "hide password" : "show password"}
-              className="input-icon"
-              onClick={() => {
-                setPasswordVisible(!passwordVisible);
-              }}
-            >
-              {passwordVisible ? eye : eyeoff}
-            </span>
           </div>
           <Field
-            name='phoneNumber'
+            name='phone_number'
             placeholder="Phone number"
-            value={formData.phoneNumber}
+            value={formData.phone_number}
             onChange={handleChange}
             type="number" />
-          <Submitbutton text="Create" />
+          <Submitbutton type={buttonType.submit} text="Create" />
         </div>
       </form>
     </div>
