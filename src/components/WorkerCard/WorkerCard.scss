@@ -1,0 +1,33 @@
+.worker-card{
+    width: 15.625em;
+    height: 5.375em;
+    cursor: pointer;
+    border: 2px solid #4970B5;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 0 1.125em;
+    color: #444444;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: ease-in-out .3s;
+    .worker-card-img{
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 30px;
+        border: 1px red solid;
+    }
+
+    .worker-card-info{
+        font-size: 1rem;
+        font-weight: 400;
+        .worker-card-position{
+            font-style: italic;
+        }
+    }
+
+    &:hover{
+        background-color: #4970B5;
+        color: #FFF;
+    }
+}
