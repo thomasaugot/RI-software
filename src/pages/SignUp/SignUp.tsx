@@ -1,15 +1,16 @@
 
-import "./SignUpForm.scss";
+import "./SignUp.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { BiErrorCircle, } from "react-icons/bi";
 import { useMutation } from "react-query";
-import { buttonType, ErrorProps, MyFormProps } from "../../types/types";
+import { MyFormProps } from "../../types/types";
 import Heading from "../../components/Title/Title";
 import Field from "../../components/InputField/InputField";
+import Text from "../../components/Text/Text";
 import Submitbutton from "../../components/SubmitButton/SubmitButton";
 import { eye, eyeoff } from "../../assets/Icons";
-import { register, verification } from "../../queries/queries";
+import { register, verification } from "../../queries/SignUpQueries";
 
 
 //--//check password Minlenght
@@ -34,7 +35,7 @@ const SingUpForm = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    if (!errors.email && !errors.password && !errors.confirmPassword) {
+    if (isError) {
       await signup(formData)
       await verify(formData.email)
       if (!signError) {
@@ -78,15 +79,13 @@ const SingUpForm = () => {
           <Field
             name='firstName'
             placeholder="First name"
-            value={formData.first_name}
-            onBlur={handleBlur}
+            value={formData.firstName}
             onChange={handleChange}
             type="text" />
             <Field
             name='lastName'
             placeholder="Last name"
-            value={formData.last_name}
-            onBlur={handleBlur}
+            value={formData.lastName}
             onChange={handleChange}
             type="text" />
           <Field
@@ -111,7 +110,7 @@ const SingUpForm = () => {
                 setPasswordVisible(!passwordVisible);
               }}
             >
-              <FontAwesomeIcon icon={passwordVisible ? faEye : faEyeSlash} />
+              {passwordVisible ? eye : eyeoff}
             </span>
           </div>
 
@@ -137,8 +136,7 @@ const SingUpForm = () => {
           <Field
             name='phoneNumber'
             placeholder="Phone number"
-            onBlur={handleBlur}
-            value={formData.phone_number}
+            value={formData.phoneNumber}
             onChange={handleChange}
             type="number" />
           <Submitbutton text="Create" />

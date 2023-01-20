@@ -1,5 +1,5 @@
 import './CheckBox.scss'
-import { checkboxProps } from "../../types";
+import { checkboxProps } from "../../types/types";
 
 
 const CheckBox = ({

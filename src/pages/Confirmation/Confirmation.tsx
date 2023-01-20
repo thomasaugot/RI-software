@@ -1,6 +1,6 @@
 import { BiErrorCircle } from 'react-icons/bi'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import './ConfimationEmailForm.scss'
+import './Confimation.scss'
 import React, { useState } from 'react'
 import { VerifyRegUrl } from '../../utils/network'
 import { codeProps, ErrorProps } from '../../types/types'
@@ -8,7 +8,7 @@ import { useMutation } from 'react-query'
 import Heading from '../../components/Title/Title'
 import Submitbutton from '../../components/SubmitButton/SubmitButton'
 import Field from '../../components/InputField/InputField'
-import { verification } from '../../queries/queries'
+import { verification } from '../../queries/SignUpQueries'
 
 
 
@@ -30,13 +30,13 @@ const ConfirmationForm = () => {
     if (!formData.code) {
       setIsError(true);
     } else {
-      const { data, error, message } = await verify({ variables: { code: formData.code } });
-      if (!error) {
-        navigate("/profile");
-      } else {
-        setIsError(true);
-        console.log(message);
-      }
+      // const { data, error, message } = await verify({ variables: { code: formData.code } });
+      // if (!error) {
+      //   navigate("/profile");
+      // } else {
+      //   setIsError(true);
+      //   console.log(message);
+      // }
     }
   };
 
@@ -71,7 +71,7 @@ const ConfirmationForm = () => {
             placeholder="Enter code"
           />
         </div>
-        <Submitbutton type={buttonType.submit} text='Send' />
+        {/* <Submitbutton type={buttonType.submit} text='Send' /> */}
       </form>
     </div>
   )

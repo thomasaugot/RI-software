@@ -1,9 +1,5 @@
-import { codeProps, EmailProps } from './../types/types';
-import { Navigate } from "react-router-dom";
 import { MyFormProps } from "../types/types";
 import { RegisterUrl, VerifyRegUrl } from "../utils/network";
-
-
 
 // register method
 export const register = async (
