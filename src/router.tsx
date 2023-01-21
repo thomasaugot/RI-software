@@ -8,10 +8,12 @@ import SingUpForm from "./pages/SignUp/SignUp";
 const Router: FC = () => {
   return (
     <Routes>
-        <Route path="/login" element={<Login/>}/>
+      <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<SingUpForm />} />
       <Route path="/confirm" element={<Confirmation />} />
       <Route path="/confirmation/:email" element={<Confirmation />} />
+      <Route path="/hierarchy" element={<Hierachy />} />
+      
     </Routes>
   );
 };

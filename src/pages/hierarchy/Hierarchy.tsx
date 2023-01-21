@@ -1,8 +1,7 @@
 import { FC, FormEvent, useState, useEffect } from "react";
 import "./Hierarchy.scss";
-import BaseLayout from "../../layouts/BaseLayout";
 import { adduser, moveWorker, options, profile, userx } from "../../assets/Icons";
-import Header from "../../components/Header/Header";
+import BaseLayout from "../../layouts/BaseLayout";
 
 
 
@@ -92,12 +91,11 @@ const Hierachy: FC = () => {
   return (
     <BaseLayout>
       <div className="Hierarchy">
-        <header>
+        {/* <header>
 
           <Header />
 
-        </header>
-
+        </header> */}
         <div className="container custom-scroll">
           <div>
             <div className="employee-details custom-scroll">
@@ -190,7 +188,7 @@ const Hierachy: FC = () => {
                   </div>
                   <div className="divide" />
 
-                  {j === employees.length - 1 && (
+                  {j === leads.length - 1 && (
                     <button
                       className="add"
                       onClick={() => setModalOpen(!modalOpen)}
@@ -201,6 +199,7 @@ const Hierachy: FC = () => {
                 </div>
               ))}
             </div>
+
 
             <div className="employee-details custom-scroll">
               <div className="employee-detail">

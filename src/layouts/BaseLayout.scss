@@ -1,25 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&family=Poppins:wght@200;300;400&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
-
-.base-layout {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
+.base-layout{
     display: flex;
-    font-family: 'Poppins';
-    align-items: flex-start;
-
-    &>div:nth-child(1) {
-        position: sticky;
-        top: 0;
-        left: 0;
-    }
-
-    .content {
-        width: 100%;
-        height: fit-content;
+    
+    .base-layout-content{
         flex: 1;
-        display: flex;
-        justify-content: center;
+        max-height: 100vh;
+        .base-layout-container{
+            height: 87.7%;
+            width: 100%;
+        }
     }
-
 }
