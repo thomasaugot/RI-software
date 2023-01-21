@@ -93,9 +93,9 @@ const Hierachy: FC = () => {
     <BaseLayout>
       <div className="Hierarchy">
         <header>
-         
-            <Header/>
-        
+
+          <Header />
+
         </header>
 
         <div className="container custom-scroll">
@@ -244,10 +244,11 @@ const Hierachy: FC = () => {
                   className="add"
                   onClick={() => setModalOpen(!modalOpen)}
                 >
+                  {adduser}
                 </button>
+
               </div>
             </div>
-
           </div>
         </div>
       </div>
