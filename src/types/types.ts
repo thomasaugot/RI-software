@@ -12,13 +12,13 @@ export type fieldType = {
 
 export enum buttonType {
     button = 'button',
-    submit = 'submit',
-    reset = 'reset'
+    submit= 'submit',
+    reset='reset'
 }
 
 export type SubmitbuttonProps = {
     text: string
-    type?: buttonType
+    type?: buttonType 
 }
 
 export type TextProps = {
@@ -35,32 +35,6 @@ export type checkboxProps = {
 export type LoginType = {
     email: string
     password: string
-}
-
-
-export interface MyFormProps {
-    first_name: string,
-    last_name: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-    phone_number:string
-}
-
-export interface ErrorProps {
-    email?: string;
-    password?: string;
-    confirmPassword?: string;
-    phone_number?:string
-    code?: any;
-}
-
-export interface codeProps {
-    code: any
-}
-
-export interface EmailProps {
-    email: any
 }
 
 export type navMenuItem = {
@@ -93,4 +67,41 @@ export type navbarProps = {
     url: string
     enabled: boolean
     subitems: subItemProps[]
+}
+
+export type MyFormProps = {
+    first_name: string,
+    last_name: string,
+    email: string
+    password: string
+    confirmPassword: string
+    phone_number: string
+}
+
+export type ErrorProps= {
+    email? : string;
+    password? : string;
+    confirmPassword?: string;
+    code?: any;
+}
+
+export type codeProps ={
+    code: any
+}
+
+export type EmailProps = {
+    email: any
+}
+
+export type textFieldProps ={
+    isSearchInput?: boolean,
+  name: string,
+  placeholder: string,
+}
+
+
+export type workerCardProps = {
+    workerNames: string
+    workerPosition: string
+    workerAvatar?: string
 }

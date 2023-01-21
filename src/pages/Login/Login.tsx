@@ -8,8 +8,8 @@ import Heading from "../../components/Title/Title";
 import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import Text from "../../components/Text/Text";
 import "./Login.scss";
-import { login } from "../../queries";
 import { buttonType } from "../../types/types";
+import { login } from "../../queries";
 
 const Login = () => {
   const [isError, setIsError] = useState(false);
@@ -43,8 +43,8 @@ const Login = () => {
       });
   };
 
-  if  (localStorage.getItem("isLogged")  ===  "true")
-    return <Navigate to="/" replace  />;
+  if (localStorage.getItem("isLogged") === "true")
+    return <Navigate to="/" replace />;
 
   return (
     <div className="login">

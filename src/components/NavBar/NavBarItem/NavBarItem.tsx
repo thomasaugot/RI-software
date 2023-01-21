@@ -22,7 +22,7 @@ function NavBarItem({index, text,icon, menuItems}: NavItemProps) {
         </div>
         <div className={isOpen ? 'nav-item-menu': 'hide'}>
            {menuItems?.map((item, i)=>(
-            <Link className='nav-menu-link' onClick={onOpen} to={""} key={i}>
+            <Link className='nav-menu-link' onClick={()=>setIsOpen(false)} to={""} key={i}>
                 <span>{item.icon}</span>
                 <p>{item.name}</p>
             </Link>

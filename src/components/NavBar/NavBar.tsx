@@ -20,10 +20,10 @@ function NavBar() {
   console.log(navData)
   return (
     <div className='navbar'>
-      <div className="navbar-header">
-        <span>{navlogo}</span>
-        <p className='navbar-head-text'>Store Panel</p>
-      </div>
+        <div className="navbar-header">
+            <span>{navlogo}</span>
+            <p className='navbar-head-text'>Store Panel</p>
+        </div>
       <div className="navbar-container">
         {navData.map((item, i) => (
           <NavBarItem key={i} text={item.name} menuItems={item.subitems} index={i + 1} />

@@ -1,7 +1,5 @@
-
 import { SubmitbuttonProps } from '../../types/types'
 import './SubmitButton.scss'
-
 
 const SubmitButton = ({ text, type }: SubmitbuttonProps) => {
   return (
