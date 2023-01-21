@@ -1,40 +1,53 @@
-.wokder-modal{
-    background-color: #FAFAFA;
-    width: 47.125em;
-    height: 30.25em;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 2.5em;
-    .worker-modal-head{
-        padding: 1.8125em;
-        .worker-modal-head-input{
-            margin-top: -1.5rem;
-            display: flex;
-            justify-content: center;
-        }
 
-        .workder-modal-close{
-            display: flex;
-            justify-content: flex-end;
-            span{
-                cursor: pointer;
-                font-size: 22px;
-                color: #747474;
+.worker-modal{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .worker-modal-container{
+        background-color: #FAFAFA;
+        width: 47.125em;
+        height: 30.25em;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+        .worker-modal-head{
+            padding: 1.8125em;
+            .worker-modal-head-input{
+                margin-top: -1.5rem;
+                display: flex;
+                justify-content: center;
+            }
+    
+            .workder-modal-close{
+                display: flex;
+                justify-content: flex-end;
+                span{
+                    cursor: pointer;
+                    font-size: 22px;
+                    color: #747474;
+                }
+            }
+        }
+    
+        .worker-modal-user-list{
+            margin: 0 1.5em;
+            height: 70.6%;
+            overflow-y: scroll;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
+            gap: 1.875em;
+            &::-webkit-scrollbar{
+                display: none;
             }
         }
     }
-
-    .worker-modal-user-list{
-        margin: 0 1.5em;
-        height: 68.5%;
-        overflow-y: scroll;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
-        gap: 1.875em;
-        &::-webkit-scrollbar{
-            display: none;
-        }
-    }
+    
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 import TextField from '../../components/TextField/TextField'
 import WorkerCard from '../../components/WorkerCard/WorkerCard'
-import { workerCardProps } from '../../types/types'
+import { close } from '../../assets/Icons'
+import { workerCardProps, workerModalProps } from '../../types/types'
 import './WorkerModal.scss'
 
 const workerData: Array<workerCardProps> = [
@@ -55,12 +56,13 @@ const workerData: Array<workerCardProps> = [
   }
 ]
 
-function WorkerModal() {
+function WorkerModal({setIsOpenModal}:workerModalProps) {
   return (
-    <div className='wokder-modal'>
+    <div className='worker-modal'>
+       <div className='worker-modal-container'>
       <div className='worker-modal-head'>
         <div className="workder-modal-close">
-          <span>X</span>
+          <span onClick={() => setIsOpenModal(false)}>{close}</span>
         </div>
         <div className="worker-modal-head-input">
           <TextField placeholder='Search' name='search' isSearchInput={true}/>
@@ -72,6 +74,8 @@ function WorkerModal() {
         ))}
       </div>
     </div>
+    </div>
+   
   )
 }
 
