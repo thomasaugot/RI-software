@@ -99,6 +99,9 @@ export type textFieldProps ={
   placeholder: string,
 }
 
+export type workerModalProps = {
+    setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 export type workerCardProps = {
     workerNames: string
