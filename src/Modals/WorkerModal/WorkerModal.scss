@@ -5,6 +5,7 @@
     bottom: 0;
     left: 0;
     right: 0;
+    opacity: 0;
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
@@ -21,6 +22,8 @@
             padding: 1.8125em;
             .worker-modal-head-input{
                 margin-top: -1.5rem;
+                margin: -1.5em auto 0;
+                width: 29.3125em;
                 display: flex;
                 justify-content: center;
             }
@@ -50,4 +53,9 @@
         }
     }
     
+}
+
+.worker-modal.modal-animate{
+    opacity: 1;
+    transition: ease-in-out 5s;
 }
