@@ -3,69 +3,23 @@ import InputField from '../../components/InputField/InputField'
 import WorkerCard from "../../components/WorkerCard/WorkerCard";
 import { close } from "../../assets/Icons";
 import { motion } from 'framer-motion'
-import { workerCardProps, workerModalProps } from "../../types/types";
+import { workerModalProps, workerResponse } from "../../types/types";
 import "./WorkerModal.scss";
-
-const workerData: Array<workerCardProps> = [
-  {
-    workerNames: "Emery Vetrovs",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Ahmad Vetrovs",
-    workerPosition: "Lead Team A",
-  },
-  {
-    workerNames: "Jaxson Franci",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Alfredo Stanton",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Phillip Curtis",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Ahmad Vetrovs",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Jaxson Franci",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Alfredo Stanton",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Phillip Curtis",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Ahmad Vetrovs",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Jaxson Franci",
-    workerPosition: "CTO",
-  },
-  {
-    workerNames: "Alfredo Stanton",
-    workerPosition: "CTO",
-  },
-];
-
-// initial={{opacity:0}} animate={{opacity:1}}
+import { searkWorks } from "../../queries";
 
 function WorkerModal({ setIsOpenModal }: workerModalProps) {
   const [search, setSearch] = React.useState("");
+  const [workers, setWorkers] = React.useState<workerResponse>()
   console.log(search)
   const closeModal = () => setIsOpenModal(false)
   React.useEffect(()=>{
-    console.log("re-render")
+    const getWorks = async () =>{
+      const data = await searkWorks(search.length === 0 ? "a": search)
+      setWorkers(data)
+    }
+    getWorks()
   },[search])
+  console.log(workers)
   return (
     <motion.div onClick={closeModal} initial={{opacity:0}} animate={{opacity:1}}  className="worker-modal">
       <motion.div onClick={(e)=> e.stopPropagation()} initial={{scale: 0}} animate={{scale:1}} className="worker-modal-container">
@@ -85,10 +39,12 @@ function WorkerModal({ setIsOpenModal }: workerModalProps) {
           </div>
         </div>
         <div className="worker-modal-user-list">
-          {workerData.map(({ workerNames, workerPosition }, i) => (
+          {workers?.result?.map(({ name, position, avatar_link }, i) => (
             <WorkerCard
-              workerNames={workerNames}
-              workerPosition={workerPosition}
+              key={i}
+              workerNames={name}
+              workerPosition={position}
+              workerAvatar={avatar_link}
             />
           ))}
         </div>
