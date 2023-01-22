@@ -16,7 +16,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.5em 1.875em 1em 3.0975em;
+        padding: 1em 1.875em 1em 3.0975em;
         .nav-item-top-text{
             display: flex;
             align-items: center;
@@ -43,8 +43,8 @@
 
 
 .navitem-expand{
-    height: 6.5625rem;
-    min-width: 9.5625rem;
+    height: 12.812rem;
+    max-height: 15.5625rem;
     background-color: #4970B5;
     width: 100%;
     border-radius: 0px 15px 15px 0px;
@@ -60,7 +60,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.5em 1.875em 1em 3.0975em;
+        padding: 1em 1.875em 1em 3.0975em;
         .nav-item-top-text{
             display: flex;
             align-items: center;
@@ -82,6 +82,7 @@
             height: 2.825em;
             display: flex;
             width: 100%;
+            background-color: #4970B5;
             transition: .3s ease-in-out;
             padding: .625em 5.45em .625em 6.45em;
             text-decoration: none;
@@ -91,15 +92,21 @@
                 font-weight: 400;
                 color: #EDEDED;
             }
+            span{
+                width: 1.75em;
+                height: 1.75em;
+                fill: white;
+                display: flex;
+            }
 
             &:hover{
                 background-color: #6F8FCC;
             }
         }
 
-        :last-child{
-            border-radius: 0px 0 15px 0px;
-        }
+        // :last-child{
+        //     border-radius: 0px 0 15px 0px;
+        // }
     }
 
 }

@@ -31,6 +31,7 @@ function NavBar() {
           <NavBarItem
             key={i}
             text={item.name}
+            url={item.url}
             menuItems={item.subitems}
             index={i + 1}
           />
