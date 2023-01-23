@@ -19,7 +19,7 @@ export const login =  async ({email, password}:LoginType)=>{
 
 export const searkWorks = async (needle:string) => {
   let page_num = 1;
-  let results_per_page=12;
+  let results_per_page=10;
   const data = {
     needle,
     results_per_page,

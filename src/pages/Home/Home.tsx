@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseLayout from '../../layouts/BaseLayout'
 import WorkerModal from '../../Modals/WorkerModal/WorkerModal'
-
+import { AnimatePresence } from 'framer-motion'
 function Home() {
   const [isOpen, setIsOpen] = React.useState(false)
   const onOpenModal = () => {
@@ -23,7 +23,11 @@ function Home() {
         }}>
           open Modal
         </button>
-        {isOpen && <WorkerModal setIsOpenModal={setIsOpen}/>}
+         <AnimatePresence>
+         {isOpen && (
+          <WorkerModal setIsOpenModal={setIsOpen}/>
+         )}
+        </AnimatePresence>
       </div>
     </BaseLayout>
   )
