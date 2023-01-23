@@ -11,6 +11,8 @@ import "./Login.scss";
 import { buttonType } from "../../types/types";
 import { login } from "../../queries";
 
+export const token = localStorage.getItem("token");
+
 const Login = () => {
   const [isError, setIsError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -67,7 +69,7 @@ const Login = () => {
         <form onSubmit={onSumit} className="login-form">
           <div className="form-controls">
             <Field
-              type="email"
+              type="text"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               placeholder="Email"

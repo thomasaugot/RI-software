@@ -4,6 +4,7 @@ import Confirmation from "./pages/Confirmation/Confirmation";
 import Login from './pages/Login/Login'
 import Hierachy from "./pages/hierarchy/Hierarchy";
 import SingUpForm from "./pages/SignUp/SignUp";
+import UserCard from "./components/UserCard/userCard";
 
 const Router: FC = () => {
   return (
@@ -13,6 +14,7 @@ const Router: FC = () => {
       <Route path="/confirm" element={<Confirmation />} />
       <Route path="/confirmation/:email" element={<Confirmation />} />
       <Route path="/hierarchy" element={<Hierachy />} />
+      {/* <Route path="/user" element={<UserCard />} /> */}
       
     </Routes>
   );

@@ -1,6 +1,6 @@
 import { LoginType, navBarResponse } from "../types/types";
 
-const baseURl = process.env.REACT_APP_URL;
+const baseURl = "http://localhost:5000"
 
 export const login =  async ({email, password}:LoginType)=>{
     let data = {
