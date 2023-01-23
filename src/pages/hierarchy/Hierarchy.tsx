@@ -194,11 +194,7 @@ const Hierachy: FC = () => {
   return (
     // <BaseLayout>
     <div className="Hierarchy">
-      {/* <header>
 
-          <Header />
-
-        </header> */}
       <div className="container custom-scroll">
         <div>
           <div className="employee-details custom-scroll">

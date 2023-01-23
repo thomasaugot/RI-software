@@ -2,6 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&family=Poppins:wght@200;300;400&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
 
+
+html {
+
+    &::-webkit-scrollbar {
+        height: none;
+        width: none;
+    }
+
+}
+
 .Hierarchy {
     width: 100%;
     padding-inline: 0;
@@ -15,7 +25,7 @@
         color: #444444;
     }
 
-    
+
 
     &>.container {
         display: flex;
@@ -131,15 +141,6 @@
                             }
                         }
                     }
-
-                    .divide {
-                        // width: 100%;
-                        // height: 4px;
-                        // min-height: 4px;
-                        // background: #3d72bf;
-                        // border-radius: 0.5rem;
-                        // margin: 2.5rem 0;
-                    }
                 }
 
                 .employee-detail:hover .options,
@@ -148,8 +149,18 @@
                     background-color: #4272C0;
                 }
 
+                .active {
+                    color: #ffffff;
+                    background-color: #4272C0;
+                }
+
+                .fire {
+                    background-color: #444444;
+                    color: #ffffff;
+                }
+
                 &:last-child {
-                    overflow-y: auto;
+                    overflow-y: hidden;
                 }
             }
         }
@@ -187,4 +198,9 @@
             width: 300px;
         }
     }
+}
+
+img {
+    aspect-ratio: 7/2;
+    object-fit: contain;
 }
