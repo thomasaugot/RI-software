@@ -1,10 +1,10 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import Confirmation from "./pages/Confirmation/Confirmation";
-import Login from './pages/Login/Login'
-import Hierachy from "./pages/hierarchy/Hierarchy";
+import Login from "./pages/Login/Login";
 import SingUpForm from "./pages/SignUp/SignUp";
-import UserCard from "./components/UserCard/userCard";
+import Home from "./pages/Home/Home";
+import Hierachy from "./pages/hierarchy/Hierarchy";
 
 const Router: FC = () => {
   return (
@@ -12,9 +12,9 @@ const Router: FC = () => {
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<SingUpForm />} />
       <Route path="/confirm" element={<Confirmation />} />
+      <Route path="/" element={<Home />} />
       <Route path="/confirmation/:email" element={<Confirmation />} />
       <Route path="/hierarchy" element={<Hierachy />} />
-      {/* <Route path="/user" element={<UserCard />} /> */}
       
     </Routes>
   );
