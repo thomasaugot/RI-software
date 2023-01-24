@@ -4,6 +4,7 @@ export type fieldType = {
   type: string;
   placeholder?: string;
   name: string;
+  isSearch?: boolean;
   minLength?: number;
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
   value?: string | number;
@@ -71,12 +72,12 @@ export type navbarProps = {
 };
 
 export type MyFormProps = {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
-  phone_number: string;
+  phoneNumber: string;
 };
 
 export type ErrorProps = {
@@ -100,8 +101,33 @@ export type textFieldProps = {
   placeholder: string;
 };
 
+export type workerModalProps = {
+  setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export type textFieldProps = {
+  isSearchInput?: boolean;
+  name: string;
+  placeholder: string;
+};
+
 export type workerCardProps = {
   workerNames: string;
   workerPosition: string;
   workerAvatar?: string;
 };
+
+export type workerResponse = {
+  ok: boolean;
+  description: string;
+  result: [
+    {
+      id: number;
+      user_id: number;
+      position: string;
+      name: string;
+      avatar_link: string;
+    }
+  ];
+};
+
