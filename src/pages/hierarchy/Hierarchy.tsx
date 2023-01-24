@@ -1,6 +1,6 @@
 import { FC, FormEvent, useState, useEffect } from "react";
 import "./Hierarchy.scss";
-import BaseLayout from "../../layouts/BaseLayout";
+import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
 import { adduser, moveWorker, options, profile, userx } from "../../assets/Icons";
 
 

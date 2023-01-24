@@ -72,12 +72,12 @@ export type navbarProps = {
 };
 
 export type MyFormProps = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   confirmPassword: string;
-  phoneNumber: string;
+  phone_number: string;
 };
 
 export type ErrorProps = {
@@ -104,12 +104,6 @@ export type textFieldProps = {
 export type workerModalProps = {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-export type textFieldProps = {
-  isSearchInput?: boolean;
-  name: string;
-  placeholder: string;
-};
 
 export type workerCardProps = {
   workerNames: string;
