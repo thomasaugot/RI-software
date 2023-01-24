@@ -1,10 +1,8 @@
 import { FC, FormEvent, useState, useEffect } from "react";
 import "./Hierarchy.scss";
 import { adduser, moveWorker, options, profile, retry, userx } from "../../assets/Icons";
-import BaseLayout from "../../layouts/BaseLayout";
 import { fetchLeaderData, fetchTeamLeadData, fetchWorkerData } from "../../queries/hierarchyQueries";
 import UserCard from "../../components/UserCard/userCard";
-import { adduser, moveWorker, options, profile, userx } from "../../assets/Icons";
 
 
 
