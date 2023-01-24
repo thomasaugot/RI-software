@@ -2,9 +2,7 @@ import { BiErrorCircle } from 'react-icons/bi'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import './Confimation.scss'
 import React, { useState } from 'react'
-import { VerifyRegUrl } from '../../utils/network'
-import { codeProps, ErrorProps } from '../../types/types'
-import { useMutation } from 'react-query'
+import { buttonType, codeProps } from '../../types/types'
 import Heading from '../../components/Title/Title'
 import Submitbutton from '../../components/SubmitButton/SubmitButton'
 import Field from '../../components/InputField/InputField'
@@ -17,29 +15,30 @@ const ConfirmationForm = () => {
   const [isError, setIsError] = useState(false);
   const [formData, setFormData] = useState<codeProps>({ code: "" });
   const navigate = useNavigate();
-  const { mutate: verify, isError: verifyError } = useMutation(verification);
 
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!formData.code) {
-      setIsError(true);
+    const confirm = await verification(formData.code)
+    if (!confirm) {
+      setIsError(true)
+    } else if (!formData.code) {
+      setIsError(true)
     } else {
-      // const { data, error, message } = await verify({ variables: { code: formData.code } });
-      // if (!error) {
-      //   navigate("/profile");
-      // } else {
-      //   setIsError(true);
-      //   console.log(message);
-      // }
+      setIsError(false);
+      navigate("/login")
     }
+    
   };
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (isNaN(Number(value))) {
+      setIsError(true);
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
 
   return (
     <div className="verification-div">
@@ -71,7 +70,7 @@ const ConfirmationForm = () => {
             placeholder="Enter code"
           />
         </div>
-        {/* <Submitbutton type={buttonType.submit} text='Send' /> */}
+        <Submitbutton type={buttonType.submit} text='Send' />
       </form>
     </div>
   )

@@ -48,6 +48,7 @@ export type NavItemProps = {
   index?: number;
   icon?: JSX.Element;
   text?: string;
+  url: string;
   menuItems?: navMenuItem[];
 };
 
@@ -102,6 +103,12 @@ export type textFieldProps = {
 
 export type workerModalProps = {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export type textFieldProps = {
+  isSearchInput?: boolean;
+  name: string;
+  placeholder: string;
 };
 
 export type workerCardProps = {
@@ -123,3 +130,4 @@ export type workerResponse = {
     }
   ];
 };
+

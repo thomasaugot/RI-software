@@ -4,18 +4,20 @@
     width: 100%;
     color: #4970B5;
     fill: #4970B5;
+    stroke:#2B539A;
     height: 4.5625em;
     cursor: pointer;
     transition: .3s ease-in-out;
     border-radius: 0px 15px 15px 0px;
     .hide{
+        transition: .3s ease-in-out;
         display: none;
     }
     .nav-item-top{
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.5em 1.875em 1em 3.0975em;
+        padding: 1em 1.875em 1em 3.0975em;
         .nav-item-top-text{
             display: flex;
             align-items: center;
@@ -32,22 +34,20 @@
     &:hover{
         background-color: #4970B5;
         color: #FFF;
-        fill: #FFF !important;
+        fill: #FFF;
+        stroke:#FFF;
     }
 }
 
-
-
-
-
 .navitem-expand{
-    height: 6.5625rem;
-    min-width: 9.5625rem;
+    height: max(13.8125em, 16.8125em);
     background-color: #4970B5;
     width: 100%;
     border-radius: 0px 15px 15px 0px;
     transition: .3s ease-in-out;
     color: #FFF;
+    fill: #FFF;
+    stroke:#FFF;
     .hide{
         display: block;
     }
@@ -56,14 +56,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1.5em 1.875em 1em 3.0975em;
+        padding: 1em 1.875em 1em 3.0975em;
         .nav-item-top-text{
             display: flex;
             align-items: center;
             gap: 1.4em;
-            svg{
-                fill: #fff;
-            }
             p{
                 font-weight: 400;
                 font-size: 1rem;
@@ -71,7 +68,7 @@
         }
         .rotate{
             transform: rotate(90deg);
-            transition: .3s ease-in-out;
+            transition: .3s ease-out;
         }
     }
 
@@ -80,25 +77,27 @@
         .nav-menu-link{
             height: 2.825em;
             display: flex;
+            align-items: center;
             width: 100%;
-            transition: .3s ease-in-out;
-            padding: .625em 5.45em .625em 6.45em;
+            padding: 0 5.45em 0 6.45em;
             text-decoration: none;
             gap: 1.4em;
             p{
                 font-size: 16px;
                 font-weight: 400;
                 color: #EDEDED;
+                white-space: nowrap;
+            }
+            span{
+                width: 1.75em;
+                height: 1.75em;
+                fill: white;
+                display: flex;
             }
 
             &:hover{
                 background-color: #6F8FCC;
             }
-        }
-
-        :last-child{
-            border-radius: 0px 0 15px 0px;
-        }
+        }    
     }
-
 }
