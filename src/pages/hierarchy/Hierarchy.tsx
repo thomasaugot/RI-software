@@ -4,6 +4,8 @@ import { adduser, moveWorker, options, profile, retry, userx } from "../../asset
 import BaseLayout from "../../layouts/BaseLayout";
 import { fetchLeaderData, fetchTeamLeadData, fetchWorkerData } from "../../queries/hierarchyQueries";
 import UserCard from "../../components/UserCard/userCard";
+import { adduser, moveWorker, options, profile, userx } from "../../assets/Icons";
+
 
 
 
@@ -87,8 +89,6 @@ const Hierachy: FC = () => {
   const [selectedUser, setSelectedUser] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(false)
 
-  // const leads = employees.filter((e) => e.generalRole === "team-lead");
-  // const teamLead = employees.find((e) => e.generalRole === "team-lead");
 
   const handleAddNewUser = (e: FormEvent) => {
     e.preventDefault();

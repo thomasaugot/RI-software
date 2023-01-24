@@ -1,6 +1,7 @@
-import { LoginType, navBarResponse } from "../types/types";
+import { LoginType, navBarResponse, workerResponse } from "../types/types";
 
-const baseURl = "http://localhost:5000"
+const baseURl = process.env.REACT_APP_URL;
+const token = localStorage.getItem('token')
 
 export const login =  async ({email, password}:LoginType)=>{
     let data = {
@@ -13,6 +14,28 @@ export const login =  async ({email, password}:LoginType)=>{
         headers: { "Content-Type": "application/json" }
       });
     return response
+}
+
+
+export const searkWorks = async (needle:string) => {
+  let page_num = 1;
+  let results_per_page=10;
+  const data = {
+    needle,
+    results_per_page,
+    page_num
+  }
+  const response = await fetch(`${baseURl}/api/search/workers`,{
+    headers:{
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`
+    },
+    method: 'POST',
+    body: JSON.stringify(data)
+  })
+
+  const workers: workerResponse = await response.json()
+  return workers
 }
 
 export const navbars = async (userId: number) => {
