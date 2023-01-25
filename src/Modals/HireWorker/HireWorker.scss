@@ -20,7 +20,7 @@
       padding: 1.8125em 2.4375em;
       display: flex;
       justify-content: flex-end;
-      span{
+      span {
         cursor: pointer;
       }
     }
@@ -55,9 +55,19 @@
           font-size: 1.5rem;
           font-size: 500;
           margin-top: 2.5em;
-          margin-bottom: 3.5em;
           color: #444444;
         }
+
+        .hire-work-function-checkboxs {
+          display: grid;
+          width: 70%;
+          margin: 55px auto;
+          grid-template-columns: repeat(2, 58.5%);
+          gap: 2.43rem;
+        }
+      }
+      .hire-worker-submit-container {
+        padding: 0 18em;
       }
     }
   }
