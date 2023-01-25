@@ -2,4 +2,9 @@
     padding: 1.25em 3.125em;
     display: flex;
     justify-content: flex-end;
+
+    .img{
+        aspect-ratio: 2/2;
+        object-fit: contain;
+    }
 }

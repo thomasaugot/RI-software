@@ -3,6 +3,7 @@ import "./Hierarchy.scss";
 import { adduser, moveWorker, options, profile, retry, userx } from "../../assets/Icons";
 import { fetchLeaderData, fetchTeamLeadData, fetchWorkerData } from "../../queries/hierarchyQueries";
 import UserCard from "../../components/UserCard/userCard";
+import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
 
 
 
@@ -11,7 +12,7 @@ const groupIntoColumns = (arr: Array<any>, cols: number) => {
   const result = [];
 
   const arrCopy = [...arr];
-
+         
   while (arrCopy.length >= 1) {
     result.push(
       arrCopy.splice(0, arrCopy.length >= cols ? cols : arrCopy.length)
@@ -76,7 +77,7 @@ const Employee: TypeProps[] = [
 ]
 
 const Hierachy: FC = () => {
-  const [employees, setEmployees] = useState<TypeProps[]>([])
+  const [employees, setEmployees] = useState<TypeProps[]>(Employee)
   const [teamlead, setTeamLead] = useState<TypeProps[]>([])
   const [teamId, setTeamId] = useState<any>()
   const [employeeactiveId, setEmployeeActiveId] = useState<any>(null)
@@ -84,6 +85,7 @@ const Hierachy: FC = () => {
   const [worker, setWorker] = useState<TypeProps[]>([])
   const [workerId, setWorkerId] = useState<any>()
   const [modalOpen, setModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<null | string>(null);
   const [isLoading, setIsLoading] = useState(false)
 
@@ -190,7 +192,7 @@ const Hierachy: FC = () => {
 
 
   return (
-    // <BaseLayout>
+    <BaseLayout>
     <div className="Hierarchy">
 
       <div className="container custom-scroll">
@@ -206,7 +208,7 @@ const Hierachy: FC = () => {
                     <div>
                       <button
                         className="remove"
-                        onClick={() => setSelectedUser(e.email)}>
+                        onClick={() => setIsDeleteModalOpen(true)}>
                         {userx}
                       </button>
                       <div>
@@ -310,7 +312,7 @@ const Hierachy: FC = () => {
         </div>
       </div>
     </div>
-    // {/* </BaseLayout > */}
+    </BaseLayout >
   );
 };
 

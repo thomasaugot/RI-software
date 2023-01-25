@@ -1,6 +1,5 @@
 import { moveWorker } from './../assets/Icons';
 import React from "react"
-import React from "react";
 
 export type fieldType = {
   type: string;
@@ -117,10 +116,6 @@ export type moveWorker = {
     leader_id: number;
     team_moving: boolean;
 }
-  workerNames: string;
-  workerPosition: string;
-  workerAvatar?: string;
-};
 
 export type workerResponse = {
   ok: boolean;
