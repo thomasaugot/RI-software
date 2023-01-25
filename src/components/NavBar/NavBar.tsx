@@ -18,8 +18,7 @@ function NavBar() {
     };
     getNavData();
   }, []);
-
-  console.log(navData);
+  
   return (
     <div className="navbar">
       <div className="navbar-header">
