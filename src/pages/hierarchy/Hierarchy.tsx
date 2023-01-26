@@ -1,7 +1,10 @@
 import { FC, FormEvent, useState, useEffect } from "react";
 import "./Hierarchy.scss";
+import { adduser, moveWorker, options, profile, retry, userx } from "../../assets/Icons";
+import { fetchLeaderData, fetchTeamLeadData, fetchWorkerData } from "../../queries/hierarchyQueries";
+import UserCard from "../../components/UserCard/userCard";
 import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
-import { adduser, moveWorker, options, profile, userx } from "../../assets/Icons";
+
 
 
 
@@ -9,7 +12,7 @@ const groupIntoColumns = (arr: Array<any>, cols: number) => {
   const result = [];
 
   const arrCopy = [...arr];
-
+         
   while (arrCopy.length >= 1) {
     result.push(
       arrCopy.splice(0, arrCopy.length >= cols ? cols : arrCopy.length)
@@ -21,9 +24,10 @@ const groupIntoColumns = (arr: Array<any>, cols: number) => {
 
 export interface TypeProps {
   id: number;
-  name: string;
+  email: string;
   companyId: number;
-  role: string;
+  position: string;
+  url?: string;
   generalRole: "CEO" | "CTO" | "team-lead" | "others";
 }
 
@@ -31,135 +35,283 @@ const Employee: TypeProps[] = [
   {
     id: 1,
     companyId: 1,
-    name: "Emery Vetrovs",
-    role: "CEO",
+    email: "Emery Vetrovs",
+    position: "CEO",
     generalRole: "CEO",
   },
   {
     id: 4,
     companyId: 2,
-    name: "Alfredo Stantan",
-    role: "CTO",
+    email: "Alfredo Stantan",
+    position: "CTO",
     generalRole: "CTO",
   },
   {
     id: 3,
     companyId: 2,
-    name: "Ahmad Vetrovs",
-    role: "Lead Team A",
+    email: "Ahmad Vetrovs",
+    position: "Lead Team A",
     generalRole: "team-lead",
   },
   {
     id: 2,
     companyId: 2,
-    name: "Philip Curtis",
-    role: "Lead Team B",
+    email: "Philip Curtis",
+    position: "Lead Team B",
     generalRole: "team-lead",
   },
   {
     id: 5,
     companyId: 3,
-    name: "Jaxson Franci",
-    role: "Lead Designer",
+    email: "Jaxson Franci",
+    position: "Lead Designer",
     generalRole: "others",
   },
   {
     id: 8,
     companyId: 3,
-    name: "Gretchen Gouse",
-    role: "Lead QA",
+    email: "Gretchen Gouse",
+    position: "Lead QA",
     generalRole: "others",
   },
 ]
 
 const Hierachy: FC = () => {
   const [employees, setEmployees] = useState<TypeProps[]>(Employee)
+  const [teamlead, setTeamLead] = useState<TypeProps[]>([])
+  const [teamId, setTeamId] = useState<any>()
+  const [employeeactiveId, setEmployeeActiveId] = useState<any>(null)
+  const [teamleadactiveId, setTeamleadActiveId] = useState<any>(null)
+  const [worker, setWorker] = useState<TypeProps[]>([])
+  const [workerId, setWorkerId] = useState<any>()
   const [modalOpen, setModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<null | string>(null);
+  const [isLoading, setIsLoading] = useState(false)
 
-  const leads = employees.filter((e) => e.generalRole === "team-lead");
-  const teamLead = employees.find((e) => e.generalRole === "team-lead");
 
   const handleAddNewUser = (e: FormEvent) => {
     e.preventDefault();
   };
 
-  const handleRemove = () => {
+  const handleRemove = (id: any) => {
 
   }
 
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchLeaderData();
+        if (data && data.result) {
+          const employeeData = data.result.map(
+            (item: { [x: string]: any; user_id: any }) => ({
+              id: item.user_id,
+              email: item.name,
+              position: item.position,
+              url: item.avatar_link,
+            })
+
+          );
+
+          setEmployees(employeeData);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  //leads
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchTeamLeadData(teamId);
+        if (data && data.result) {
+          const teamData = data.result.map(
+            (item: { [x: string]: any; user_id: any }) => ({
+              id: item.user_id,
+              email: item.name,
+              position: item.position,
+              url: item.avatar_link,
+            })
+
+          );
+
+          setTeamLead(teamData);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+
+  }, [teamId]);
+  console.log(teamlead)
+  console.log(teamId)
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const data = await fetchWorkerData(workerId);
+        if (data && data.result) {
+          const workerData = data.result.map(
+            (item: { [x: string]: any; user_id: any }) => ({
+              id: item.user_id,
+              email: item.name,
+              position: item.position,
+              url: item.avatar_link,
+            })
+
+          );
+
+          setWorker(workerData);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+
+  }, [workerId]);
+  console.log(worker)
+  console.log(workerId)
+
+
   return (
     <BaseLayout>
-      <div className="Hierarchy">
-        {/* <h1>Иерархия</h1> */}
+    <div className="Hierarchy">
 
-
-        <div className="container custom-scroll">
-          <div>
-            {/* <div className="company-details custom-scroll">
-              <div>
-                <div className="company-logo">
-                  <FontAwesomeIcon icon={faHouse} />
-                </div>
+      <div className="container custom-scroll">
+        <div>
+          <div className="employee-details custom-scroll">
+            {/* all employees */}
+            {employees.map((e, j) => (
+              <div key={`e-d-${j}`} className={`employee-detail ${e.id === employeeactiveId ? 'active' : ''}`} onClick={() => { setEmployeeActiveId(e.id); setTeamId(e?.id); }}>
                 <div>
-                  <h2>{data.companyName}</h2>
-                  <p>Владелец</p>
-                </div>
-              </div>
-            </div> */}
+                  <UserCard email={e.email} position={e.position} url={e.url} />
 
-            <div className="employee-details custom-scroll">
-              {/* all employees */}
-              {employees.map((e, j) => (
-                <div key={`e-d-${j}`} className="employee-detail">
-                  <div>
-                    <div className="left">
+                  <div className="right">
+                    <div>
+                      <button
+                        className="remove"
+                        onClick={() => setIsDeleteModalOpen(true)}>
+                        {userx}
+                      </button>
                       <div>
-                        <div className="profile-image">
-                          {profile}
-                        </div>
-                      </div>
-                      <div className="name-role">
-                        <p>{e.name}</p>
-                        <p>{e.role}</p>
-                      </div>
-                    </div>
-
-                    <div className="right">
-                      <div>
-                        <button
-                          className="remove"
-                          onClick={() => setSelectedUser(e.name)}
-                        >
-                          {userx}
-                        </button>
                         <button className="expand">
                           {moveWorker}
                         </button>
                       </div>
-
+                    </div>
+                    <div>
                       <button className="options">
                         {options}
                       </button>
                     </div>
                   </div>
-                  <div className="divide" />
-
-                  {j === employees.length - 1 && (
-                    <button
-                      className="add"
-                      onClick={() => setModalOpen(!modalOpen)}
-                    >
-                      {adduser}
-                    </button>
-                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
 
+          <div className="employee-details custom-scroll">
+            {/* all employees */}
+            {teamlead.map((e, j) => (
+              <div key={`e-d-${j}`} className={`employee-detail ${e.id === teamleadactiveId ? 'active' : ''}`} onClick={() => { setTeamleadActiveId(e.id); setWorkerId(e?.id); }}>
+                <div>
+                  <UserCard email={e.email} position={e.position} url={e.url} />
+
+                  <div className="right">
+                    <div>
+                      <button
+                        className="remove"
+                        onClick={() => setSelectedUser(e.email)}>
+                        {userx}
+                      </button>
+                      <div>
+                        <button className="expand">
+                          {retry}
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <button className="options">
+                        {/* {options} */}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="divide" />
+
+                {j === teamlead.length - 1 && (
+                  <button
+                    className="add"
+                    onClick={() => setModalOpen(!modalOpen)}
+                  >
+                    {adduser}
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="employee-details custom-scroll">
+            {/* all employees */}
+            {worker.map((e, j) => (
+              <div key={`e-d-${j}`} className="employee-detail">
+                <div>
+                  <UserCard email={e.email} position={e.position} url={e.url} />
+
+                  <div className="right">
+                    <div>
+                      <button
+                        className="remove"
+                        onClick={() => setSelectedUser(e.email)}>
+                        {userx}
+                      </button>
+                      <div>
+                        <button className="expand">
+                          {moveWorker}
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <button className="options">
+                        {options}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="divide" />
+
+                {j === worker.length - 1 && (
+                  <button
+                    className="add"
+                    onClick={() => setModalOpen(!modalOpen)}
+                  >
+                    {adduser}
+                  </button>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
+    </div>
     </BaseLayout >
   );
 };

@@ -1,0 +1,42 @@
+.left {
+    display: flex;
+    align-items: center;
+
+    p {
+        &:nth-child(1) {
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 0.35rem;
+        }
+
+        &:last-child {
+            font-size: 15px;
+            font-style: italic;
+            letter-spacing: 0.35px;
+        }
+    }
+
+    .profile-image {
+        position: relative;
+        background: #4970B5;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        svg {
+            position: absolute;
+            bottom: 0;
+            width: 85%;
+            height: 85%;
+            color: hsl(216, 52%, 90%);
+        }
+    }
+
+    .name-role {
+        padding-left: 40px;
+    }
+}

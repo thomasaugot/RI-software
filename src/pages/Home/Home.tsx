@@ -1,5 +1,5 @@
 import React from 'react'
-import BaseLayout from '../../layouts/BaseLayout'
+import BaseLayout from '../../layouts/BaseLayout/BaseLayout'
 function Home() {
   return (
     <BaseLayout>

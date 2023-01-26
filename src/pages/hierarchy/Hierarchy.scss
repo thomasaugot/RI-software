@@ -2,6 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600&family=Poppins:wght@200;300;400&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
 
+
+html {
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+
+}
+
 .Hierarchy {
     width: 100%;
     padding-inline: 0;
@@ -14,6 +24,8 @@
         margin-bottom: 2rem;
         color: #444444;
     }
+
+
 
     &>.container {
         display: flex;
@@ -39,7 +51,6 @@
                 overflow-y: scroll;
                 gap: 0.8rem;
                 min-width: 21rem;
-                overflow-y: scroll;
 
                 .employee-detail {
                     width: 22rem;
@@ -76,8 +87,8 @@
 
                                 &.expand {
                                     border: none;
-                                    padding: 0.4rem 0.7rem;
                                     border-radius: 0.7rem;
+                                    margin-left: -6px;
                                 }
 
                                 &.options {
@@ -130,15 +141,6 @@
                             }
                         }
                     }
-
-                    .divide {
-                        /*width: 100%;
-              height: 4px;
-              min-height: 4px;
-              background: #3d72bf;
-              border-radius: 0.5rem;*/
-                        margin: 2.5rem 0;
-                    }
                 }
 
                 .employee-detail:hover .options,
@@ -147,8 +149,18 @@
                     background-color: #4272C0;
                 }
 
+                .active {
+                    color: #ffffff;
+                    background-color: #4272C0;
+                }
+
+                .fire {
+                    background-color: #444444;
+                    color: #ffffff;
+                }
+
                 &:last-child {
-                    overflow-y: auto;
+                    overflow-y: hidden;
                 }
             }
         }
@@ -157,7 +169,7 @@
             width: fit-content;
             font-size: 20px;
             background: none;
-            padding: 0.5rem;
+            padding: 50px;
             margin: 0 auto;
             border: none;
         }
@@ -188,165 +200,7 @@
     }
 }
 
-
-.modal-content {
-    position: relative;
-    width: 100%;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 3rem 2rem;
-    overflow: auto;
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-
-    button.close {
-        position: absolute;
-        top: 1.75rem;
-        right: 1.75rem;
-        padding: 0.25rem;
-        background: none;
-
-        svg {
-            font-size: 20px;
-            color: #505050;
-        }
-    }
-
-    &:nth-child(1) {
-        .buttons {
-            width: 50%;
-            // max-width: 240px;
-            display: flex;
-            margin: 9%;
-            margin-bottom: 0;
-            align-items: center;
-            justify-content: space-between;
-
-            button {
-                background: transparent;
-                font-size: 18px;
-                font-weight: 400;
-                width: 114px;
-                border: 2px solid #4272C0;
-                border-radius: 10px;
-                padding: 7px 10px;
-
-                &:nth-child(1) {
-                    color: #ffffff;
-                    border-radius: 10px;
-                    background-color: #3d72bf;
-                }
-            }
-        }
-    }
-
-    .modal-header {
-        font-size: 24px;
-        text-align: center;
-        margin-bottom: 2.75rem;
-    }
-
-    form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-
-        input {
-            width: 100%;
-            height: 50px;
-            font-size: 14px;
-            border: 1px solid rgba(100, 100, 100, 0.2);
-            border-radius: 0.35rem;
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            margin-top: 0.75rem;
-            outline: none;
-            padding: 1rem 0.75rem;
-        }
-
-        button {
-            height: 50px;
-            background: #3d72bf;
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            padding: 1rem 2rem;
-            border-radius: 0.5rem;
-        }
-
-        .details {
-            width: 100%;
-            display: flex;
-            margin-bottom: 2.5rem;
-
-            &>div {
-                display: flex;
-                flex: 1;
-                flex-direction: column;
-
-                label {
-                    font-weight: 500;
-                    font-size: 15px;
-                }
-
-                &:nth-child(1) {
-                    margin-right: 2.5rem;
-                }
-
-                .field-container {
-                    display: flex;
-                    flex-direction: column;
-                    margin-bottom: 1rem;
-
-                    &:last-child {
-                        margin-bottom: 0;
-                    }
-                }
-            }
-        }
-
-        .user-functions {
-            margin-bottom: 2.5rem;
-
-            h3 {
-                font-size: 20px;
-                text-align: center;
-                margin-bottom: 2rem;
-            }
-
-            div.functions {
-                width: 100%;
-                max-width: 420px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin: 0 auto;
-
-                &>div {
-                    display: flex;
-                    flex-direction: column;
-
-                    .function {
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 1rem;
-
-                        &:last-child {
-                            margin-bottom: 0;
-                        }
-
-                        .Checkbox {
-                            margin-right: 0.5rem;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
+img {
+    aspect-ratio: 7/2;
+    object-fit: contain;
 }

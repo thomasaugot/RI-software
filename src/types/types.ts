@@ -1,4 +1,5 @@
-import React from "react";
+import { moveWorker } from './../assets/Icons';
+import React from "react"
 
 export type fieldType = {
   type: string;
@@ -106,10 +107,15 @@ export type workerModalProps = {
 }
 
 export type workerCardProps = {
-  workerNames: string;
-  workerPosition: string;
-  workerAvatar?: string;
-};
+    workerNames: string
+    workerPosition: string
+    workerAvatar?: string
+}
+
+export type moveWorker = {
+    leader_id: number;
+    team_moving: boolean;
+}
 
 export type workerResponse = {
   ok: boolean;
