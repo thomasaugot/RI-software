@@ -31,7 +31,12 @@ export type TextProps = {
 export type checkboxProps = {
   isChecked: boolean;
   setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
-  text: string;
+  checkedText?: string;
+  label: string
+  gap?: string;
+  size?: string | number;
+  fontSize?: string;
+  setCheckedText?: React.Dispatch<React.SetStateAction<string>>
 };
 
 export type LoginType = {

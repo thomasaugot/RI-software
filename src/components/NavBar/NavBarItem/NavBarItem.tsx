@@ -81,7 +81,7 @@ function NavBarItem({ index, text,url, menuItems }: NavItemProps) {
             return isOpen ? `navitem-expand`: `navitem`
         } else {
             setIsOpen(false)
-            return 'navitem'
+            return !isOpen ? `navitem`: `navitem`
         }
     }}>
       <div className="nav-item-top">

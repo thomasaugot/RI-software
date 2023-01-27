@@ -1,10 +1,7 @@
 .check-container{
     display: flex;
     align-items: center;
-    gap: 1.18em;
     .check-box{
-      width: 15px;
-      height: 15px;
       border: 2px solid #444444;
       cursor: pointer;
       border-radius: 5px;
@@ -14,6 +11,7 @@
     }
 
     .checked{
+      display: block;
       background-color: #444444;
       width: 7px;
       height: 7px;
@@ -21,14 +19,10 @@
     }
 
     .unchecked{
-      background-color: #fff;
-      width: 7px;
-      height: 7px;
-      border-radius: 5px;
+      display: none;
     }
 
     p{
-      font-size: 0.875rem;
       color: #444;
     }
   }

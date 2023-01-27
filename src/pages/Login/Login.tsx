@@ -98,7 +98,7 @@ const Login = () => {
             <CheckBox
               isChecked={isChecked}
               setIsChecked={setIsChecked}
-              text="Remember me"
+              label="Remember me"
             />
             <Link to="/forget" className="login-forget">
               Forget password?
