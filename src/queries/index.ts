@@ -1,6 +1,6 @@
 import { LoginType, navBarResponse, workerResponse } from "../types/types";
 
-const baseURl = process.env.REACT_APP_URL;
+const baseURl = 'http://127.0.0.1:5000';
 const token = localStorage.getItem('token')
 
 export const login =  async ({email, password}:LoginType)=>{
@@ -11,8 +11,13 @@ export const login =  async ({email, password}:LoginType)=>{
     const response = await fetch(`${baseURl}/api/login`,{
         method: 'POST',
         body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
+        headers: { 
+          "Content-Type": "application/json"
+        }
       });
+      // response.json().then(data => {
+      //   console.log(data)
+      // })
     return response
 }
 
@@ -39,8 +44,15 @@ export const searkWorks = async (needle:string) => {
 }
 
 export const navbars = async (userId: number) => {
-  const response = await fetch(`${baseURl}/api/navbar/${userId}`);
+  console.log(token)
+  const response = await fetch(`${baseURl}/api/navbar/${userId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    method: 'GET'});
   const navbarData: navBarResponse =  await response.json()
+  console.log(navbarData.result)
   return navbarData.result
 
 }

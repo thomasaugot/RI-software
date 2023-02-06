@@ -27,20 +27,27 @@ const Login = () => {
     return await login({ email, password })
       .then((res) => {
         if (res.status === 400) {
+          console.log('1')
           setIsError(true);
           setErrorText("Wrong email or password");
+          return
         } else if (res.status === 200) {
           setIsError(false);
           if (isChecked) {
             localStorage.setItem("isLogged", "true");
           }
           console.log("isLogged");
-          navigate("/");
+          console.log(res)
+          return res.json();
         }
-        return res.json();
       })
-      .then((data) => localStorage.setItem("token", data.result.access_token))
+      .then((data) => {
+        console.log(data)
+        localStorage.setItem("token", data.result.access_token)
+        return <Navigate to="/" replace />;
+      })
       .catch((err) => {
+        console.log(err)
         setIsError(true);
       });
   };
