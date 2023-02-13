@@ -53,7 +53,7 @@ function WorkerModal({ setIsOpenModal }: workerModalProps) {
         </div>
         {workers?.result?.length ? (
           <div className="worker-modal-user-list">
-            {workers?.result?.map(({ name, position, avatar_link }, i) => (
+            {workers?.result?.map(({ name, position, avatar_link }: { name: string, position: string, avatar_link: string }, i: number) => (
               <WorkerCard
                 key={i}
                 workerNames={name}

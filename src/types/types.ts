@@ -44,39 +44,6 @@ export type LoginType = {
   password: string;
 };
 
-export type navMenuItem = {
-  icon?: JSX.Element;
-  name?: string;
-  url?: string;
-};
-
-export type NavItemProps = {
-  index?: number;
-  icon?: JSX.Element;
-  text?: string;
-  url: string;
-  menuItems?: navMenuItem[];
-};
-
-type subItemProps = {
-  name: string;
-  url: string;
-  enabled: boolean;
-};
-
-export type navBarResponse = {
-  ok?: boolean;
-  description?: string;
-  result: navbarProps[];
-};
-
-export type navbarProps = {
-  name: string;
-  url: string;
-  enabled: boolean;
-  subitems: subItemProps[];
-};
-
 export type MyFormProps = {
   first_name: string;
   last_name: string;
@@ -122,17 +89,5 @@ export type moveWorker = {
     team_moving: boolean;
 }
 
-export type workerResponse = {
-  ok: boolean;
-  description: string;
-  result: [
-    {
-      id: number;
-      user_id: number;
-      position: string;
-      name: string;
-      avatar_link: string;
-    }
-  ];
-};
+
 
