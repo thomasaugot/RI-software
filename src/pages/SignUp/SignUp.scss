@@ -12,15 +12,14 @@ $fonts: 'Poppins', sans-serif;
   font-family: $fonts;
 
   .registration-form {
-    width: 36.625em;
-    height: fit-content;
-    padding: 1.875em 3.3125em;
+    width: 40%;
+    margin: 0 auto;
     border-radius: 20px;
+    background-color: #ffffff;
+    padding: 30px 53px;
     display: flex;
     flex-direction: column;
     gap: 13px;
-    background-color: #fff;
-    margin: 0 auto;
 
     .registration-header {
       display: flex;
@@ -30,22 +29,22 @@ $fonts: 'Poppins', sans-serif;
     header {
       display: flex;
       flex-direction: column;
-      gap: 2.1875em;
+      gap: 35px;
 
       h2 {
-        font-size: 1.5rem;
+        font-size: 24px;
         font-weight: 600;
       }
 
       h4 {
-        font-size: 1rem;
+        font-size: 16px;
         font-weight: 400;
         color: #444444;
 
         a {
           color: #0B8FEF;
           text-decoration: none;
-          margin-left: 0.3rem;
+          margin-left: 4.8px;
         }
       }
     }
@@ -61,7 +60,7 @@ $fonts: 'Poppins', sans-serif;
       color: #F61D1D;
 
       p {
-        font-size: 1rem;
+        font-size: 16px;
       }
     }
 
@@ -73,11 +72,11 @@ $fonts: 'Poppins', sans-serif;
         width: 100%;
         background: none;
         color: #444444;
-        font-size: 1rem;
+        font-size: 16px;
         border: 2px solid #4970B5;
-        border-radius: 0.625rem;
-        margin-top: 1rem;
-        padding: 0.8rem 0;
+        border-radius: 10px;
+        margin-top: 1px;
+        padding: 12.8 0;
         font-family: $fonts;
         transition: 0.3s ease;
         cursor: pointer;
@@ -92,7 +91,7 @@ $fonts: 'Poppins', sans-serif;
     .registration-info {
       display: flex;
       flex-direction: column;
-      gap: 1.875em;
+      gap: 30px;
 
       .field-container {
         width: 100%;
@@ -105,7 +104,7 @@ $fonts: 'Poppins', sans-serif;
           color: #727272;
           margin-right: 8.3px;
           transform: translateY(-25%);
-          font-size: 1rem;
+          font-size: 16px;
           cursor: pointer;
         }
       }
@@ -121,7 +120,7 @@ $fonts: 'Poppins', sans-serif;
   .check-container {
     display: flex;
     align-items: center;
-    gap: 1.18em;
+    gap: 18.88px;
 
     .check-box {
       width: 15px;
@@ -157,17 +156,17 @@ $fonts: 'Poppins', sans-serif;
   a {
     text-decoration: none;
     color: #0B8FEF;
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 400;
   }
 }
 
 @media screen and (max-width: 560px) {
   .registration-Div {
-    padding: 3rem 0.75rem;
+    padding: 48px 0.75rem;
 
     .registration-form {
-      padding: 2.5rem 3%;
+      padding: 40px 3%;
 
       .registration-info {
         width: 100%;
