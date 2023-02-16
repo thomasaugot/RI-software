@@ -1,30 +1,39 @@
 .navbar {
   height: 100vh;
-  width: 20.31em;
-  padding: 2.75em 0 3.1em 0;
+  width: 23vw;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.15);
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &::-webkit-scrollbar {
     display: none;
   }
+
   .navbar-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 4.18735em;
+    padding: 3vw 0 3vw 0;
     justify-content: center;
+
     .navbar-head-text {
-      font-size: 1.25rem;
+      font-size: 1.5vw;
       color: #4970b5;
       font-weight: 500;
     }
+
+    svg{
+      display: block;
+      width: 3.42vw;
+    }
+
   }
 
   .navbar-container {
-    height: 74%;
+    height: auto;
     width: 100%;
     display: flex;
-    padding: 1em 0;
     flex-direction: column;
   }
 
@@ -35,12 +44,32 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      padding-left: 3.7em;
-      gap: 18px;
+      padding: 3.1vw 0 3.1vw 4vw;
+      border-radius: 0 15px 15px 0;
+      transition: .3s ease-out all;
+      width: 100%;
+
       p {
         color: #4970b5;
         font-family: "Inter", sans-serif;
         font-weight: 400;
+        margin-left: 1.3vw;
+        font-size: 1.15vw;
+      }
+      svg{
+        display: block;
+        width: 2.71vw;
+      }
+
+      &:hover{
+        background-color: #4970B5;
+        p{
+          color: #fff;
+        }
+
+        path{
+          fill: #fff;
+        }
       }
     }
   }

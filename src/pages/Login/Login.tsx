@@ -9,7 +9,7 @@ import SubmitButton from "../../components/SubmitButton/SubmitButton";
 import Text from "../../components/Text/Text";
 import "./Login.scss";
 import { buttonType } from "../../types/types";
-import { login } from "../../queries";
+import { login } from "../../queries/loginQueries";
 
 export const token = localStorage.getItem("token");
 
@@ -42,9 +42,15 @@ const Login = () => {
         }
       })
       .then((data) => {
-        console.log(data)
-        localStorage.setItem("token", data.result.access_token)
-        return <Navigate to="/" replace />;
+        console.log(data);
+        new Promise<void>((resolveOuter) => {
+          localStorage.setItem("token", data.result.access_token)
+          resolveOuter()
+        }).then(()=>{
+          navigate('/');
+        })
+        
+        return;
       })
       .catch((err) => {
         console.log(err)

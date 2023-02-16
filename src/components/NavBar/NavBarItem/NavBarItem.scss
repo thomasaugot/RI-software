@@ -1,103 +1,108 @@
 
+
 .navitem{
-    background-color: #FFF;
     width: 100%;
+    background-color: #FFF;
     color: #4970B5;
     fill: #4970B5;
-    stroke:#2B539A;
-    height: 4.5625em;
-    cursor: pointer;
-    transition: .3s ease-in-out;
-    border-radius: 0px 15px 15px 0px;
-    .hide{
-        transition: .3s ease-in-out;
-        display: none;
-    }
-    .nav-item-top{
+    transition: .3s ease-out all;
+    border-radius: 0 15px 15px 0;
+    stroke:#4970B5;
+    overflow: hidden;
+
+    .navitem-header{
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        padding: 1em 1.875em 1em 3.0975em;
-        .nav-item-top-text{
+        align-items: center;
+        padding: 0  3vw 0 2.3vw;
+        height: 5.2vw;
+        .navitem-header-text{
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 1.4em;
             p{
-                font-weight: 400;
-                font-size: 1rem;
+                margin-left: 1.8vw;
+                font-size: 1.1vw;
+                font-family: 'Poppins', sans-serif;
+            }
+            .navitem-header-icons{
+
+                svg{
+                    width: 2.65vw;
+                    display: block;
+
+                }
+                path{
+                    display: block;
+
+                }
             }
         }
-        .rotate-0{
+        .navitem-header-vector{
+            width: 0.6vw;
+            transition: .3s ease-out all;
             transform: rotate(0);
-        } 
+        }
+
+        .rotated{
+            transition: .3s ease-out all;
+            transform: rotate(90deg) !important;
+        }
     }
+
+    .navitem-item-container{
+        display: flex;
+        flex-direction: column;
+
+        .navbar-link{
+            display: flex;
+            align-items: center;
+            padding: 1.2vw 0 1.2vw 7.2vw;
+            transition: .3s ease-out all;
+            svg{
+                width: 1.9vw;
+                display: block;
+
+            }
+
+            path{
+                display: block;
+
+            }
+
+            p{
+                color: #fff;
+                margin-left: 1.4vw;
+                font-size: 1.1vw;
+            }
+
+            &:hover{
+                background: #6F8FCC;
+            }
+        }
+    }
+
     &:hover{
         background-color: #4970B5;
         color: #FFF;
         fill: #FFF;
-        stroke:#FFF;
+        stroke: #FFF;
+        .navitem-header-vector{
+            path{
+                stroke: #FFF;
+            }
+        }   
     }
 }
 
-.navitem-expand{
-    height: max(13.8125em, 16.8125em);
+.active{
     background-color: #4970B5;
-    width: 100%;
-    border-radius: 0px 15px 15px 0px;
-    transition: .3s ease-in-out;
     color: #FFF;
     fill: #FFF;
-    stroke:#FFF;
-    .hide{
-        display: block;
-    }
-    
-    .nav-item-top{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1em 1.875em 1em 3.0975em;
-        .nav-item-top-text{
-            display: flex;
-            align-items: center;
-            gap: 1.4em;
-            p{
-                font-weight: 400;
-                font-size: 1rem;
-            }
+    stroke: #FFF;
+    .navitem-header-vector{
+        path{
+            stroke: #FFF;
         }
-        .rotate{
-            transform: rotate(90deg);
-            transition: .3s ease-out;
-        }
-    }
-
-    .nav-item-menu{
-        
-        .nav-menu-link{
-            height: 2.825em;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            padding: 0 5.45em 0 6.45em;
-            text-decoration: none;
-            gap: 1.4em;
-            p{
-                font-size: 16px;
-                font-weight: 400;
-                color: #EDEDED;
-                white-space: nowrap;
-            }
-            span{
-                width: 1.75em;
-                height: 1.75em;
-                fill: white;
-                display: flex;
-            }
-
-            &:hover{
-                background-color: #6F8FCC;
-            }
-        }    
-    }
+    }  
 }

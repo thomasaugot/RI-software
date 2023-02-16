@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { searkWorks } from "../queries";
-import { workerResponse } from "../types/types";
+import { searchWorkers } from "../queries/searchWorkers";
+import { workerResponse } from "../types/searchWorkersTypes";
 
 export function useSearchDebounce(value:string, time=250){
     const [debounceValue, setDebounce] = useState(value)
@@ -22,7 +22,7 @@ export function useSearchWorker(value: string) {
     console.log(searchDebounce)
     useEffect(() => {
         (async()=>{
-            const data = await searkWorks(searchDebounce);
+            const data = await searchWorkers(searchDebounce);
             setWorkers(data)
         })()
   }, [searchDebounce]);
