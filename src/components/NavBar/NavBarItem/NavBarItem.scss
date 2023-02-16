@@ -5,7 +5,7 @@
     color: #4970B5;
     fill: #4970B5;
     stroke:#2B539A;
-    height: 4.5625em;
+    height: 5.96vw;
     cursor: pointer;
     transition: .3s ease-in-out;
     border-radius: 0px 15px 15px 0px;
@@ -17,11 +17,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1em 1.875em 1em 3.0975em;
+        padding: 1.11vw 2.07vw 1.11vw 3.43vw;
         .nav-item-top-text{
             display: flex;
             align-items: center;
-            gap: 1.4em;
+            gap: 1.55vw;
 
             .icons{
                 width: 2.63vmax;
@@ -51,10 +51,10 @@
 }
 
 .navitem-expand{
-    height: max(13.8125em, 16.8125em);
+    height: max(15.34vw, 17.97vw);
     background-color: #4970B5;
     width: 100%;
-    border-radius: 0px 15px 15px 0px;
+    border-radius: 0px 1.1vw 1.1vw 0px;
     transition: .3s ease-in-out;
     color: #FFF;
     fill: #FFF;
@@ -67,11 +67,11 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1em 1.875em 1em 3.0975em;
+        padding: 1.1vw 2.07vw 1.1vw 3.44vw;
         .nav-item-top-text{
             display: flex;
             align-items: center;
-            gap: 1.4em;
+            gap: 1.55vw;
 
             .icons{
                 width: 2.63vmax;
@@ -97,24 +97,26 @@
     .nav-item-menu{
         
         .nav-menu-link{
-            height: 2.825em;
+            height: 3.14vw;
             display: flex;
             align-items: center;
             width: 100%;
-            padding: 0 5.45em 0 6.45em;
+            padding: 0 6.05vw 0 7.16vw;
             text-decoration: none;
-            gap: 1.4em;
+            gap: 1.55vw;
             p{
-                font-size: 16px;
+                font-size: 1.1vw;
                 font-weight: 400;
                 color: #EDEDED;
                 white-space: nowrap;
             }
             span{
-                width: 1.75em;
-                height: 1.75em;
+                width: 1.94vw;
+                height: 1.94vw;
                 fill: white;
                 display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             &:hover{
