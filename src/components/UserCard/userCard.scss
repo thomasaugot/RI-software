@@ -1,3 +1,53 @@
+.employee-detail {
+    width: 325px;
+    height: 87px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 15px;
+    transition: all 350ms ease-in-out;
+
+    &>div {
+        display: flex;
+        justify-content: space-between;
+
+
+    }
+}
+
+.employee-detail:hover .options,
+.employee-detail:hover {
+    color: #ffffff;
+    background-color: #4272C0;
+}
+
+.active {
+    color: #ffffff;
+    background-color: #4272C0;
+}
+
+.fire {
+    background-color: #444444;
+    color: #ffffff;
+}
+.fire:hover {
+    background-color: darken(#444444, 10%);
+}
+
+.removed {
+    
+    border: none;
+    margin: 0 15.5px 19px auto;
+}
+
+.retry {
+    
+    border: none;
+    margin: 0 auto 19px auto;
+}
+
+
 .left {
     display: flex;
     align-items: center;
@@ -38,5 +88,40 @@
 
     .name-role {
         padding-left: 40px;
+        font-family: 'Poppins', 'Sans';
+
     }
+}
+
+.right {
+    display: flex;
+    align-items: center;
+
+    button {
+        background: none;
+
+        svg {
+            font-size: 16px;
+            color: #444444;
+
+        }
+
+        &.remove {
+            border: none;
+            margin: 0 auto 13px auto;
+
+        }
+
+        &.expand {
+            border: none;
+            border-radius: 0.7rem;
+            margin-left: -6px;
+        }
+
+        &.options {
+            margin-left: 14px;
+            border: none;
+        }
+    }
+
 }
