@@ -200,29 +200,9 @@ const Hierachy: FC = () => {
           <div className="employee-details custom-scroll">
             {/* all employees */}
             {employees.map((e, j) => (
-              <div key={`e-d-${j}`} className={`employee-detail ${e.id === employeeactiveId ? 'active' : ''}`} onClick={() => { setEmployeeActiveId(e.id); setTeamId(e?.id); }}>
+              <div key={`e-d-${j}`}>
                 <div>
-                  <UserCard email={e.email} position={e.position} url={e.url} />
-
-                  <div className="right">
-                    <div>
-                      <button
-                        className="remove"
-                        onClick={() => setIsDeleteModalOpen(true)}>
-                        {userx}
-                      </button>
-                      <div>
-                        <button className="expand">
-                          {moveWorker}
-                        </button>
-                      </div>
-                    </div>
-                    <div>
-                      <button className="options">
-                        {options}
-                      </button>
-                    </div>
-                  </div>
+                  <UserCard id={e.id} email={e.email} position={e.position} url={e.url} />
                 </div>
               </div>
             ))}
@@ -231,29 +211,9 @@ const Hierachy: FC = () => {
           <div className="employee-details custom-scroll">
             {/* all employees */}
             {teamlead.map((e, j) => (
-              <div key={`e-d-${j}`} className={`employee-detail ${e.id === teamleadactiveId ? 'active' : ''}`} onClick={() => { setTeamleadActiveId(e.id); setWorkerId(e?.id); }}>
+              <div key={`e-d-${j}`}>
                 <div>
-                  <UserCard email={e.email} position={e.position} url={e.url} />
-
-                  <div className="right">
-                    <div>
-                      <button
-                        className="remove"
-                        onClick={() => setSelectedUser(e.email)}>
-                        {userx}
-                      </button>
-                      <div>
-                        <button className="expand">
-                          {retry}
-                        </button>
-                      </div>
-                    </div>
-                    <div>
-                      <button className="options">
-                        {/* {options} */}
-                      </button>
-                    </div>
-                  </div>
+                  <UserCard id={e.id} email={e.email} position={e.position} url={e.url} />
                 </div>
                 <div className="divide" />
 
@@ -274,27 +234,7 @@ const Hierachy: FC = () => {
             {worker.map((e, j) => (
               <div key={`e-d-${j}`} className="employee-detail">
                 <div>
-                  <UserCard email={e.email} position={e.position} url={e.url} />
-
-                  <div className="right">
-                    <div>
-                      <button
-                        className="remove"
-                        onClick={() => setSelectedUser(e.email)}>
-                        {userx}
-                      </button>
-                      <div>
-                        <button className="expand">
-                          {moveWorker}
-                        </button>
-                      </div>
-                    </div>
-                    <div>
-                      <button className="options">
-                        {options}
-                      </button>
-                    </div>
-                  </div>
+                  <UserCard id={e.id} email={e.email} position={e.position} url={e.url} />
                 </div>
                 <div className="divide" />
 

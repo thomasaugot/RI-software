@@ -23,7 +23,7 @@ export const fetchLeaderData = async () => {
 
 // lead data
 
-export const fetchTeamLeadData = async (id : any) => {
+export const fetchTeamLeadData = async (id : number) => {
     try {
         const response = await fetch(`${FetchHierarchyUrl}${id}`, {
             method: 'GET',
@@ -42,7 +42,7 @@ export const fetchTeamLeadData = async (id : any) => {
     }
 }
 
-export const fetchWorkerData = async (id : any) => {
+export const fetchWorkerData = async (id : number) => {
     try {
         const response = await fetch(`${FetchHierarchyUrl}${id}`, {
             method: 'GET',
