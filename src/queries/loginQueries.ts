@@ -1,7 +1,7 @@
 import { LoginType } from "../types/types";
 import { loginUrl } from '../utils/network';
 
-export const login =  async ({email, password}:LoginType)=>{
+export const login =  async ({email, password}: LoginType)=>{
     let data = {
         email,
         password

@@ -1,4 +1,3 @@
-import React from 'react'
 import { fieldType } from '../../types/types'
 import './InputField.scss'
 import { BiSearch } from "react-icons/bi";

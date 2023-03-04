@@ -1,42 +1,87 @@
-.left {
+.user-card-container{
     display: flex;
     align-items: center;
+    width: 22.36vw;
+    min-height: 6vw;
+    max-height: 6vw;
+    padding: 1vw 0.9vw 1vw 1.4vw;
+    border-radius: 1vw;
+    transition: all ease 0.3s;
+    margin-bottom: 0.8vw;
 
-    p {
-        &:nth-child(1) {
-            font-weight: 500;
-            font-size: 16px;
-            margin-bottom: 0.35rem;
-        }
-
-        &:last-child {
-            font-size: 15px;
-            font-style: italic;
-            letter-spacing: 0.35px;
-        }
-    }
-
-    .profile-image {
-        position: relative;
-        background: #4970B5;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
+    .user-card-avatar{
         display: flex;
-        align-items: center;
         justify-content: center;
-        overflow: hidden;
+        align-items: center;
+    }
 
-        svg {
-            position: absolute;
-            bottom: 0;
-            width: 85%;
-            height: 85%;
-            color: hsl(216, 52%, 90%);
+    .user-card-avatar{
+        img, svg{
+            width: 2.7vw;
+            border-radius: 50%;
         }
     }
 
-    .name-role {
-        padding-left: 40px;
+    .user-card-info{
+        width: 9.37vw;
+        margin-left: 2.8vw;
+
+        .user-card-info-name{
+            font-size: 0.84vw;
+        }
+
+        .user-card-info-position{
+            font-size: 0.86vw;
+            font-family: 'Poppins';
+            font-style: italic;
+        }
     }
+
+    .user-card-functions-container{
+        margin-left: 2.8vw;
+        height: 100%;
+
+        .user-card-functions-buttons-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+
+            .user-card-functions-fire{
+                padding-left: 0.3vw;
+                cursor: pointer;
+                svg{
+                    display: flex;
+                    width: 1.3vw;
+                }
+
+            }
+
+            .user-card-functions-move{
+                width: 1.8vw;
+                height: 1.8vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #ECD613;
+                border-radius: 0.69vw;
+                cursor: pointer;
+                svg{
+                    display: block;
+                    width: 0.63vw;
+                }
+            }
+        }
+    }
+
+    &:hover{
+        background: #4970B5;
+        color: #fff;
+    }
+}
+
+.user-card-container-active{
+    background: #4970B5;
+    color: #fff;
 }

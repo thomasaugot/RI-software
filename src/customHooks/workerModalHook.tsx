@@ -17,7 +17,7 @@ export function useSearchDebounce(value:string, time=250){
 }
 
 export function useSearchWorker(value: string) {
-    const [workers, setWorkers] =useState<workerResponse>();
+    const [workers, setWorkers] = useState<workerResponse>();
     const searchDebounce = useSearchDebounce(value)
     console.log(searchDebounce)
     useEffect(() => {
