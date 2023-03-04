@@ -1,14 +1,18 @@
-import React from 'react'
 import { workerCardProps } from '../../types/types'
+import { onMoveWorkerFetch } from '../../queries/moveWorker';
 import './WorkerCard.scss';
 
 function WorkerCard({
   workerNames,
   workerPosition,
-  workerAvatar
+  workerAvatar,
+  id,
+  leaderId
+  
 }: workerCardProps) {
+
   return (
-    <div className='worker-card'>
+    <div className='worker-card' onClick={() => {onMoveWorkerFetch(true, leaderId, id)}}>
       <div className="worker-card-img">
         <img src={workerAvatar ? workerAvatar: 'https://tinypic.host/images/2023/01/20/Ellipse-14.png'} alt=""/>
       </div>

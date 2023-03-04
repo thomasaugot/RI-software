@@ -16,7 +16,6 @@ const Router: FC = () => {
       <Route path="/confirm" element={<Confirmation />} />
       <Route path="/confirmation/:email" element={<Confirmation />} />
       <Route path="/hierarchy" element={<Hierachy />} />
-      
       <Route path="/" element={<Protected><Home/></Protected>}/>
       <Route path="*" element={<NotFound/>} />
     </Routes>

@@ -47,7 +47,6 @@ const UserCard: FC<UserCardProps> = ({email, position, url, id, setHierarchy, hi
         })
     } 
 
-
     return (
         <div className={`user-card-container ${active ? 'user-card-container-active' : ''}`} onClick={(e) => {e.stopPropagation(); getEmployeesData()}}>
             <div>
