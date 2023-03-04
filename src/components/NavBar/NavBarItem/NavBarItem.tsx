@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./NavBarItem.scss";
 import {
   employee,
@@ -21,8 +20,7 @@ import {
   mutual,
   vector
 } from "../../../assets/Icons";
-import { FiChevronRight } from "react-icons/fi";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { NavItemProps } from "../../../types/navbarTypes";
 
 const navIcons = [
@@ -79,16 +77,6 @@ function NavBarItem({ text, url, menuItems, index, activeCategory, setActiveCate
     }
   }
   
-  // const delayedHide = (time: number) : string => {
-  //   new Promise((resolve, reject) => {
-
-  //     let result = '';
-  //     setTimeout(() => result = "hide", time)
-  //     return result;
-  //   });
-    
-  // } 
-  console.log(vector)
   return (
     <div onClick={() => onClickCallback(index)} className={activeCategory === index ? `navitem active`: `navitem`} style={{minHeight: activeCategory === index ? `${menuItems.length*4.3 + 5.2}vw` : `5.2vw`, maxHeight: activeCategory === index ? `${menuItems.length*4.3 + 5.2}vw` : `5.2vw`}}>
       <div className="navitem-header">

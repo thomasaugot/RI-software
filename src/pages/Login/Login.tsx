@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { whoAmI } from '../../queries/generalQueries';
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { BiErrorCircle } from "react-icons/bi";
 import { eye, eyeoff } from "../../assets/Icons";
@@ -11,9 +12,8 @@ import "./Login.scss";
 import { buttonType } from "../../types/types";
 import { login } from "../../queries/loginQueries";
 
-export const token = localStorage.getItem("token");
-
 const Login = () => {
+
   const [isError, setIsError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -27,7 +27,6 @@ const Login = () => {
     return await login({ email, password })
       .then((res) => {
         if (res.status === 400) {
-          console.log('1')
           setIsError(true);
           setErrorText("Wrong email or password");
           return
@@ -36,7 +35,6 @@ const Login = () => {
           if (isChecked) {
             localStorage.setItem("isLogged", "true");
           }
-          console.log("isLogged");
           console.log(res)
           return res.json();
         }
@@ -47,7 +45,17 @@ const Login = () => {
           localStorage.setItem("token", data.result.access_token)
           resolveOuter()
         }).then(()=>{
-          navigate('/');
+           const whoAmIPromise = whoAmI();
+           whoAmIPromise.then((result) => {
+            console.log(result)
+            localStorage.setItem("avatar", result.result.avatar)
+            localStorage.setItem("id", result.result.id)
+            localStorage.setItem("company_id", result.result.companies[0].id)
+            localStorage.setItem("employee_id", result.result.companies[0].employee_id)
+            localStorage.setItem("company_avatar", result.result.companies[0].avatar)
+            localStorage.setItem("company_name", result.result.companies[0].name)
+            navigate('/');
+           })
         })
         
         return;
