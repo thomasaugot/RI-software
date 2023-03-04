@@ -1,62 +1,52 @@
-import { token } from "../pages/Login/Login";
-import { FetchHierarchyUrl } from "../utils/network";
+import { fetchEmployeesUrl, fetchOwnersUrl } from "../utils/network";
+import { moveWorkerUrl } from '../utils/network';
+import { hierarchyItem } from '../types/hierarchyTypes';
 
+export const fetchEmployees = async (userId: number) => {
+    console.log(userId)
+    console.log(fetchEmployeesUrl(userId))
+    const token = localStorage.getItem('token');
 
-export const fetchLeaderData = async () => {
-    try {
-        const response = await fetch(`${FetchHierarchyUrl}8`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer  ${token}`,
-            },
+    const response = await fetch(fetchEmployeesUrl(userId), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer  ${token}`,
+        },
 
-        });
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error(error);
-        return error;
-    }
+    });
+    const responseJson = await response.json();
+    console.log(responseJson);
+    return responseJson.result;
 }
 
-// lead data
+export const fetchOwners = async (companyId: number):Promise<hierarchyItem[]> => {
+    const token = localStorage.getItem('token');
 
-export const fetchTeamLeadData = async (id : number) => {
-    try {
-        const response = await fetch(`${FetchHierarchyUrl}${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer  ${token}`,
-            },
-
-        });
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error(error);
-        return error;
-    }
+    const response = await fetch(fetchOwnersUrl(companyId), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+    });
+    const responseJson = await response.json();
+    console.log(responseJson);
+    return responseJson.result;
 }
 
-export const fetchWorkerData = async (id : number) => {
-    try {
-        const response = await fetch(`${FetchHierarchyUrl}${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer  ${token}`,
-            },
+export const fetchTeam = async (employeeId: number) => {
+    const token = localStorage.getItem('token');
 
-        });
-        const data = await response.json();
-        console.log(data);
-        return data;
-    } catch (error) {
-        console.error(error);
-        return error;
-    }
+    const responce = await fetch(moveWorkerUrl(employeeId), {
+        method: 'GET',
+        headers: {
+            'Content-Type': "application/json",
+            Authorization: `Bearer ${token}`
+        },
+    });
+
+    const responseJson = await responce.json();
+
+    return responseJson.result;
 }

@@ -15,9 +15,14 @@ const NavBar = () => {
   const [activeCategory, setActiveCategory] = useState<number>(0);
   const navigate = useNavigate();
 
+  const companyAvatar = localStorage.getItem("company_avatar")
+  const companyName = localStorage.getItem("company_name")
+  const employeeId = parseInt(localStorage.getItem("employee_id") || '-1')
+  
+
   useEffect(() => {
     const getNavData = async () => {
-      const datas = await navbar(1);
+      const datas = await navbar(employeeId);
       if(datas){
         setNavData(datas);
       }else{
@@ -31,8 +36,8 @@ const NavBar = () => {
     <div className="navbar">
       <div className="navbar-wrapper">
         <div className="navbar-header">
-          <span>{navlogo}</span>
-          <p className="navbar-head-text">Company name</p>
+          <span className="navnar-company-avatar-container">{companyAvatar && companyAvatar != 'null' ? <img src={companyAvatar} /> : navlogo}</span>
+          <p className="navbar-head-text">{companyName}</p>
         </div>
         <div className="navbar-container">
           {navData.map((item, i) => (

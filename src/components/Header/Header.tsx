@@ -1,10 +1,19 @@
-import React from 'react'
 import './Header.scss'
+import { Link } from "react-router-dom";
+import { basicUserAvatar } from '../../assets/Icons';
 
 function Header() {
+  const avatar = localStorage.getItem("avatar");
+  const id = localStorage.getItem("id");
+  
   return (
     <div className='header-container'>
-      <img className ='img' src="https://tinypic.host/images/2023/01/18/Group-215.png" alt="" />
+      <Link className="navbar-link" to={`/profile/${id}`}> 
+      {
+        avatar && avatar != 'null' ? <img className='img' src={avatar} alt="" /> : basicUserAvatar
+      }
+        
+      </Link>
     </div>
   )
 }

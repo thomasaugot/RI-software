@@ -1,9 +1,9 @@
-import React from 'react'
 import BaseLayout from '../../layouts/BaseLayout/BaseLayout'
-function Home() {
+
+const Home = () => {
   return (
     <BaseLayout>
-      <h1>Home page</h1>
+      
     </BaseLayout>
   )
 }

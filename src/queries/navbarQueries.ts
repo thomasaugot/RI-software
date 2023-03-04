@@ -15,7 +15,6 @@ export const navbar = async (userId: number) => {
 
     if(response){
       const navbarData: navBarResponse =  await response.json()
-      console.log(navbarData.result)
       return navbarData.result
     }else{
       return undefined
