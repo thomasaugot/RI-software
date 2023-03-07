@@ -1,7 +1,8 @@
 import { SearchWorkerUrl } from "../utils/network";
-import { token } from "../pages/Login/Login";
 
 export const SearchWorkerFetch = async <T>( workerName: string, pageNum: number ): Promise<T> => {
+    const token = localStorage.getItem('token');
+
     const res = await fetch(`${SearchWorkerUrl}`, {
         method: 'POST',
         headers: {

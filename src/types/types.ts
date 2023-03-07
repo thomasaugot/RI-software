@@ -106,12 +106,13 @@ export type WorkersSettings = {
   avatar_link: string
 }
 
-export type workerResponse = {
-  ok: boolean;
-  description: string;
-  result: [
-    WorkersSettings
-  ];
+// export type workerResponse = {
+//   ok: boolean;
+//   description: string;
+//   result: [
+//     WorkersSettings
+//   ];
+// }
 // export type workerFetch = {
 //   ok: boolean,
 //   description: string,
@@ -125,17 +126,18 @@ export type workerResponse = {
 //   }
 // ]
 // }
-export type workersTypes = [{
+export type workersTypes = {
   id: number;
   user_id: number;
   position: string;
   name: string;
   avatar_link: string;
-}]
+}
+
 export type workerResponse = {
   ok: boolean;
   description: string;
-  result: workersTypes;
+  result: workersTypes[];
 };
 
 

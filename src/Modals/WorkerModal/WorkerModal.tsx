@@ -10,7 +10,7 @@ import { workersTypes } from "../../types/types";
 
 function WorkerModal({ setIsOpenModal, leaderId }: moveWorkerType) {
   const [search, setSearch] = useState("");
-  const [workersForMove, setWorkerForMove]  =useState<workersTypes | undefined>();
+  const [workersForMove, setWorkerForMove] = useState<workersTypes[] | undefined>();
   const closeModal = () => setIsOpenModal(false);
 
   const employeeId = parseInt(localStorage.getItem('employee_id') || '-1');
@@ -25,7 +25,7 @@ function WorkerModal({ setIsOpenModal, leaderId }: moveWorkerType) {
   }, [])
 
   useEffect(()=>{
-    filterWorkersForMove(workersForMove as workersTypes, search)
+    filterWorkersForMove(workersForMove as workersTypes[], search)
   }, [search])
 
   console.log(workersForMove);

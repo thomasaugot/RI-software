@@ -11,3 +11,4 @@ export const searchWorkersUrl = baseUrl + 'api/search/workers';
 export const whoAmIUrl = baseUrl + 'api/whoami'; 
 export const navbarUrl = (userId: number) => baseUrl + `api/navbar/${userId}`;
 export const updateStatusUrl = baseUrl + 'api/profile/updateStatus';
+export const SearchWorkerUrl = baseUrl + "/api/search/workers";
