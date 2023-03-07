@@ -1,7 +1,7 @@
 import { moveWorkerUrl } from "../utils/network"; 
 import { workerResponse, workersTypes } from "../types/types";
 
-export const workersForMoveFetch  = async (employeeId: number): Promise<workersTypes | undefined> => {
+export const workersForMoveFetch  = async (employeeId: number): Promise<workersTypes[] | undefined> => {
     const token = localStorage.getItem('token');
     try{
         const workersForMove = await fetch(moveWorkerUrl(employeeId), {
@@ -46,7 +46,7 @@ export const onMoveWorkerFetch = async (employeeId: number, team: boolean, newLe
     }
 } 
 
-export const filterWorkersForMove = (workersForMove: workersTypes, search: string) => {
+export const filterWorkersForMove = (workersForMove: workersTypes[], search: string) => {
     const filterSearch: string  = search.toLocaleLowerCase();
     const newFilterWorkers = workersForMove.filter((workers_value) => {
         const WorkerNameLc = workers_value.name.toLocaleLowerCase();
