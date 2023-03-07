@@ -1,6 +1,5 @@
 import { fetchEmployeesUrl, fetchOwnersUrl } from "../utils/network";
 import { moveWorkerUrl } from '../utils/network';
-import { hierarchyItem } from '../types/hierarchyTypes';
 
 export const fetchEmployees = async (userId: number) => {
     console.log(userId)
@@ -20,7 +19,7 @@ export const fetchEmployees = async (userId: number) => {
     return responseJson.result;
 }
 
-export const fetchOwners = async (companyId: number):Promise<hierarchyItem[]> => {
+export const fetchOwners = async (companyId: number) => {
     const token = localStorage.getItem('token');
 
     const response = await fetch(fetchOwnersUrl(companyId), {
@@ -30,9 +29,10 @@ export const fetchOwners = async (companyId: number):Promise<hierarchyItem[]> =>
             Authorization: `Bearer ${token}`,
         },
     });
-    const responseJson = await response.json();
-    console.log(responseJson);
-    return responseJson.result;
+
+    // console.log(await response.json())
+    
+    return response;
 }
 
 export const fetchTeam = async (employeeId: number) => {

@@ -1,5 +1,5 @@
 export type hierarchyItem = {
-    id: number, 
+    employee_id: number, 
     userId: number,
     avatar_link: string,
     name: string,
@@ -8,8 +8,8 @@ export type hierarchyItem = {
     inTeam: boolean
 }
 
-export type UserCardProps = {
-    email: string,
+export type HierarchyUserCardProps = {
+    name: string,
     position: string,
     url?: string,
     id: number,
