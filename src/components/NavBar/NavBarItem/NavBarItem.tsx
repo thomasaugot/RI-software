@@ -1,4 +1,3 @@
-import React from "react";
 import "./NavBarItem.scss";
 import {
   employee,
@@ -18,11 +17,11 @@ import {
   planningShipments,
   account,
   flowAndFund,
-  mutual
+  mutual,
+  vector
 } from "../../../assets/Icons";
-import { FiChevronRight } from "react-icons/fi";
-import { Link, NavLink } from "react-router-dom";
-import { NavItemProps } from "../../../types/types";
+import { Link } from "react-router-dom";
+import { NavItemProps } from "../../../types/navbarTypes";
 
 const navIcons = [
     {
@@ -68,43 +67,42 @@ const navIcons = [
     }
 ];
 
-function NavBarItem({ index, text,url, menuItems }: NavItemProps) {
-  const [isOpen, setIsOpen] = React.useState(false);
-  const onOpen = () => {
-    if (index) {
-      setIsOpen(!isOpen);
+function NavBarItem({ text, url, menuItems, index, activeCategory, setActiveCategory}: NavItemProps) {
+
+  const onClickCallback = (index: number) => {
+    if(activeCategory == index){
+      setActiveCategory(0);
+    }else{
+      setActiveCategory(index); 
     }
-  };
+  }
+  
   return (
-    <NavLink to={url} onClick={onOpen} className={({isActive})=>{
-        if(isActive){
-            return isOpen ? `navitem-expand`: `navitem`
-        } else {
-            setIsOpen(false)
-            return !isOpen ? `navitem`: `navitem`
-        }
-    }}>
-      <div className="nav-item-top">
-        <div className="nav-item-top-text">
-          <span className="icons">{navIcons[(index!)-1].icon}</span>
+    <div onClick={() => onClickCallback(index)} className={activeCategory === index ? `navitem active`: `navitem`} style={{minHeight: activeCategory === index ? `${menuItems.length*4.3 + 5.2}vw` : `5.2vw`, maxHeight: activeCategory === index ? `${menuItems.length*4.3 + 5.2}vw` : `5.2vw`}}>
+      <div className="navitem-header">
+        <div className="navitem-header-text">
+          <span className="navitem-header-icons">{navIcons[(index)-1].icon}</span>
           <p>{text}</p>
         </div>
-        <FiChevronRight className={isOpen ? "rotate" : "rotate-0"} />
+        <span className={activeCategory == index ? "navitem-header-vector rotated" : "navitem-header-vector"}>{vector}</span>
+        {/* <FiChevronRight className={activeCategory == index ? "rotate" : "rotate rotated"} /> */}
       </div>
-      <div className={isOpen ? "nav-item-menu" : "hide"}>
-        {menuItems?.map((item, i) => (
+      <div className={activeCategory == index ? "navitem-item-container" : 'navitem-item-container hidden'} >
+        {menuItems.map((item, i) => (
           <Link
-            className="nav-menu-link"
-            onClick={() => setIsOpen(false)}
+            className="navbar-link"
+            onClick={(e) => {
+              setActiveCategory(0);
+            }}
             to={item.url!}
             key={i}
           >
-            <span>{navIcons[(index!)-1].subitemIcons[i]}</span>
+            {navIcons[(index!)-1].subitemIcons[i]}
             <p>{item.name}</p>
           </Link>
         ))}
       </div>
-    </NavLink>
+    </div>
   );
 }
 

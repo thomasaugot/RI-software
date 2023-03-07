@@ -1,16 +1,34 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import InputField from "../../components/InputField/InputField";
 import WorkerCard from "../../components/WorkerCard/WorkerCard";
 import { close } from "../../assets/Icons";
 import { motion } from "framer-motion";
-import { workerModalProps } from "../../types/types";
+import { moveWorkerType } from "../../types/types";
 import "./WorkerModal.scss";
-import { useSearchWorker } from "../../customHooks/workerModalHook";
+import { workersForMoveFetch, filterWorkersForMove } from "../../queries/moveWorker";
+import { workersTypes } from "../../types/types";
 
-function WorkerModal({ setIsOpenModal }: workerModalProps) {
-  const [search, setSearch] = React.useState("");
+function WorkerModal({ setIsOpenModal, leaderId }: moveWorkerType) {
+  const [search, setSearch] = useState("");
+  const [workersForMove, setWorkerForMove]  =useState<workersTypes | undefined>();
   const closeModal = () => setIsOpenModal(false);
-  const workers = useSearchWorker(search);
+
+  const employeeId = parseInt(localStorage.getItem('employee_id') || '-1');
+
+  const getworkerForMove = async () => {
+    const workersForMoveFetchData = await workersForMoveFetch(employeeId)
+    setWorkerForMove(workersForMoveFetchData)
+  }
+
+  useEffect(()=>{
+    getworkerForMove();
+  }, [])
+
+  useEffect(()=>{
+    filterWorkersForMove(workersForMove as workersTypes, search)
+  }, [search])
+
+  console.log(workersForMove);
   return (
     <motion.div
       onClick={closeModal}
@@ -51,14 +69,16 @@ function WorkerModal({ setIsOpenModal }: workerModalProps) {
             />
           </div>
         </div>
-        {workers?.result?.length ? (
+        {workersForMove?.length ? (
           <div className="worker-modal-user-list">
-            {workers?.result?.map(({ name, position, avatar_link }, i) => (
+            {workersForMove?.map(({ name, position, avatar_link, id }, i) => (
               <WorkerCard
                 key={i}
                 workerNames={name}
                 workerPosition={position}
                 workerAvatar={avatar_link}
+                id={id}
+                leaderId={leaderId}
               />
             ))}
           </div>

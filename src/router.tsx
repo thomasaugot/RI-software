@@ -8,6 +8,7 @@ import Hierachy from "./pages/hierarchy/Hierarchy";
 import Protected from "./components/Protected/ProtectedRoute";
 import NotFound from "./pages/NotFound/NotFound";
 import SearchWorker from "./pages/SearchWorker/SearchWorker";
+import Chat from "./pages/Chat/Chat";
 
 const Router: FC = () => {
   return (
@@ -18,7 +19,7 @@ const Router: FC = () => {
       <Route path="/confirmation/:email" element={<Confirmation />} />
       <Route path="/hierarchy" element={<Hierachy />} />
       <Route path="/search_workers" element={<SearchWorker/>}/>
-      
+      <Route path="/chat" element={<Chat/>}/>
       <Route path="/" element={<Protected><Home/></Protected>}/>
       <Route path="*" element={<NotFound/>} />
     </Routes>

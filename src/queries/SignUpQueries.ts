@@ -10,25 +10,25 @@ export const register = async (
     password,
     phone_number
   }: MyFormProps) => {
-  const newData = {
+  const data = {
     first_name,
     last_name,
     email,
     password,
     phone_number
   }
-  console.log("new Data", newData)
+  console.log("new Data", data)
   try {
-    const response = await fetch(`${RegisterUrl}`, {
+    const response = await fetch(RegisterUrl, {
       method: 'POST',
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newData)
+      }
     });
-    const data = await response.json();
-    console.log(data);
-    return data;
+    const responceJson = await response.json();
+    console.log(responceJson);
+    return responceJson;
   } catch (error) {
     console.error(error);
     return error;
@@ -37,15 +37,16 @@ export const register = async (
 
 //verify
 
-
-export const verification = async (code: any) => {
+export const verification = async (code: number) => {
   try {
+    console.log(localStorage.getItem("verificationToken"))
     const response = await fetch(`${VerifyRegUrl}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        token: localStorage.getItem("verificationToken"),
         code: code
       }),
     });
@@ -56,7 +57,7 @@ export const verification = async (code: any) => {
     return { data, error: null, message: 'success' };
   } catch (error) {
     console.error(error);
-    return { data: null, error, message: 'failed' };
+    return { data: {ok: false}, error, message: 'failed' };
   }
 }
 

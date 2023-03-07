@@ -1,30 +1,29 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
-import ReactModal from "react-modal";
+import { close } from "../../assets/Icons";
+import { ModalProps } from "../../types/generalTypes";
+import './modal.scss';
 
-import "./Modal.scss";
 
-interface ModalProps {
-  open: boolean;
-  requestClose: () => void;
-}
 
 const Modal: FC<
   ModalProps &
-    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> &
-    ModalProps
-> = ({ children, open, requestClose }) => {
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+> = ({ closeModal, closeButton=true, additionalClass='', children}) => {
+
   return (
-    <ReactModal
-      isOpen={open}
-      ariaHideApp={false}
-      onRequestClose={() => {
-        requestClose();
-      }}
-      className="react-modal"
-      closeTimeoutMS={600}
-    >
-      <div className="modal">{children}</div>
-    </ReactModal>
+    <div onClick={closeModal} className="dark-bg">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`modal-container ${additionalClass}`}
+      >
+        {closeButton && (
+          <div className="modal-header">
+              <span onClick={() => closeModal()} className="close-animate">{close}</span>
+          </div>
+        )}
+        {children}
+      </div>
+    </div>
   );
 };
 

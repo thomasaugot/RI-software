@@ -1,5 +1,6 @@
 import { moveWorker } from './../assets/Icons';
 import React from "react"
+import { type } from 'os';
 
 export type fieldType = {
   type: string;
@@ -21,6 +22,7 @@ export enum buttonType {
 export type SubmitbuttonProps = {
   text: string;
   type?: buttonType;
+  onClick?: ()=> void
 };
 
 export type TextProps = {
@@ -42,39 +44,6 @@ export type checkboxProps = {
 export type LoginType = {
   email: string;
   password: string;
-};
-
-export type navMenuItem = {
-  icon?: JSX.Element;
-  name?: string;
-  url?: string;
-};
-
-export type NavItemProps = {
-  index?: number;
-  icon?: JSX.Element;
-  text?: string;
-  url: string;
-  menuItems?: navMenuItem[];
-};
-
-type subItemProps = {
-  name: string;
-  url: string;
-  enabled: boolean;
-};
-
-export type navBarResponse = {
-  ok?: boolean;
-  description?: string;
-  result: navbarProps[];
-};
-
-export type navbarProps = {
-  name: string;
-  url: string;
-  enabled: boolean;
-  subitems: subItemProps[];
 };
 
 export type MyFormProps = {
@@ -111,10 +80,17 @@ export type workerModalProps = {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export type moveWorkerType = {
+  setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  leaderId: number;
+}
+
 export type workerCardProps = {
-    workerNames: string
-    workerPosition: string
-    workerAvatar?: string
+    workerNames: string;
+    workerPosition: string;
+    workerAvatar?: string;
+    id: number
+    leaderId: number
 }
 
 export type moveWorker = {
@@ -136,5 +112,31 @@ export type workerResponse = {
   result: [
     WorkersSettings
   ];
+// export type workerFetch = {
+//   ok: boolean,
+//   description: string,
+//   result: [
+//     {
+//     id: number,
+//     user_id: number,
+//     position: string,
+//     name: string,
+//     avatar_link: string
+//   }
+// ]
+// }
+export type workersTypes = [{
+  id: number;
+  user_id: number;
+  position: string;
+  name: string;
+  avatar_link: string;
+}]
+export type workerResponse = {
+  ok: boolean;
+  description: string;
+  result: workersTypes;
 };
+
+
 
