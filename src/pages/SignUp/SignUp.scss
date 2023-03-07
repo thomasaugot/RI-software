@@ -13,10 +13,14 @@ $fonts: 'Poppins', sans-serif;
   font-family: $fonts;
 
   .registration-form {
+
     width: 39.5vw;
     border-radius: 20px;
+    background-color: #ffffff;
+    padding: 2.08vw 3.68vw;
     display: flex;
     flex-direction: column;
+
     background-color: #fff;
     margin: 0 auto;
     overflow: hidden;
@@ -49,7 +53,7 @@ $fonts: 'Poppins', sans-serif;
       }
 
       h4 {
-        font-size: 1rem;
+        font-size: 1.1vw;
         font-weight: 400;
         color: #444444;
         margin-top: 2.4vw;
@@ -57,7 +61,7 @@ $fonts: 'Poppins', sans-serif;
         a {
           color: #0B8FEF;
           text-decoration: none;
-          margin-left: 0.3rem;
+          margin-left: 0.33vw;
         }
       }
     }
@@ -96,7 +100,7 @@ $fonts: 'Poppins', sans-serif;
           top: 40%;
           color: #727272;
           transform: translateY(-25%);
-          font-size: 1rem;
+          font-size: 1.1vw;
           cursor: pointer;
 
           svg{
@@ -118,11 +122,11 @@ $fonts: 'Poppins', sans-serif;
   .check-container {
     display: flex;
     align-items: center;
-    gap: 1.18em;
+    gap: 1.31vw;
 
     .check-box {
-      width: 15px;
-      height: 15px;
+      width: 1.1vw;
+      height: 1.1vw;
       border: 2px solid #444444;
       cursor: pointer;
       border-radius: 5px;
@@ -133,20 +137,20 @@ $fonts: 'Poppins', sans-serif;
 
     .checked {
       background-color: #444444;
-      width: 7px;
-      height: 7px;
+      width: 0.48vw;
+      height: 0.48vw;
       border-radius: 5px;
     }
 
     .unchecked {
       background-color: #fff;
-      width: 7px;
-      height: 7px;
+      width: 0.48vw;
+      height: 0.48vw;
       border-radius: 5px;
     }
 
     p {
-      font-size: 0.875rem;
+      font-size: 0.97vw;
       color: #444;
     }
   }
@@ -154,7 +158,7 @@ $fonts: 'Poppins', sans-serif;
   a {
     text-decoration: none;
     color: #0B8FEF;
-    font-size: 0.875rem;
+    font-size: 0.97vw;
     font-weight: 400;
   }
 }

@@ -1,5 +1,6 @@
 .navbar {
   height: 100vh;
+
   width: 23vw;
   box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.15);
   overflow-y: scroll;
@@ -43,11 +44,18 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .navbar-bottom {
     width: 100%;
     display: flex;
+    justify-content: center;
     .logout-button {
       display: flex;
       align-items: center;
