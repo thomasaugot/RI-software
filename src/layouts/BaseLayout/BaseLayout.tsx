@@ -2,27 +2,17 @@ import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import "./BaseLayout.scss";
 import NavBar from "../../components/NavBar/NavBar";
 import Header from "../../components/Header/Header";
-import { updateStatus } from '../../queries/generalQueries';
-import { useNavigate } from "react-router-dom";
+import { updateStatusUrl } from "../../utils/network";
+import { authorizedRequest } from '../../utils/queries'
 
 const BaseLayout: FC<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 > = ({ children }) => {
-  const navigate = useNavigate();
 
   setInterval(() => {
-    const responce = updateStatus()
-    
-    if(responce){
-      responce.then((data) => {
+      authorizedRequest(updateStatusUrl, 'PUT').then((data) => {
         localStorage.setItem("token", data.result.access_token);
-      }) 
-    }else{
-      localStorage.setItem("token", '');
-      navigate('/login');
-    }
-
-    
+      })
   }, 5000)
 
   return (

@@ -1,74 +1,127 @@
-.hire-worker {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  .hire-worker-container {
-    background-color: #fafafa;
-    width: 45.3125em;
-    height: 50.375em;
-    border-radius: 20px;
+// .hire-worker {
+//   position: fixed;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   opacity: 0;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   display: flex;
+//   justify-content: center;
+//   .hire-worker-container {
+//     background-color: #fafafa;
+//     width: 45.3125em;
+//     height: 50.375em;
+//     border-radius: 20px;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1.5em;
+//     .hire-worker-header {
+//       padding: 1.8125em 2.4375em;
+//       display: flex;
+//       justify-content: flex-end;
+//       span {
+//         cursor: pointer;
+//       }
+//     }
+
+//     .hire-worker-title {
+//       text-align: center;
+//       margin-top: -2.5em;
+//       font-size: 1.5rem;
+//       font-size: 500;
+//       color: #444444;
+//     }
+    
+//     .hire-worker-form {
+//       .form-inputs-wrapper {
+//         padding: 0 2.8125em;
+//         display: grid;
+//         grid-template-columns: repeat(2, 2fr);
+//         gap: 1.4em;
+//         justify-items: center;
+//         .form-worker-control {
+//           width: 18.75em;
+//           label {
+//             color: #444444;
+//             font-size: 1rem;
+//             font-weight: 400;
+//           }
+//         }
+//       }
+
+//       .hire-worker-functions {
+//         .user-function {
+//           text-align: center;
+//           font-size: 1.5rem;
+//           font-size: 500;
+//           margin-top: 2.5em;
+//           color: #444444;
+//         }
+
+//         .hire-work-function-checkboxs {
+//           display: grid;
+//           width: 70%;
+//           margin: 55px auto;
+//           grid-template-columns: repeat(2, 58.5%);
+//           gap: 2.43rem;
+//         }
+//       }
+//       .hire-worker-submit-container {
+//         padding: 0 18em;
+//       }
+//     }
+//   }
+// }
+
+.hire-worker-modal-container{
+  max-height: 72.65vh;
+  width: 50.41vw;
+
+  .hire-worker-title{
+    font-size: 1.66vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 2vw;
+  }
+
+  .hire-worker-form{
+    padding: 0 3.125vw 3.47vw;
+    min-height: calc(100% - 4.5vw);
+    max-height: calc(100% - 4.5vw);
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
-    .hire-worker-header {
-      padding: 1.8125em 2.4375em;
+    justify-content: space-between;
+
+    .hire-worker-content-container{
+      overflow-y: scroll;
+      max-height: 100%;
+      padding: 2vw 0;
       display: flex;
-      justify-content: flex-end;
-      span {
-        cursor: pointer;
-      }
-    }
+      flex-direction: column;
+      align-items: center;
 
-    .hire-worker-title {
-      text-align: center;
-      margin-top: -2.5em;
-      font-size: 1.5rem;
-      font-size: 500;
-      color: #444444;
-    }
-    .hire-worker-form {
-      .form-inputs-wrapper {
-        padding: 0 2.8125em;
+      .hire-worker-content-input-container{
         display: grid;
-        grid-template-columns: repeat(2, 2fr);
-        gap: 1.4em;
-        justify-items: center;
-        .form-worker-control {
-          width: 18.75em;
-          label {
-            color: #444444;
-            font-size: 1rem;
-            font-weight: 400;
-          }
-        }
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-row-gap: 10px;
+        grid-column-gap: 10px;
+        width: 100%;
       }
 
-      .hire-worker-functions {
-        .user-function {
-          text-align: center;
-          font-size: 1.5rem;
-          font-size: 500;
-          margin-top: 2.5em;
-          color: #444444;
-        }
+      .hire-work-function-checkbox-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        margin-left: auto;
+        margin-right: auto;
 
-        .hire-work-function-checkboxs {
-          display: grid;
-          width: 70%;
-          margin: 55px auto;
-          grid-template-columns: repeat(2, 58.5%);
-          gap: 2.43rem;
-        }
       }
-      .hire-worker-submit-container {
-        padding: 0 18em;
-      }
+    }
+
+    .hire-worker-submit-container{
+      margin-top: 3.125vw;
     }
   }
 }

@@ -13,8 +13,10 @@ function WorkerModal({ setIsOpenModal, leaderId }: moveWorkerType) {
   const [workersForMove, setWorkerForMove]  =useState<workersTypes | undefined>();
   const closeModal = () => setIsOpenModal(false);
 
+  const employeeId = parseInt(localStorage.getItem('employee_id') || '-1');
+
   const getworkerForMove = async () => {
-    const workersForMoveFetchData = await workersForMoveFetch()
+    const workersForMoveFetchData = await workersForMoveFetch(employeeId)
     setWorkerForMove(workersForMoveFetchData)
   }
 

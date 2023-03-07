@@ -1,5 +1,5 @@
 import './FireWorker.scss'
-import Modal from '../../../components/modal/Modal';
+import Modal from '../../../components/modal/modal';
 import { Props } from '../../../types/fireworkertypes';
 import SubmitButton from '../../../components/SubmitButton/SubmitButton';
 import { buttonType } from '../../../types/types';
@@ -19,22 +19,18 @@ function FireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
     }
 
     return (
-        <div>
-            {setIsOpenModal && (
-                <Modal
-                    setIsOpenModal={setIsOpenModal}
-                    title="Remove this user?"
-                    showClose={false}
-                >
+        <Modal
+            closeModal={closeModal}
+            title="Remove this user?"
+            closeButton={false}
+        >
 
 
-                    <div className='buttons'>
-                        <SubmitButton type={buttonType.submit} text="Yes" onClick={handleDeleteClick} />
-                        <SubmitButton type={buttonType.submit} text="No" onClick={closeModal} />
-                    </div>
-                </Modal>
-            )}
-        </div>
+            <div className='buttons'>
+                <SubmitButton type={buttonType.submit} text="Yes" onClick={handleDeleteClick} />
+                <SubmitButton type={buttonType.submit} text="No" onClick={closeModal} />
+            </div>
+        </Modal>
     );
 }
 

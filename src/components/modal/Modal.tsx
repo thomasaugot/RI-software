@@ -1,30 +1,26 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import { close } from "../../assets/Icons";
-import { ModalProps } from "../../types/modaltypes";
-import "./Modal.scss";
+import { ModalProps } from "../../types/generalTypes";
+import './modal.scss';
 
 
 
 const Modal: FC<
   ModalProps &
-  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> &
-  ModalProps
-> = ({ setIsOpenModal, children, title, showClose = true }) => {
-
-  const closeModal = () => setIsOpenModal(false);
-
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
+> = ({ closeModal, closeButton=true, additionalClass='', children}) => {
 
   return (
-    <div onClick={closeModal} className="modal">
+    <div onClick={closeModal} className="dark-bg">
       <div
         onClick={(e) => e.stopPropagation()}
-        className="modal-container">
-        <div className="modal-header">
-          {showClose && (
-            <span onClick={() => closeModal()} className="close-animate">{close}</span>
-          )}
-        </div>
-        <p className='modal-title'>{title}</p>
+        className={`modal-container ${additionalClass}`}
+      >
+        {closeButton && (
+          <div className="modal-header">
+              <span onClick={() => closeModal()} className="close-animate">{close}</span>
+          </div>
+        )}
         {children}
       </div>
     </div>

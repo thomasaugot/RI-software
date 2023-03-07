@@ -1,5 +1,3 @@
-import { token } from "../pages/Login/Login";
-
 export const handleDelete = async (employeeId: number) => {
     try {
         const data = {
@@ -9,18 +7,12 @@ export const handleDelete = async (employeeId: number) => {
             method: 'DELETE',
             headers: {
                 'Content-Type': "application/json",
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(data)
         });
         const json = await response.json();
         return json
-        // if (json.status === 'success') {
-        //     setEmployees((prev) => prev.filter((employee: any) => employee.id !== employeeId))
-        //     setIsDeleted(true);
-        // } else {
-        //     setError(json.message);
-        // }
     } catch (err) {
         console.log(err)
     }

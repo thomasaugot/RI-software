@@ -1,11 +1,10 @@
-import { token } from "../pages/Login/Login";
-
 import { moveWorkerUrl } from "../utils/network"; 
 import { workerResponse, workersTypes } from "../types/types";
 
-export const workersForMoveFetch  = async (): Promise<workersTypes | undefined> => {
+export const workersForMoveFetch  = async (employeeId: number): Promise<workersTypes | undefined> => {
+    const token = localStorage.getItem('token');
     try{
-        const workersForMove = await fetch(moveWorkerUrl, {
+        const workersForMove = await fetch(moveWorkerUrl(employeeId), {
             method: 'GET',
             headers: {
                 'Content-Type': "application/json",
@@ -21,7 +20,8 @@ export const workersForMoveFetch  = async (): Promise<workersTypes | undefined> 
     }
 }
 
-export const onMoveWorkerFetch = async (team: boolean, newLeaderUserId: number, employeeToBeMovedUserId: number): Promise<workerResponse | undefined> => {
+export const onMoveWorkerFetch = async (employeeId: number, team: boolean, newLeaderUserId: number, employeeToBeMovedUserId: number): Promise<workerResponse | undefined> => {
+    const token = localStorage.getItem('token');
     try{
         let data = {
             employee_to_be_moved_user_id: employeeToBeMovedUserId,
@@ -29,7 +29,7 @@ export const onMoveWorkerFetch = async (team: boolean, newLeaderUserId: number, 
             move_with_team: team
         }
 
-        const movedworker = await fetch(moveWorkerUrl, {
+        const movedworker = await fetch(moveWorkerUrl(employeeId), {
             method: 'PATCH',
             body: JSON.stringify(data),
             headers: {

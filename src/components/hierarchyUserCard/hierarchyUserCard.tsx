@@ -1,13 +1,14 @@
 import { FC } from "react";
 import { profile } from "../../assets/Icons";
 import { fireEmployeeButton, moveEmployeeButton } from "../../assets/hierarchyIcons"
-import './userCard.scss'
-import { fetchEmployees } from "../../queries/hierarchyQueries";
-import { hierarchyItem, UserCardProps } from '../../types/hierarchyTypes'
+import './hierarchyUserCard.scss'
+import { hierarchyItem, HierarchyUserCardProps } from '../../types/hierarchyTypes'
+import { authorizedRequest } from '../../utils/queries';
+import { fetchEmployeesUrl } from "../../utils/network";
 
 
 
-const UserCard: FC<UserCardProps> = ({email, position, url, id, setHierarchy, hierarchy, level, active, index, inTeam, setHierarchyLevel, hierarchyLevel, setIsActive, isActive}) => {
+const HierarchyUserCard: FC<HierarchyUserCardProps> = ({name, position, url, id, setHierarchy, hierarchy, level, active, index, inTeam, setHierarchyLevel, hierarchyLevel, setIsActive, isActive}) => {
 
     const employeeId = parseInt(localStorage.getItem('employee_id') || '-1');
 
@@ -30,10 +31,12 @@ const UserCard: FC<UserCardProps> = ({email, position, url, id, setHierarchy, hi
 
         arrayBuf[level][index].active = true;
 
-        fetchEmployees(id).then((data) => {
+        
+
+        authorizedRequest(fetchEmployeesUrl(id), 'GET').then((data) => {
 
             console.log(data)
-            const employeesList: hierarchyItem[] = data || [];
+            const employeesList: hierarchyItem[] = data.result || [];
 
             for(let i=0; i<employeesList.length; i++){
                 employeesList[i].active = false;
@@ -48,14 +51,20 @@ const UserCard: FC<UserCardProps> = ({email, position, url, id, setHierarchy, hi
     } 
 
     return (
-        <div className={`user-card-container ${active ? 'user-card-container-active' : ''}`} onClick={(e) => {e.stopPropagation(); getEmployeesData()}}>
+        <div 
+            className={`user-card-container ${active ? 'user-card-container-active' : ''}`}
+            onClick={(e) => {
+                e.stopPropagation();
+                getEmployeesData();
+            }}
+        >
             <div>
                 <div className="user-card-avatar">
                     {url ? <img src={url} alt="U." /> : <>{profile}</>}
                 </div>
             </div>
             <div className="user-card-info">
-                <p className="user-card-info-name">{email}</p>
+                <p className="user-card-info-name">{name}</p>
                 <p className="user-card-info-position">{position}</p>
             </div>
             {inTeam ? 
@@ -77,4 +86,4 @@ const UserCard: FC<UserCardProps> = ({email, position, url, id, setHierarchy, hi
     )
 }
 
-export default UserCard;
+export default HierarchyUserCard;
