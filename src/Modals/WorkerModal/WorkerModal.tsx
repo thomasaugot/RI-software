@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import InputField from "../../components/InputField/InputField";
-import WorkerCard from "../../components/WorkerCard/WorkerCard";
+import InputField from "../../components/general/inputField/inputField";
+import WorkerCard from "../../components/searchWorker/workerCard/workerCard";
 import { close } from "../../assets/Icons";
 import { motion } from "framer-motion";
 import { moveWorkerType } from "../../types/types";

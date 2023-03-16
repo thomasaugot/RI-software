@@ -1,8 +1,8 @@
 import { FC, useState, useEffect, useContext } from "react";
-import "./Hierarchy.scss";
-import HierarchyUserCard from "../../components/hierarchyUserCard/hierarchyUserCard";
+import "./hierarchy.scss";
+import HierarchyUserCard from "../../components/hierarchy/hierarchyUserCard/hierarchyUserCard";
 import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
-import { hierarchyItem } from '../../types/hierarchyTypes';
+import { hierarchyItem } from '../../types/hierarchy/generalTypes';
 import { hireEmployeeButton } from '../../assets/hierarchyIcons';
 import { authorizedRequest } from '../../utils/queries'
 import { fetchOwnersUrl, fetchEmployeesUrl, fetchLeadersUrl } from "../../utils/network";
@@ -20,17 +20,18 @@ const Hierachy: FC = () => {
   const [hierarchy, setHierarchy] = useState<hierarchyItem[][]>([]);
   const [hierarchyLevel, setHierarchyLevel] = useState<number>(-1);
   const [isActive, setIsActive] = useState<boolean>(false);
-
-  console.log(hierarchy)
+  const [hireWorkerLeader, setHireWorkerLeader] = useState<number>(-1);
 
 
   useEffect(() => {
-    authorizedRequest(fetchOwnersUrl(companyId), 'GET').then((data) => {
-      setHierarchy([[...data.result]]);
-    })
+    // authorizedRequest(fetchOwnersUrl(companyId), 'GET').then((data) => {
+    //   setHierarchy([[...data.result]]);
+    // })
 
-    authorizedRequest(fetchLeadersUrl(companyId, 10), 'GET').then((data) => {
-      // setHierarchy([[...data.result]]);
+    authorizedRequest(fetchLeadersUrl(companyId, employeeId), 'GET').then((data) => {
+      if(data.result){
+        setHierarchy([[...data.result]]);
+      }
       console.log(data)
     })
 
@@ -54,7 +55,8 @@ const Hierachy: FC = () => {
                       name={employee.name}
                       position={employee.position}
                       url={employee.avatar_link}
-                      id={employee.employee_id}
+                      employeeId={employee.employee_id}
+                      userId={employee.user_id}
                       setHierarchy={setHierarchy}
                       hierarchy={hierarchy}
                       level={index}
@@ -69,14 +71,15 @@ const Hierachy: FC = () => {
                     />
                   })
                 }
-                {index>hierarchyLevel && isActive ? <div className="hierarchy-hire-worker-button" onClick={ () => {setHireWorkerModalIsOpen(true)}}>{hireEmployeeButton}</div> : <></>}
+                {index>hierarchyLevel && isActive ? <div className="hierarchy-hire-worker-button" onClick={() => {setHireWorkerModalIsOpen(true); setHireWorkerLeader(hierarchy[index-1].filter((worker) => worker.active)[0].employee_id)}}>{hireEmployeeButton}</div> : <></>}
               </div>
             )
           }
           )}
         </div>
       </div>
-      {hireWorkerModalIsOpen ? <HireWorker/> : <></>}
+      
+      <HireWorker hireWorkerLeader={hireWorkerLeader}/>
 
     </BaseLayout >
   );

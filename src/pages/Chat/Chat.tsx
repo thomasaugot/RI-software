@@ -1,9 +1,9 @@
 import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
-import ChatHeader from "../../components/ChatHeader/ChatHeader";
-import MessageArea from "../../components/MessageArea/MessageArea";
-import ChatBarHeader from "../../components/ChatBarHeader/ChatBarHeader";
-import ChatBar from "../../components/ChatBar/ChatBar";
-import './Chat.scss';
+import ChatHeader from "../../components/chat/chatHeader/chatHeader";
+import MessageArea from "../../components/chat/chatBar/messageArea/messageArea";
+import ChatBarHeader from "../../components/chat/chatBarHeader/chatBarHeader";
+import ChatBar from "../../components/chat/chatBar/chatBar";
+import './chat.scss';
 
 const Chat = () => {
     return (

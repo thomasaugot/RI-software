@@ -1,4 +1,3 @@
-export type hireWorkerModalProps = {
-    setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  }
-  
+export type HireWorkerProps = {
+  hireWorkerLeader: number
+}

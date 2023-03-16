@@ -1,12 +1,11 @@
-import './SearchWorker.scss';
-import SearchUserCard from '../../components/SearchUserCard/SearchUserCard';
+import './searchWorker.scss';
+import SearchUserCard from '../../components/searchWorker/searchUserCard/searchUserCard';
 import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
-import InputField from '../../components/InputField/InputField' 
-import PaginationButtons from '../../components/PaginationButtons/PaginationButtons';
-import { ChangeEvent, useState, MouseEvent, useEffect } from 'react';
+import InputField from '../../components/general/inputField/inputField' 
+import PaginationButtons from '../../components/general/paginationButtons/paginationButtons';
+import { ChangeEvent, useState, useEffect } from 'react';
 import { SearchWorkerFetch } from '../../queries/SearchWorkers.utils';
 import { workerResponse } from '../../types/types';
-import { WorkersSettings } from '../../types/types';
 
 
 const SearchWorker = () => {
