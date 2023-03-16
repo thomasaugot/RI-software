@@ -1,20 +1,22 @@
 import { useState } from "react";
-import { whoAmI } from '../../queries/generalQueries';
+import { whoAmIUrl, loginUrl } from "../../utils/network";
+import { unauthorizedRequest, authorizedRequest } from "../../utils/queries";
+
+
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { BiErrorCircle } from "react-icons/bi";
+import { errorAlert } from "../../assets/Icons";
 import { eye, eyeoff } from "../../assets/Icons";
-import CheckBox from "../../components/CheckBox/CheckBox";
-import Field from "../../components/InputField/InputField";
-import Heading from "../../components/Title/Title";
-import SubmitButton from "../../components/SubmitButton/SubmitButton";
-import Text from "../../components/Text/Text";
-import "./Login.scss";
-import { buttonType } from "../../types/types";
-import { login } from "../../queries/loginQueries";
+import CheckBox from "../../components/general/checkBox/checkBox";
+import Field from "../../components/general/inputField/inputField";
+import Heading from "../../components/general/title/title";
+import SubmitButton from "../../components/general/submitButton/submitButton";
+import "./login.scss";
+import { buttonType } from "../../types/general/generalTypes";
+import FormError from "../../components/general/formError/formError";
 
 const Login = () => {
 
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -24,46 +26,75 @@ const Login = () => {
   // login method
   const onSumit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    return await login({ email, password })
-      .then((res) => {
-        if (res.status === 400) {
-          setIsError(true);
-          setErrorText("Wrong email or password");
-          return
-        } else if (res.status === 200) {
-          setIsError(false);
-          if (isChecked) {
-            localStorage.setItem("isLogged", "true");
-          }
-          console.log(res)
-          return res.json();
-        }
-      })
-      .then((data) => {
-        console.log(data);
+
+    unauthorizedRequest(loginUrl, 'POST', { email, password }).then((responce) => {
+      console.log(responce)
+      if(responce.ok){
+        setError(false);
+
         new Promise<void>((resolveOuter) => {
-          localStorage.setItem("token", data.result.access_token)
+          localStorage.setItem('accessToken', responce.result.access_token)
+          localStorage.setItem('refreshToken', responce.result.refresh_token)
           resolveOuter()
         }).then(()=>{
-           const whoAmIPromise = whoAmI();
-           whoAmIPromise.then((result) => {
-            console.log(result)
-            localStorage.setItem("avatar", result.result.avatar)
-            localStorage.setItem("id", result.result.id)
-            localStorage.setItem("company_id", result.result.companies[0].id)
-            localStorage.setItem("employee_id", result.result.companies[0].employee_id)
-            localStorage.setItem("company_avatar", result.result.companies[0].avatar)
-            localStorage.setItem("company_name", result.result.companies[0].name)
+          authorizedRequest(whoAmIUrl, 'GET').then((whoAmIResponce: any) => {
+            console.log(whoAmIResponce)
+            localStorage.setItem("avatar", whoAmIResponce.result.avatar)
+            localStorage.setItem("userId", whoAmIResponce.result.user_id)
+            localStorage.setItem("companyId", whoAmIResponce.result.companies[0].company_id)
+            localStorage.setItem("employeeId", whoAmIResponce.result.companies[0].employee_id)
+            localStorage.setItem("companyAvatar", whoAmIResponce.result.companies[0].avatar)
+            localStorage.setItem("companyName", whoAmIResponce.result.companies[0].name)
             navigate('/');
-           })
+          })
         })
+      }else if(responce === 400 || responce === 401){
+        setError(true);
+        setErrorText("Wrong email or password");
+      }
+    })
+
+
+    // e.preventDefault();
+    // return await login({ email, password })
+    //   .then((res) => {
+    //     if (res.status === 400) {
+    //       setError(true);
+    //       setErrorText("Wrong email or password");
+    //       return
+    //     } else if (res.status === 200) {
+    //       setError(false);
+    //       if (isChecked) {
+    //         localStorage.setItem("isLogged", "true");
+    //       }
+    //       console.log(res)
+    //       return res.json();
+    //     }
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //     new Promise<void>((resolveOuter) => {
+    //       localStorage.setItem("token", data.result.access_token)
+    //       resolveOuter()
+    //     }).then(()=>{
+    //        authorizedRequest(whoAmIUrl, 'GET').then((result) => {
+    //         console.log(result)
+    //         localStorage.setItem("avatar", result.result.avatar)
+    //         localStorage.setItem("id", result.result.user_id)
+    //         localStorage.setItem("company_id", result.result.companies[0].company_id)
+    //         localStorage.setItem("employee_id", result.result.companies[0].employee_id)
+    //         localStorage.setItem("company_avatar", result.result.companies[0].avatar)
+    //         localStorage.setItem("company_name", result.result.companies[0].name)
+    //         navigate('/');
+    //        })
+    //     })
         
-        return;
-      })
-      .catch((err) => {
-        console.log(err)
-        setIsError(true);
-      });
+    //     return;
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //     setError(true);
+    //   });
   };
 
   if (localStorage.getItem("isLogged") === "true")
@@ -75,18 +106,13 @@ const Login = () => {
         <div className="login-header">
           <Heading text="Sign In" />
           <div className="login-text">
-            <Text text="Don’t have an account yet?" />
-            <Link to="/register">
-              <Text text=" Register" color="#0B8FEF" />
+            <p>Don’t have an account yet?</p>
+            <Link to='/register'>
+              <p>Register</p>
             </Link>
           </div>
         </div>
-        {isError ? (
-          <div className="login-error">
-            <BiErrorCircle size={"1.25rem"} />
-            <Text color="#F61D1D" text={errorText} />
-          </div>
-        ) : null}
+        <FormError errorText={errorText} appear={error} />
         <form onSubmit={onSumit} className="login-form">
           <div className="form-controls">
             <Field

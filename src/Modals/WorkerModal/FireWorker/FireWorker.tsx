@@ -1,8 +1,8 @@
 import './FireWorker.scss'
-import Modal from '../../../components/modal/modal';
-import { Props } from '../../../types/fireworkertypes';
-import SubmitButton from '../../../components/SubmitButton/SubmitButton';
-import { buttonType } from '../../../types/types';
+import Modal from '../../../components/general/modal/modal';
+import { Props } from '../../../types/hierarchy/fireworkertypes';
+import SubmitButton from '../../../components/general/submitButton/submitButton';
+import { buttonType } from '../../../types/general/generalTypes';
 import { handleDelete } from '../../../queries/fireWorker';
 
 function FireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
@@ -21,8 +21,9 @@ function FireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
     return (
         <Modal
             closeModal={closeModal}
-            title="Remove this user?"
+            // title="Remove this user?"
             closeButton={false}
+            open={false}
         >
 
 

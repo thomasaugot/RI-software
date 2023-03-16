@@ -1,19 +1,19 @@
 import { whoAmIUrl, updateStatusUrl } from "../utils/network";
-import { whoAmIType } from '../types/generalTypes';
+import { whoAmIType } from '../types/general/generalTypes';
 
-export const whoAmI =  async () => {
+// export const whoAmI =  async () => {
   
-  const token = localStorage.getItem("token");
+//   const token = localStorage.getItem("token");
 
-  const response = await fetch(whoAmIUrl, {
-      method: 'GET',
-      headers: { 
-        'Authorization': `Bearer ${token}`
-      }
-    });
+//   const response = await fetch(whoAmIUrl, {
+//       method: 'GET',
+//       headers: { 
+//         'Authorization': `Bearer ${token}`
+//       }
+//     });
 
-  return await response.json();
-}
+//   return await response.json();
+// }
 
 export const updateStatus = async () => {
   const token = localStorage.getItem("token");

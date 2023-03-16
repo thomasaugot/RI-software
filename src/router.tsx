@@ -1,26 +1,31 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
-import Confirmation from "./pages/Confirmation/Confirmation";
-import Login from "./pages/Login/Login";
-import SingUpForm from "./pages/SignUp/SignUp";
+import Confirmation from "./pages/confirmation/confirmation";
+import Login from "./pages/login/login";
+import Register from "./pages/register/register";
+import AcceptInvitationRegister from "./pages/acceptInvintation/register/register";
+import AcceptInvitationLogin from "./pages/acceptInvintation/login/login";
+import AcceptInvitationConfirmation from "./pages/acceptInvintation/confirmation/confirmation"
 import Home from "./pages/Home/Home";
-import Hierachy from "./pages/hierarchy/Hierarchy";
-import Protected from "./components/Protected/ProtectedRoute";
+import Hierachy from "./pages/hierarchy/hierarchy";
 import NotFound from "./pages/NotFound/NotFound";
-import SearchWorker from "./pages/SearchWorker/SearchWorker";
-import Chat from "./pages/Chat/Chat";
+import SearchWorker from './pages/searchWorker/searchWorker'
+import Chat from "./pages/chat/chat";
 
 const Router: FC = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/register" element={<SingUpForm />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/accept-invitation/register/:token" element={<AcceptInvitationRegister />} />
+      <Route path="/accept-invitation/login/:token" element={<AcceptInvitationLogin />} />
+      <Route path="/accept-invitation/confirmation/:email/:token" element={<AcceptInvitationConfirmation/>} />
       <Route path="/confirm" element={<Confirmation />} />
       <Route path="/confirmation/:email" element={<Confirmation />} />
       <Route path="/hierarchy" element={<Hierachy />} />
       <Route path="/search_workers" element={<SearchWorker/>}/>
       <Route path="/chat" element={<Chat/>}/>
-      <Route path="/" element={<Protected><Home/></Protected>}/>
+      <Route path="/" element={<Home/>}/>
       <Route path="*" element={<NotFound/>} />
     </Routes>
   );

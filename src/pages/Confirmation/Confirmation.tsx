@@ -1,45 +1,41 @@
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import './Confimation.scss'
-import React, { useState } from 'react'
-import { buttonType, codeProps } from '../../types/types'
-import Heading from '../../components/Title/Title'
-import Submitbutton from '../../components/SubmitButton/SubmitButton'
-import Field from '../../components/InputField/InputField'
-import { verification } from '../../queries/SignUpQueries'
+import './confirmation.scss'
+import { useState } from 'react'
+import { buttonType } from '../../types/general/generalTypes'
+import Heading from '../../components/general/title/title'
+import Submitbutton from '../../components/general/submitButton/submitButton'
+import InputField from '../../components/general/inputField/inputField'
 import { errorAlert } from "../../assets/Icons";
-import Text from "../../components/Text/Text";
+import { unauthorizedRequest } from '../../utils/queries';
+import { VerifyRegUrl } from '../../utils/network';
 
 
-const ConfirmationForm = () => {
+const AcceptInvitationConfirmation = () => {
   const { email } = useParams();
-  const [error, setError] = useState(false);
-  const [formData, setFormData] = useState<codeProps>({ code: "" });
+  const [ error, setError ] = useState(false);
+  const [ code, setCode ] = useState<string | number>('');
   const navigate = useNavigate();
 
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if(formData.code){
-      const confirm = await verification(formData.code);
+    if(code){
+      const confirm = unauthorizedRequest(VerifyRegUrl, 'POST', {token: localStorage.getItem("verificationToken"), code: code})
 
-      if (!confirm.data.ok) {
-        setError(true);
-      } else {
-        setError(false);
-        navigate("/login");
-      }
+      confirm.then((responce) => {
+        if (!responce.ok) {
+            setError(true);
+        } else {
+            setError(false);
+            navigate(`/login`);
+        }
+      }) 
     }
-    
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    if (isNaN(Number(value))) {
-      setError(true);
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCode(e.target.value.replace(/\D/g,'').length>0 ? parseInt(e.target.value.replace(/\D/g,'')) : '')
   };
 
   return (
@@ -59,7 +55,7 @@ const ConfirmationForm = () => {
             {error ? (
               <>
                 {errorAlert}
-                <Text color="#F61D1D" text='Wrong verification code' />
+                <p>Wrong verification code</p>
               </>
             ) : null}
           </div>
@@ -69,11 +65,11 @@ const ConfirmationForm = () => {
           </div>
         </div>
         <div className="form-control">
-          <Field
+          <InputField
             name="code"
             type="text"
-            value={formData.code}
-            onChange={handleChange}
+            value={code}
+            onChange={(e) => handleChange(e)}
             placeholder="Enter code"
           />
         </div>
@@ -83,4 +79,4 @@ const ConfirmationForm = () => {
   )
 }
 
-export default ConfirmationForm
+export default AcceptInvitationConfirmation

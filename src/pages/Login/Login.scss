@@ -21,14 +21,33 @@
       .login-text {
         display: flex;
         gap: 0.11vw;
+
+        p{
+          color: #444444;
+        }
+
+        a{
+          p{
+            color:#0B8FEF;
+          }
+        }
       }
     }
-    .login-error {
+    
+    .error-container{
+      height: 1.3vw;
       display: flex;
-      color: #f61d1d;
       align-items: center;
-      gap: 0.83vw;
+      justify-content: center;
+      margin: 1vw 0;
+
+      p{
+        color: #F61D1D;
+        margin-left: 0.83vw;
+        font-size: 1.112vw;
+      }
     }
+
     .login-form {
       display: flex;
       flex-direction: column;

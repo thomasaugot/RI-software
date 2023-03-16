@@ -1,9 +1,9 @@
 import './FireWorker.scss'
-import SubmitButton from '../../../components/SubmitButton/SubmitButton';
+import SubmitButton from '../../../components/general/submitButton/submitButton';
 import { handleDelete } from '../../../queries/fireWorker';
-import Modal from '../../../components/modal/modal';
-import { Props } from '../../../types/fireworkertypes';
-import { buttonType } from '../../../types/types';
+import Modal from '../../../components/general/modal/modal';
+import { Props } from '../../../types/hierarchy/fireworkertypes';
+import { buttonType } from '../../../types/general/generalTypes';
 
 
 function ConfirmFireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
@@ -23,8 +23,9 @@ function ConfirmFireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Prop
     return (
         <Modal
             closeModal={closeModal}
-            title="Permanently Delete this user?"
+            // title="Permanently Delete this user?"
             closeButton={false}
+            open={false}
         >
             <div className="buttons">
                 <SubmitButton type={buttonType.submit} text="Yes" onClick={handleDeleteClick} />
