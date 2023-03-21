@@ -1,64 +1,65 @@
-.header{
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; //51.11vw
+  height: 8.49609375vh;
+  background-color: #EEEEEE;
+  border-right: 1px solid white;
+
+  .chat-name {
+    display: flex;
+    // justify-content: space-between;
+    align-items: center;
+    width: 15.76vw;
+    height: 100%;
+    padding: 1.73vw;
+
+    img {
+      width: 4.16vw;
+      height: 4.16vw;
+      display: flex;
+      background-color: #376ABE;
+      justify-content: center;
+      align-items: center;
+      border-radius: 99px;
+    }
+
+    .name-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-left: 2.7vw;
+
+      .name {
+        font-size: 1.11vw;
+        line-height: 1.66vw;
+        color: #444444;
+      }
+
+      .status {
+        font-size: 1vw;
+        line-height: 1.66vw;
+        color: #444444;
+      }
+    }
+  }
+
+  .additional-tools {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 51.11vw;
-    height: 8.49609375vh;
-    background-color: #EEEEEE;
-    border-right: 1px solid white;
+    width: 5.72vw;
+    margin-right: 2.3vw;
+    height: 100%;
 
-    .chat-name{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 15.76vw;
-        height: 100%;
-        padding: 1.73vw;
-
-        img{
-            width: 4.16vw;
-            height: 4.16vw;
-            display: flex;
-            background-color: #376ABE;
-            justify-content: center;
-            align-items: center;
-            border-radius: 99px;
-        }
-
-        .name-container{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-start;
-
-            .name{
-                font-size: 1.11vw;
-                line-height: 1.66vw;
-                color: #444444;
-            }
-
-            .status{
-                font-size: 1vw;
-                line-height: 1.66vw;
-                color: #444444;
-            }
-        }
+    svg {
+      width: 1.94vw;
+      height: 1.94vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-
-    .additional-tools{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 4.72vw;
-        margin-right: 2.08vw;
-        height: 100%;
-
-        svg{
-            width: 1.94vw;
-            height: 1.94vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
+  }
 }

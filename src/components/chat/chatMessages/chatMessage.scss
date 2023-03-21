@@ -1,138 +1,139 @@
-.icon{
-    width: 2.77vw;
-    height: 2.77vw;
-    margin-right: 2.29vw;
-    margin-top: 1vw;
-    background: #376ABE;
-    border-radius: 99px;
+.icon {
+  width: 2.77vw;
+  height: 2.77vw;
+  margin-right: 2.29vw;
+  margin-top: 1vw;
+  background: #376ABE;
+  border-radius: 99px;
 }
 
-.stranger-owner{
-    display: flex;
-    padding-left: 4.30vw;
+.stranger-owner {
+  display: flex;
+  padding-left: 4.30vw;
 }
 
-.chat-message-wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 15.625vw;
-    background-color: #FAFAFA;
-    margin-bottom: 2vw;
+.chat-message-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15.625vw;
+  background-color: #FAFAFA;
+  margin-bottom: 2vw;
 
-    .chat-message-container{
-        min-height: 3.68vw;
-        width: 14.23vw;
-        padding-top: 0.55vw;
-        padding-bottom: 0.55vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        .sent-data{
-            width: 100%;
-            height: 1.66vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 0.4vw;
-
-            .message-owner{
-                font-size: 1.11vw;
-                line-height: 1.66vw;
-                font-weight: 600;
-                color: #444444;
-            }
-
-            .time{
-                font-size: 0.83vw;
-                line-height: 1.25vw;
-                font-weight: 600;
-                color: rgba(68, 68, 68, 0.9);
-            }
-        }
-
-        .message-text{
-            font-size: 1.11vw;
-            line-height: 1.66vw;
-            color: #444444;
-        }
-    }
-}
-
-.yes{
-    margin-left: 33.5vw;
-}
-
-.file-yes{
-    margin-left: 38vw; 
-}
-
-.file-message-wrapper{
+  .chat-message-container {
+    min-height: 3.68vw;
+    width: 14.23vw;
+    padding-top: 0.55vw;
+    padding-bottom: 0.55vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 11.11vw;
-    border-radius: 0.90vw;
-    background-color: #1C2666;
-    margin-bottom: 2vw; 
 
-    .file-message-container{
-        min-height: 9.37vw;
-        width: 9.58vw;
-        padding-top: 1.38vw;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+    .sent-data {
+      width: 100%;
+      height: 1.66vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.4vw;
 
-        .file-type{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            .file{
-                width: 3.88vw;
-                height: 3.88vw;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+      .message-owner {
+        font-size: 1.11vw;
+        line-height: 1.66vw;
+        font-weight: 600;
+        color: #444444;
+      }
 
-                svg{
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-
-            p{
-                font-size: 0.83vw;
-                line-height: 1.85vw;
-                color: #E2E2E2;
-            }
-        }
+      .time {
+        font-size: 0.83vw;
+        line-height: 1.25vw;
+        font-weight: 600;
+        color: rgba(68, 68, 68, 0.9);
+      }
     }
 
-    .file-text{
+    .message-text {
+      font-size: 1.11vw;
+      line-height: 1.66vw;
+      color: #444444;
+    }
+  }
+}
+
+.yes {
+  margin-left: 33.5vw;
+}
+
+.file-yes {
+  margin-left: 38vw;
+}
+
+.file-message-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 11.11vw;
+  border-radius: 0.90vw;
+  background-color: #1C2666;
+  margin-bottom: 2vw;
+
+  .file-message-container {
+    min-height: 9.37vw;
+    width: 9.58vw;
+    padding-top: 1.38vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .file-type {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .file {
+        width: 3.88vw;
+        height: 3.88vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      p {
         font-size: 0.83vw;
         line-height: 1.85vw;
         color: #E2E2E2;
+      }
+    }
+  }
+
+  .file-text {
+    font-size: 0.83vw;
+    line-height: 1.85vw;
+    color: #E2E2E2;
+  }
+
+  .sent-data {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 1.38vw;
+    width: 9.58vw;
+
+    .time {
+      font-size: 0.69vw;
+      color: #E2E2E2;
     }
 
-    .sent-data{
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding-bottom: 1.38vw;
-        width: 9.58vw;
-
-        .time{
-            font-size: 0.69vw;
-            color: #E2E2E2;
-        }
-
-        svg{
-            width: 0.69vw;
-            height: 0.69vw;
-            margin-left: 0.69vw;
-        }
+    svg {
+      // width: 0.69vw;
+      // height: 0.69vw;
+      // margin-left: 0.69vw;
     }
+  }
 }

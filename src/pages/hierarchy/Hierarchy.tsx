@@ -1,5 +1,5 @@
 import { FC, useState, useEffect, useContext } from "react";
-import "./hierarchy.scss";
+import "./Hierarchy.scss";
 import HierarchyUserCard from "../../components/hierarchy/hierarchyUserCard/hierarchyUserCard";
 import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
 import { hierarchyItem } from '../../types/hierarchy/generalTypes';
@@ -29,7 +29,7 @@ const Hierachy: FC = () => {
     // })
 
     authorizedRequest(fetchLeadersUrl(companyId, employeeId), 'GET').then((data) => {
-      if(data.result){
+      if (data.result) {
         setHierarchy([[...data.result]]);
       }
       console.log(data)
@@ -44,7 +44,7 @@ const Hierachy: FC = () => {
     <BaseLayout>
       <div className="hierarchy">
         <div className="hierarchy-horizontal-container">
-          {hierarchy.map((employeesList, index)=>{
+          {hierarchy.map((employeesList, index) => {
             console.log(employeesList);
             console.log(index)
             return (
@@ -62,7 +62,7 @@ const Hierachy: FC = () => {
                       level={index}
                       active={employee.active}
                       index={employeeIndex}
-                      inTeam={index>hierarchyLevel && isActive}
+                      inTeam={index > hierarchyLevel && isActive}
                       setHierarchyLevel={setHierarchyLevel}
                       hierarchyLevel={hierarchyLevel}
                       setIsActive={setIsActive}
@@ -71,15 +71,15 @@ const Hierachy: FC = () => {
                     />
                   })
                 }
-                {index>hierarchyLevel && isActive ? <div className="hierarchy-hire-worker-button" onClick={() => {setHireWorkerModalIsOpen(true); setHireWorkerLeader(hierarchy[index-1].filter((worker) => worker.active)[0].employee_id)}}>{hireEmployeeButton}</div> : <></>}
+                {index > hierarchyLevel && isActive ? <div className="hierarchy-hire-worker-button" onClick={() => { setHireWorkerModalIsOpen(true); setHireWorkerLeader(hierarchy[index - 1].filter((worker) => worker.active)[0].employee_id) }}>{hireEmployeeButton}</div> : <></>}
               </div>
             )
           }
           )}
         </div>
       </div>
-      
-      <HireWorker hireWorkerLeader={hireWorkerLeader}/>
+
+      <HireWorker hireWorkerLeader={hireWorkerLeader} />
 
     </BaseLayout >
   );

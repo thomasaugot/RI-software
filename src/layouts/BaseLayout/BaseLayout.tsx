@@ -13,7 +13,7 @@ const BaseLayout: FC<
         <NavBar />
       </div>
       <div className="base-layout-content">
-        <Header/>
+        {/* <Header/> */}
         <div className="base-layout-container">
           {children ?? <></>}
         </div>
