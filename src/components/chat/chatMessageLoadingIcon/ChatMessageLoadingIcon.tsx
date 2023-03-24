@@ -3,7 +3,6 @@ import './ChatMessageLoadingIcon.scss'
 function ChatMessageLoadingIcon() {
   return (
     <div className="box"></div>
-
   )
 }
 

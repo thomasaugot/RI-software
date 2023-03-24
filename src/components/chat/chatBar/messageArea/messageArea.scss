@@ -13,6 +13,7 @@
     flex-direction: column-reverse;
     flex: 1 1 auto;
     overflow-y: scroll;
+    position: relative;
   }
 
   ::-webkit-scrollbar {
@@ -25,4 +26,15 @@
   ::-webkit-scrollbar-thumb {
     border-color: transparent;
   }
+}
+
+.loading-messages .box::before {
+  background: #CADDFF;
+
+}
+
+.loading-messages {
+  top: 10px;
+  position: absolute;
+  left: 50%;
 }

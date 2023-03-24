@@ -5,7 +5,6 @@ import { loading } from '../../../assets/Icons';
 import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon';
 
 const ChatMessages = ({ ownerName, time, text, owner, file, imgUrl }: ChatMessageTypes) => {
-
   const fileTypeIcon = getFile(file as string);
   return (
     <>
