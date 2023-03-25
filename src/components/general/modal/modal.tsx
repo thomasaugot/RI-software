@@ -1,11 +1,11 @@
-import { DetailedHTMLProps, FC, HTMLAttributes, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { close } from "../../../assets/Icons";
 import { modalProps } from "../../../types/general/generalTypes";
 import './modal.scss';
 
 
 
-const Modal: FC<modalProps> = ({ closeModal, closeButton=true, open, children }) => {
+const Modal: FC<modalProps> = ({ closeModal, closeButton=true, open, additionalClass, children }) => {
 
   const [initiated, setInitiated] = useState(false);
 
@@ -21,7 +21,7 @@ const Modal: FC<modalProps> = ({ closeModal, closeButton=true, open, children })
       <div onClick={closeModal} className={open ? 'dark-bg' : 'hiddenss'}>
         <div
           onClick={(e) => e.stopPropagation()}
-          className='modal-container'
+          className={`modal-container ${additionalClass}`}
         >
           {closeButton && (
             <div className="modal-header">

@@ -24,6 +24,7 @@ function FireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
             // title="Remove this user?"
             closeButton={false}
             open={false}
+            additionalClass=''
         >
 
 

@@ -4,7 +4,6 @@ import { unauthorizedRequest, authorizedRequest } from "../../utils/queries";
 
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { errorAlert } from "../../assets/Icons";
 import { eye, eyeoff } from "../../assets/Icons";
 import CheckBox from "../../components/general/checkBox/checkBox";
 import Field from "../../components/general/inputField/inputField";
@@ -53,52 +52,7 @@ const Login = () => {
         setErrorText("Wrong email or password");
       }
     })
-
-
-    // e.preventDefault();
-    // return await login({ email, password })
-    //   .then((res) => {
-    //     if (res.status === 400) {
-    //       setError(true);
-    //       setErrorText("Wrong email or password");
-    //       return
-    //     } else if (res.status === 200) {
-    //       setError(false);
-    //       if (isChecked) {
-    //         localStorage.setItem("isLogged", "true");
-    //       }
-    //       console.log(res)
-    //       return res.json();
-    //     }
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //     new Promise<void>((resolveOuter) => {
-    //       localStorage.setItem("token", data.result.access_token)
-    //       resolveOuter()
-    //     }).then(()=>{
-    //        authorizedRequest(whoAmIUrl, 'GET').then((result) => {
-    //         console.log(result)
-    //         localStorage.setItem("avatar", result.result.avatar)
-    //         localStorage.setItem("id", result.result.user_id)
-    //         localStorage.setItem("company_id", result.result.companies[0].company_id)
-    //         localStorage.setItem("employee_id", result.result.companies[0].employee_id)
-    //         localStorage.setItem("company_avatar", result.result.companies[0].avatar)
-    //         localStorage.setItem("company_name", result.result.companies[0].name)
-    //         navigate('/');
-    //        })
-    //     })
-        
-    //     return;
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //     setError(true);
-    //   });
   };
-
-  if (localStorage.getItem("isLogged") === "true")
-    return <Navigate to="/" replace />;
 
   return (
     <div className="login">
