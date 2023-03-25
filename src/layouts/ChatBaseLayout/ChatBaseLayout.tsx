@@ -1,9 +1,8 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
-import "./BaseLayout.scss";
+import "./chatBaseLayout.scss";
 import NavBar from "../../components/general/navBar/navBar";
-import Header from "../../components/general/header/header";
 
-const BaseLayout: FC<
+const ChatBaseLayout: FC<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 > = ({ children }) => {
 
@@ -13,7 +12,6 @@ const BaseLayout: FC<
         <NavBar />
       </div>
       <div className="base-layout-content">
-        <Header />
         <div className="base-layout-container">
           {children ?? <></>}
         </div>
@@ -22,4 +20,4 @@ const BaseLayout: FC<
   );
 };
 
-export default BaseLayout;
+export default ChatBaseLayout;

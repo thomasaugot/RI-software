@@ -1,13 +1,14 @@
-import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
 import ChatHeader from "../../components/chat/chatHeader/chatHeader";
 import MessageArea from "../../components/chat/chatBar/messageArea/messageArea";
 import ChatBarHeader from "../../components/chat/chatBarHeader/chatBarHeader";
 import ChatBar from "../../components/chat/chatBar/chatBar";
-import './Chat.scss';
-import { getChatById } from '../../queries/chat.queries';
+import './chat.scss';
 import { useEffect, useRef, useState } from 'react';
 import { ChatByIdResponse } from '../../types/chats/chat.types';
 import { useInfiniteScroll } from '../../customHooks/useInfiniteScroll';
+import { authorizedRequest } from '../../utils/queries';
+import { chatInfoById } from '../../utils/network';
+import ChatBaseLayout from '../../layouts/ChatBaseLayout/ChatBaseLayout';
 
 const Chat = () => {
   const [userChat, setUserChat] = useState<ChatByIdResponse>()
@@ -15,8 +16,13 @@ const Chat = () => {
   const messagesScrollHeight = useRef<HTMLDivElement>(null)
   const blockHeight = messagesScrollHeight.current !== null ? messagesScrollHeight.current.scrollHeight : 100000
   const { count, loading } = useInfiniteScroll(blockHeight, currentUserHeight, 100, 20)
+  console.log(count, blockHeight, currentUserHeight)
   useEffect(() => {
-    getChatById().then((data) => setUserChat(data))
+    // getChatById().then((data) => setUserChat(data))
+    const userId = localStorage.getItem("userId")
+    if (userId !== null) {
+      authorizedRequest(chatInfoById(userId), "GET").then((data) => setUserChat(data))
+    }
   }, [])
   const handleScroll = () => {
     const currentHeight = messagesScrollHeight.current
@@ -25,7 +31,7 @@ const Chat = () => {
     }
   }
   return (
-    <BaseLayout>
+    <ChatBaseLayout>
       <div className="chat-container">
         <div>
           <ChatHeader
@@ -42,7 +48,7 @@ const Chat = () => {
           <ChatBar />
         </div>
       </div>
-    </BaseLayout>
+    </ChatBaseLayout>
   );
 };
 

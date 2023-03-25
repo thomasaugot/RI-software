@@ -10,7 +10,7 @@ import CheckBox from "../../components/general/checkBox/checkBox";
 import Field from "../../components/general/inputField/inputField";
 import Heading from "../../components/general/title/title";
 import SubmitButton from "../../components/general/submitButton/submitButton";
-import "./Login.scss";
+import "./login.scss";
 import { buttonType } from "../../types/general/generalTypes";
 import FormError from "../../components/general/formError/formError";
 
@@ -41,10 +41,10 @@ const Login = () => {
             console.log(whoAmIResponce)
             localStorage.setItem("avatar", whoAmIResponce.result.avatar)
             localStorage.setItem("userId", whoAmIResponce.result.user_id)
-            // localStorage.setItem("companyId", whoAmIResponce.result.companies[0].company_id)
-            // localStorage.setItem("employeeId", whoAmIResponce.result.companies[0].employee_id)
-            // localStorage.setItem("companyAvatar", whoAmIResponce.result.companies[0].avatar)
-            // localStorage.setItem("companyName", whoAmIResponce.result.companies[0].name)
+            localStorage.setItem("companyId", whoAmIResponce.result.companies[0].company_id)
+            localStorage.setItem("employeeId", whoAmIResponce.result.companies[0].employee_id)
+            localStorage.setItem("companyAvatar", whoAmIResponce.result.companies[0].avatar)
+            localStorage.setItem("companyName", whoAmIResponce.result.companies[0].name)
             navigate('/');
           })
         })

@@ -1,4 +1,4 @@
-import './SearchWorker.scss';
+import './searchWorker.scss';
 import SearchUserCard from '../../components/searchWorker/searchUserCard/searchUserCard';
 import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
 import InputField from '../../components/general/inputField/inputField'

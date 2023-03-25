@@ -1,5 +1,5 @@
 import { FC, useState, useEffect, useContext } from "react";
-import "./Hierarchy.scss";
+import "./hierarchy.scss";
 import HierarchyUserCard from "../../components/hierarchy/hierarchyUserCard/hierarchyUserCard";
 import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
 import { hierarchyItem } from '../../types/hierarchy/generalTypes';

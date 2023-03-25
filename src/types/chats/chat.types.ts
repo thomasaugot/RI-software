@@ -4,7 +4,7 @@ export type ChatHeaderTypes = {
   status: string
 }
 
-export type ChatMessageTypes = {
+export type chatMessagePropsType = {
   owner?: boolean,
   time: string,
   text?: string,
@@ -19,7 +19,7 @@ export type ChatCardTypes = {
   name: string,
   notif?: number
 }
-export interface MessageAreaProps {
+export interface messageAreaProps {
   messagesScrollHeight: React.RefObject<HTMLDivElement>,
   handleScroll: () => void,
   blocksCount: number,

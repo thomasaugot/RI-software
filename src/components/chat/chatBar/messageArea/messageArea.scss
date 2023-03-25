@@ -16,12 +16,11 @@
     position: relative;
   }
 
-  ::-webkit-scrollbar {
-    // display: none;
-    width: 0.9765625vw;
-    background-color: #D9D9D9;
-    border-radius: 5px;
-  }
+  // ::-webkit-scrollbar {
+  //   // // display: none;
+  //   // width: 0.9765625vw;
+  //   // border-radius: 5px;
+  // }
 
   ::-webkit-scrollbar-thumb {
     border-color: transparent;

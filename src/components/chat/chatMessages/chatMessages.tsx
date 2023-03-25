@@ -1,10 +1,10 @@
 import './chatMessage.scss';
-import { ChatMessageTypes } from '../../../types/chats/chat.types';
+import { chatMessagePropsType } from '../../../types/chats/chat.types';
 import { getFile } from '../../../queries/chat.queries';
 import { loading } from '../../../assets/Icons';
 import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon';
 
-const ChatMessages = ({ ownerName, time, text, owner, file, imgUrl }: ChatMessageTypes) => {
+const ChatMessages = ({ ownerName, time, text, owner, file, imgUrl }: chatMessagePropsType) => {
   const fileTypeIcon = getFile(file as string);
   return (
     <>
