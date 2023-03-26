@@ -16,12 +16,11 @@ const Chat = () => {
   const messagesScrollHeight = useRef<HTMLDivElement>(null)
   const blockHeight = messagesScrollHeight.current !== null ? messagesScrollHeight.current.scrollHeight : 100000
   const { count, loading } = useInfiniteScroll(blockHeight, currentUserHeight, 100, 20)
-  console.log(count, blockHeight, currentUserHeight)
   useEffect(() => {
     // getChatById().then((data) => setUserChat(data))
-    const userId = localStorage.getItem("userId")
-    if (userId !== null) {
-      authorizedRequest(chatInfoById(userId), "GET").then((data) => setUserChat(data))
+    const employeeId = localStorage.getItem('employeeId')
+    if (employeeId !== null) {
+      authorizedRequest(chatInfoById(employeeId), "GET").then((data) => setUserChat(data))
     }
   }, [])
   const handleScroll = () => {

@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
-import "./BaseLayout.scss";
+import "./baseLayout.scss";
 import NavBar from "../../components/general/navBar/navBar";
 import Header from "../../components/general/header/header";
 

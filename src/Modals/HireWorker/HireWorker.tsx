@@ -1,5 +1,5 @@
 import { useState, useContext, FC } from "react";
-import "./HireWorker.scss";
+import "./hireWorker.scss";
 import InputField from "../../components/general/inputField/inputField";
 import CheckBox from "../../components/general/checkBox/checkBox";
 import SubmitButton from "../../components/general/submitButton/submitButton";

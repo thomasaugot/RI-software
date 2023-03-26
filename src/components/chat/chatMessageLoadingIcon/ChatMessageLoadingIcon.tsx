@@ -1,5 +1,5 @@
 import React from 'react'
-import './ChatMessageLoadingIcon.scss'
+import './chatMessageLoadingIcon.scss'
 function ChatMessageLoadingIcon() {
   return (
     <div className="box"></div>
