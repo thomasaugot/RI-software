@@ -1,54 +1,39 @@
 export const authorizedRequest = async (url: string, method: string, tokenType: string = 'accessToken', body?: object) => {
+  const token = localStorage.getItem(tokenType);
 
-    const token = localStorage.getItem(tokenType);
-    const request: object = body ? {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-        body:  JSON.stringify(body)
-    }  : {
-        method: method,
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        } 
+  const request: object = body ? {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body)
+  } : {
+    method: method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
     }
+  }
+
+  if (!token || token === '') {
+    return undefined;
   }
 
   const response = await fetch(url, request);
 
-  console.log(response)
 
   if (response.status === 200) {
     return await response.json();
   } else if (response.status === 401) {
     window.location.href = 'http://127.0.0.1:3000/';
+    localStorage.setItem(tokenType, '');
     return response.status;
   } else {
+    window.location.href = 'http://127.0.0.1:3000/';
+    localStorage.setItem(tokenType, '');
     return response.status;
   }
-
-    if(!token || token === ''){
-        return undefined;
-    }
-
-    const response = await fetch(url, request);
-    
-
-    if(response.status === 200){
-        return await response.json();
-    }else if(response.status === 401){
-        window.location.href = 'http://127.0.0.1:3000/';
-        localStorage.setItem(tokenType, '');
-        return response.status;
-    }else{
-        window.location.href = 'http://127.0.0.1:3000/';
-        localStorage.setItem(tokenType, '');
-        return response.status;
-    }
-    
 
 }
 
