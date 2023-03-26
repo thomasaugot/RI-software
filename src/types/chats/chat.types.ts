@@ -19,14 +19,14 @@ export type ChatCardTypes = {
   name: string,
   notif?: number
 }
-export interface messageAreaProps {
+export type messageAreaProps = {
   messagesScrollHeight: React.RefObject<HTMLDivElement>,
   handleScroll: () => void,
   blocksCount: number,
   loading: boolean
 }
 
-export interface ChatByIdResponse {
+export type ChatByIdResponse = {
   ok: boolean,
   description: string,
   result: {

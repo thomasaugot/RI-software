@@ -86,7 +86,7 @@ export type workerResponse = {
   result: workersTypes[];
 };
 
-export interface whoAMiResponse {
+export type whoAMiResponse = {
   description: string
   ok: boolean
   result: {

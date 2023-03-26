@@ -1,4 +1,4 @@
-import './fireWorker.scss'
+import './FireWorker.scss'
 import Modal from '../../../components/general/modal/modal';
 import { Props } from '../../../types/hierarchy/fireworkertypes';
 import SubmitButton from '../../../components/general/submitButton/submitButton';

@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
-import "./chatBaseLayout.scss";
+import "./ChatBaseLayout.scss";
 import NavBar from "../../components/general/navBar/navBar";
 
 const ChatBaseLayout: FC<

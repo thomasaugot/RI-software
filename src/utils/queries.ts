@@ -1,6 +1,3 @@
-import { mockMessages } from '../components/chat/chatBar/messageArea/mockMessagesData';
-import { chatInfoById } from './network';
-
 export const authorizedRequest = async (url: string, method: string, tokenType: string = 'accessToken', body?: object) => {
   const token = localStorage.getItem(tokenType);
 

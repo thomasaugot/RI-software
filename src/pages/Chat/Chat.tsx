@@ -2,7 +2,7 @@ import ChatHeader from "../../components/chat/chatHeader/chatHeader";
 import MessageArea from "../../components/chat/chatBar/messageArea/messageArea";
 import ChatBarHeader from "../../components/chat/chatBarHeader/chatBarHeader";
 import ChatBar from "../../components/chat/chatBar/chatBar";
-import './chat.scss';
+import './Chat.scss';
 import { useEffect, useRef, useState } from 'react';
 import { ChatByIdResponse } from '../../types/chats/chat.types';
 import { useInfiniteScroll } from '../../customHooks/useInfiniteScroll';
