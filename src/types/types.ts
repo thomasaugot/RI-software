@@ -32,16 +32,16 @@ export type moveWorkerType = {
 }
 
 export type workerCardProps = {
-    workerNames: string;
-    workerPosition: string;
-    workerAvatar?: string;
-    id: number
-    leaderId: number
+  workerNames: string;
+  workerPosition: string;
+  workerAvatar?: string;
+  id: number
+  leaderId: number
 }
 
 export type moveWorker = {
-    leader_id: number;
-    team_moving: boolean;
+  leader_id: number;
+  team_moving: boolean;
 }
 
 export type WorkersSettings = {
@@ -86,5 +86,31 @@ export type workerResponse = {
   result: workersTypes[];
 };
 
-
-
+export type whoAMiResponse = {
+  description: string
+  ok: boolean
+  result: {
+    avatar: null | string,
+    companies: {
+      avatar: null | string,
+      company_id: number
+      employee_id: number
+      name: string
+      name_in_law: string
+      owner_id: number
+      position: string
+    }[]
+    confirmed_on: number
+    email: string
+    external_id: string
+    first_name: string
+    is_active: boolean
+    is_admin: boolean
+    is_online: boolean
+    last_name: null | string
+    phone_number: string
+    registered_on: number
+    role: string
+    user_id: number
+  }
+}

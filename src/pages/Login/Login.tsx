@@ -9,7 +9,7 @@ import CheckBox from "../../components/general/checkBox/checkBox";
 import Field from "../../components/general/inputField/inputField";
 import Heading from "../../components/general/title/title";
 import SubmitButton from "../../components/general/submitButton/submitButton";
-import "./login.scss";
+import "./Login.scss";
 import { buttonType } from "../../types/general/generalTypes";
 import FormError from "../../components/general/formError/formError";
 
@@ -28,14 +28,14 @@ const Login = () => {
 
     unauthorizedRequest(loginUrl, 'POST', { email, password }).then((responce) => {
       console.log(responce)
-      if(responce.ok){
+      if (responce.ok) {
         setError(false);
 
         new Promise<void>((resolveOuter) => {
           localStorage.setItem('accessToken', responce.result.access_token)
           localStorage.setItem('refreshToken', responce.result.refresh_token)
           resolveOuter()
-        }).then(()=>{
+        }).then(() => {
           authorizedRequest(whoAmIUrl, 'GET').then((whoAmIResponce: any) => {
             console.log(whoAmIResponce)
             localStorage.setItem("avatar", whoAmIResponce.result.avatar)
@@ -47,7 +47,7 @@ const Login = () => {
             navigate('/');
           })
         })
-      }else if(responce === 400 || responce === 401){
+      } else if (responce === 400 || responce === 401) {
         setError(true);
         setErrorText("Wrong email or password");
       }

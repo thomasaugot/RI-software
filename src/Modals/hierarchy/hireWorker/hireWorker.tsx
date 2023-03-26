@@ -5,6 +5,7 @@ import CheckBox from "../../../components/general/checkBox/checkBox";
 import SubmitButton from "../../../components/general/submitButton/submitButton";
 import { hireUrl } from '../../../utils/network';
 import { authorizedRequest } from '../../../utils/queries';
+
 import Modal from '../../../components/general/modal/modal';
 import { ModalsContext } from '../../../context/modalsContext';
 
@@ -77,8 +78,9 @@ const HireWorker: FC = () => {
             <div className="hire-worker-content-input">
               <label htmlFor="position">Position</label>
               <InputField type="text" name="position" value={position} onChange={(e) => {
-                setPosition(e.target.value);
+               setPosition(e.target.value);
               }}/>
+
             </div>
             <div className="hire-worker-content-input">
               <label htmlFor="position">Email</label>

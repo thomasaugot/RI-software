@@ -1,3 +1,4 @@
+
 import { FC, useState, useEffect, useContext, useRef } from "react";
 import "./hierarchy.scss";
 import HierarchyUserCard from "../../components/hierarchy/hierarchyUserCard/hierarchyUserCard";
@@ -25,7 +26,6 @@ const Hierachy: FC = () => {
 
   // initial hierarchy structure generation
   useEffect(() => {
-
     authorizedRequest(fetchTheLeaderUrl(companyId, employeeId), 'GET').then((data) => { // checking if there is a leader for the user
       console.log(data)
       if(data.result){ // if it's not an owner
@@ -143,7 +143,7 @@ const Hierachy: FC = () => {
                       level={index}
                       active={employee.active}
                       index={employeeIndex}
-                      inTeam={index>hierarchyLevel && isActive}
+                      inTeam={index > hierarchyLevel && isActive}
                       setHierarchyLevel={setHierarchyLevel}
                       hierarchyLevel={hierarchyLevel}
                       setIsActive={setIsActive}

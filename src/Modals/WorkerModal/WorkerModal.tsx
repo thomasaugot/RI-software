@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import InputField from "../../components/general/inputField/inputField";
 import WorkerCard from "../../components/searchWorker/workerCard/workerCard";
 import { close } from "../../assets/Icons";
 import { motion } from "framer-motion";
 import { moveWorkerType } from "../../types/types";
-import "./WorkerModal.scss";
+import "./workerModal.scss";
 import { workersForMoveFetch, filterWorkersForMove } from "../../queries/moveWorker";
 import { workersTypes } from "../../types/types";
 
@@ -20,11 +20,11 @@ function WorkerModal({ setIsOpenModal, leaderId }: moveWorkerType) {
     setWorkerForMove(workersForMoveFetchData)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getworkerForMove();
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     filterWorkersForMove(workersForMove as workersTypes[], search)
   }, [search])
 

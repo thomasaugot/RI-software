@@ -1,13 +1,13 @@
 import React from 'react'
 import BaseLayout from '../../layouts/BaseLayout/BaseLayout'
-import './NotFound.scss'
+import './notFound.scss'
 
 function NotFound() {
   return (
     <BaseLayout>
-        <div className='not-found'>
+      <div className='not-found'>
         <h3>Page Not Found | 404</h3>
-        </div>
+      </div>
     </BaseLayout>
   )
 }

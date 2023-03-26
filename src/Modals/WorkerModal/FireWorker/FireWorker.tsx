@@ -6,17 +6,18 @@ import { buttonType } from '../../../types/general/generalTypes';
 import { handleDelete } from '../../../queries/fireWorker';
 
 function FireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
-    const closeModal = () => setIsOpenModal(false);
+  const closeModal = () => setIsOpenModal(false);
 
-    const handleDeleteClick = async () => {
-        const json = await handleDelete(id);
-        if (json.status === 'success') {
-            setIsDeleted(true);
-            closeModal();
-        } else {
-            // setError(json.message);
-        }
+  const handleDeleteClick = async () => {
+    const json = await handleDelete(id);
+    if (json.status === 'success') {
+      setIsDeleted(true);
+      closeModal();
+    } else {
+      // setError(json.message);
     }
+  }
+
 
     return (
         <Modal
@@ -28,12 +29,12 @@ function FireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
         >
 
 
-            <div className='buttons'>
-                <SubmitButton type={buttonType.submit} text="Yes" onClick={handleDeleteClick} />
-                <SubmitButton type={buttonType.submit} text="No" onClick={closeModal} />
-            </div>
-        </Modal>
-    );
+      <div className='buttons'>
+        <SubmitButton type={buttonType.submit} text="Yes" onClick={handleDeleteClick} />
+        <SubmitButton type={buttonType.submit} text="No" onClick={closeModal} />
+      </div>
+    </Modal>
+  );
 }
 
 export default FireWorker;

@@ -1,32 +1,32 @@
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
-import Confirmation from "./pages/confirmation/confirmation";
-import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import AcceptInvitationRegister from "./pages/acceptInvintation/register/register";
 import AcceptInvitationLogin from "./pages/acceptInvintation/login/login";
 import AcceptInvitationConfirmation from "./pages/acceptInvintation/confirmation/confirmation"
 import Home from "./pages/Home/Home";
-import Hierachy from "./pages/hierarchy/hierarchy";
 import NotFound from "./pages/NotFound/NotFound";
-import SearchWorker from './pages/searchWorker/searchWorker'
-import Chat from "./pages/chat/chat";
+import Chat from './pages/Chat/Chat';
+import Login from './pages/Login/Login';
+import Confirmation from './pages/Confirmation/Confirmation';
+import Hierachy from './pages/hierarchy/Hierarchy';
+import SearchWorker from './pages/SearchWorker/SearchWorker';
 
 const Router: FC = () => {
   return (
     <Routes>
-      <Route path="/login" element={<Login/>}/>
+      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/accept-invitation/register/:token" element={<AcceptInvitationRegister />} />
       <Route path="/accept-invitation/login/:token" element={<AcceptInvitationLogin />} />
-      <Route path="/accept-invitation/confirmation/:email/:token" element={<AcceptInvitationConfirmation/>} />
+      <Route path="/accept-invitation/confirmation/:email/:token" element={<AcceptInvitationConfirmation />} />
       <Route path="/confirm" element={<Confirmation />} />
       <Route path="/confirmation/:email" element={<Confirmation />} />
       <Route path="/hierarchy" element={<Hierachy />} />
-      <Route path="/search_workers" element={<SearchWorker/>}/>
-      <Route path="/chat" element={<Chat/>}/>
-      <Route path="/" element={<Home/>}/>
-      <Route path="*" element={<NotFound/>} />
+      <Route path="/search_workers" element={<SearchWorker />} />
+      <Route path="/chat" element={<Chat />} />
+      <Route path="/" element={<Home />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
