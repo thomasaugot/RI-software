@@ -1,15 +1,15 @@
 import { useState, useContext, FC } from "react";
-import "./HireWorker.scss";
-import InputField from "../../components/general/inputField/inputField";
-import CheckBox from "../../components/general/checkBox/checkBox";
-import SubmitButton from "../../components/general/submitButton/submitButton";
-import { hireUrl } from '../../utils/network';
-import { authorizedRequest } from '../../utils/queries';
+import "./hireWorker.scss";
+import InputField from "../../../components/general/inputField/inputField";
+import CheckBox from "../../../components/general/checkBox/checkBox";
+import SubmitButton from "../../../components/general/submitButton/submitButton";
+import { hireUrl } from '../../../utils/network';
+import { authorizedRequest } from '../../../utils/queries';
 
-import { HireWorkerProps } from '../../types/hierarchy/hireWorkerTypes'
+import { HireWorkerProps } from '../../../types/hierarchy/hireWorkerTypes'
 
-import Modal from '../../components/general/modal/modal';
-import { ModalsContext } from "../../context/modalsContext";
+import Modal from '../../../components/general/modal/modal';
+import { ModalsContext } from "../../../context/modalsContext";
 
 const HireWorker: FC<HireWorkerProps> = ({ hireWorkerLeader }) => {
   const { hireWorkerModalIsOpen, setHireWorkerModalIsOpen } = useContext(ModalsContext);

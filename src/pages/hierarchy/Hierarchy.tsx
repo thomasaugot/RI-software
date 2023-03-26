@@ -8,8 +8,8 @@ import { authorizedRequest } from '../../utils/queries'
 import { fetchOwnersUrl, fetchEmployeesUrl, fetchLeadersUrl } from "../../utils/network";
 import { workersForMoveFetch } from '../../queries/moveWorker';
 import { ModalsContext } from "../../context/modalsContext";
+import HireWorker from '../../Modals/hierarchy/hireWorker/HireWorker';
 
-import HireWorker from '../../Modals/HireWorker/HireWorker';
 const Hierachy: FC = () => {
 
   const companyId = parseInt(localStorage.getItem('company_id') || '-1');
