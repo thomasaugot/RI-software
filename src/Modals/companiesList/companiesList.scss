@@ -1,0 +1,76 @@
+.copanies-list{
+    height: 56.15vh;
+    width: 58.5vw;
+  
+    .copanies-list-title{
+      font-size: 1.66vw;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 2vw;
+    }
+
+    .copanies-list-container{
+        display: grid;
+        grid-template-columns: 25.7vw 25.7vw;
+        grid-row-gap: 1.39vw;
+        height: 100%;
+        padding: 0 3.125vw 2.16vw 3.125vw;
+        overflow-y: scroll;
+        // overflow-x: hidden;
+
+        .add-company-button-container{
+            width: 25.7vw;
+            height: 7.64vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+
+            svg{
+                display: block;
+                cursor: pointer;
+                width: 3.47vw;
+            }
+        }
+
+        .company-card{
+            width: 25.7vw;
+            height: 7.64vw;
+            padding: 0.3vw 1vw;
+            display: flex;
+            align-items: center;
+            transition: ease 0.3s;
+
+            .company-avatar{
+                img, svg{
+                    width: 7vw;
+                    height: 7vw;
+                    border-radius: 50%;
+                }
+            }
+
+            .company-data{
+                margin-left: 2vw;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                height: 4.16vw;
+
+                .company-name{
+                    font-size: 1.75vw;
+                    font-weight: 500;
+                }
+
+                .company-description{
+                    font-size: 1.12vw;
+                }
+            }
+
+            &:hover{
+                background: #fff;
+            }
+        }
+    
+    }
+}

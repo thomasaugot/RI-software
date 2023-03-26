@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { whoAmI } from '../../queries/generalQueries';
 import { whoAmIUrl, loginUrl, hireUrl } from "../../../utils/network";
 import { unauthorizedRequest, authorizedRequest } from "../../../utils/queries";
 
@@ -60,9 +59,6 @@ const AcceptInvitationLogin = () => {
       }
     })
   };
-
-  if (localStorage.getItem("isLogged") === "true")
-    return <Navigate to="/" replace />;
 
   return (
     <div className="login">

@@ -1,23 +1,24 @@
-import { FC } from "react";
+import { FC, useEffect, useContext } from "react";
 import { profile } from "../../../assets/Icons";
 import { fireEmployeeButton, moveEmployeeButton, replaceEmployeeButton } from "../../../assets/hierarchyIcons"
 import './hierarchyUserCard.scss'
-// import { hierarchyItem, HierarchyUserCardProps } from '../../../types/hierarchyTypes';
 import { hierarchyUserCardProps } from '../../../types/hierarchy/hierarchyUserCardTypes';
 import { hierarchyItem } from '../../../types/hierarchy/generalTypes';
 import { authorizedRequest } from '../../../utils/queries';
 import { fetchEmployeesUrl } from "../../../utils/network";
-
-
+import { ModalsContext } from "../../../context/modalsContext";
 
 const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, employeeId, userId, setHierarchy, hierarchy, level, active, index, inTeam, setHierarchyLevel, hierarchyLevel, setIsActive, isActive }) => {
 
-    const currentUserEmployeeId = parseInt(localStorage.getItem('employee_id') || '-1');
+    const currentUserEmployeeId = parseInt(localStorage.getItem('employeeId') || '-1');// logged in user employee id
     const companyId = parseInt(localStorage.getItem('companyId') || '-1');
 
+    const { setHireWorkerModalIsOpen, setHireWorkerLeader } = useContext(ModalsContext);
+
+    // adding new column of employee once someone was chosen in the hierarchy
     const getEmployeesData = () => {
 
-        if(employeeId === currentUserEmployeeId){
+        if(employeeId === currentUserEmployeeId){// if it's the logged in user
             setHierarchyLevel(level);
             setIsActive(true);
         }else if(isActive && level>hierarchyLevel){
@@ -26,7 +27,7 @@ const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, em
             setIsActive(false);
         }
 
-        const arrayBuf = hierarchy.slice(0, level+1);
+        const arrayBuf = hierarchy.slice(0, level+1); // buffer array
 
         for(let i=0; i<arrayBuf[level].length; i++){
             arrayBuf[level][i].active = false;
@@ -35,10 +36,9 @@ const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, em
         arrayBuf[level][index].active = true;
 
         
-
+        // getting employees of the chosen employee
         authorizedRequest(fetchEmployeesUrl(companyId, employeeId), 'GET').then((data) => {
 
-            console.log(data)
             const employeesList: hierarchyItem[] = data.result || [];
 
             for(let i=0; i<employeesList.length; i++){
@@ -46,7 +46,8 @@ const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, em
             } 
 
             if(employeesList){
-                setHierarchy([...arrayBuf, [...employeesList]])
+                setHierarchy([...arrayBuf, [...employeesList]]);
+                
             }else{
                 setHierarchy([...arrayBuf, []])
             }
@@ -81,7 +82,7 @@ const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, em
                             {moveEmployeeButton}
                         </div>
                     :
-                        <div className="user-card-functions-replace">
+                        <div className="user-card-functions-replace" onClick={(e) => { e.stopPropagation(); setHireWorkerModalIsOpen(true); setHireWorkerLeader(employeeId)}}>
                             {replaceEmployeeButton}
                         </div>
                     }
