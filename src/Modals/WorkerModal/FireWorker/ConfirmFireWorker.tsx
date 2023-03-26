@@ -26,6 +26,7 @@ function ConfirmFireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Prop
             // title="Permanently Delete this user?"
             closeButton={false}
             open={false}
+            additionalClass=''
         >
             <div className="buttons">
                 <SubmitButton type={buttonType.submit} text="Yes" onClick={handleDeleteClick} />

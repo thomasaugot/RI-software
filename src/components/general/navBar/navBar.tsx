@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./navBar.scss";
 import {
   navlogo,
@@ -9,11 +9,13 @@ import { navbarProps } from "../../../types/general/navbarTypes";
 import { useNavigate } from "react-router-dom";
 import { navbarUrl } from '../../../utils/network';
 import { authorizedRequest } from '../../../utils/queries';
+import { ModalsContext } from '../../../context/modalsContext';
 
 
 const NavBar = () => {
   const [navData, setNavData] = useState<Array<navbarProps>>([]);
   const [activeCategory, setActiveCategory] = useState<number>(0);
+  const { setCompanisListModalIsOpen } = useContext(ModalsContext);
   const navigate = useNavigate();
 
   const companyAvatar = localStorage.getItem("companyAvatar")
@@ -22,19 +24,23 @@ const NavBar = () => {
   
 
   useEffect(() => {
-    authorizedRequest(navbarUrl(employeeId), 'GET').then((data) => {
-      if(data.ok){
-        setNavData(data.result);
-      }else{
-        navigate('/login');
-      }
-    })
+    if(employeeId > -1){
+      authorizedRequest(navbarUrl(employeeId), 'GET').then((data) => {
+        if(data && data.ok){
+          setNavData(data.result);
+        }else{
+          navigate('/login');
+        }
+      })
+    }else{
+      navigate('/login');
+    }
   }, []);
   
   return (
     <div className="navbar">
       <div className="navbar-wrapper">
-        <div className="navbar-header">
+        <div className="navbar-header" onClick={() => setCompanisListModalIsOpen(true)}>
           <span className="navnar-company-avatar-container">{companyAvatar && companyAvatar != 'null' ? <img src={companyAvatar} /> : navlogo}</span>
           <p className="navbar-head-text">{companyName}</p>
         </div>

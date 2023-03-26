@@ -14,5 +14,6 @@ export const updateStatusUrl = baseUrl + 'api/profile/updateStatus';
 export const refreshUrl = baseUrl + 'api/refresh';
 export const SearchWorkerUrl = baseUrl + "api/search/workers";
 export const hireUrl = baseUrl + 'api/hierarchy/hire';
+export const fetchTheLeaderUrl = (companyId: number, employeeId: number) => baseUrl + `api/hierarchy/aleader/${companyId}/${employeeId}`;
 export const chatInfoById = (chatId: string) => baseUrl + `api/chats/get/chat/${chatId}`
 export const sendChatMessageUrl = (chatId: string, chatMessage: string) => baseUrl + chatId // we do not have an endpoint for sending messages

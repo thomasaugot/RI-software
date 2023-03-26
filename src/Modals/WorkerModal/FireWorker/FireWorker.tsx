@@ -18,13 +18,15 @@ function FireWorker({ setIsOpenModal, id, isDeleted, setIsDeleted }: Props) {
     }
   }
 
-  return (
-    <Modal
-      closeModal={closeModal}
-      // title="Remove this user?"
-      closeButton={false}
-      open={false}
-    >
+
+    return (
+        <Modal
+            closeModal={closeModal}
+            // title="Remove this user?"
+            closeButton={false}
+            open={false}
+            additionalClass=''
+        >
 
 
       <div className='buttons'>

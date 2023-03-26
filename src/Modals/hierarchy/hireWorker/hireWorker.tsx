@@ -6,95 +6,101 @@ import SubmitButton from "../../../components/general/submitButton/submitButton"
 import { hireUrl } from '../../../utils/network';
 import { authorizedRequest } from '../../../utils/queries';
 
-import { HireWorkerProps } from '../../../types/hierarchy/hireWorkerTypes'
-
 import Modal from '../../../components/general/modal/modal';
-import { ModalsContext } from "../../../context/modalsContext";
+import { ModalsContext } from '../../../context/modalsContext';
 
-const HireWorker: FC<HireWorkerProps> = ({ hireWorkerLeader }) => {
-  const { hireWorkerModalIsOpen, setHireWorkerModalIsOpen } = useContext(ModalsContext);
+const HireWorker: FC = () => {
 
+  // data for tracking if the pop up open and what is the leader's id
+  const { hireWorkerModalIsOpen, setHireWorkerModalIsOpen, hireWorkerLeader } = useContext(ModalsContext);
+
+  // close modal funtion
   const closeModal = () => setHireWorkerModalIsOpen(false);
 
-  const [position, setPosition] = useState('');
-  const [email, setEmail] = useState('');
+  // pop up intupt's data
+  const [position, setPosition] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [wage, setWage] = useState<number | string>('');
   const [workingHours, setWorkingHours] = useState<number | string>('');
 
-  const [employeeCheckbox, setEmployeeCheckbox] = useState(false);
-  const [projectsCheckbox, setProjectsCheckbox] = useState(false);
-  const [purchaseCheckbox, setPurchaseCheckbox] = useState(false);
-  const [salesCheckbox, setSalesCheckbox] = useState(false);
-  const [stocksCheckbox, setStocksCheckbox] = useState(false);
-  const [financeCheckbox, setFinanceCheckbox] = useState(false);
+  // pop up checkboxes data
+  const [employeeCheckbox, setEmployeeCheckbox] = useState<boolean>(false);
+  const [projectsCheckbox, setProjectsCheckbox] = useState<boolean>(false);
+  const [purchaseCheckbox, setPurchaseCheckbox] = useState<boolean>(false);
+  const [salesCheckbox, setSalesCheckbox] = useState<boolean>(false);
+  const [stocksCheckbox, setStocksCheckbox] = useState<boolean>(false);
+  const [financeCheckbox, setFinanceCheckbox] = useState<boolean>(false);
+
+  // generating and sending the jwt
+  const submitHandle = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const companyId: number = parseInt(localStorage.getItem('company_id') || '-1');
+
+    const sign = require('jwt-encode');
+    const secret = 'secret-data-adding-employee';
+    const data = {
+      user: {
+        email
+      },
+      employee: {
+        work_hour: workingHours,
+        wage,
+        position,
+        leader_id: hireWorkerLeader,
+        company_id: companyId
+      },
+      functions: {
+        employee: employeeCheckbox,
+        projects: projectsCheckbox,
+        sales: salesCheckbox,
+        purchase: purchaseCheckbox,
+        finance: financeCheckbox
+      }
+    };
+    const jwt = sign(data, secret, { "alg": "HS256" });
+
+    // sending the email
+    authorizedRequest(hireUrl, 'PUT', 'accessToken', {email, link: `http://127.0.0.1:3000/accept-invitation/register/${jwt}`});
+    
+  }
 
   return (
     <Modal
       closeModal={closeModal}
       open={hireWorkerModalIsOpen}
+      additionalClass='hire-worker'
     >
       <p className="hire-worker-title">Add new user</p>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          const companyId = parseInt(localStorage.getItem('company_id') || '-1');
-          console.log(hireWorkerLeader)
-
-          const sign = require('jwt-encode');
-          const secret = 'secret-data-adding-employee';
-          const data = {
-            user: {
-              email
-            },
-            employee: {
-              work_hour: workingHours,
-              wage,
-              position,
-              leader_id: hireWorkerLeader,
-              company_id: companyId
-            },
-            functions: {
-              employee: employeeCheckbox,
-              projects: projectsCheckbox,
-              sales: salesCheckbox,
-              purchase: purchaseCheckbox,
-              finance: financeCheckbox
-            }
-          };
-          const jwt = sign(data, secret, { "alg": "HS256" });
-          console.log(jwt);
-
-          authorizedRequest(hireUrl, 'PUT', 'accessToken', { email, link: `http://127.0.0.1:3000/accept-invitation/register/${jwt}` });
-
-        }}
-        className="hire-worker-form"
-      >
+      <form className="hire-worker-form" onSubmit={submitHandle}>
         <div className="hire-worker-content-container">
           <div className="hire-worker-content-input-container">
             <div className="hire-worker-content-input">
               <label htmlFor="position">Position</label>
               <InputField type="text" name="position" value={position} onChange={(e) => {
-                setPosition(e.target.value);
-              }} />
+               setPosition(e.target.value);
+              }}/>
+
             </div>
             <div className="hire-worker-content-input">
               <label htmlFor="position">Email</label>
               <InputField type="email" name="email" value={email} onChange={(e) => {
                 setEmail(e.target.value);
-              }} />
+              }}/>
             </div>
             <div className="hire-worker-content-input">
               <label htmlFor="position">Wage</label>
               <InputField type="text" name="wage" value={wage} onChange={(e) => {
-                setWage(e.target.value.replace(/\D/g, '').length > 0 ? parseInt(e.target.value.replace(/\D/g, '')) : '')
-              }} />
+                // removing all letters
+                setWage(e.target.value.replace(/\D/g,'').length>0 ? parseInt(e.target.value.replace(/\D/g,'')) : '')
+              }}/>
             </div>
             <div className="hire-worker-content-input">
               <label htmlFor="position">Work Hour</label>
               <InputField type="text" name="work-hour" value={workingHours} onChange={(e) => {
-                setWorkingHours(e.target.value.replace(/\D/g, '').length > 0 ? parseInt(e.target.value.replace(/\D/g, '')) : '');
-              }} />
+                // removing all letters
+                setWorkingHours(e.target.value.replace(/\D/g,'').length>0 ? parseInt(e.target.value.replace(/\D/g,'')) : '');
+              }}/>
             </div>
           </div>
           <div className="hire-worker-functions">

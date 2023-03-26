@@ -15,5 +15,5 @@ export type hierarchyUserCardProps = {
     setHierarchyLevel: React.Dispatch<React.SetStateAction<number>>,
     setIsActive: React.Dispatch<React.SetStateAction<boolean>>,
     isActive: boolean,
-    hierarchyLevel: number
+    hierarchyLevel: number,
 }
