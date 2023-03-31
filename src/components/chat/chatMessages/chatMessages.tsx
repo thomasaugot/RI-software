@@ -2,31 +2,67 @@ import './chatMessage.scss';
 import { chatMessagePropsType } from '../../../types/chats/chat.types';
 import { getFile } from '../../../queries/chat.queries';
 import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon';
-import React from 'react';
-import MiniPopup from '../miniPopup/miniPopup';
+import React, { FC } from 'react';
+import MiniPopup from '../miniPopup/editMessagePopup';
 import ForwardComponent from '../forwardComponent/forwardComponent';
-const ChatMessages = ({handleDisplayPopup,displayPopup,message,  changeEditMessage }: chatMessagePropsType) => {
+const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup,message,  changeEditMessage }) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, editted} = message
   const fileTypeIcon = getFile(file as string);
   const handleRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault()
     handleDisplayPopup(
-      ownerName ? ownerName : '',
-      text ? text : '',
+      ownerName ?? '',
+      text ?? '',
       time,
-      file ? true : false,
+      file ? true : false
     )
   }
-  const needToDisplayMiniPopup = () => displayPopup !== null && displayPopup.ownerName === ownerName && displayPopup.text === text && displayPopup.time === time && (file !== undefined && displayPopup.fileExist && <MiniPopup changeEditMessage={changeEditMessage} message={message}/>)
-  const needToDisplayMiniPopupWithoutFile = () => displayPopup !== null && displayPopup.ownerName === ownerName && displayPopup.text === text && displayPopup.time === time && <MiniPopup changeEditMessage={changeEditMessage} message={message}/>
-  const needToDisplayForwardMessage = () => forwarded?.from ? <ForwardComponent forwardedMessage={forwarded}/> : null
-  const needToDisplayEdditedMessage = () => editted ?<p className='editted'>Eddited</p>: null
+  const needToDisplayMiniPopup = () => {
+    if (
+      displayPopup !== null &&
+      displayPopup.ownerName === ownerName &&
+      displayPopup.text === text &&
+      displayPopup.time === time &&
+      file !== undefined &&
+      displayPopup.fileExist
+    ) {
+      return <MiniPopup changeEditMessage={changeEditMessage} message={message} />;
+    }
+    return null;
+  };
+  //if clicked message include default message data this function will return popup component if there is no data, the function returns nothing
+  const needToDisplayMiniPopupWithoutFile = () => {
+    if (
+      displayPopup !== null &&
+      displayPopup.ownerName === ownerName &&
+      displayPopup.text === text &&
+      displayPopup.time === time
+    ) {
+      return <MiniPopup changeEditMessage={changeEditMessage} message={message} />;
+    }
+    return null;
+  };
+  //if clicked message include default message data and file this function will return popup component if there is no data, the function returns nothing
+  const needToDisplayForwardMessage = () => {
+    if (forwarded?.from) {
+      return <ForwardComponent forwarded={forwarded} />;
+    }
+    return null;
+  };
+  //if message include forward field function will return forward component if there is no forward field, the function returns nothing
+  const needToDisplayEdditedMessage = () => {
+    if (editted) {
+      return <p className='editted'>Edited</p>;
+    }
+    return null;
+  };
+    //if message eddited field function will return eddited block if there is no eddited field, the function returns nothing
   return (
     <>
       {file ? (
         <>
           {owner ? (
-              <div className={`file-message-wrapper file-yes ${displayPopup !== null && displayPopup.ownerName === ownerName && displayPopup.text === text && displayPopup.time === time && (file !== undefined && displayPopup.fileExist) ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick} >
+              <div className={`file-message-wrapper file-yes ${ needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick} >
               {needToDisplayMiniPopup()}
               {needToDisplayForwardMessage()}
               <div className='file-message-container'>
@@ -43,7 +79,7 @@ const ChatMessages = ({handleDisplayPopup,displayPopup,message,  changeEditMessa
               </div>
             </div>
           ) : (
-            <div className={`stranger-owner ${displayPopup !== null && displayPopup.ownerName === ownerName && displayPopup.text === text && displayPopup.time === time && (file !== undefined && displayPopup.fileExist) ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
+            <div className={`stranger-owner ${needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
               {needToDisplayMiniPopup()}
               {needToDisplayForwardMessage()}
               <img src={imgUrl} alt={ownerName} className="icon" />
@@ -68,7 +104,7 @@ const ChatMessages = ({handleDisplayPopup,displayPopup,message,  changeEditMessa
       ) : (
         <>
           {owner ? (
-            <div className={`chat-message-wrapper yes ${displayPopup !== null && displayPopup.ownerName === ownerName && displayPopup.text === text && displayPopup.time === time  ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
+            <div className={`chat-message-wrapper yes ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
               {needToDisplayMiniPopupWithoutFile()}
               {needToDisplayForwardMessage()}
               <div className='chat-message-container'>
@@ -82,7 +118,7 @@ const ChatMessages = ({handleDisplayPopup,displayPopup,message,  changeEditMessa
               </div>
             </div>
           ) : (
-            <div className={`stranger-owner ${displayPopup !== null && displayPopup.ownerName === ownerName && displayPopup.text === text && displayPopup.time === time  ? 'miniPopup-parent' : ''}`} onContextMenu={handleRightClick}>
+            <div className={`stranger-owner ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''}`} onContextMenu={handleRightClick}>
                {needToDisplayMiniPopupWithoutFile()}
                {needToDisplayForwardMessage()}
               <img src={imgUrl} alt={ownerName} className="icon" />

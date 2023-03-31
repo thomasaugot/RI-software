@@ -1,11 +1,11 @@
 import './chatInput.scss'
 import { microphone, clip, sendMessageIcon } from '../../../assets/Icons';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {  mockMessages } from '../chatBar/messageArea/mockMessagesData';
 import ReplyComponent from '../reply/replyComponent';
 import { ChatInputProps,  MessageDataType } from '../../../types/chats/chat.types';
 
-const ChatInput = ({editType, changeEditMessage}:ChatInputProps) => {
+const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage}) => {
   const [diplayEditComponent, setDiplayEditComponent] = useState(true)
   const [chatInputValue, setChatInputValue] = useState('')
   const handleCloseEditPopup = () => {

@@ -9,6 +9,7 @@ import { mockMessages } from './mockMessagesData';
 
 
 const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll, blocksCount, loading }) => {
+  //clicked message data
   const [displayPopup, setDisplayPopup] = useState<displayPopupData | null>(null)
   const [editType, setEditType] = useState<EditMessageType>({editType: '', value: null, from: null, messageId: null})
   const handleDisplayPopup = (ownerName: string, text: string, time: string, fileExist: boolean) => {
@@ -19,8 +20,10 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
       fileExist
     }
     if(JSON.stringify(objectFromComponent) === JSON.stringify(displayPopup)) {
+      //If the popup is already open, then set the popup to null
       setDisplayPopup(null)
     }else {
+       //If the popup is closed, then set the message data to the value of the popup
       setDisplayPopup(objectFromComponent)
     }
   }

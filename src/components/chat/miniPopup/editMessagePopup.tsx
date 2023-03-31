@@ -1,9 +1,14 @@
-import React from 'react'
-import { copyMessageIcon, deleteMessageIcon, editMessageIcon, forwardMessageIcon, pinMessageIcon, replyMessageIcon } from '../../../assets/Icons'
+import React, { FC } from 'react'
+import { copyMessageIcon} from '../../../assets/Icons'
+import {deleteMessageIcon} from '../../../assets/Icons'
+import {editMessageIcon} from '../../../assets/Icons'
+import {forwardMessageIcon} from '../../../assets/Icons'
+import {pinMessageIcon} from '../../../assets/Icons'
+import {replyMessageIcon} from '../../../assets/Icons'
 import './miniPopup.scss'
 import { MiniPopupProps } from '../../../types/chats/chat.types'
 
-function MiniPopup({changeEditMessage, message}: MiniPopupProps) {
+const editMessagePopup: FC<MiniPopupProps> = ({changeEditMessage, message}) => {
   const {text, ownerName, messageId} = message
   return (
     <div className='miniPopup-wrapper'>
@@ -37,4 +42,4 @@ function MiniPopup({changeEditMessage, message}: MiniPopupProps) {
   )
 }
 
-export default MiniPopup
+export default editMessagePopup

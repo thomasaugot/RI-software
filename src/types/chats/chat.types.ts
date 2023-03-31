@@ -12,6 +12,19 @@ export type EditMessageType = {
   from: string | null,
   messageId: string | null
 }
+export type ForwardMessageProps = {
+  forwarded: {
+    from: string ,
+    message: string,
+  }
+}
+export type ForwardMessage = {
+  forwarded?: {
+    from: string ,
+    message: string,
+  }
+}
+
 export type MessageDataType = {
   owner?: boolean
   ownerName?: string
@@ -21,13 +34,9 @@ export type MessageDataType = {
   imgUrl?: string,
   messageId: string | null
   editted?: boolean,
-  forwarded?: {
-  from: string ,
-  message: string,
-}
   type: string,
 
-}
+} & ForwardMessage
 export type ChatInputProps = {
   changeEditMessage: (editType: string, value: string | null, from: string | null, messageId: string | null) => void,
   editType: EditMessageType

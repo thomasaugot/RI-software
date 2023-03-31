@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { cross } from '../../../assets/Icons'
 import './replyComponent.scss'
-function ReplyComponent({handleCloseEditPopup, editType} : {
-  editType: {editType: string, value: string | null, from: string | null, messageId: string | null}
+import { EditMessageType } from '../../../types/chats/chat.types'
+const ReplyComponent:FC<{
+  editType: EditMessageType
   handleCloseEditPopup: () => void
-}) {
+}> =({handleCloseEditPopup, editType}) => {
   return (
     <div className='reply-wrapper'>
       <div className="reply-container">
