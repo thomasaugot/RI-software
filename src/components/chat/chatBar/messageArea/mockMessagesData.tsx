@@ -2,7 +2,7 @@ import { MessageDataType } from '../../../../types/chats/chat.types'
 
 export const mockMessages:MessageDataType[] = [
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -12,7 +12,7 @@ export const mockMessages:MessageDataType[] = [
       editted: true,
     },
     {
-      messageId: '123213123-12dasda',
+      messageId: null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -20,7 +20,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's worka?",
     },
     {
-      messageId: '123saxcfdgd',
+      messageId: null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -28,7 +28,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?asdsad"
     },
     {
-      messageId: 'asdasxcvcvgjg',
+      messageId: null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -43,7 +43,7 @@ export const mockMessages:MessageDataType[] = [
     },
 
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -52,7 +52,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -60,7 +60,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work? tyteertert"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -68,7 +68,7 @@ export const mockMessages:MessageDataType[] = [
       text: "Lorem"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -76,7 +76,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -84,7 +84,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -93,7 +93,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -107,7 +107,7 @@ export const mockMessages:MessageDataType[] = [
       messageId: null
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -116,7 +116,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -124,7 +124,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -132,7 +132,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -140,7 +140,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -148,7 +148,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -157,7 +157,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -171,7 +171,7 @@ export const mockMessages:MessageDataType[] = [
     },
 
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -180,7 +180,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -188,7 +188,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work? tyteertert"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -196,7 +196,7 @@ export const mockMessages:MessageDataType[] = [
       text: "Lorem"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -204,7 +204,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -212,7 +212,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -221,7 +221,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -235,7 +235,7 @@ export const mockMessages:MessageDataType[] = [
       messageId: null
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -244,7 +244,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -252,7 +252,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -260,7 +260,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -268,7 +268,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -276,7 +276,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -285,7 +285,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: true,
       ownerName: "You",
@@ -299,7 +299,7 @@ export const mockMessages:MessageDataType[] = [
     },
 
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -308,7 +308,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -316,7 +316,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work? tyteertert"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -324,7 +324,7 @@ export const mockMessages:MessageDataType[] = [
       text: "Lorem"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -332,7 +332,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -340,7 +340,7 @@ export const mockMessages:MessageDataType[] = [
       text: "How's work?"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",
@@ -349,7 +349,7 @@ export const mockMessages:MessageDataType[] = [
       file: "pdf"
     },
     {
-      messageId:'asdasdasdasd',
+      messageId:null,
       type: 'message',
       owner: false,
       ownerName: "Ivan",

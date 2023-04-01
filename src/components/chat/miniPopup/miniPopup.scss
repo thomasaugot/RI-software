@@ -9,7 +9,8 @@
   left:50%;
   transform:translate(-50%, -50%);
   z-index: 1;
-
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
 }
 .miniPopup-parent {
   position: relative;
@@ -29,4 +30,8 @@
   line-height: 1.5625vw;
   color: #444444;
   padding-left: 0.8138020833333334vw;
+}
+.miniPopup-visible {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }

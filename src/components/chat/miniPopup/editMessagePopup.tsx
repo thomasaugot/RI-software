@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import { copyMessageIcon} from '../../../assets/Icons'
 import {deleteMessageIcon} from '../../../assets/Icons'
 import {editMessageIcon} from '../../../assets/Icons'
@@ -7,11 +7,28 @@ import {pinMessageIcon} from '../../../assets/Icons'
 import {replyMessageIcon} from '../../../assets/Icons'
 import './miniPopup.scss'
 import { MiniPopupProps } from '../../../types/chats/chat.types'
-
-const editMessagePopup: FC<MiniPopupProps> = ({changeEditMessage, message}) => {
+type Coords = {
+  coords: {
+    x: number,
+    y: number
+  }
+}
+const EditMessagePopup: FC<MiniPopupProps & Coords> = ({changeEditMessage, message, coords}) => {
+  const {x, y} = coords
   const {text, ownerName, messageId} = message
+  const popupRef = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+    const popupElement = popupRef.current
+    setTimeout(() => {
+      if(popupElement !== null) {
+        popupElement.classList.add('miniPopup-visible')
+      }
+    }, 10);
+
+
+  }, [])
   return (
-    <div className='miniPopup-wrapper'>
+    <div ref={popupRef} className='miniPopup-wrapper' style={{top: y, left: x}}>
       <div className="miniPopup-container">
         <div className="miniPopup-item">
           <div className="miniPopup-item-icon">{replyMessageIcon}</div>
@@ -42,4 +59,4 @@ const editMessagePopup: FC<MiniPopupProps> = ({changeEditMessage, message}) => {
   )
 }
 
-export default editMessagePopup
+export default EditMessagePopup

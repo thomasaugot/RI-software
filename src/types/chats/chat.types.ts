@@ -37,17 +37,28 @@ export type MessageDataType = {
   type: string,
 
 } & ForwardMessage
+export enum messageActions {
+  DELETE = 'DELETE',
+  ADD = 'ADD',
+  EDIT = 'EDIT'
+}
 export type ChatInputProps = {
   changeEditMessage: (editType: string, value: string | null, from: string | null, messageId: string | null) => void,
-  editType: EditMessageType
+  editType: EditMessageType,
+  handleMessages: (action: string, body: MessageDataType) => void,
+  messages: MessageDataType[]
 }
 export type MiniPopupProps = {
   changeEditMessage: (editType: string, value: string | null, from: string | null, messageId: string | null) => void,
-  message: MessageDataType
+  message: MessageDataType,
+
 }
 export type chatMessagePropsType  = {
   handleDisplayPopup: (ownerName: string, text: string, time: string, fileExist: boolean) => void,
   displayPopup: displayPopupData | null,
+  delay: number,
+  needToAnimateBlock: {messageID: string | null, firstLoad: boolean},
+  messagesScrollHeight: React.RefObject<HTMLDivElement>
 } & MiniPopupProps
 
 export type ChatCardTypes = {

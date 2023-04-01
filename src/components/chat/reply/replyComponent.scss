@@ -7,6 +7,14 @@ border-radius:  0.9765625vw;
 padding: 0px 1.2369791666666667vw 0px 1.6276041666666667vw;
 height: 3.90625vw;
 }
+@keyframes slide-in {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 .reply-container-icon svg {
   width: 1.4322916666666667vw;
   height: 1.4322916666666667vw;
@@ -32,4 +40,7 @@ color: #444444;
   border-radius: 1vw 1vw 0vw 0vw;
   padding: 0.78125vw 1.171875vw;
   background-color: white;
+  animation-name: slide-in;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
 }

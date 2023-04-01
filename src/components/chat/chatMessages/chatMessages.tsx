@@ -2,14 +2,46 @@ import './chatMessage.scss';
 import { chatMessagePropsType } from '../../../types/chats/chat.types';
 import { getFile } from '../../../queries/chat.queries';
 import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon';
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import MiniPopup from '../miniPopup/editMessagePopup';
 import ForwardComponent from '../forwardComponent/forwardComponent';
-const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup,message,  changeEditMessage }) => {
+const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisplayPopup,displayPopup,message,  changeEditMessage, delay, needToAnimateBlock }) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, editted} = message
+  const {messageID, firstLoad} = needToAnimateBlock
   const fileTypeIcon = getFile(file as string);
+  const blockRef  = useRef<HTMLDivElement>(null);
+  const animatedRef = useRef<HTMLDivElement>(null)
+  const [popupCoords, setPopupCoords] = useState({y: 0, x: 0})
+  useEffect(() => {
+    const blockElement = blockRef.current;
+    //first message loading animation
+    setTimeout(() => {
+      if(blockElement !== null && firstLoad) {
+        blockElement.classList.add('chat-messages-visible');
+      }
+    }, delay * 1000);
+  }, [delay]);
+  useEffect(() => {
+    const blockElement = animatedRef.current;
+    //animation of sended or eddited message
+    setTimeout(() => {
+      if(blockElement !== null) {
+        blockElement.classList.add('chat-messages-visible');
+      }
+    },  1000);
+  }, [needToAnimateBlock])
   const handleRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = messagesScrollHeight.current?.getBoundingClientRect() as DOMRect
+    const parentWidth = rect.width
+    let popupX = e.clientX + 10
+    if(popupX + parentWidth > window.innerWidth) {
+      popupX = e.clientX - 10 - parentWidth
+    }else {
+      popupX = e.clientX - 200
+    }
+    setPopupCoords({x: popupX, y: 0})
     e.preventDefault()
+
     handleDisplayPopup(
       ownerName ?? '',
       text ?? '',
@@ -26,7 +58,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup
       file !== undefined &&
       displayPopup.fileExist
     ) {
-      return <MiniPopup changeEditMessage={changeEditMessage} message={message} />;
+      return <MiniPopup changeEditMessage={changeEditMessage} message={message} coords={popupCoords}/>;
     }
     return null;
   };
@@ -38,7 +70,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup
       displayPopup.text === text &&
       displayPopup.time === time
     ) {
-      return <MiniPopup changeEditMessage={changeEditMessage} message={message} />;
+      return <MiniPopup changeEditMessage={changeEditMessage} message={message} coords={popupCoords}/>;
     }
     return null;
   };
@@ -58,11 +90,11 @@ const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup
   };
     //if message eddited field function will return eddited block if there is no eddited field, the function returns nothing
   return (
-    <>
+    <div ref={blockRef} key={message.messageId} className={`chat-messages-wrapper ${firstLoad ? 'chat-message-hidden' : ''} ${message.messageId === messageID ? 'chat-message-hidden-anim' : ''}`}>
       {file ? (
         <>
           {owner ? (
-              <div className={`file-message-wrapper file-yes ${ needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick} >
+              <div  className={`file-message-wrapper  file-yes ${ needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick} >
               {needToDisplayMiniPopup()}
               {needToDisplayForwardMessage()}
               <div className='file-message-container'>
@@ -79,10 +111,10 @@ const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup
               </div>
             </div>
           ) : (
-            <div className={`stranger-owner ${needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
+            <div  className={`stranger-owner  ${needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
               {needToDisplayMiniPopup()}
               {needToDisplayForwardMessage()}
-              <img src={imgUrl} alt={ownerName} className="icon" />
+              <img src={imgUrl ? imgUrl : 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'} alt={ownerName} className="icon" />
               <div className='file-message-wrapper'>
                 <div className='file-message-container'>
 
@@ -104,7 +136,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup
       ) : (
         <>
           {owner ? (
-            <div className={`chat-message-wrapper yes ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
+            <div className={`chat-message-wrapper  yes ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
               {needToDisplayMiniPopupWithoutFile()}
               {needToDisplayForwardMessage()}
               <div className='chat-message-container'>
@@ -118,10 +150,10 @@ const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup
               </div>
             </div>
           ) : (
-            <div className={`stranger-owner ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''}`} onContextMenu={handleRightClick}>
+            <div  className={`stranger-owner  ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''}`} onContextMenu={handleRightClick}>
                {needToDisplayMiniPopupWithoutFile()}
                {needToDisplayForwardMessage()}
-              <img src={imgUrl} alt={ownerName} className="icon" />
+               <img src={imgUrl ? imgUrl : 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'} alt={ownerName} className="icon" />
               <div className={`chat-message-wrapper ${forwarded ? 'forwarded-message' : ''}`}>
                 <div className='chat-message-container'>
                   <div className='sent-data'>
@@ -137,7 +169,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({handleDisplayPopup,displayPopup
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

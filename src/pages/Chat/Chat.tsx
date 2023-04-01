@@ -32,9 +32,9 @@ const Chat = () => {
   return (
     <ChatBaseLayout>
       <div className="chat-container">
-        <div>
+        <div className='chat-container-layout'>
           <ChatHeader
-            imgUrl={userChat && userChat.result.peer.avatar ? userChat.result.peer.avatar : "/dwofmw"}
+            imgUrl={userChat && userChat.result.peer.avatar ? userChat.result.peer.avatar : "https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"}
             name={userChat ? userChat.result.peer.name : 'Ivan'}
             status="online" />
           <MessageArea loading={loading}

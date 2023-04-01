@@ -1,11 +1,10 @@
 import './chatInput.scss'
 import { microphone, clip, sendMessageIcon } from '../../../assets/Icons';
 import { FC, useEffect, useState } from 'react';
-import {  mockMessages } from '../chatBar/messageArea/mockMessagesData';
 import ReplyComponent from '../reply/replyComponent';
-import { ChatInputProps,  MessageDataType } from '../../../types/chats/chat.types';
+import { ChatInputProps,  MessageDataType, messageActions } from '../../../types/chats/chat.types';
 
-const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage}) => {
+const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage, handleMessages, messages}) => {
   const [diplayEditComponent, setDiplayEditComponent] = useState(true)
   const [chatInputValue, setChatInputValue] = useState('')
   const handleCloseEditPopup = () => {
@@ -14,9 +13,10 @@ const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage}) => {
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+   if(chatInputValue.length > 0) {
     const dateNow = new Date()
-    const hours = dateNow.getHours()
-    const minutes = dateNow.getMinutes()
+    const hours = dateNow.getHours() >= 9 ? dateNow.getHours() : `0${dateNow.getHours()}`
+    const minutes = dateNow.getMinutes() >= 9 ? dateNow.getMinutes() : `0${dateNow.getMinutes()}`
     const body: MessageDataType = {
       messageId: crypto.randomUUID(),
       type: 'message',
@@ -30,15 +30,16 @@ const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage}) => {
         from: editType.from,
         message: editType.value
       }
-      mockMessages.unshift(body)
+      handleMessages(messageActions.ADD, body)
     }else if(editType.editType === 'Edit') {
-      const messageToReplace = mockMessages.findIndex((item) => item.messageId === editType.messageId)
-      mockMessages[messageToReplace].editted = true
-      mockMessages[messageToReplace].text = chatInputValue
-      mockMessages[messageToReplace].time = `${hours}:${minutes}`
-      mockMessages[messageToReplace].text = chatInputValue
+      const messageToReplace = messages.findIndex((item) => item.messageId === editType.messageId)
+      body.messageId = messages[messageToReplace].messageId
+      body.editted = true
+      body.time = `${hours}:${minutes}`
+      body.text = chatInputValue
+      handleMessages(messageActions.EDIT, body)
     }else {
-      mockMessages.unshift(body)
+      handleMessages(messageActions.ADD, body)
     }
 
 
@@ -46,6 +47,7 @@ const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage}) => {
     changeEditMessage('', null, null, null)
     // authorizedRequest(sendChatMessageUrl('1', chatInputValue), "POST", 'accessToken', body).then((_) => setChatInputValue(''))
     // sendChatMessage('1', chatInputValue).then((_) => setChatInputValue(''))
+   }
   }
   useEffect(() => {
     if(editType.value !== null && editType.editType !== 'Reply') {

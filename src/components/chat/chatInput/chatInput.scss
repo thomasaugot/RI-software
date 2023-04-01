@@ -9,7 +9,8 @@
   background-color: white;
   margin-bottom: 2.77vw;
   margin-right: 10px;
-
+  position: relative;
+  z-index: 2;
   .tools {
     width: 2.91vw;
     height: 2.91vw;
@@ -49,4 +50,8 @@
 .chat-input-container-edit {
   border-radius: 0vw 0vw 1vw 1vw;
   box-shadow: none
+}
+.chat-input-wrapper {
+  position: relative;
+  z-index: 1;
 }
