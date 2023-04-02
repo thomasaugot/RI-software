@@ -3,10 +3,10 @@ export type ChatHeaderTypes = {
   name: string,
   status: string
 }
-export type displayPopupData = {
+export type additionalDataForPopup = {
   ownerName: string, text: string, time: string, fileExist: boolean
 }
-export type EditMessageType = {
+export type PopupActionType = {
   editType: string,
   value: string | null,
   from: string | null,
@@ -44,7 +44,7 @@ export enum messageActions {
 }
 export type ChatInputProps = {
   changeEditMessage: (editType: string, value: string | null, from: string | null, messageId: string | null) => void,
-  editType: EditMessageType,
+  popupActionType: PopupActionType,
   handleMessages: (action: string, body: MessageDataType) => void,
   messages: MessageDataType[]
 }
@@ -55,7 +55,7 @@ export type MiniPopupProps = {
 }
 export type chatMessagePropsType  = {
   handleDisplayPopup: (ownerName: string, text: string, time: string, fileExist: boolean) => void,
-  displayPopup: displayPopupData | null,
+  additionalDataForPopup: additionalDataForPopup | null,
   delay: number,
   needToAnimateBlock: {messageID: string | null, firstLoad: boolean},
   messagesScrollHeight: React.RefObject<HTMLDivElement>

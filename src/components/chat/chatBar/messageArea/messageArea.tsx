@@ -4,7 +4,7 @@ import ChatMessages from '../../chatMessages/chatMessages';
 import ChatInfoText from '../../chatInfoText/chatInfoText';
 import { FC, useState } from 'react';
 import ChatMessageLoadingIcon from '../../chatMessageLoadingIcon/ChatMessageLoadingIcon';
-import { EditMessageType, MessageDataType, displayPopupData, messageActions, messageAreaProps } from '../../../../types/chats/chat.types';
+import { PopupActionType, MessageDataType,  messageActions, messageAreaProps, additionalDataForPopup } from '../../../../types/chats/chatTypes';
 import { mockMessages } from './mockMessagesData';
 
 
@@ -15,8 +15,8 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
     messageID: null,
     firstLoad: true
   })
-  const [displayPopup, setDisplayPopup] = useState<displayPopupData | null>(null)
-  const [editType, setEditType] = useState<EditMessageType>({editType: '', value: null, from: null, messageId: null})
+  const [additionalDataForPopup, setAdditionalDataForPopup] = useState<additionalDataForPopup | null>(null)
+  const [popupActionType, setPopupActionType] = useState<PopupActionType>({editType: '', value: null, from: null, messageId: null})
   const handleDisplayPopup = (ownerName: string, text: string, time: string, fileExist: boolean) => {
     const objectFromComponent = {
       ownerName,
@@ -24,25 +24,25 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
       time,
       fileExist
     }
-    if(JSON.stringify(objectFromComponent) === JSON.stringify(displayPopup)) {
+    if(JSON.stringify(objectFromComponent) === JSON.stringify(additionalDataForPopup)) {
       //If the popup is already open, then set the popup to null
-      setDisplayPopup(null)
+      setAdditionalDataForPopup(null)
     }else {
        //If the popup is closed, then set the message data to the value of the popup
-      setDisplayPopup(objectFromComponent)
+       setAdditionalDataForPopup(objectFromComponent)
     }
   }
   const changeEditMessage = (editType: string, value: string | null, from: string | null, messageId: string | null) => {
-    setDisplayPopup(null)
+    setAdditionalDataForPopup(null)
     if(value !== null && from !== null) {
-      setEditType({
+      setPopupActionType({
         editType,
         value,
         from,
         messageId
       })
     }else {
-      setEditType({editType, value: null, from: null, messageId: null})
+      setPopupActionType({editType, value: null, from: null, messageId: null})
     }
   }
   const handleMessages = (action: string, body: MessageDataType) => {
@@ -81,7 +81,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
             messagesScrollHeight={messagesScrollHeight}
               changeEditMessage={changeEditMessage}
               handleDisplayPopup={handleDisplayPopup}
-              displayPopup={displayPopup}
+              additionalDataForPopup={additionalDataForPopup}
               message={message}
               needToAnimateBlock={needToAnimateBlock}
               delay={index * 0.05}
@@ -91,7 +91,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
         })}
       </div>
 
-      <ChatInput editType={editType} changeEditMessage={changeEditMessage} handleMessages={handleMessages} messages={messages}/>
+      <ChatInput popupActionType={popupActionType} changeEditMessage={changeEditMessage} handleMessages={handleMessages} messages={messages}/>
     </div>
   );
 };

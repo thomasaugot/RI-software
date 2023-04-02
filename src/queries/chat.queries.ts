@@ -1,4 +1,4 @@
-import { pdfFile, wordFile, excelFile, powerpointFile, zipFile } from "../assets/Icons";
+import { pdfFile, wordFile, excelFile, powerpointFile, zipFile } from '../assets/chatIcons'
 
 export const FILE_TYPE_ICON = {
   pdf: 'pdf',

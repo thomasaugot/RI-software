@@ -1,5 +1,5 @@
+import { addChat } from '../../../assets/chatIcons';
 import './chatBarHeader.scss';
-import { addChat } from '../../../assets/Icons';
 
 const ChatBarHeader = () => {
   return (

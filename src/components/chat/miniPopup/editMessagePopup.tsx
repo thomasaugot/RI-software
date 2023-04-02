@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useRef } from 'react'
-import { copyMessageIcon} from '../../../assets/Icons'
-import {deleteMessageIcon} from '../../../assets/Icons'
-import {editMessageIcon} from '../../../assets/Icons'
-import {forwardMessageIcon} from '../../../assets/Icons'
-import {pinMessageIcon} from '../../../assets/Icons'
-import {replyMessageIcon} from '../../../assets/Icons'
+import { copyMessageIcon} from '../../../assets/chatIcons'
+import {deleteMessageIcon} from '../../../assets/chatIcons'
+import {editMessageIcon} from '../../../assets/chatIcons'
+import {forwardMessageIcon} from '../../../assets/chatIcons'
+import {pinMessageIcon} from '../../../assets/chatIcons'
+import {replyMessageIcon} from '../../../assets/chatIcons'
 import './miniPopup.scss'
-import { MiniPopupProps } from '../../../types/chats/chat.types'
+import { MiniPopupProps } from '../../../types/chats/chatTypes'
 type Coords = {
   coords: {
     x: number,

@@ -1,11 +1,12 @@
 import './chatMessage.scss';
-import { chatMessagePropsType } from '../../../types/chats/chat.types';
+import { chatMessagePropsType } from '../../../types/chats/chatTypes';
 import { getFile } from '../../../queries/chat.queries';
 import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import MiniPopup from '../miniPopup/editMessagePopup';
 import ForwardComponent from '../forwardComponent/forwardComponent';
-const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisplayPopup,displayPopup,message,  changeEditMessage, delay, needToAnimateBlock }) => {
+import { profile } from '../../../assets/Icons';
+const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisplayPopup,additionalDataForPopup,message,  changeEditMessage, delay, needToAnimateBlock }) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, editted} = message
   const {messageID, firstLoad} = needToAnimateBlock
   const fileTypeIcon = getFile(file as string);
@@ -51,12 +52,12 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
   }
   const needToDisplayMiniPopup = () => {
     if (
-      displayPopup !== null &&
-      displayPopup.ownerName === ownerName &&
-      displayPopup.text === text &&
-      displayPopup.time === time &&
+      additionalDataForPopup !== null &&
+      additionalDataForPopup.ownerName === ownerName &&
+      additionalDataForPopup.text === text &&
+      additionalDataForPopup.time === time &&
       file !== undefined &&
-      displayPopup.fileExist
+      additionalDataForPopup.fileExist
     ) {
       return <MiniPopup changeEditMessage={changeEditMessage} message={message} coords={popupCoords}/>;
     }
@@ -65,10 +66,10 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
   //if clicked message include default message data this function will return popup component if there is no data, the function returns nothing
   const needToDisplayMiniPopupWithoutFile = () => {
     if (
-      displayPopup !== null &&
-      displayPopup.ownerName === ownerName &&
-      displayPopup.text === text &&
-      displayPopup.time === time
+      additionalDataForPopup !== null &&
+      additionalDataForPopup.ownerName === ownerName &&
+      additionalDataForPopup.text === text &&
+      additionalDataForPopup.time === time
     ) {
       return <MiniPopup changeEditMessage={changeEditMessage} message={message} coords={popupCoords}/>;
     }
@@ -114,7 +115,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
             <div  className={`stranger-owner  ${needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
               {needToDisplayMiniPopup()}
               {needToDisplayForwardMessage()}
-              <img src={imgUrl ? imgUrl : 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'} alt={ownerName} className="icon" />
+              {imgUrl ?  <img src={imgUrl} alt={ownerName} className="icon" /> : <span className="icon">{profile}</span>}
               <div className='file-message-wrapper'>
                 <div className='file-message-container'>
 
@@ -153,7 +154,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
             <div  className={`stranger-owner  ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''}`} onContextMenu={handleRightClick}>
                {needToDisplayMiniPopupWithoutFile()}
                {needToDisplayForwardMessage()}
-               <img src={imgUrl ? imgUrl : 'https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png'} alt={ownerName} className="icon" />
+               {imgUrl ?  <img src={imgUrl} alt={ownerName} className="icon" /> : <span className="icon">{profile}</span>}
               <div className={`chat-message-wrapper ${forwarded ? 'forwarded-message' : ''}`}>
                 <div className='chat-message-container'>
                   <div className='sent-data'>

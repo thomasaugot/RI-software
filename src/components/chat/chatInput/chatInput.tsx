@@ -1,10 +1,10 @@
 import './chatInput.scss'
-import { microphone, clip, sendMessageIcon } from '../../../assets/Icons';
 import { FC, useEffect, useState } from 'react';
 import ReplyComponent from '../reply/replyComponent';
-import { ChatInputProps,  MessageDataType, messageActions } from '../../../types/chats/chat.types';
+import { ChatInputProps,  MessageDataType, messageActions } from '../../../types/chats/chatTypes';
+import { clip, microphone, sendMessageIcon } from '../../../assets/chatIcons';
 
-const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage, handleMessages, messages}) => {
+const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, handleMessages, messages}) => {
   const [diplayEditComponent, setDiplayEditComponent] = useState(true)
   const [chatInputValue, setChatInputValue] = useState('')
   const handleCloseEditPopup = () => {
@@ -25,14 +25,14 @@ const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage, handleMessa
       time: `${hours}:${minutes}`,
       text: chatInputValue,
     }
-    if(editType.editType === 'Reply' && editType.value !== null && editType.from !== null) {
+    if(popupActionType.editType === 'Reply' && popupActionType.value !== null && popupActionType.from !== null) {
       body.forwarded =  {
-        from: editType.from,
-        message: editType.value
+        from: popupActionType.from,
+        message: popupActionType.value
       }
       handleMessages(messageActions.ADD, body)
-    }else if(editType.editType === 'Edit') {
-      const messageToReplace = messages.findIndex((item) => item.messageId === editType.messageId)
+    }else if(popupActionType.editType === 'Edit') {
+      const messageToReplace = messages.findIndex((item) => item.messageId === popupActionType.messageId)
       body.messageId = messages[messageToReplace].messageId
       body.editted = true
       body.time = `${hours}:${minutes}`
@@ -50,14 +50,14 @@ const ChatInput: FC<ChatInputProps> = ({editType, changeEditMessage, handleMessa
    }
   }
   useEffect(() => {
-    if(editType.value !== null && editType.editType !== 'Reply') {
-      setChatInputValue(editType.value)
+    if(popupActionType.value !== null && popupActionType.editType !== 'Reply') {
+      setChatInputValue(popupActionType.value)
     }
-  }, [editType.value])
+  }, [popupActionType.value])
   return (
     <form onSubmit={handleSubmit} className='chat-input-wrapper'>
-      { editType.editType.length !== 0 ?  <ReplyComponent editType={editType} handleCloseEditPopup={handleCloseEditPopup}/> : null}
-      <div className={`chat-input-container ${editType.editType.length > 0 ? 'chat-input-container-edit' : ''}`}>
+      { popupActionType.editType.length !== 0 ?  <ReplyComponent editType={popupActionType} handleCloseEditPopup={handleCloseEditPopup}/> : null}
+      <div className={`chat-input-container ${popupActionType.editType.length > 0 ? 'chat-input-container-edit' : ''}`}>
        <div className='tools'>
           {clip}
         </div>

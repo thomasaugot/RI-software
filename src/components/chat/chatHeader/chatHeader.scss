@@ -24,7 +24,15 @@
       align-items: center;
       border-radius: 99px;
     }
-
+    svg {
+      width: 4.16vw;
+      height: 4.16vw;
+      display: flex;
+      background-color: #376ABE;
+      justify-content: center;
+      align-items: center;
+      border-radius: 99px;
+    }
     .name-container {
       display: flex;
       flex-direction: column;

@@ -1,4 +1,4 @@
-import { MessageDataType } from '../../../../types/chats/chat.types'
+import { MessageDataType } from '../../../../types/chats/chatTypes'
 
 export const mockMessages:MessageDataType[] = [
     {
