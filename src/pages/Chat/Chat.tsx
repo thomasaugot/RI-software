@@ -4,11 +4,12 @@ import ChatBarHeader from "../../components/chat/chatBarHeader/chatBarHeader";
 import ChatBar from "../../components/chat/chatBar/chatBar";
 import './Chat.scss';
 import { useEffect, useRef, useState } from 'react';
-import { ChatByIdResponse } from '../../types/chats/chat.types';
+import { ChatByIdResponse } from '../../types/chats/chatTypes';
 import { useInfiniteScroll } from '../../customHooks/useInfiniteScroll';
 import { authorizedRequest } from '../../utils/queries';
 import { chatInfoById } from '../../utils/network';
 import ChatBaseLayout from '../../layouts/ChatBaseLayout/ChatBaseLayout';
+import { profile } from '../../assets/Icons';
 
 const Chat = () => {
   const [userChat, setUserChat] = useState<ChatByIdResponse>()
@@ -32,9 +33,9 @@ const Chat = () => {
   return (
     <ChatBaseLayout>
       <div className="chat-container">
-        <div>
+        <div className='chat-container-layout'>
           <ChatHeader
-            imgUrl={userChat && userChat.result.peer.avatar ? userChat.result.peer.avatar : "/dwofmw"}
+            imgUrl={userChat && userChat.result.peer.avatar ? userChat.result.peer.avatar : ''}
             name={userChat ? userChat.result.peer.name : 'Ivan'}
             status="online" />
           <MessageArea loading={loading}

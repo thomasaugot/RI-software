@@ -19,7 +19,6 @@
   width: 15.625vw;
   background-color: #FAFAFA;
   margin-bottom: 2vw;
-
   .chat-message-container {
     min-height: 3.68vw;
     width: 14.23vw;
@@ -136,4 +135,40 @@
       // margin-left: 0.69vw;
     }
   }
+}
+.forwarded-message {
+  flex-direction: column;
+}
+.editted {
+  font-size: 0.69vw;
+  color: #E2E2E2;
+  padding-right: 0.6510416666666666vw;
+}
+@keyframes slide-in {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+.chat-message-hidden{
+ opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+.chat-message-hidden-anim {
+  animation-name: slide-in;
+  animation-duration: 0.08s;
+  animation-timing-function: ease-out;
+
+}
+
+.chat-messages-container {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.chat-messages-visible {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
