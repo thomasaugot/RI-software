@@ -1,0 +1,14 @@
+.audio-recording-wrapper{
+  width: 31.4453125vw;
+  overflow: hidden;
+  position: relative;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+.audio-recording-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  transition: transform 0.2s ease-out;
+ }

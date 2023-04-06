@@ -6,7 +6,7 @@ import {forwardMessageIcon} from '../../../assets/chatIcons'
 import {pinMessageIcon} from '../../../assets/chatIcons'
 import {replyMessageIcon} from '../../../assets/chatIcons'
 import './miniPopup.scss'
-import { MiniPopupProps } from '../../../types/chats/chatTypes'
+import { MiniPopupProps, messageActions } from '../../../types/chats/chatTypes'
 type Coords = {
   coords: {
     x: number,
@@ -40,7 +40,7 @@ const EditMessagePopup: FC<MiniPopupProps & Coords> = ({changeEditMessage, messa
         </div>
         <div className="miniPopup-item">
           <div className="miniPopup-item-icon">{copyMessageIcon}</div>
-          <div className="miniPopup-item-text">Copy</div>
+          <div className="miniPopup-item-text" onClick={() => {changeEditMessage('Copy', text === undefined ? null : text, null, null)}}>Copy</div>
         </div>
         <div className="miniPopup-item">
           <div className="miniPopup-item-icon">{forwardMessageIcon}</div>

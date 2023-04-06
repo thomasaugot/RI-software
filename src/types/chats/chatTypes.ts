@@ -40,7 +40,8 @@ export type MessageDataType = {
 export enum messageActions {
   DELETE = 'DELETE',
   ADD = 'ADD',
-  EDIT = 'EDIT'
+  EDIT = 'EDIT',
+  COPY = 'COPY',
 }
 export type ChatInputProps = {
   changeEditMessage: (editType: string, value: string | null, from: string | null, messageId: string | null) => void,

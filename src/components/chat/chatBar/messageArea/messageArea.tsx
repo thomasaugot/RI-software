@@ -41,8 +41,19 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
         from,
         messageId
       })
+    }else if(editType === 'Copy') {
+      if(value) {
+        const input = document.createElement('input');
+      input.value = value
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input)
+      }
+      setPopupActionType({editType, value: null, from: null, messageId: null})
     }else {
       setPopupActionType({editType, value: null, from: null, messageId: null})
+
     }
   }
   const handleMessages = (action: string, body: MessageDataType) => {
@@ -64,6 +75,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
         }
       }))
     }
+
   }
 
   return (

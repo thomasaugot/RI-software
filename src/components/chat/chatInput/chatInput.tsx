@@ -2,15 +2,23 @@ import './chatInput.scss'
 import { FC, useEffect, useState } from 'react';
 import ReplyComponent from '../reply/replyComponent';
 import { ChatInputProps,  MessageDataType, messageActions } from '../../../types/chats/chatTypes';
-import { clip, microphone, sendMessageIcon } from '../../../assets/chatIcons';
+import ChatAudioRecorder from '../chatAudioRecorder/chatAudioRecorder';
+import ChatInputMessage from '../chatInputMessage/chatInputMessage';
 
 const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, handleMessages, messages}) => {
   const [diplayEditComponent, setDiplayEditComponent] = useState(true)
   const [chatInputValue, setChatInputValue] = useState('')
+  const [isRecordingAudio, setIsRecordingAudio] = useState(false)
+
   const handleCloseEditPopup = () => {
     setDiplayEditComponent(!diplayEditComponent)
     changeEditMessage('', null, null, null)
   }
+
+  const changeIsRecording = (isRec: boolean) => {
+    setIsRecordingAudio(isRec)
+  }
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
    if(chatInputValue.length > 0) {
@@ -40,6 +48,7 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
       handleMessages(messageActions.EDIT, body)
     }else {
       handleMessages(messageActions.ADD, body)
+
     }
 
 
@@ -54,19 +63,14 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
       setChatInputValue(popupActionType.value)
     }
   }, [popupActionType.value])
+
   return (
     <form onSubmit={handleSubmit} className='chat-input-wrapper'>
-      { popupActionType.editType.length !== 0 ?  <ReplyComponent editType={popupActionType} handleCloseEditPopup={handleCloseEditPopup}/> : null}
+      { popupActionType.editType.length !== 0 && popupActionType.editType !== 'Copy' ?  <ReplyComponent editType={popupActionType} handleCloseEditPopup={handleCloseEditPopup}/> : null}
       <div className={`chat-input-container ${popupActionType.editType.length > 0 ? 'chat-input-container-edit' : ''}`}>
-       <div className='tools'>
-          {clip}
-        </div>
-        <input type="text" placeholder='Message' className='chat-input' value={chatInputValue} onChange={(e) => { setChatInputValue(e.target.value) }} />
-        {chatInputValue.length === 0 ? <div className='tools tools-microphone'>
-          {microphone}
-        </div> : <div className='tools tools-microphone' >
-          {sendMessageIcon}
-        </div>}
+      {isRecordingAudio
+      ? <ChatAudioRecorder isRecording={isRecordingAudio} handleRecording={changeIsRecording} />
+      : <ChatInputMessage chatInputValue={chatInputValue} setChatInputValue={setChatInputValue} handleRecording={changeIsRecording}/>}
        </div>
     </form>
   );
