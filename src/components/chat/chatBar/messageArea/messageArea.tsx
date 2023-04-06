@@ -2,7 +2,7 @@ import './messageArea.scss';
 import ChatInput from '../../chatInput/chatInput';
 import ChatMessages from '../../chatMessages/chatMessages';
 import ChatInfoText from '../../chatInfoText/chatInfoText';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ChatMessageLoadingIcon from '../../chatMessageLoadingIcon/ChatMessageLoadingIcon';
 import { PopupActionType, MessageDataType,  messageActions, messageAreaProps, additionalDataForPopup } from '../../../../types/chats/chatTypes';
 import { mockMessages } from './mockMessagesData';
@@ -77,7 +77,9 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
     }
 
   }
-
+useEffect(() => {
+  console.log(messages)
+}, [messages])
   return (
     <div className="message-area">
       <div className='messages' ref={messagesScrollHeight} onScroll={handleScroll} onClick={() => {

@@ -1,20 +1,21 @@
-import React from 'react'
-import { redCircle } from '../../../assets/chatIcons'
+import React, { FC } from 'react'
+import { playAudioIcon, redCircle } from '../../../assets/chatIcons'
 import './chatTimer.scss'
 interface ChatTimerProps {
-  timer: number
+  timer: number,
+  isRec: boolean
 }
-function ChatTimer({timer}: ChatTimerProps) {
+const ChatTimer: FC<ChatTimerProps> = ({timer, isRec}) => {
   function formatTime(seconds: number) {
     let minutes = Math.floor(seconds / 60);
     let remainingSeconds = seconds % 60;
     let formattedMinutes = (minutes < 10) ? '0' + minutes : minutes;
     let formattedSeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
-    return `${formattedMinutes}:${formattedSeconds}`;
+    return `${formattedMinutes}:${Math.floor(+formattedSeconds)}`;
   }
   return (
     <div className='audio-recorder-timer-wrapper'>
-      <div className='audio-recorder-icon'>{redCircle}</div>
+      <div className='audio-recorder-icon'>{isRec ? redCircle : playAudioIcon}</div>
       <div className='audio-recorder-timer'>{formatTime(timer)}</div>
     </div>
   )

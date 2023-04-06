@@ -1,15 +1,17 @@
-import React, {  useCallback, useEffect, useRef, useState } from 'react'
+import React, {  FC, useCallback, useEffect, useRef, useState } from 'react'
 import AudioLevel from '../chatAudioLine/audioLevel';
 import RecordRTC from 'recordrtc';
 import './chatAudioRecorder.scss'
 import ChatTimer from '../chatTimer/chatTimer';
 import { getAudioLevels } from './getAudioLevels';
-import { recordingAudioIcon } from '../../../assets/chatIcons';
-interface ChatAudioRecorderProps {
+import { deleteAudioMessageIcon, recordingAudioIcon, sendMessageIcon } from '../../../assets/chatIcons';
+type ChatAudioRecorderProps = {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement> |  null) => void,
   isRecording: boolean,
-  handleRecording: (isRec: boolean) => void
+  handleRecording: (isRec: boolean) => void,
+  setRecordingAudioBlob: (blob: Blob) => void,
 }
-function ChatAudioRecorder({isRecording, handleRecording}: ChatAudioRecorderProps) {
+const ChatAudioRecorder: FC<ChatAudioRecorderProps> = ({isRecording, handleRecording, setRecordingAudioBlob, handleSubmit}) => {
   const [blob, setBlob] = useState<Blob | null>(null);
   const [levels, setLevels] = useState<number[]>([]);
   const recorder = useRef<RecordRTC | null>(null);
@@ -17,11 +19,9 @@ function ChatAudioRecorder({isRecording, handleRecording}: ChatAudioRecorderProp
   const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<null | HTMLDivElement >(null)
   const [timer, setTimer] = useState(0)
-  const [audioFile, setAudioFile] = useState<null | Blob>(null)
-  const [audioLevels, setAudioLevels] = useState<[] | number[]>([])
   const [isRec, setIsRec] = useState(false)
   const incrementTimer = useCallback(() => {
-    setTimer((prevTimer) => prevTimer + 1);
+    setTimer((prevTimer) => prevTimer + 0.5);
   }, []);
 useEffect(() => {
   if (containerRef.current) {
@@ -57,23 +57,24 @@ useEffect(() => {
     animationId.current =  setInterval(() => {
       draw()
       incrementTimer()
-    }, 1000);
+    }, 500);
   };
 
   const stopRecording = async () => {
     recorder.current?.stopRecording(() => {
       const blob = recorder.current?.getBlob();
       setBlob(blob as Blob);
+      setRecordingAudioBlob(blob as Blob)
       setNewAudioFile(blob as Blob)
     });
 
     clearInterval(animationId.current!);
+    animationId.current = null;
   };
   const setNewAudioFile = (file: Blob) => {
     getAudioLevels(file).then((data) => {
-      setAudioLevels(data)
+      setLevels(data)
     })
-    setAudioFile(file)
   }
   useEffect(() => {
     if(isRecording) {
@@ -81,24 +82,29 @@ useEffect(() => {
       setIsRec(true)
     }
   }, [isRecording])
-  useEffect(() => {
-    if(!isRec) {
-      stopRecording()
-    }
-  }, [isRec])
   return (
       <>
-      <ChatTimer timer={timer}/>
+      {!isRec ? <div className="delete-audio-message">
+        {deleteAudioMessageIcon}
+      </div> : null}
+      <ChatTimer timer={timer} isRec={isRec}/>
       <div className="audio-recording-wrapper">
-      <div className="audio-recording-container" style={{
-    transform: `translateX(-${containerWidth - 31.4453125 * window.innerWidth / 100}px)`
-  }}  ref={containerRef}>
+      {isRec && <div className="audio-recording-container" style={{
+        transform: `translateX(-${containerWidth - 31.4453125 * window.innerWidth / 100}px)`}}  ref={containerRef}>
         {levels.map((level, index) => (
           <AudioLevel key={index} height={level} />
         ))}
-        </div>
+        </div> }
+      {!isRec && levels.map((item, index) => <AudioLevel key={index} height={item}/>)}
       </div>
-      <div className='recording-audio-button' onClick={() => {setIsRec(false)}}>{recordingAudioIcon}</div>
+     {isRec ?  <div className='recording-audio-button' onClick={() => {
+        stopRecording()
+        setIsRec(false)
+      }}>{recordingAudioIcon}</div> : <div className='recording-audio-button' onClick={() => {
+        handleSubmit(null)
+        setIsRec(false)
+        handleRecording(false)
+      }}>{sendMessageIcon}</div>}
       </>
   );
 }

@@ -31,6 +31,7 @@ export type MessageDataType = {
   time: string
   text?:string
   file?: string
+  audioFile?:Blob
   imgUrl?: string,
   messageId: string | null
   editted?: boolean,

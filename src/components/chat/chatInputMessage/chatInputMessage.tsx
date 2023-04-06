@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { clip, microphone, sendMessageIcon } from '../../../assets/chatIcons'
-interface ChatInputMessageProps {
+type ChatInputMessageProps = {
   chatInputValue: string,
   setChatInputValue: (value: string) => void,
   handleRecording: (value: boolean) => void
 }
-function ChatInputMessage({chatInputValue, setChatInputValue, handleRecording}: ChatInputMessageProps) {
+const ChatInputMessage: FC<ChatInputMessageProps> = ({chatInputValue, setChatInputValue, handleRecording}) => {
   return (
     <>
         <div className='tools'>

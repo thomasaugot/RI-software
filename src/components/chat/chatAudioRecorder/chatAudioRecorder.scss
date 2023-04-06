@@ -12,3 +12,25 @@
   position: absolute;
   transition: transform 0.2s ease-out;
  }
+.delete-audio-message {
+  background-color: #E3494C;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-radius: 9px 0px 0px 9px;
+  width: 2.6692708333vw;
+  justify-content: center;
+}
+.delete-audio-message svg {
+  height: 1.3671875vw;
+  width: 1.2369791666666667vw;
+}
+.recording-audio-button svg {
+  width: 2.6692708333333335vw;
+  height: 2.6692708333333335vw;
+}
+.recording-audio-button {
+  margin-left: 1.6276041666666667vw;
+}
