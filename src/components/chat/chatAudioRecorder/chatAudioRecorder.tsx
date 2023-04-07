@@ -9,9 +9,10 @@ type ChatAudioRecorderProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement> |  null) => void,
   isRecording: boolean,
   handleRecording: (isRec: boolean) => void,
-  setRecordingAudioBlob: (blob: Blob) => void,
+  handleAddAudioBlob: (audioBlob: Blob | null, audioLength: string | null) => void,
 }
-const ChatAudioRecorder: FC<ChatAudioRecorderProps> = ({isRecording, handleRecording, setRecordingAudioBlob, handleSubmit}) => {
+
+const ChatAudioRecorder: FC<ChatAudioRecorderProps> = ({isRecording, handleRecording, handleAddAudioBlob, handleSubmit}) => {
   const [blob, setBlob] = useState<Blob | null>(null);
   const [levels, setLevels] = useState<number[]>([]);
   const recorder = useRef<RecordRTC | null>(null);
@@ -31,7 +32,13 @@ useEffect(() => {
     }
   }
 }, [levels]);
-
+function formatTime(seconds: number) {
+  let minutes = Math.floor(seconds / 60);
+  let remainingSeconds = seconds % 60;
+  let formattedMinutes = (minutes < 10) ? '0' + minutes : minutes;
+  let formattedSeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
+  return `${formattedMinutes}:${Math.floor(+formattedSeconds) > 10 ? Math.floor(+formattedSeconds) : `0${Math.floor(+formattedSeconds)}`}`;
+}
   const startRecording = async () => {
     const audio = await navigator.mediaDevices.getUserMedia({ audio: true });
     recorder.current = new RecordRTC(audio, { type: 'audio' });
@@ -64,18 +71,13 @@ useEffect(() => {
     recorder.current?.stopRecording(() => {
       const blob = recorder.current?.getBlob();
       setBlob(blob as Blob);
-      setRecordingAudioBlob(blob as Blob)
-      setNewAudioFile(blob as Blob)
+      handleAddAudioBlob(blob as Blob, formatTime(timer))
     });
 
     clearInterval(animationId.current!);
     animationId.current = null;
   };
-  const setNewAudioFile = (file: Blob) => {
-    getAudioLevels(file).then((data) => {
-      setLevels(data)
-    })
-  }
+
   useEffect(() => {
     if(isRecording) {
       startRecording()
@@ -84,7 +86,10 @@ useEffect(() => {
   }, [isRecording])
   return (
       <>
-      {!isRec ? <div className="delete-audio-message">
+      {!isRec ? <div className="delete-audio-message" onClick={() => {
+        handleAddAudioBlob(null, null)
+        handleRecording(false)
+      }}>
         {deleteAudioMessageIcon}
       </div> : null}
       <ChatTimer timer={timer} isRec={isRec}/>

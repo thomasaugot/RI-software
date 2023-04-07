@@ -11,7 +11,7 @@ const ChatTimer: FC<ChatTimerProps> = ({timer, isRec}) => {
     let remainingSeconds = seconds % 60;
     let formattedMinutes = (minutes < 10) ? '0' + minutes : minutes;
     let formattedSeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
-    return `${formattedMinutes}:${Math.floor(+formattedSeconds)}`;
+    return `${formattedMinutes}:${Math.floor(+formattedSeconds) > 10 ? Math.floor(+formattedSeconds) : `0${Math.floor(+formattedSeconds)}`}`;
   }
   return (
     <div className='audio-recorder-timer-wrapper'>

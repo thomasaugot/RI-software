@@ -89,8 +89,7 @@ useEffect(() => {
         {messages.slice(0, blocksCount).map((message, index) => {
           if (message.type === 'Date') {
             return <ChatInfoText text={message.time} />
-          }
-          if (message.type === 'message') {
+          }else {
             return <ChatMessages
             messagesScrollHeight={messagesScrollHeight}
               changeEditMessage={changeEditMessage}
@@ -101,7 +100,6 @@ useEffect(() => {
               delay={index * 0.05}
               />
           }
-          return null
         })}
       </div>
 

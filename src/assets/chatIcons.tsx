@@ -126,3 +126,11 @@ export const deleteAudioMessageIcon = <svg width="19" height="21" viewBox="0 0 1
 export const playAudioIcon = <svg width="18" height="20" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.526455 19.5527L0.526455 0.500176L17.0265 10.0265L0.526455 19.5527Z" fill="#4272C0"/>
 </svg>
+export const pauseAudioIcon = <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+<rect x="8" y="7" width="4" height="16" rx="2" fill="#000"/>
+<rect x="18" y="7" width="4" height="16" rx="2" fill="#000"/>
+</svg>
+export const playAudioMessage = <svg width="46" height="45" viewBox="0 0 46 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="23.5" cy="22.5" r="22.5" fill="#7F90FF"/>
+<path d="M17.4737 31.5L17.4737 12.4474L33.9737 21.9737L17.4737 31.5Z" fill="#E1E5EC"/>
+</svg>

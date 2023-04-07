@@ -9,7 +9,7 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
   const [diplayEditComponent, setDiplayEditComponent] = useState(true)
   const [chatInputValue, setChatInputValue] = useState('')
   const [isRecordingAudio, setIsRecordingAudio] = useState(false)
-  const [recordingAudioBlob, setRecordingAudioBlob] = useState<Blob | null>(null)
+  const [recordingAudioBlob, setRecordingAudioBlob] = useState<{recordingAudioBlob: Blob, audioLength: string} | null>(null)
   const handleCloseEditPopup = () => {
     setDiplayEditComponent(!diplayEditComponent)
     changeEditMessage('', null, null, null)
@@ -18,7 +18,13 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
   const changeIsRecording = (isRec: boolean) => {
     setIsRecordingAudio(isRec)
   }
-
+  const handleAddAudioBlob = (audioBlob: Blob | null, audioLength: string | null) => {
+    if(audioBlob && audioLength) {
+      setRecordingAudioBlob({recordingAudioBlob: audioBlob, audioLength})
+    }else {
+      setRecordingAudioBlob(null)
+    }
+  }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement> | null) => {
     if(e !== null) {
       e.preventDefault();
@@ -90,7 +96,7 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
       { popupActionType.editType.length !== 0 && popupActionType.editType !== 'Copy' ?  <ReplyComponent editType={popupActionType} handleCloseEditPopup={handleCloseEditPopup}/> : null}
       <div className={`chat-input-container ${popupActionType.editType.length > 0 ? 'chat-input-container-edit' : ''}`}>
       {isRecordingAudio
-      ? <ChatAudioRecorder handleSubmit={handleSubmit} isRecording={isRecordingAudio} handleRecording={changeIsRecording} setRecordingAudioBlob={setRecordingAudioBlob}/>
+      ? <ChatAudioRecorder handleSubmit={handleSubmit} isRecording={isRecordingAudio} handleRecording={changeIsRecording} handleAddAudioBlob={handleAddAudioBlob}/>
       : <ChatInputMessage chatInputValue={chatInputValue} setChatInputValue={setChatInputValue} handleRecording={changeIsRecording}/>}
        </div>
     </form>

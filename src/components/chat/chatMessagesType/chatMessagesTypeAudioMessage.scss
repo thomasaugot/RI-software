@@ -1,0 +1,107 @@
+.audio-yes {
+  margin-left: 24vw;
+}
+.audio-message-wrapper {
+  display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 25.2604166667vw;
+    border-radius: 0.9vw;
+    background-color: #E1E5EC;
+    padding: 0.5859375vw 0.9765625vw 0.6510416667vw 0.9765625vw;
+    margin-bottom: 2vw;
+    height: 4.1666666667vw;
+}
+.audio-message-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.audio-message-time {
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 0.6510416666666666vw;
+line-height: 0.78125vw;
+
+color: #4272C0;
+}
+
+.audio-message-wrapper .sent-data .box {
+  margin-left: 0.65vw;
+  width: 0.9114583333333334vw;
+  height: 0.9114583333333334vw;
+  border-radius: 50%;
+  background: conic-gradient(#3a86ff, transparent, transparent, transparent, transparent);
+  position: relative;
+  display: grid;
+  place-items: center;
+  animation: loader-audio 0.7s linear infinite;
+}
+
+.audio-message-wrapper .sent-data .box::before,
+.audio-message-wrapper .sent-data .box::after {
+  content: '';
+  position: absolute;
+}
+
+.audio-message-wrapper .sent-data .box::before {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  background: #E1E5EC;
+}
+
+.audio-message-wrapper .sent-data .box::after {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 1px;
+  background: #3a86ff;
+  border-radius: 50%;
+}
+
+@keyframes loader-audio {
+  0% {
+    transform: rotate(0);
+    background: conic-gradient(#376ABE, #D9D9D900, #D9D9D900, #D9D9D900, #D9D9D900);
+  }
+
+  25% {
+    background: conic-gradient(#376ABE, #D9D9D900, #D9D9D900, #D9D9D900);
+  }
+
+  50% {
+    background: conic-gradient(#376ABE, #D9D9D900, #D9D9D900);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+    background: conic-gradient(#376ABE, #D9D9D900, #D9D9D900);
+  }
+}
+.audio-message-wrapper-data {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.3671875vw;
+  width: 100%;
+}
+.audio-message-left-data {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.6510416666666666vw;
+  line-height: 0.78125vw;
+
+  color: #4272C0;
+}
+.audio-message-right-data .sent-data {
+  display: flex;
+  align-items: center;
+}
+.audio-message-data {
+  display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
