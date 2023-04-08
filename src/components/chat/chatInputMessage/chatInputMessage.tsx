@@ -1,10 +1,7 @@
 import React, { FC } from 'react'
 import { clip, microphone, sendMessageIcon } from '../../../assets/chatIcons'
-type ChatInputMessageProps = {
-  chatInputValue: string,
-  setChatInputValue: (value: string) => void,
-  handleRecording: (value: boolean) => void
-}
+import { ChatInputMessageProps } from '../../../types/chats/audioMessageTypes/audioMessageType'
+
 const ChatInputMessage: FC<ChatInputMessageProps> = ({chatInputValue, setChatInputValue, handleRecording}) => {
   return (
     <>

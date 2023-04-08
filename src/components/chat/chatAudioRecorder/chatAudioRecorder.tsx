@@ -4,12 +4,8 @@ import RecordRTC from 'recordrtc';
 import './chatAudioRecorder.scss'
 import ChatTimer from '../chatTimer/chatTimer';
 import { deleteAudioMessageIcon, recordingAudioIcon, sendMessageIcon } from '../../../assets/chatIcons';
-type ChatAudioRecorderProps = {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement> |  null) => void,
-  isRecording: boolean,
-  handleRecording: (isRec: boolean) => void,
-  handleAddAudioBlob: (audioBlob: Blob | null, audioLength: string | null) => void,
-}
+import { ChatAudioRecorderProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
+
 
 const ChatAudioRecorder: FC<ChatAudioRecorderProps> = ({isRecording, handleRecording, handleAddAudioBlob, handleSubmit}) => {
   const [blob, setBlob] = useState<Blob | null>(null);
@@ -31,7 +27,7 @@ useEffect(() => {
     }
   }
 }, [levels]);
-function formatTime(seconds: number) {
+const formatTime = (seconds: number) => {
   let minutes = Math.floor(seconds / 60);
   let remainingSeconds = seconds % 60;
   let formattedMinutes = (minutes < 10) ? '0' + minutes : minutes;
@@ -91,7 +87,7 @@ function formatTime(seconds: number) {
       }}>
         {deleteAudioMessageIcon}
       </div> : null}
-      <ChatTimer timer={timer} isRec={isRec}/>
+      <ChatTimer timer={timer} isRec={isRec} blob={blob as Blob}/>
       <div className="audio-recording-wrapper">
       {isRec && <div className="audio-recording-container" style={{
         transform: `translateX(-${containerWidth - 31.4453125 * window.innerWidth / 100}px)`}}  ref={containerRef}>

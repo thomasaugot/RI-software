@@ -7,7 +7,7 @@ export type additionalDataForPopup = {
   ownerName: string, text: string, time: string, fileExist: boolean
 }
 export type PopupActionType = {
-  editType: string,
+  actionType: string,
   value: string | null,
   from: string | null,
   messageId: string | null
@@ -48,7 +48,7 @@ export enum messageActions {
   COPY = 'COPY',
 }
 export type ChatInputProps = {
-  changeEditMessage: (editType: string, value: string | null, from: string | null, messageId: string | null) => void,
+  changeEditMessage: (actionType: string, value: string | null, from: string | null, messageId: string | null) => void,
   popupActionType: PopupActionType,
   handleMessages: (action: string, body: MessageDataType) => void,
   messages: MessageDataType[]

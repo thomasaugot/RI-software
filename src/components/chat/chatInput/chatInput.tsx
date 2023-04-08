@@ -43,13 +43,13 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
       text: chatInputValue,
     }
 
-    if(popupActionType.editType === 'Reply' && popupActionType.value !== null && popupActionType.from !== null) {
+    if(popupActionType.actionType === 'Reply' && popupActionType.value !== null && popupActionType.from !== null) {
       body.forwarded =  {
         from: popupActionType.from,
         message: popupActionType.value
       }
       handleMessages(messageActions.ADD, body)
-    }else if(popupActionType.editType === 'Edit') {
+    }else if(popupActionType.actionType === 'Edit') {
       const messageToReplace = messages.findIndex((item) => item.messageId === popupActionType.messageId)
       body.messageId = messages[messageToReplace].messageId
       body.editted = true
@@ -86,15 +86,15 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
   }
   }
   useEffect(() => {
-    if(popupActionType.value !== null && popupActionType.editType !== 'Reply') {
+    if(popupActionType.value !== null && popupActionType.actionType !== 'Reply') {
       setChatInputValue(popupActionType.value)
     }
   }, [popupActionType.value])
 
   return (
     <form onSubmit={handleSubmit} className='chat-input-wrapper'>
-      { popupActionType.editType.length !== 0 && popupActionType.editType !== 'Copy' ?  <ReplyComponent editType={popupActionType} handleCloseEditPopup={handleCloseEditPopup}/> : null}
-      <div className={`chat-input-container ${popupActionType.editType.length > 0 ? 'chat-input-container-edit' : ''}`}>
+      { popupActionType.actionType.length !== 0 && popupActionType.actionType !== 'Copy' ?  <ReplyComponent editType={popupActionType} handleCloseEditPopup={handleCloseEditPopup}/> : null}
+      <div className={`chat-input-container ${popupActionType.actionType.length > 0 ? 'chat-input-container-edit' : ''}`}>
       {isRecordingAudio
       ? <ChatAudioRecorder handleSubmit={handleSubmit} isRecording={isRecordingAudio} handleRecording={changeIsRecording} handleAddAudioBlob={handleAddAudioBlob}/>
       : <ChatInputMessage chatInputValue={chatInputValue} setChatInputValue={setChatInputValue} handleRecording={changeIsRecording}/>}

@@ -3,13 +3,8 @@ import { profile } from '../../../assets/Icons'
 import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon'
 import { MessageDataType } from '../../../types/chats/chatTypes'
 import { getFile } from '../../../queries/chat.queries'
-type ChatMessagesTypeFileMessageProps = {
-  message: MessageDataType,
-  needToDisplayMiniPopup: () => JSX.Element | null,
-  needToDisplayForwardMessage: () => JSX.Element | null,
-  needToDisplayEdditedMessage: () => JSX.Element | null,
-  handleRightClick: (e: React.MouseEvent<HTMLDivElement>) => void
-}
+import { ChatMessagesTypeFileMessageProps } from '../../../types/chats/audioMessageTypes/audioMessageType'
+
 const ChatMessagesTypeFileMessage: FC<ChatMessagesTypeFileMessageProps> = ({message, needToDisplayMiniPopup, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, editted} = message
   const fileTypeIcon = getFile(file as string);

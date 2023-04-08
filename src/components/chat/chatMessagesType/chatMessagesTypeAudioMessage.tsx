@@ -7,13 +7,8 @@ import AudioPlayer from '../audioMessagePlayButton/audioMessagePlayButton'
 import './chatMessagesTypeAudioMessage.scss'
 import AudioLevel from '../chatAudioLine/audioLevel'
 import { getAudioLevels } from '../chatAudioRecorder/getAudioLevels'
-type ChatMessagesTypeAudioMessageProps = {
-  message: MessageDataType,
-  needToDisplayMiniPopupWithoutFile: () => JSX.Element | null,
-  needToDisplayForwardMessage: () => JSX.Element | null,
-  needToDisplayEdditedMessage: () => JSX.Element | null,
-  handleRightClick: (e: React.MouseEvent<HTMLDivElement>) => void
-}
+import { ChatMessagesTypeAudioMessageProps } from '../../../types/chats/audioMessageTypes/audioMessageType'
+
 const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, audioFile} = message
   const [audioLevels, setAudioLevels] = useState<number[]>([0,0,0,0])

@@ -1,4 +1,4 @@
-export function getAudioLevels(blob: Blob): Promise<number[]> {
+export const getAudioLevels =(blob: Blob): Promise<number[]> => {
   return new Promise(async (resolve, reject) => {
     try {
       const arrayBuffer = await blob.arrayBuffer();

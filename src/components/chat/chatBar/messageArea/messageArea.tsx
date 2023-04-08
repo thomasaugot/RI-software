@@ -16,7 +16,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
     firstLoad: true
   })
   const [additionalDataForPopup, setAdditionalDataForPopup] = useState<additionalDataForPopup | null>(null)
-  const [popupActionType, setPopupActionType] = useState<PopupActionType>({editType: '', value: null, from: null, messageId: null})
+  const [popupActionType, setPopupActionType] = useState<PopupActionType>({actionType: '', value: null, from: null, messageId: null})
   const handleDisplayPopup = (ownerName: string, text: string, time: string, fileExist: boolean) => {
     const objectFromComponent = {
       ownerName,
@@ -32,16 +32,16 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
        setAdditionalDataForPopup(objectFromComponent)
     }
   }
-  const changeEditMessage = (editType: string, value: string | null, from: string | null, messageId: string | null) => {
+  const changeEditMessage = (actionType: string, value: string | null, from: string | null, messageId: string | null) => {
     setAdditionalDataForPopup(null)
     if(value !== null && from !== null) {
       setPopupActionType({
-        editType,
+        actionType,
         value,
         from,
         messageId
       })
-    }else if(editType === 'Copy') {
+    }else if(actionType === 'Copy') {
       if(value) {
         const input = document.createElement('input');
       input.value = value
@@ -50,9 +50,9 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
       document.execCommand('copy');
       document.body.removeChild(input)
       }
-      setPopupActionType({editType, value: null, from: null, messageId: null})
+      setPopupActionType({actionType, value: null, from: null, messageId: null})
     }else {
-      setPopupActionType({editType, value: null, from: null, messageId: null})
+      setPopupActionType({actionType, value: null, from: null, messageId: null})
 
     }
   }

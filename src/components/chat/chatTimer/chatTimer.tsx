@@ -1,11 +1,9 @@
 import React, { FC } from 'react'
 import { playAudioIcon, redCircle } from '../../../assets/chatIcons'
 import './chatTimer.scss'
-interface ChatTimerProps {
-  timer: number,
-  isRec: boolean
-}
-const ChatTimer: FC<ChatTimerProps> = ({timer, isRec}) => {
+import { ChatTimerProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
+
+const ChatTimer: FC<ChatTimerProps> = ({timer, isRec, blob}) => {
   function formatTime(seconds: number) {
     let minutes = Math.floor(seconds / 60);
     let remainingSeconds = seconds % 60;
@@ -15,7 +13,7 @@ const ChatTimer: FC<ChatTimerProps> = ({timer, isRec}) => {
   }
   return (
     <div className={`audio-recorder-timer-wrapper ${isRec ? 'audio-recorder-timer-wrapper-choose' : ''}`}>
-      <div className='audio-recorder-icon'>{isRec ? redCircle : playAudioIcon}</div>
+      {isRec ? <div className='audio-recorder-icon'>{redCircle}</div> : <div className='audio-recorder-icon' onClick={() => {new Audio(URL.createObjectURL(blob)).play();}}>{playAudioIcon}</div>}
       <div className='audio-recorder-timer'>{formatTime(timer)}</div>
     </div>
   )
