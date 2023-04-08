@@ -77,9 +77,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
     }
 
   }
-useEffect(() => {
-  console.log(messages)
-}, [messages])
+
   return (
     <div className="message-area">
       <div className='messages' ref={messagesScrollHeight} onScroll={handleScroll} onClick={() => {

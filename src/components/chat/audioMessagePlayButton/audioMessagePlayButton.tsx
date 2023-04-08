@@ -1,4 +1,4 @@
-import { FC, useEffect, useState, useMemo } from "react";
+import { FC, useEffect, useState, useMemo, useRef } from "react";
 import { pauseAudioIcon, playAudioIcon, playAudioMessage } from '../../../assets/chatIcons';
 import './audioMessagePlayButton.scss'
 
@@ -8,52 +8,47 @@ type AudioPlayerProps = {
 
 const AudioPlayer: FC<AudioPlayerProps> = ({ audioBlobUrl }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
-  const audioUrl = URL.createObjectURL(audioBlobUrl);
-  const audio = useMemo(() => new Audio(audioUrl), [audioUrl]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioUrl, setAudioUrl] = useState<string>("");
 
   const handleClick = () => {
     if (!isPlaying) {
-      if (currentAudio) {
-        currentAudio.pause();
+      if (audioRef.current) {
+        audioRef.current.pause();
       }
-      audio.play();
-      setCurrentAudio(audio);
+      audioRef.current = new Audio(audioUrl);
+      audioRef.current.play();
       setIsPlaying(true);
     } else {
-      audio.pause();
-      setCurrentAudio(null);
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
       setIsPlaying(false);
     }
   };
 
   const handleEnded = () => {
     setIsPlaying(false);
-    setCurrentAudio(null);
   };
 
   useEffect(() => {
-    audio.addEventListener('ended', handleEnded);
-    return () => {
-      audio.removeEventListener('ended', handleEnded);
-    };
-  }, [audio]);
+    setAudioUrl(URL.createObjectURL(audioBlobUrl));
+  }, [audioBlobUrl]);
 
   useEffect(() => {
-    if (isPlaying) {
+    if (audioRef.current) {
+      audioRef.current.addEventListener('ended', handleEnded);
       return () => {
-        setIsPlaying(false);
-      };
-    } else {
-      return () => {
+        audioRef.current?.removeEventListener('ended', handleEnded);
+        audioRef.current?.pause();
         setIsPlaying(false);
       };
     }
-  }, [isPlaying]);
+  }, [audioUrl]);
 
   return (
     <button onClick={handleClick} className='message-audio-btn'>
-      {isPlaying ? pauseAudioIcon : playAudioIcon}
+      {isPlaying ? pauseAudioIcon : playAudioMessage}
     </button>
   );
 }

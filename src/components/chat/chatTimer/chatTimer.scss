@@ -1,8 +1,8 @@
 .audio-recorder-timer-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-right: 3.4505208333333335vw;
+  margin-top: 0.8vw;
+  margin-left: 3.4505208333vw;
 }
 .audio-recorder-icon svg{
   width: 1.1067708333333333vw;
@@ -15,5 +15,7 @@
   font-size: 0.6510416667vw;
   line-height: 0.78125vw;
   color: #4272C0;
-  margin-top: 0.6vw;
+}
+.audio-recorder-timer-wrapper-choose {
+  margin-left: 0;
 }

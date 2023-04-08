@@ -9,22 +9,20 @@ import AudioLevel from '../chatAudioLine/audioLevel'
 import { getAudioLevels } from '../chatAudioRecorder/getAudioLevels'
 type ChatMessagesTypeAudioMessageProps = {
   message: MessageDataType,
-  needToDisplayMiniPopup: () => JSX.Element | null,
+  needToDisplayMiniPopupWithoutFile: () => JSX.Element | null,
   needToDisplayForwardMessage: () => JSX.Element | null,
   needToDisplayEdditedMessage: () => JSX.Element | null,
   handleRightClick: (e: React.MouseEvent<HTMLDivElement>) => void
 }
-const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({message, needToDisplayMiniPopup, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
+const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, audioFile} = message
   const [audioLevels, setAudioLevels] = useState<number[]>([0,0,0,0])
   const [loading, setLoading] = useState(false)
   const fileTypeIcon = getFile(file as string);
-
   useEffect(() => {
     if(audioFile) {
       setLoading(true)
       getAudioLevels(audioFile.recordingAudioBlob).then((data) => {
-        console.log(data)
         setAudioLevels(data as number[]);
         setLoading(false)
       })
@@ -33,8 +31,8 @@ const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({me
   return (
     <>
           {owner ? (
-              <div  className={`audio-message-wrapper  audio-yes ${ needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick} >
-              {needToDisplayMiniPopup()}
+              <div  className={`audio-message-wrapper  audio-yes ${ needToDisplayMiniPopupWithoutFile() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick} >
+              {needToDisplayMiniPopupWithoutFile()}
               {needToDisplayForwardMessage()}
               <div className='file-message-container'>
                 <div className='file-type'>
@@ -64,8 +62,8 @@ const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({me
               </div>
             </div>
           ) : (
-            <div  className={`stranger-owner  ${needToDisplayMiniPopup() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
-              {needToDisplayMiniPopup()}
+            <div  className={`stranger-owner  ${needToDisplayMiniPopupWithoutFile() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
+              {needToDisplayMiniPopupWithoutFile()}
               {needToDisplayForwardMessage()}
               {imgUrl ?  <img src={imgUrl} alt={ownerName} className="icon" /> : <span className="icon">{profile}</span>}
               <div className='file-message-wrapper'>

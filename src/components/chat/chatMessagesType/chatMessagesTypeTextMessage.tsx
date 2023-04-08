@@ -10,7 +10,7 @@ type ChatMessagesTypeTextMessageProps = {
   handleRightClick: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 const ChatMessagesTypeTextMessage: FC<ChatMessagesTypeTextMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
-    const {file, text, ownerName, owner, time, imgUrl,  forwarded, editted} = message
+    const { text, ownerName, owner, time, imgUrl,  forwarded} = message
   return (
     <>
     {owner ? (

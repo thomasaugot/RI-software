@@ -42,7 +42,6 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
     }
     setPopupCoords({x: popupX, y: 0})
     e.preventDefault()
-
     handleDisplayPopup(
       ownerName ?? '',
       text ?? '',
@@ -92,7 +91,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
     //if message eddited field function will return eddited block if there is no eddited field, the function returns nothing
   return (
     <div ref={blockRef} key={message.messageId} className={`chat-messages-wrapper ${firstLoad ? 'chat-message-hidden' : ''} ${message.messageId === messageID ? 'chat-message-hidden-anim' : ''}`}>
-      {audioFile ? <ChatMessagesTypeAudioMessage message={message} needToDisplayMiniPopup={needToDisplayMiniPopup} needToDisplayForwardMessage={needToDisplayForwardMessage} needToDisplayEdditedMessage={needToDisplayEdditedMessage} handleRightClick={handleRightClick}/> : null}
+      {audioFile ? <ChatMessagesTypeAudioMessage message={message} needToDisplayMiniPopupWithoutFile={needToDisplayMiniPopupWithoutFile} needToDisplayForwardMessage={needToDisplayForwardMessage} needToDisplayEdditedMessage={needToDisplayEdditedMessage} handleRightClick={handleRightClick}/> : null}
       {file && audioFile === undefined ? (
         <ChatMessagesTypeFileMessage message={message} needToDisplayMiniPopup={needToDisplayMiniPopup} needToDisplayForwardMessage={needToDisplayForwardMessage} needToDisplayEdditedMessage={needToDisplayEdditedMessage} handleRightClick={handleRightClick}/>
       ) : null}

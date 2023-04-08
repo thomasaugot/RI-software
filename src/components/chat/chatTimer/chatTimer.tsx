@@ -14,7 +14,7 @@ const ChatTimer: FC<ChatTimerProps> = ({timer, isRec}) => {
     return `${formattedMinutes}:${Math.floor(+formattedSeconds) > 10 ? Math.floor(+formattedSeconds) : `0${Math.floor(+formattedSeconds)}`}`;
   }
   return (
-    <div className='audio-recorder-timer-wrapper'>
+    <div className={`audio-recorder-timer-wrapper ${isRec ? 'audio-recorder-timer-wrapper-choose' : ''}`}>
       <div className='audio-recorder-icon'>{isRec ? redCircle : playAudioIcon}</div>
       <div className='audio-recorder-timer'>{formatTime(timer)}</div>
     </div>

@@ -3,7 +3,6 @@ import AudioLevel from '../chatAudioLine/audioLevel';
 import RecordRTC from 'recordrtc';
 import './chatAudioRecorder.scss'
 import ChatTimer from '../chatTimer/chatTimer';
-import { getAudioLevels } from './getAudioLevels';
 import { deleteAudioMessageIcon, recordingAudioIcon, sendMessageIcon } from '../../../assets/chatIcons';
 type ChatAudioRecorderProps = {
   handleSubmit: (e: React.FormEvent<HTMLFormElement> |  null) => void,
