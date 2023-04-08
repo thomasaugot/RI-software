@@ -36,3 +36,10 @@ export type ChatInputMessageProps = {
   setChatInputValue: (value: string) => void,
   handleRecording: (value: boolean) => void
 }
+export type ChatMessagesTypeTextMessageProps = {
+  message: MessageDataType,
+  needToDisplayMiniPopupWithoutFile: () => JSX.Element | null,
+  needToDisplayForwardMessage: () => JSX.Element | null,
+  needToDisplayEdditedMessage: () => JSX.Element | null,
+  handleRightClick: (e: React.MouseEvent<HTMLDivElement>) => void
+}

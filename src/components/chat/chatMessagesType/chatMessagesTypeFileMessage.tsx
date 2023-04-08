@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import { profile } from '../../../assets/Icons'
 import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon'
-import { MessageDataType } from '../../../types/chats/chatTypes'
 import { getFile } from '../../../queries/chat.queries'
 import { ChatMessagesTypeFileMessageProps } from '../../../types/chats/audioMessageTypes/audioMessageType'
 

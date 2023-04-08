@@ -1,14 +1,8 @@
 import { FC } from 'react'
-import { MessageDataType } from '../../../types/chats/chatTypes'
 import { profile } from '../../../assets/Icons'
+import { ChatMessagesTypeTextMessageProps } from '../../../types/chats/audioMessageTypes/audioMessageType'
 
-type ChatMessagesTypeTextMessageProps = {
-  message: MessageDataType,
-  needToDisplayMiniPopupWithoutFile: () => JSX.Element | null,
-  needToDisplayForwardMessage: () => JSX.Element | null,
-  needToDisplayEdditedMessage: () => JSX.Element | null,
-  handleRightClick: (e: React.MouseEvent<HTMLDivElement>) => void
-}
+
 const ChatMessagesTypeTextMessage: FC<ChatMessagesTypeTextMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
     const { text, ownerName, owner, time, imgUrl,  forwarded} = message
   return (

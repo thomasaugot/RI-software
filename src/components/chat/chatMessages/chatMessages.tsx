@@ -7,12 +7,12 @@ import ChatMessagesTypeTextMessage from '../chatMessagesType/chatMessagesTypeTex
 import ChatMessagesTypeFileMessage from '../chatMessagesType/chatMessagesTypeFileMessage';
 import ChatMessagesTypeAudioMessage from '../chatMessagesType/chatMessagesTypeAudioMessage';
 const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisplayPopup,additionalDataForPopup,message,  changeEditMessage, delay, needToAnimateBlock }) => {
-  const {file, text, ownerName, owner, time, imgUrl,  forwarded, editted, audioFile} = message
+  const {file, text, ownerName,  time, forwarded, editted, audioFile} = message
   const {messageID, firstLoad} = needToAnimateBlock
+  const [popupCoords, setPopupCoords] = useState({y: 0, x: 0})
 
   const blockRef  = useRef<HTMLDivElement>(null);
   const animatedRef = useRef<HTMLDivElement>(null)
-  const [popupCoords, setPopupCoords] = useState({y: 0, x: 0})
   useEffect(() => {
     const blockElement = blockRef.current;
     //first message loading animation
@@ -31,6 +31,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
       }
     },  1000);
   }, [needToAnimateBlock])
+
   const handleRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = messagesScrollHeight.current?.getBoundingClientRect() as DOMRect
     const parentWidth = rect.width
@@ -49,6 +50,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
       file ? true : false
     )
   }
+
   const needToDisplayMiniPopup = () => {
     if (
       additionalDataForPopup !== null &&
@@ -62,6 +64,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
     }
     return null;
   };
+
   //if clicked message include default message data this function will return popup component if there is no data, the function returns nothing
   const needToDisplayMiniPopupWithoutFile = () => {
     if (
@@ -74,6 +77,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
     }
     return null;
   };
+
   //if clicked message include default message data and file this function will return popup component if there is no data, the function returns nothing
   const needToDisplayForwardMessage = () => {
     if (forwarded?.from) {
@@ -81,6 +85,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
     }
     return null;
   };
+
   //if message include forward field function will return forward component if there is no forward field, the function returns nothing
   const needToDisplayEdditedMessage = () => {
     if (editted) {

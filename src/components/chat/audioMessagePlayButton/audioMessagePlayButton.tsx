@@ -1,5 +1,5 @@
-import { FC, useEffect, useState, useMemo, useRef } from "react";
-import { pauseAudioIcon, playAudioIcon, playAudioMessage } from '../../../assets/chatIcons';
+import { FC, useEffect, useState,  useRef } from "react";
+import { pauseAudioIcon, playAudioMessage } from '../../../assets/chatIcons';
 import './audioMessagePlayButton.scss'
 import { AudioPlayerProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
 

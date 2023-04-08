@@ -2,7 +2,7 @@ import './messageArea.scss';
 import ChatInput from '../../chatInput/chatInput';
 import ChatMessages from '../../chatMessages/chatMessages';
 import ChatInfoText from '../../chatInfoText/chatInfoText';
-import { FC, useEffect, useState } from 'react';
+import { FC,  useState } from 'react';
 import ChatMessageLoadingIcon from '../../chatMessageLoadingIcon/ChatMessageLoadingIcon';
 import { PopupActionType, MessageDataType,  messageActions, messageAreaProps, additionalDataForPopup } from '../../../../types/chats/chatTypes';
 import { mockMessages } from './mockMessagesData';

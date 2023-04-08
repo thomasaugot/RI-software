@@ -4,6 +4,7 @@ import './chatTimer.scss'
 import { ChatTimerProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
 
 const ChatTimer: FC<ChatTimerProps> = ({timer, isRec, blob}) => {
+    // Function to format time as MM:SS
   function formatTime(seconds: number) {
     let minutes = Math.floor(seconds / 60);
     let remainingSeconds = seconds % 60;
@@ -11,6 +12,7 @@ const ChatTimer: FC<ChatTimerProps> = ({timer, isRec, blob}) => {
     let formattedSeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
     return `${formattedMinutes}:${Math.floor(+formattedSeconds) > 10 ? Math.floor(+formattedSeconds) : `0${Math.floor(+formattedSeconds)}`}`;
   }
+
   return (
     <div className={`audio-recorder-timer-wrapper ${isRec ? 'audio-recorder-timer-wrapper-choose' : ''}`}>
       {isRec ? <div className='audio-recorder-icon'>{redCircle}</div> : <div className='audio-recorder-icon' onClick={() => {new Audio(URL.createObjectURL(blob)).play();}}>{playAudioIcon}</div>}

@@ -9,7 +9,6 @@ import { useInfiniteScroll } from '../../customHooks/useInfiniteScroll';
 import { authorizedRequest } from '../../utils/queries';
 import { chatInfoById } from '../../utils/network';
 import ChatBaseLayout from '../../layouts/ChatBaseLayout/ChatBaseLayout';
-import { profile } from '../../assets/Icons';
 
 const Chat = () => {
   const [userChat, setUserChat] = useState<ChatByIdResponse>()
