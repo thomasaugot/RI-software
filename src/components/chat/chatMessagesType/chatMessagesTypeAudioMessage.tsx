@@ -10,11 +10,17 @@ import { ChatMessagesTypeAudioMessageProps } from '../../../types/chats/audioMes
 
 const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, audioFile} = message
-
+  const [playingAudioTime, setPlayingAudioTime] = useState<number>(0)
   const [audioLevels, setAudioLevels] = useState<number[]>([0,0,0,0])
   const [loading, setLoading] = useState(false)
   const fileTypeIcon = getFile(file as string);
-
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const formattedMinutes = (minutes < 10) ? '0' + minutes : minutes;
+    const formattedSeconds = (remainingSeconds < 10) ? '0' + remainingSeconds : remainingSeconds;
+    return `${formattedMinutes}:${Math.floor(+formattedSeconds) > 10 ? Math.floor(+formattedSeconds) : `0${Math.floor(+formattedSeconds)}`}`;
+  }
   useEffect(() => {
     if(audioFile) {
       setLoading(true)
@@ -29,7 +35,10 @@ const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({me
   <>
     {owner ? (
       <div
-        className={`audio-message-wrapper audio-yes ${needToDisplayMiniPopupWithoutFile() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`}
+        className={`audio-message-wrapper audio-yes ${needToDisplayMiniPopupWithoutFile()
+          ? 'miniPopup-parent'
+          : ''}
+          ${forwarded ? 'forwarded-message' : ''}`}
         onContextMenu={handleRightClick}
       >
         {needToDisplayMiniPopupWithoutFile()}
@@ -37,14 +46,19 @@ const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({me
         <div className='file-message-container'>
           <div className='file-type'>
             <div className='file'>{fileTypeIcon}</div>
-            <AudioPlayer audioBlobUrl={audioFile?.recordingAudioBlob as Blob} />
+            <AudioPlayer audioBlobUrl={audioFile?.recordingAudioBlob as Blob} setPlayingAudioTime={setPlayingAudioTime}/>
           </div>
           <p className='file-text'>{text}</p>
         </div>
         <div className='audio-message-wrapper-data'>
-          <div className='audio-message-container'>
+          <div
+           className='audio-message-container'
+           style={{width: `${audioLevels.length * (0.0651041667 + 0.09765625 * 2 + 0.13020833333333334 *2) + 0.5}vw`}}>
             {!loading && audioLevels.map((level, index) => (
-              <AudioLevel key={index} height={level} />
+              <AudioLevel
+                key={index}
+                height={level}
+                />
             ))}
           </div>
           <div className='audio-message-data'>
@@ -56,14 +70,15 @@ const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({me
               </div>
             </div>
             <div className='audio-message-left-data'>
-              {audioFile?.audioLength}
+              {playingAudioTime > 0 ? formatTime(+playingAudioTime.toFixed(0)) : audioFile?.audioLength}
             </div>
           </div>
         </div>
       </div>
     ) : (
       <div
-        className={`stranger-owner ${needToDisplayMiniPopupWithoutFile() ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`}
+        className={`stranger-owner ${needToDisplayMiniPopupWithoutFile() ? 'miniPopup-parent' : ''}
+        ${forwarded ? 'forwarded-message' : ''}`}
         onContextMenu={handleRightClick}
       >
         {needToDisplayMiniPopupWithoutFile()}
@@ -73,7 +88,7 @@ const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({me
           <div className='file-message-container'>
             <div className='file-type'>
               <div className='file'>{fileTypeIcon}</div>
-              <AudioPlayer audioBlobUrl={audioFile?.recordingAudioBlob as Blob} />
+              <AudioPlayer audioBlobUrl={audioFile?.recordingAudioBlob as Blob} setPlayingAudioTime={setPlayingAudioTime}/>
             </div>
             <p className='file-text'>{text}</p>
           </div>
@@ -91,7 +106,7 @@ const ChatMessagesTypeAudioMessage: FC<ChatMessagesTypeAudioMessageProps> = ({me
               </div>
             </div>
             <div className='audio-message-left-data'>
-              {audioFile?.audioLength}
+              {playingAudioTime > 0 ? formatTime(+playingAudioTime.toFixed(0)) : audioFile?.audioLength}
             </div>
           </div>
         </div>

@@ -10,13 +10,16 @@
     background-color: #E1E5EC;
     padding: 0.5859375vw 0.9765625vw 0.6510416667vw 0.9765625vw;
     margin-bottom: 2vw;
-    height: 5.1666666667vw;
+    height: 4.1666666667vw;
 }
 .audio-message-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-top: 0.7vw;
+  height: 1.3020833333333333vw;
+  width: 18.75vw;
+  overflow: hidden;
 }
 .audio-message-time {
   font-family: 'Montserrat';

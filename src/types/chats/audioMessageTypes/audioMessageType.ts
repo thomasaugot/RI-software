@@ -10,7 +10,8 @@ export type ChatAudioRecorderProps = {
   handleAddAudioBlob: (audioBlob: Blob | null, audioLength: string | null) => void,
 }
 export type AudioPlayerProps = {
-  audioBlobUrl: Blob
+  audioBlobUrl: Blob,
+  setPlayingAudioTime?:(time: number) => void
 }
 export type ChatMessagesTypeAudioMessageProps = {
   message: MessageDataType,

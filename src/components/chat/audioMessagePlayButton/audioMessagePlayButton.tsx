@@ -3,7 +3,7 @@ import { pauseAudioIcon, playAudioMessage } from '../../../assets/chatIcons';
 import './audioMessagePlayButton.scss'
 import { AudioPlayerProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
 
-const AudioPlayer: FC<AudioPlayerProps> = ({ audioBlobUrl }) => {
+const AudioPlayer: FC<AudioPlayerProps> = ({ audioBlobUrl, setPlayingAudioTime }) => {
   // State variables
   const [isPlaying, setIsPlaying] = useState<boolean>(false); // Determines if the audio is currently playing
   const audioRef = useRef<HTMLAudioElement | null>(null); // Reference to the <audio> element
@@ -36,6 +36,19 @@ const AudioPlayer: FC<AudioPlayerProps> = ({ audioBlobUrl }) => {
   useEffect(() => {
     setAudioUrl(URL.createObjectURL(audioBlobUrl)); // Create a URL for the audio file
   }, [audioBlobUrl]);
+
+
+// Effect hook that updates the current time of the audio playback
+useEffect(() => {
+  const intervalId = setInterval(() => {
+    if (audioRef.current && setPlayingAudioTime) {
+      setPlayingAudioTime(audioRef.current.currentTime)
+    }
+  }, 1000); // Update every 1 second
+
+  // Cleanup function to clear the interval when the component unmounts
+  return () => clearInterval(intervalId);
+}, []);
 
   // Effect hook that runs when the audioUrl state changes
   useEffect(() => {

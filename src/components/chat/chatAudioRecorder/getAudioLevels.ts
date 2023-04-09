@@ -1,4 +1,3 @@
-// This function takes in an audio blob and returns a promise that resolves with an array of audio levels
 export const getAudioLevels = (blob: Blob): Promise<number[]> => {
   // Return a new promise
   return new Promise(async (resolve, reject) => {
@@ -23,9 +22,9 @@ export const getAudioLevels = (blob: Blob): Promise<number[]> => {
       source.connect(analyser);
       analyser.connect(audioCtx.destination);
 
-      // Get the frequency bin count and create a new Float32Array to hold the audio data
+      // Get the frequency bin count and create a new Uint8Array to hold the audio data
       const bufferLength = analyser.frequencyBinCount;
-      const dataArray = new Float32Array(bufferLength);
+      const dataArray = new Uint8Array(bufferLength);
       const levels: number[] = [];
 
       // Start playing the audio
@@ -33,12 +32,13 @@ export const getAudioLevels = (blob: Blob): Promise<number[]> => {
 
       // Set an interval to update the audio levels every 500ms
       const intervalId = setInterval(() => {
-        // Get the audio data from the analyser node and calculate the root mean square (RMS)
-        analyser.getFloatTimeDomainData(dataArray);
-        const sum = dataArray.reduce((acc, curr) => acc + curr * curr, 0);
-        const rms = Math.sqrt(sum / dataArray.length);
-        // Scale the RMS to a range of 0-100 and push it to the levels array
-        const scaledLevel = Math.floor(Math.max(0, (20 * Math.log10(rms) + 90)) / 3);
+        // Get the frequency data from the analyser node
+        analyser.getByteFrequencyData(dataArray);
+        // Calculate the average value of the frequency data and scale it to a percentage value
+        const sum = dataArray.reduce((acc, curr) => acc + curr, 0);
+        const avg = sum / dataArray.length;
+        const scaledLevel = Math.floor((avg / 255) * 100);
+        // Push the scaled level to the levels array
         levels.push(scaledLevel);
       }, 500);
 

@@ -5,7 +5,7 @@ import { ChatTimerProps } from '../../../types/chats/audioMessageTypes/audioMess
 
 const ChatTimer: FC<ChatTimerProps> = ({timer, isRec, blob}) => {
     // Function to format time as MM:SS
-  function formatTime(seconds: number) {
+  const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     const formattedMinutes = (minutes < 10) ? '0' + minutes : minutes;
