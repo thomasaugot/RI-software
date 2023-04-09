@@ -11,12 +11,16 @@ import { mockMessages } from './mockMessagesData';
 const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll, blocksCount, loading }) => {
   //clicked message data
   const [messages, setMessages] = useState(mockMessages)
+  //set block that we need to animate and its first loading of message animate all blocks with default animation
   const [needToAnimateBlock, setNeedToAnimateBlock] = useState<{messageID: string | null, firstLoad: boolean}>({
     messageID: null,
     firstLoad: true
   })
+
   const [additionalDataForPopup, setAdditionalDataForPopup] = useState<additionalDataForPopup | null>(null)
+  //what kind of action we need to apply to component
   const [popupActionType, setPopupActionType] = useState<PopupActionType>({actionType: '', value: null, from: null, messageId: null})
+    // Handle display of popup with message data
   const handleDisplayPopup = (ownerName: string, text: string, time: string, fileExist: boolean,) => {
     const objectFromComponent = {
       ownerName,
@@ -32,6 +36,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
        setAdditionalDataForPopup(objectFromComponent)
     }
   }
+   // Handle editing of messages
   const changeEditMessage = (actionType: string, value: string | null, from: string | null, messageId: string | null) => {
     setAdditionalDataForPopup(null)
     if(value !== null && from !== null) {
@@ -56,6 +61,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
 
     }
   }
+  // Handle adding, deleting, and editing of messages
   const handleMessages = (action: string, body: MessageDataType) => {
     if(action === messageActions.ADD) {
       setNeedToAnimateBlock({messageID: body.messageId, firstLoad: false})

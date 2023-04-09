@@ -5,16 +5,18 @@ import { ChatInputMessageProps } from '../../../types/chats/audioMessageTypes/au
 const ChatInputMessage: FC<ChatInputMessageProps> = ({chatInputValue, setChatInputValue, handleRecording}) => {
   return (
     <>
-        <div className='tools'>
-          {clip}
-        </div>
-        <input type="text" placeholder='Message' className='chat-input' value={chatInputValue} onChange={(e) => { setChatInputValue(e.target.value) }} />
+      <div className='tools'>
+        {clip}
+      </div>
+      <input type="text" placeholder='Message' className='chat-input' value={chatInputValue} onChange={(e) => { setChatInputValue(e.target.value) }} />
         {chatInputValue.length === 0
-        ? <div className='tools tools-microphone' onClick={() => {handleRecording(true)}}>
-         {microphone}
-        </div> : <div className='tools tools-microphone' >
-          {sendMessageIcon}
-        </div>}
+          ? <div className='tools tools-microphone' onClick={() => {handleRecording(true)}}>
+              {microphone}
+            </div>
+          : <div className='tools tools-microphone tools-send-message' >
+              {sendMessageIcon}
+            </div>
+        }
     </>
   )
 }

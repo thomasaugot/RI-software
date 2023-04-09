@@ -1,7 +1,7 @@
 import './chatMessage.scss';
 import { chatMessagePropsType } from '../../../types/chats/chatTypes';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import MiniPopup from '../miniPopup/editMessagePopup';
+import MiniPopup from '../miniPopup/actionMessagePopup';
 import ForwardComponent from '../forwardComponent/forwardComponent';
 import ChatMessagesTypeTextMessage from '../chatMessagesType/chatMessagesTypeTextMessage';
 import ChatMessagesTypeFileMessage from '../chatMessagesType/chatMessagesTypeFileMessage';
@@ -96,14 +96,35 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
   };
     //if message eddited field function will return eddited block if there is no eddited field, the function returns nothing
   return (
-    <div ref={blockRef} key={message.messageId} className={`chat-messages-wrapper ${firstLoad ? 'chat-message-hidden' : ''} ${message.messageId === messageID ? 'chat-message-hidden-anim' : ''}`}>
-      {audioFile ? <ChatMessagesTypeAudioMessage message={message} needToDisplayMiniPopupWithoutFile={needToDisplayMiniPopupWithoutFile} needToDisplayForwardMessage={needToDisplayForwardMessage} needToDisplayEdditedMessage={needToDisplayEdditedMessage} handleRightClick={handleRightClick}/> : null}
-      {file && audioFile === undefined ? (
-        <ChatMessagesTypeFileMessage message={message} needToDisplayMiniPopup={needToDisplayMiniPopup} needToDisplayForwardMessage={needToDisplayForwardMessage} needToDisplayEdditedMessage={needToDisplayEdditedMessage} handleRightClick={handleRightClick}/>
-      ) : null}
-      {audioFile === undefined && text ? (
-        <ChatMessagesTypeTextMessage message={message} needToDisplayMiniPopupWithoutFile={needToDisplayMiniPopupWithoutFile} needToDisplayForwardMessage={needToDisplayForwardMessage} needToDisplayEdditedMessage={needToDisplayEdditedMessage} handleRightClick={handleRightClick}/>
-      ) : null}
+    <div
+    ref={blockRef}
+    key={message.messageId}
+    className={`chat-messages-wrapper
+    ${firstLoad ? 'chat-message-hidden' : ''}
+    ${message.messageId === messageID ? 'chat-message-hidden-anim' : ''}`}>
+    {audioFile
+      ? <ChatMessagesTypeAudioMessage
+        message={message}
+        needToDisplayMiniPopupWithoutFile={needToDisplayMiniPopupWithoutFile}
+        needToDisplayForwardMessage={needToDisplayForwardMessage}
+        needToDisplayEdditedMessage={needToDisplayEdditedMessage}
+        handleRightClick={handleRightClick}/> : null}
+    {file && audioFile === undefined ? (
+      <ChatMessagesTypeFileMessage
+        message={message}
+        needToDisplayMiniPopup={needToDisplayMiniPopup}
+        needToDisplayForwardMessage={needToDisplayForwardMessage}
+        needToDisplayEdditedMessage={needToDisplayEdditedMessage}
+        handleRightClick={handleRightClick}/>
+    ) : null}
+    {audioFile === undefined && text ? (
+      <ChatMessagesTypeTextMessage
+        message={message}
+        needToDisplayMiniPopupWithoutFile={needToDisplayMiniPopupWithoutFile}
+        needToDisplayForwardMessage={needToDisplayForwardMessage}
+        needToDisplayEdditedMessage={needToDisplayEdditedMessage}
+        handleRightClick={handleRightClick}/>
+    ) : null}
     </div>
   );
 };

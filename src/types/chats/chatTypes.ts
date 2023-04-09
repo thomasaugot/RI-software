@@ -108,3 +108,9 @@ export type ChatByIdResponse = {
     peer_id: number
   }
 }
+export type CoordsForMessagePopup = {
+  coords: {
+    x: number,
+    y: number
+  }
+}
