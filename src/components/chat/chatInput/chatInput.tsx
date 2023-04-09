@@ -90,7 +90,7 @@ const ChatInput: FC<ChatInputProps> = ({popupActionType, changeEditMessage, hand
       setChatInputValue(popupActionType.value)
     }
   }, [popupActionType.value])
-
+  console.log()
   return (
     <form onSubmit={handleSubmit} className='chat-input-wrapper'>
       { popupActionType.actionType.length !== 0 && popupActionType.actionType !== 'Copy' ?  <ReplyComponent editType={popupActionType} handleCloseEditPopup={handleCloseEditPopup}/> : null}

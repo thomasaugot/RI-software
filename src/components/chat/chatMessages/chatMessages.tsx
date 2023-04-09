@@ -49,6 +49,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisp
       time,
       file ? true : false
     )
+
   }
 
   const needToDisplayMiniPopup = () => {

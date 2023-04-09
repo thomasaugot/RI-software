@@ -1,12 +1,18 @@
 .audio-recorder-timer-wrapper {
   display: flex;
   flex-direction: column;
-  margin-top: 0.8vw;
   margin-left: 3.4505208333vw;
+  align-items: center;
+}
+.audio-recorder-icon {
+  width: 1.5vw;
+  display: flex;
+  margin:  0.6vw 0vw;
 }
 .audio-recorder-icon svg{
-  width: 1.1067708333333333vw;
-  height: 1.1067708333333333vw;
+  width: 1.5vw;
+  height: 1.5vw;
+  display: block;
 }
 .audio-recorder-timer {
   font-family: "Montserrat";

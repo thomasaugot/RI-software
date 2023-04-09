@@ -17,7 +17,7 @@ const MessageArea: FC<messageAreaProps> = ({ messagesScrollHeight, handleScroll,
   })
   const [additionalDataForPopup, setAdditionalDataForPopup] = useState<additionalDataForPopup | null>(null)
   const [popupActionType, setPopupActionType] = useState<PopupActionType>({actionType: '', value: null, from: null, messageId: null})
-  const handleDisplayPopup = (ownerName: string, text: string, time: string, fileExist: boolean) => {
+  const handleDisplayPopup = (ownerName: string, text: string, time: string, fileExist: boolean,) => {
     const objectFromComponent = {
       ownerName,
       text,
