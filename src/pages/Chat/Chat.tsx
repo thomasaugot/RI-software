@@ -10,7 +10,7 @@ import { authorizedRequest } from '../../utils/queries';
 import { chatInfoById } from '../../utils/network';
 import ChatBaseLayout from '../../layouts/chatBaseLayout/chatBaseLayout';
 
-import CompaniesList from '../../modals/chat/createGroupChat/createGroupChat';
+import CreateGroupChat from '../../modals/chat/createGroupChat/createGroupChat';
 
 
 const Chat = () => {
@@ -58,7 +58,7 @@ const Chat = () => {
           <ChatBar />
         </div>
       </div>
-      <CompaniesList/>
+      <CreateGroupChat/>
     </ChatBaseLayout>
   );
 };

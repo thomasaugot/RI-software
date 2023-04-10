@@ -10,7 +10,7 @@ import SubmitButton from "../../../components/general/submitButton/submitButton"
 import { employee } from '../../../assets/Icons';
 
 
-const CompaniesList = () => {
+const CreateGroupChat = () => {
     const { createGroupChatIsOpen, setCreateGroupChatIsOpen } = useContext(ModalsContext);
     const [ groupName, setGroupName ] = useState('');
     
@@ -115,4 +115,4 @@ const CompaniesList = () => {
 
 }
 
-export default CompaniesList;
+export default CreateGroupChat;
