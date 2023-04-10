@@ -8,7 +8,7 @@ export type additionalDataForPopup = {
   ownerName: string, text: string, time: string, fileExist: boolean
 }
 export type PopupActionType = {
-  editType: string,
+  actionType: string,
   value: string | null,
   from: string | null,
   messageId: string | null
@@ -32,6 +32,10 @@ export type MessageDataType = {
   time: string
   text?:string
   file?: string
+  audioFile?:{
+    recordingAudioBlob: Blob;
+    audioLength: string;
+}
   imgUrl?: string,
   messageId: string | null
   editted?: boolean,
@@ -41,10 +45,11 @@ export type MessageDataType = {
 export enum messageActions {
   DELETE = 'DELETE',
   ADD = 'ADD',
-  EDIT = 'EDIT'
+  EDIT = 'EDIT',
+  COPY = 'COPY',
 }
 export type ChatInputProps = {
-  changeEditMessage: (editType: string, value: string | null, from: string | null, messageId: string | null) => void,
+  changeEditMessage: (actionType: string, value: string | null, from: string | null, messageId: string | null) => void,
   popupActionType: PopupActionType,
   handleMessages: (action: string, body: MessageDataType) => void,
   messages: MessageDataType[]
@@ -102,6 +107,13 @@ export type ChatByIdResponse = {
     type: string,
     from_id: number,
     peer_id: number
+  }
+}
+
+export type CoordsForMessagePopup = {
+  coords: {
+    x: number,
+    y: number
   }
 }
 
