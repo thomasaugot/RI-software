@@ -3,8 +3,8 @@ import ChatInput from '../../chatInput/chatInput';
 import ChatMessages from '../../chatMessages/chatMessages';
 import ChatInfoText from '../../chatInfoText/chatInfoText';
 import { FC } from 'react';
-import ChatMessageLoadingIcon from '../../chatMessageLoadingIcon/ChatMessageLoadingIcon';
-import { messageAreaProps } from '../../../../types/chats/chat.types';
+import ChatMessageLoadingIcon from '../../chatMessageLoadingIcon/chatMessageLoadingIcon';
+import { messageAreaProps } from '../../../../types/chats/chatTypes';
 import { mockMessages } from './mockMessagesData';
 
 

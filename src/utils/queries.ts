@@ -22,14 +22,11 @@ export const authorizedRequest = async (url: string, method: string, tokenType: 
 
   const response = await fetch(url, request);
 
+  console.log(response.status)
 
-  if (response.status === 200) {
+  if (response.status === 200 || response.status === 201) {
     return await response.json();
-  } else if (response.status === 401) {
-    window.location.href = 'http://127.0.0.1:3000/';
-    localStorage.setItem(tokenType, '');
-    return response.status;
-  } else {
+  }else{
     window.location.href = 'http://127.0.0.1:3000/';
     localStorage.setItem(tokenType, '');
     return response.status;
@@ -44,6 +41,7 @@ export const unauthorizedRequest = async (url: string, method: string, body?: ob
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(body)
+
   } : {
     method: method,
     headers: {

@@ -55,3 +55,9 @@ export type ChatByIdResponse = {
     peer_id: number
   }
 }
+
+export type selectableChatCardProps = {
+  name: string,
+  avatar: string | null | undefined,
+  onClickHandler: Function
+}

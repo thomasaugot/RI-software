@@ -1,4 +1,3 @@
-import React from 'react'
 import BaseLayout from '../../layouts/BaseLayout/BaseLayout'
 import './notFound.scss'
 

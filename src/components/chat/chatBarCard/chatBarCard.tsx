@@ -1,5 +1,5 @@
 import './chatBarCard.scss'
-import { ChatCardTypes } from '../../../types/chats/chat.types';
+import { ChatCardTypes } from '../../../types/chats/chatTypes';
 
 const ChatBarCard = ({imgUrl, name, text, notif}: ChatCardTypes) => {
     return (

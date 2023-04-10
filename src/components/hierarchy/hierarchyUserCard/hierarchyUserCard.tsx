@@ -1,5 +1,5 @@
 import { FC, useEffect, useContext } from "react";
-import { profile } from "../../../assets/Icons";
+import { employee, profile } from "../../../assets/Icons";
 import { fireEmployeeButton, moveEmployeeButton, replaceEmployeeButton } from "../../../assets/hierarchyIcons"
 import './hierarchyUserCard.scss'
 import { hierarchyUserCardProps } from '../../../types/hierarchy/hierarchyUserCardTypes';
@@ -8,32 +8,38 @@ import { authorizedRequest } from '../../../utils/queries';
 import { fetchEmployeesUrl } from "../../../utils/network";
 import { ModalsContext } from "../../../context/modalsContext";
 
-const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, employeeId, userId, setHierarchy, hierarchy, level, active, index, inTeam, setHierarchyLevel, hierarchyLevel, setIsActive, isActive }) => {
+const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ employee, inTeam, setHierarchy, hierarchy, currentLevel, index, setHierarchyLevel, hierarchyLevel, setIsActive, isActive }) => {
+
+    const { name, position, active} = employee;
+    const avatarUrl = employee.avatar_link;
+    const employeeId = employee.employee_id;
+    const userId = employee.user_id;
+    const employeeTeam = employee.team;
 
     const currentUserEmployeeId = parseInt(localStorage.getItem('employeeId') || '-1');// logged in user employee id
     const companyId = parseInt(localStorage.getItem('companyId') || '-1');
 
-    const { setHireWorkerModalIsOpen, setHireWorkerLeader } = useContext(ModalsContext);
+    const { setHireWorkerModalIsOpen, setHireWorkerLeader, setFireWorkerIsOpen, setFireWorkerId, setMoveWorkerIsOpen, setMoveWorkerData } = useContext(ModalsContext);
 
     // adding new column of employee once someone was chosen in the hierarchy
     const getEmployeesData = () => {
 
         if(employeeId === currentUserEmployeeId){// if it's the logged in user
-            setHierarchyLevel(level);
+            setHierarchyLevel(currentLevel);
             setIsActive(true);
-        }else if(isActive && level>hierarchyLevel){
+        }else if(isActive && currentLevel>hierarchyLevel){
             setIsActive(true);
         }else{
             setIsActive(false);
         }
 
-        const arrayBuf = hierarchy.slice(0, level+1); // buffer array
+        const arrayBuf = hierarchy.slice(0, currentLevel+1); // buffer array
 
-        for(let i=0; i<arrayBuf[level].length; i++){
-            arrayBuf[level][i].active = false;
+        for(let i=0; i<arrayBuf[currentLevel].length; i++){
+            arrayBuf[currentLevel][i].active = false;
         }
 
-        arrayBuf[level][index].active = true;
+        arrayBuf[currentLevel][index].active = true;
 
         
         // getting employees of the chosen employee
@@ -56,7 +62,7 @@ const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, em
 
     return (
         <div 
-            className={`${userId ? `${`user-card-container ${active && userId ? 'user-card-container-active' : ''}`}` : 'user-card-container-placeholder'}`}
+            className={`${userId ? `user-card-container ${active && userId ? 'user-card-container-active' : ''}` : 'user-card-container-placeholder'}`}
             onClick={(e) => {
                 e.stopPropagation();
                 getEmployeesData();
@@ -64,25 +70,39 @@ const HierarchyUserCard: FC<hierarchyUserCardProps> = ({ name, position, url, em
         >
             <div>
                 <div className="user-card-avatar">
-                    {url ? <img src={url} alt="U." /> : <>{profile}</>}
+                    {avatarUrl ? <img src={avatarUrl} alt="U." /> : <>{profile}</>}
                 </div>
             </div>
             <div className="user-card-info">
-                <p className="user-card-info-name">{name}</p>
+                {userId ? 
+                    <p className="user-card-info-name">{name}</p>
+                : null}
                 <p className="user-card-info-position">{position}</p>
             </div>
             {inTeam ? 
             <div className="user-card-functions-container">
                 <div className="user-card-functions-buttons-container">
-                    <div className="user-card-functions-fire">
+                    <div className="user-card-functions-fire" onClick={(e) => {
+                        e.stopPropagation();
+                        setFireWorkerIsOpen(true);
+                        setFireWorkerId(employeeId)
+                    }}>
                         {fireEmployeeButton}
                     </div>
                     {userId ? 
-                        <div className="user-card-functions-move">
+                        <div className="user-card-functions-move" onClick={(e) => {
+                            e.stopPropagation();
+                            setMoveWorkerIsOpen(true);
+                            setMoveWorkerData({employeeId: employeeId, newLeaderId: -1, team: employeeTeam ? employeeTeam : false});
+                        }}>
                             {moveEmployeeButton}
                         </div>
                     :
-                        <div className="user-card-functions-replace" onClick={(e) => { e.stopPropagation(); setHireWorkerModalIsOpen(true); setHireWorkerLeader(employeeId)}}>
+                        <div className="user-card-functions-replace" onClick={(e) => { 
+                            e.stopPropagation();
+                            setHireWorkerModalIsOpen(true);
+                            setHireWorkerLeader(employeeId);
+                        }}>
                             {replaceEmployeeButton}
                         </div>
                     }

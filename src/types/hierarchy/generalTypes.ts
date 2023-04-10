@@ -5,5 +5,5 @@ export type hierarchyItem = {
     name: string,
     position: string,
     active?: boolean,
-    inTeam: boolean
+    team?: boolean
 }

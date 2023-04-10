@@ -1,8 +1,8 @@
 import './chatMessage.scss';
-import { chatMessagePropsType } from '../../../types/chats/chat.types';
+import { chatMessagePropsType } from '../../../types/chats/chatTypes';
 import { getFile } from '../../../queries/chat.queries';
 import { loading } from '../../../assets/Icons';
-import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon';
+import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/chatMessageLoadingIcon';
 
 const ChatMessages = ({ ownerName, time, text, owner, file, imgUrl }: chatMessagePropsType) => {
   const fileTypeIcon = getFile(file as string);

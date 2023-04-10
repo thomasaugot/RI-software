@@ -35,14 +35,11 @@ const HireWorker: FC = () => {
   const submitHandle = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const companyId: number = parseInt(localStorage.getItem('company_id') || '-1');
+    const companyId: number = parseInt(localStorage.getItem('companyId') || '-1');
 
-    const sign = require('jwt-encode');
-    const secret = 'secret-data-adding-employee';
     const data = {
-      user: {
-        email
-      },
+      email,
+      link: 'http://localhost:3000/accept-invitation/register/{TOKEN}',
       employee: {
         work_hour: workingHours,
         wage,
@@ -50,7 +47,7 @@ const HireWorker: FC = () => {
         leader_id: hireWorkerLeader,
         company_id: companyId
       },
-      functions: {
+      navbar: {
         employee: employeeCheckbox,
         projects: projectsCheckbox,
         sales: salesCheckbox,
@@ -58,10 +55,8 @@ const HireWorker: FC = () => {
         finance: financeCheckbox
       }
     };
-    const jwt = sign(data, secret, { "alg": "HS256" });
-
-    // sending the email
-    authorizedRequest(hireUrl, 'PUT', 'accessToken', {email, link: `http://127.0.0.1:3000/accept-invitation/register/${jwt}`});
+    
+    authorizedRequest(hireUrl, 'POST', 'accessToken', data);
     
   }
 
@@ -75,33 +70,19 @@ const HireWorker: FC = () => {
       <form className="hire-worker-form" onSubmit={submitHandle}>
         <div className="hire-worker-content-container">
           <div className="hire-worker-content-input-container">
-            <div className="hire-worker-content-input">
-              <label htmlFor="position">Position</label>
-              <InputField type="text" name="position" value={position} onChange={(e) => {
-               setPosition(e.target.value);
-              }}/>
-
-            </div>
-            <div className="hire-worker-content-input">
-              <label htmlFor="position">Email</label>
-              <InputField type="email" name="email" value={email} onChange={(e) => {
-                setEmail(e.target.value);
-              }}/>
-            </div>
-            <div className="hire-worker-content-input">
-              <label htmlFor="position">Wage</label>
-              <InputField type="text" name="wage" value={wage} onChange={(e) => {
-                // removing all letters
+            <InputField  type="text" name="position" value={position} label='Position' onChange={(e) => {
+              setPosition(e.target.value);
+            }}/>
+            <InputField  type="email" name="email" value={email} label='Email' onChange={(e) => {
+              setEmail(e.target.value);
+            }}/>
+            <InputField type="text" name="wage" value={wage} label='Wage' onChange={(e) => {
                 setWage(e.target.value.replace(/\D/g,'').length>0 ? parseInt(e.target.value.replace(/\D/g,'')) : '')
               }}/>
-            </div>
-            <div className="hire-worker-content-input">
-              <label htmlFor="position">Work Hour</label>
-              <InputField type="text" name="work-hour" value={workingHours} onChange={(e) => {
+            <InputField type="text" name="work-hour" value={workingHours} label='Work hours' onChange={(e) => {
                 // removing all letters
                 setWorkingHours(e.target.value.replace(/\D/g,'').length>0 ? parseInt(e.target.value.replace(/\D/g,'')) : '');
               }}/>
-            </div>
           </div>
           <div className="hire-worker-functions">
             <p className="hire-worker-functions-title">User Function</p>

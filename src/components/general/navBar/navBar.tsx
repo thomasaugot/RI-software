@@ -59,7 +59,12 @@ const NavBar = () => {
         </div>
       </div>
       <div className="navbar-bottom" onClick={()=>{
-        localStorage.setItem("token", '')
+        localStorage.setItem("avatar", '')
+        localStorage.setItem("userId", '')
+        localStorage.setItem("companyId", '')
+        localStorage.setItem("employeeId", '')
+        localStorage.setItem("companyAvatar", '')
+        localStorage.setItem("companyName", '')
         navigate('/login');
       }}>
         <div className="logout-button">
