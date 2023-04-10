@@ -1,6 +1,5 @@
 import { addChat } from '../../../assets/chatIcons';
 import './chatBarHeader.scss';
-import { addChat } from '../../../assets/Icons';
 import { useContext } from 'react';
 import { ModalsContext } from '../../../context/modalsContext';
 
