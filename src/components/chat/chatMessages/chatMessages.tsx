@@ -6,6 +6,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import MiniPopup from '../miniPopup/editMessagePopup';
 import ForwardComponent from '../forwardComponent/forwardComponent';
 import { profile } from '../../../assets/Icons';
+
 const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisplayPopup,additionalDataForPopup,message,  changeEditMessage, delay, needToAnimateBlock }) => {
   const {file, text, ownerName, owner, time, imgUrl,  forwarded, editted} = message
   const {messageID, firstLoad} = needToAnimateBlock

@@ -12,7 +12,7 @@
   }
 
   .hire-worker-form{
-    padding: 0 3.125vw 3.47vw;
+    padding: 0 3.125vw 1.47vw;
     min-height: calc(100% - 4.5vw);
     max-height: calc(100% - 4.5vw);
     display: flex;
@@ -35,18 +35,17 @@
         grid-column-gap: 2.5vw;
         width: 100%;
 
-        .hire-worker-content-input{
-          label{
-            font-size: 1.13vw;
-          }
-          .input-field-container{
-            width: 100%;
-            height: 2.5vw;
-            input{
-              font-size: 0.95vw;
-            }
+        label{
+          font-size: 1.13vw;
+        }
+        .input-field-container{
+          width: 100%;
+          height: 2.5vw;
+          input{
+            font-size: 0.95vw;
           }
         }
+        
       }
       
       .hire-worker-functions{
@@ -75,7 +74,7 @@
     }
 
     .hire-worker-submit-container{
-      margin-top: 3.125vw;
+      margin-top: 2.125vw;
       width: 10.42vw;
       height: 3.5vw;
       margin-left: auto;

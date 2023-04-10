@@ -1,5 +1,5 @@
 import { createContext, useState, FC } from "react";
-import { modals, modalsProviderProps } from '../types/context/modalsContextTypes';
+import { modals, modalsProviderProps, moveWorkerData } from '../types/context/modalsContextTypes';
 
 export  const ModalsContext = createContext<modals>({} as modals);
 
@@ -9,9 +9,37 @@ const ModalsProvider: FC<modalsProviderProps> = ({ children }) => {
     const [ companisListModalIsOpen, setCompanisListModalIsOpen ] = useState(false);
     const [ createCompanyIsOpen, setCreateCompanyIsOpen ] = useState(false);
     const [ hireWorkerLeader, setHireWorkerLeader ] = useState(-1);
+    const [ fireWorkerIsOpen, setFireWorkerIsOpen ] = useState(false);
+    const [ fireWorkerId, setFireWorkerId ] = useState(-1);
+    const [ moveWorkerIsOpen, setMoveWorkerIsOpen ] = useState(false);
+    const [ moveWorkerConfirmationIsOpen, setMoveWorkerConfirmationIsOpen ] = useState(false);
+    const [ moveWorkerData, setMoveWorkerData ] = useState<moveWorkerData>({employeeId: -1, newLeaderId: -1, team: false});
+
+    const [ createGroupChatIsOpen, setCreateGroupChatIsOpen ] = useState(false);
 
     return (
-        <ModalsContext.Provider value={{ hireWorkerModalIsOpen, setHireWorkerModalIsOpen, companisListModalIsOpen, setCompanisListModalIsOpen, createCompanyIsOpen, setCreateCompanyIsOpen, hireWorkerLeader, setHireWorkerLeader }}>
+        <ModalsContext.Provider value={{ 
+            hireWorkerModalIsOpen, 
+            setHireWorkerModalIsOpen, 
+            companisListModalIsOpen, 
+            setCompanisListModalIsOpen, 
+            createCompanyIsOpen, 
+            setCreateCompanyIsOpen, 
+            hireWorkerLeader, 
+            setHireWorkerLeader,
+            fireWorkerIsOpen,
+            setFireWorkerIsOpen,
+            fireWorkerId,
+            setFireWorkerId,
+            moveWorkerIsOpen,
+            setMoveWorkerIsOpen,
+            moveWorkerConfirmationIsOpen,
+            setMoveWorkerConfirmationIsOpen,
+            moveWorkerData,
+            setMoveWorkerData,
+            createGroupChatIsOpen,
+            setCreateGroupChatIsOpen
+        }}>
             { children }
         </ModalsContext.Provider>
     )

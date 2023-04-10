@@ -1,5 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
+export type moveWorkerData = {
+    employeeId: number,
+    newLeaderId: number,
+    team: boolean
+}
+
 export type modals = {
     hireWorkerModalIsOpen: boolean,
     setHireWorkerModalIsOpen: Dispatch<SetStateAction<boolean>>,
@@ -9,6 +15,18 @@ export type modals = {
     setCreateCompanyIsOpen: Dispatch<SetStateAction<boolean>>,
     hireWorkerLeader: number,
     setHireWorkerLeader: Dispatch<SetStateAction<number>>,
+    fireWorkerIsOpen: boolean,
+    setFireWorkerIsOpen: Dispatch<SetStateAction<boolean>>,
+    fireWorkerId: number,
+    setFireWorkerId: Dispatch<SetStateAction<number>>,
+    moveWorkerIsOpen: boolean,
+    setMoveWorkerIsOpen: Dispatch<SetStateAction<boolean>>,
+    moveWorkerConfirmationIsOpen: boolean,
+    setMoveWorkerConfirmationIsOpen: Dispatch<SetStateAction<boolean>>,
+    moveWorkerData: moveWorkerData,
+    setMoveWorkerData: Dispatch<SetStateAction<moveWorkerData>>,
+    createGroupChatIsOpen: boolean,
+    setCreateGroupChatIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export type modalsProviderProps = {

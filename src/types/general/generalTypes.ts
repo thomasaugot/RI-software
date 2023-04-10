@@ -28,9 +28,10 @@ export type inputFieldProps = {
   name: string;
   isSearch?: boolean;
   minLength?: number;
-  onBlur?: (e: React.FocusEvent<any, Element>) => void;
   value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<any, Element>) => void;
+  label?: string | null;
 };
 
 export enum buttonType {
@@ -65,4 +66,16 @@ export type paginationButtonsProps = {
 export type formErrorProps = {
   errorText: string,
   appear: boolean
+}
+
+type confirmationModalButton = {
+  text: string,
+  onClickHandler: Function
+}
+
+export type confirmationModalProps = {
+  title: string,
+  buttons: confirmationModalButton[],
+  isOpen: boolean,
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
