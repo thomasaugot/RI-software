@@ -9,8 +9,8 @@ import { useInfiniteScroll } from '../../customHooks/useInfiniteScroll';
 import { authorizedRequest } from '../../utils/queries';
 import { chatInfoById } from '../../utils/network';
 import ChatBaseLayout from '../../layouts/chatBaseLayout/chatBaseLayout';
-
 import CreateGroupChat from '../../modals/chat/createGroupChat/createGroupChat';
+import { profile } from '../../assets/Icons';
 
 
 const Chat = () => {
