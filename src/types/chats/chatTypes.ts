@@ -3,6 +3,7 @@ export type ChatHeaderTypes = {
   name: string,
   status: string
 }
+
 export type additionalDataForPopup = {
   ownerName: string, text: string, time: string, fileExist: boolean
 }
@@ -108,9 +109,16 @@ export type ChatByIdResponse = {
     peer_id: number
   }
 }
+
 export type CoordsForMessagePopup = {
   coords: {
     x: number,
     y: number
   }
+}
+
+export type selectableChatCardProps = {
+  name: string,
+  avatar: string | null | undefined,
+  onClickHandler: Function
 }

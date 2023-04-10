@@ -15,7 +15,6 @@ body {
 /* width */
 ::-webkit-scrollbar {
   background: transparent;
-  background-color: #D9D9D9;
   width: 10px;
 }
 
@@ -31,4 +30,10 @@ body {
   border-radius: 20px;
   border: 3px solid #fff;
 
+}
+
+p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -5,12 +5,12 @@ import AcceptInvitationRegister from "./pages/acceptInvintation/register/registe
 import AcceptInvitationLogin from "./pages/acceptInvintation/login/login";
 import AcceptInvitationConfirmation from "./pages/acceptInvintation/confirmation/confirmation"
 import Home from "./pages/Home/Home";
-import NotFound from "./pages/NotFound/NotFound";
-import Chat from './pages/Chat/Chat';
-import Login from './pages/Login/Login';
-import Confirmation from './pages/Confirmation/Confirmation';
-import Hierachy from './pages/hierarchy/Hierarchy';
-import SearchWorker from './pages/SearchWorker/SearchWorker';
+import NotFound from "./pages/notFound/notFound";
+import Chat from './pages/chat/chat';
+import Login from './pages/login/Login';
+import Confirmation from './pages/confirmation/Confirmation';
+import Hierachy from './pages/hierarchy/hierarchy';
+import SearchWorker from './pages/searchWorker/SearchWorker';
 
 const Router: FC = () => {
   return (

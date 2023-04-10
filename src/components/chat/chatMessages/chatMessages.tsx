@@ -6,6 +6,7 @@ import ForwardComponent from '../forwardComponent/forwardComponent';
 import ChatMessagesTypeTextMessage from '../chatMessagesType/chatMessagesTypeTextMessage';
 import ChatMessagesTypeFileMessage from '../chatMessagesType/chatMessagesTypeFileMessage';
 import ChatMessagesTypeAudioMessage from '../chatMessagesType/chatMessagesTypeAudioMessage';
+
 const ChatMessages: FC<chatMessagePropsType> = ({messagesScrollHeight,handleDisplayPopup,additionalDataForPopup,message,  changeEditMessage, delay, needToAnimateBlock }) => {
   const {file, text, ownerName,  time, forwarded, editted, audioFile} = message
   const {messageID, firstLoad} = needToAnimateBlock

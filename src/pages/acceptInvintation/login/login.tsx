@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { whoAmIUrl, loginUrl, hireUrl } from "../../../utils/network";
+import { whoAmIUrl, loginUrl, acceptJobOfferUrl } from "../../../utils/network";
 import { unauthorizedRequest, authorizedRequest } from "../../../utils/queries";
 
 
@@ -39,18 +39,29 @@ const AcceptInvitationLogin = () => {
           localStorage.setItem('refreshToken', responce.result.refresh_token)
           resolveOuter()
         }).then(()=>{
-            authorizedRequest(hireUrl, 'POST', 'accessToken', { 'data-token': token }).then((acceptInvitationResponce) => {
-              console.log(acceptInvitationResponce)
-              authorizedRequest(whoAmIUrl, 'GET').then((whoAmIResponce: any) => {
-                console.log(whoAmIResponce)
-                localStorage.setItem("avatar", whoAmIResponce.result.avatar)
-                localStorage.setItem("userId", whoAmIResponce.result.user_id)
-                localStorage.setItem("companyId", whoAmIResponce.result.companies[0].company_id)
-                localStorage.setItem("employeeId", whoAmIResponce.result.companies[0].employee_id)
-                localStorage.setItem("companyAvatar", whoAmIResponce.result.companies[0].avatar)
-                localStorage.setItem("companyName", whoAmIResponce.result.companies[0].name)
-                navigate('/');
-              })
+            authorizedRequest(acceptJobOfferUrl, 'POST', 'accessToken', { 'token': token }).then((acceptInvitationResponce) => {
+              if(acceptInvitationResponce.ok){
+                authorizedRequest(whoAmIUrl, 'GET').then((whoAmIResponce: any) => {
+                  console.log(whoAmIResponce)
+                  localStorage.setItem("avatar", whoAmIResponce.result.avatar)
+                  localStorage.setItem("userId", whoAmIResponce.result.user_id)
+                  localStorage.setItem("companyId", whoAmIResponce.result.companies[0].company_id)
+                  localStorage.setItem("employeeId", whoAmIResponce.result.companies[0].employee_id)
+                  localStorage.setItem("companyAvatar", whoAmIResponce.result.companies[0].avatar)
+                  localStorage.setItem("companyName", whoAmIResponce.result.companies[0].name)
+                  navigate('/');
+                })
+              }else if(acceptInvitationResponce === 400){
+                console.log('ddssf')
+                setError(true);
+                setErrorText('No such invitation token');
+              }else if(acceptInvitationResponce === 401){
+                setError(true);
+                setErrorText('Token expired or already used');
+              }else if(acceptInvitationResponce === 402){
+                setError(true);
+                setErrorText('This is not for current user');
+              }
             })
         })
       }else if(responce === 400 || responce === 401){

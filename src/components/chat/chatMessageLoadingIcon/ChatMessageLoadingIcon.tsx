@@ -1,4 +1,3 @@
-import React from 'react'
 import './chatMessageLoadingIcon.scss'
 function ChatMessageLoadingIcon() {
   return (

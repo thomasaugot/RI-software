@@ -5,14 +5,14 @@ import { errorAlert } from '../../../assets/Icons';
 
 const FormError: FC<formErrorProps> = ({ errorText, appear }) => {
     return (
+      <>
+      {appear ? (
         <div className="error-container">
-          {appear ? (
-            <>
-              {errorAlert}
-              <p>]{errorText} </p>
-            </>
-          ) : null}
+          {errorAlert}
+          <p>{errorText}</p>
         </div>
+      ) : null}
+      </>
     )
 }
 

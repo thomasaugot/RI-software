@@ -8,7 +8,10 @@ import { hireEmployeeButton } from '../../assets/hierarchyIcons';
 import { authorizedRequest } from '../../utils/queries'
 import { fetchOwnersUrl, fetchEmployeesUrl, fetchLeadersUrl, fetchTheLeaderUrl } from "../../utils/network";
 import { ModalsContext } from "../../context/modalsContext";
-import HireWorker from '../../Modals/hierarchy/hireWorker/hireWorker';
+import HireWorker from '../../modals/hierarchy/hireWorker/hireWorker';
+import FireWorker from '../../modals/hierarchy/fireWorker/fireWorker';
+import MoveWorker from '../../modals/hierarchy/moveWorker/moveWorker';
+import MoveWorkerConfirmation from '../../modals/hierarchy/moveWorker/moveWorkerConfirmation/moveWorkerConfirmation';
 
 const Hierachy: FC = () => {
 
@@ -133,15 +136,10 @@ const Hierachy: FC = () => {
                 {
                   employeesList.map((employee, employeeIndex) => {
                     return <HierarchyUserCard
-                      name={employee.name}
-                      position={employee.position}
-                      url={employee.avatar_link}
-                      employeeId={employee.employee_id}
-                      userId={employee.user_id}
+                      employee={employee}
                       setHierarchy={setHierarchy}
                       hierarchy={hierarchy}
-                      level={index}
-                      active={employee.active}
+                      currentLevel={index}
                       index={employeeIndex}
                       inTeam={index > hierarchyLevel && isActive}
                       setHierarchyLevel={setHierarchyLevel}
@@ -171,6 +169,9 @@ const Hierachy: FC = () => {
       </div>
       
       <HireWorker/>
+      <FireWorker/>
+      <MoveWorker/>
+      <MoveWorkerConfirmation/>
 
     </BaseLayout >
   );

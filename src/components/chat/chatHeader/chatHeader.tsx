@@ -1,7 +1,8 @@
 import {ChatHeaderTypes} from '../../../types/chats/chatTypes'
-import {  profile } from '../../../assets/Icons';
+import { profile } from '../../../assets/Icons';
 import './chatHeader.scss';
 import { ChatTools, ChatsearchSvg } from '../../../assets/chatIcons';
+
 const ChatHeader = ({imgUrl, name, status}: ChatHeaderTypes) => {
     return (
         <div className="header">
