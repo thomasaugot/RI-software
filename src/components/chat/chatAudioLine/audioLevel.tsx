@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { AudioLevelProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
+import { audioWaveProps } from '../../../types/chats/audioMessageType';
 import './audioLevel.scss'
 
-const AudioLevel: FC<AudioLevelProps> = ({ height }) => {
+const AudioLevel: FC<audioWaveProps> = ({ height }) => {
   // Define the minimum and maximum heights for the level-item div.
   const minHeight = 5;
   const maxHeight = 30;
