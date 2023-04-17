@@ -9,7 +9,7 @@ import CheckBox from "../../components/general/checkBox/checkBox";
 import Field from "../../components/general/inputField/inputField";
 import Heading from "../../components/general/title/title";
 import SubmitButton from "../../components/general/submitButton/submitButton";
-import "./Login.scss";
+import "./login.scss";
 import { buttonType } from "../../types/general/generalTypes";
 import FormError from "../../components/general/formError/formError";
 

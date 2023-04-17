@@ -1,9 +1,9 @@
 import { FC, useEffect, useState, useRef } from "react";
 import { pauseAudioIcon, playAudioMessage } from '../../../assets/chatIcons';
 import './audioMessagePlayButton.scss'
-import { AudioPlayerProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
+import { chatAudioPlayerProps } from '../../../types/chats/audioMessageType';
 
-const AudioPlayer: FC<AudioPlayerProps> = ({ audioBlobUrl, setPlayingAudioTime }) => {
+const AudioPlayer: FC<chatAudioPlayerProps> = ({ audioBlobUrl, setPlayingAudioTime }) => {
   // State variables
   const [isPlaying, setIsPlaying] = useState<boolean>(false); // Determines if the audio is currently playing
   const audioRef = useRef<HTMLAudioElement | null>(null); // Reference to the <audio> element

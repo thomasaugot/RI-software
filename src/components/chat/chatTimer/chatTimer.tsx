@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { playAudioIcon, redCircle } from '../../../assets/chatIcons'
 import './chatTimer.scss'
-import { ChatTimerProps } from '../../../types/chats/audioMessageTypes/audioMessageType';
+import { chatTimerProps } from '../../../types/chats/audioMessageType';
 
-const ChatTimer: FC<ChatTimerProps> = ({timer, isRec, blob}) => {
+const ChatTimer: FC<chatTimerProps> = ({timer, isRec, blob}) => {
     // Function to format time as MM:SS
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);

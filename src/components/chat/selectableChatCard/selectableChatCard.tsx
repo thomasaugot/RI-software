@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, FC } from 'react'
 import './selectableChatCard.scss';
 import CheckBox from '../../general/checkBox/checkBox';
-import { selectableChatCardProps } from '../../../types/chats/chatTypes';
+import { selectableChatCardProps } from '../../../types/chats/generalTypes';
 import { profile } from '../../../assets/Icons';
 
 const SelectableChatCard: FC<selectableChatCardProps> = ({

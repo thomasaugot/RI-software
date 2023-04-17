@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import './forwardComponent.scss'
-import { ForwardMessageProps } from '../../../types/chats/chatTypes'
-const ForwardComponent: FC<ForwardMessageProps> = ({forwarded}) => {
+import { forwardMessageProps } from '../../../types/chats/generalTypes'
+
+const ForwardComponent: FC<forwardMessageProps> = ({forwarded}) => {
   const {from, message} = forwarded
   return (
     <div className='forward-message-wrapper'>

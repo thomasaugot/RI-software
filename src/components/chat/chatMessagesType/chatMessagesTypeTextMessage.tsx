@@ -1,20 +1,21 @@
 import { FC } from 'react'
 import { profile } from '../../../assets/Icons'
-import { ChatMessagesTypeTextMessageProps } from '../../../types/chats/audioMessageTypes/audioMessageType'
+import { chatTextMessageProps } from '../../../types/chats/audioMessageType'
+import { messageTypes } from '../../../types/chats/messagesTypes'
 
 
-const ChatMessagesTypeTextMessage: FC<ChatMessagesTypeTextMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
-    const { text, ownerName, owner, time, imgUrl,  forwarded} = message
+const ChatMessagesTypeTextMessage: FC<chatTextMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
+    const { text, senderName, type, time,  forwarded} = message
   return (
     <>
-    {owner ? (
+    {type === messageTypes.USER ? (
       <div className={`chat-message-wrapper  yes ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''} ${forwarded ? 'forwarded-message' : ''}`} onContextMenu={handleRightClick}>
         {needToDisplayMiniPopupWithoutFile()}
         {needToDisplayForwardMessage()}
         <div className='chat-message-container'>
           <div className='sent-data'>
           {needToDisplayEdditedMessage()}
-            <p className='message-owner'>{ownerName}</p>
+            <p className='message-owner'>{senderName}</p>
             <p className='time'>{time}</p>
           </div>
           <div className='file-type'></div>
@@ -25,12 +26,12 @@ const ChatMessagesTypeTextMessage: FC<ChatMessagesTypeTextMessageProps> = ({mess
       <div  className={`stranger-owner  ${needToDisplayMiniPopupWithoutFile()  ? 'miniPopup-parent' : ''}`} onContextMenu={handleRightClick}>
          {needToDisplayMiniPopupWithoutFile()}
          {needToDisplayForwardMessage()}
-         {imgUrl ?  <img src={imgUrl} alt={ownerName} className="icon" /> : <span className="icon">{profile}</span>}
+         {/* {imgUrl ?  <img src={imgUrl} alt={ownerName} className="icon" /> : <span className="icon">{profile}</span>} */}
         <div className={`chat-message-wrapper ${forwarded ? 'forwarded-message' : ''}`}>
           <div className='chat-message-container'>
             <div className='sent-data'>
             {needToDisplayEdditedMessage()}
-              <p className='message-owner'>{ownerName}</p>
+              <p className='message-owner'>{senderName}</p>
               <p className='time'>{time}</p>
             </div>
             <div className='file-type'></div>

@@ -4,14 +4,17 @@ import './index.scss';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ModalsProvider from './context/modalsContext'
+import ChatProvider from './context/chat/chatContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
     <ModalsProvider>
-      <Router>
-        <App />
-      </Router>
+      <ChatProvider>
+        <Router>
+          <App />
+        </Router>
+      </ChatProvider>
     </ModalsProvider>
 );
