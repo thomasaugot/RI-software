@@ -132,7 +132,10 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
           :
           null
       }
-      <div className={`chat-input-container ${actionType.actionType.length > 0 ? 'chat-input-container-edit' : ''}`}>
+      <div className={`chat-input-container
+        ${actionType.actionType === actions.EDIT || actionType.actionType === actions.REPLY
+          ? 'chat-input-container-edit'
+          : ''}`}>
         {isRecordingAudio
           ? <ChatAudioRecorder handleSubmit={handleSubmit} isRecordingAudio={isRecordingAudio} setIsRecordingAudio={setIsRecordingAudio} handleAddAudioBlob={handleAddAudioBlob} />
           : <ChatInputMessage chatInputValue={chatInputValue} setChatInputValue={setChatInputValue} setIsRecordingAudio={setIsRecordingAudio} />}
