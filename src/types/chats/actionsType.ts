@@ -27,4 +27,6 @@ export type actionType = {
   messageId: number | undefined
 }
 
+export type actionBannerProps = { text: string, sender: string, }
+
 export type updateAction = (actionType: actions, messageId: number | undefined) => void

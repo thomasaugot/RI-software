@@ -1,34 +1,28 @@
-import { FC, useContext, useRef } from 'react'
+import { FC, useContext, useState } from 'react'
 import './actionBanner.scss'
-import { actions, updateAction } from '../../../../../types/chats/actionsType'
+import { actionBannerProps, actions } from '../../../../../types/chats/actionsType'
 import { cross } from '../../../../../assets/chatIcons'
 import { ChatContext } from '../../../../../context/chat/chatContext'
 
-const ActionBanner: FC<{ text: string, sender: string, }> = ({ text, sender }) => {
-  const replyWrapperRef = useRef<HTMLDivElement | null>(null)
+const ActionBanner: FC<actionBannerProps> = ({ text, sender }) => {
   const { setContextMenu, setActionType } = useContext(ChatContext)
+  const [displayActionBanner, setDisplayActionBanner] = useState(true)
   const closeBanner = () => {
-    replyWrapperRef.current?.classList.add('reply-wrapper-hidden')
-    setContextMenu(null)
-    setActionType({ actionType: actions.SEND, messageId: undefined })
+    setDisplayActionBanner(false)
+    setTimeout(() => {
+      setContextMenu(null)
+      setActionType({ actionType: actions.SEND, messageId: undefined })
+    }, 70)
   }
 
-  // const closeReplyComponent = () => {
-  //   replyWrapperRef.current?.classList.add('reply-wrapper-hidden')
-  //   setTimeout(() => {
-  //     handleCloseEditPopup()
-  //   }, 80)
-  // }
-
-
   return (
-    <div className='reply-wrapper' ref={replyWrapperRef}>
-      <div className="reply-container">
-        <div className="reply-container-text">
-          <div className="reply-container-text-up">{sender}</div>
-          <div className="reply-container-text-bottom">{text}</div>
+    <div className={`action-banner ${!displayActionBanner ? 'action-banner-deplay-before-hidding' : ''}`} >
+      <div className="action-banner-container">
+        <div className="action-banner-sender-info">
+          <div className="action-banner-sender">{sender}</div>
+          <div className="action-banner-sender-message"><p>{text}</p></div>
         </div>
-        <div className="reply-container-icon" onClick={closeBanner}>{cross}</div>
+        <div className="action-banner-close-icon" onClick={closeBanner}>{cross}</div>
       </div>
     </div>
   )

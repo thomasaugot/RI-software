@@ -1,46 +1,28 @@
-.reply-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #EEEEEE;
-border-radius:  0.9765625vw;
-padding: 0px 1.2369791666666667vw 0px 1.6276041666666667vw;
-height: 3.90625vw;
-}
 @keyframes slide-in {
   0% {
     transform: translateY(100%);
   }
+
   100% {
     transform: translateY(0);
   }
 }
+
 @keyframes slide-out {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(100%);
   }
 }
-.reply-container-icon svg {
-  width: 1.4322916666666667vw;
-  height: 1.4322916666666667vw;
-  cursor: pointer;
-}
-.reply-container-text-up {
-  font-size: 1.0416666666666667vw;
-  font-weight: 600;
-line-height: 1.5625vw;
-color: #444444;
-}
-.reply-container-text-bottom {
-  font-size: 1.0416666666666667vw;
-  font-weight: 400;
-line-height: 1.5625vw;
-color: #444444;
-}
-.reply-wrapper {
+
+
+
+
+
+.action-banner {
   background: #FFFFFF;
   width: 47.63vw;
   height: 4.94vw;
@@ -51,8 +33,42 @@ color: #444444;
   animation-name: slide-in;
   animation-duration: 0.08s;
   animation-timing-function: ease-out;
+
+  .action-banner-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #EEEEEE;
+    border-radius: 0.9765625vw;
+    padding: 0px 1.2369791666666667vw 0px 1.6276041666666667vw;
+    height: 3.90625vw;
+
+    .action-banner-close-icon svg {
+      width: 1.4322916666666667vw;
+      height: 1.4322916666666667vw;
+      cursor: pointer;
+    }
+
+    .action-banner-sender-info {
+      .action-banner-sender {
+        font-size: 1.0416666666666667vw;
+        font-weight: 600;
+        line-height: 1.5625vw;
+        color: #444444;
+      }
+
+      .action-banner-sender-message {
+        font-size: 1.0416666667vw;
+        font-weight: 400;
+        line-height: 1.5625vw;
+        color: #444444;
+        width: 40.317708vw;
+      }
+    }
+  }
 }
-.reply-wrapper-hidden {
+
+.action-banner-deplay-before-hidding {
   animation-name: slide-out;
   animation-duration: 0.08s;
   animation-timing-function: ease-out;

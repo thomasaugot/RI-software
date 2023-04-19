@@ -15,7 +15,7 @@ import { ChatContext } from '../../../../context/chat/chatContext';
 const MessageArea: FC<messageAreaProps> = ({ loading, scrollHandler, messages, messageAreaContainer }) => {
   //clicked message data
   //set block that we need to animate and its first loading of message animate all blocks with default animation
-  const { setContextMenu } = useContext(ChatContext)
+  const { setContextMenu, contextMenu } = useContext(ChatContext)
   const [additionalDataForPopup, setAdditionalDataForPopup] = useState<popupAdditionDataType | null>(null)
   //what kind of action we need to apply to component
   // Handle display of popup with message data
@@ -37,10 +37,24 @@ const MessageArea: FC<messageAreaProps> = ({ loading, scrollHandler, messages, m
 
 
   return (
-    <div className='message-area' ref={messageAreaContainer} onScroll={scrollHandler} onClick={() => {
+    <div className={`message-area ${contextMenu ? 'message-area-block-scroll' : ''}`} ref={messageAreaContainer} onScroll={scrollHandler} onClick={() => {
       setContextMenu(null)
     }}>
       {loading ? <div className='loading-messages'><ChatMessageLoadingIcon /></div> : null}
+      {messages.map((message, index) => {
+        if (message.type === messageTypes.DATE) {
+          return <ChatInfoText text={message.text} />
+        } else {
+          return <ChatMessages
+            // messagesScrollHeight={messagesScrollHeight}
+            // handleDisplayPopup={handleDisplayPopup}
+            // additionalDataForPopup={additionalDataForPopup}
+            message={message as userMessageType}
+          // needToAnimateBlock={needToAnimateBlock}
+          // delay={index * 0.05}
+          />
+        }
+      })}
       {messages.map((message, index) => {
         if (message.type === messageTypes.DATE) {
           return <ChatInfoText text={message.text} />
