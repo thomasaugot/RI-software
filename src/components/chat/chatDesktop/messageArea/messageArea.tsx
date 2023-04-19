@@ -9,7 +9,7 @@ import { chatMessageType, userMessageType, messageTypes } from '../../../../type
 import { mockMessages } from './mockMessagesData';
 
 import { actions } from '../../../../types/chats/actionsType';
-import ChatMessageLoadingIcon from '../../chatMessageLoadingIcon/ChatMessageLoadingIcon';
+import ChatMessageLoadingIcon from '../../chatMessageLoadingIcon/chatMessageLoadingIcon';
 import { ChatContext } from '../../../../context/chat/chatContext';
 
 const MessageArea: FC<messageAreaProps> = ({ loading, scrollHandler, messages, messageAreaContainer }) => {

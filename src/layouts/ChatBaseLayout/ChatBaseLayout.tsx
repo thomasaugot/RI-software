@@ -1,8 +1,8 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import "./chatBaseLayout.scss";
 import NavBar from "../../components/general/navBar/navBar";
-import CompaniesList from "../../Modals/companiesList/companiesList";
-import CreateCompany from "../../Modals/createCompany/createCompany";
+import CompaniesList from "../../modals/companiesList/companiesList";
+import CreateCompany from "../../modals/createCompany/createCompany";
 
 const ChatBaseLayout: FC<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>

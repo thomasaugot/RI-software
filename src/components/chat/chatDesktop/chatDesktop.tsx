@@ -17,6 +17,7 @@ const ChatDesktop: FC = () => {
     status: ''
   });
 
+
   // const { count, loading } = useInfiniteScroll(blockHeight, currentUserHeight, 100, 20);
 
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ const ChatDesktop: FC = () => {
   }
 
 
-  const { chatId } = useContext(ChatContext);
+  const { chatId, setChatMembers } = useContext(ChatContext);
 
   const [messages, setMessages] = useState(mockMessages);
   const [needToAnimateBlock, setNeedToAnimateBlock] = useState<{ messageId: number | null | undefined, firstLoad: boolean }>({
@@ -44,6 +45,11 @@ const ChatDesktop: FC = () => {
         name: 'randomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandom',
         status: 'offline'
       })
+
+      setChatMembers([
+        {employeeId: 1, avatar: 'sss', name: 'sd22'}, 
+        {employeeId: 2, avatar: null, name: 'sd22333'}, 
+        ])
     }
   }, [chatId])
 

@@ -5,7 +5,7 @@ import { messageTypes } from '../../../types/chats/messagesTypes'
 
 
 const ChatMessagesTypeTextMessage: FC<chatTextMessageProps> = ({message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick}) => {
-    const { text, senderName, type, time,  forwarded} = message
+    const { text, type, time,  forwarded} = message
   return (
     <>
     {type === messageTypes.USER ? (
@@ -15,7 +15,7 @@ const ChatMessagesTypeTextMessage: FC<chatTextMessageProps> = ({message, needToD
         <div className='chat-message-container'>
           <div className='sent-data'>
           {needToDisplayEdditedMessage()}
-            <p className='message-owner'>{senderName}</p>
+            <p className='message-owner'>{null}</p>
             <p className='time'>{time}</p>
           </div>
           <div className='file-type'></div>
@@ -31,7 +31,7 @@ const ChatMessagesTypeTextMessage: FC<chatTextMessageProps> = ({message, needToD
           <div className='chat-message-container'>
             <div className='sent-data'>
             {needToDisplayEdditedMessage()}
-              <p className='message-owner'>{senderName}</p>
+              <p className='message-owner'>{null}</p>
               <p className='time'>{time}</p>
             </div>
             <div className='file-type'></div>
