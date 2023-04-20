@@ -19,7 +19,7 @@ const CompaniesList = () => {
     useEffect(() => {
         authorizedRequest(whoAmIUrl, 'GET').then((whoAmIResponce) => {
             console.log(whoAmIResponce)
-            if(whoAmIResponce.ok){
+            if(whoAmIResponce?.ok){
                 setComapniesList([...whoAmIResponce.result.companies]);
             }
         })

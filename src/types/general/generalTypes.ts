@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
 
 export type whoAmIType = {
-    id: number
+  id: number
 }
 
 export type modalProps = {
-    closeModal: ()=>void,
-    closeButton?: boolean,
-    open: boolean,
-    additionalClass: string,
-    children: ReactNode 
+  closeModal: () => void,
+  closeButton?: boolean,
+  open: boolean,
+  additionalClass: string,
+  children: ReactNode
 }
 
 export type MoveWorkerFetchTypes = {
@@ -18,6 +18,19 @@ export type MoveWorkerFetchTypes = {
   employeeToBeMovedUserId: number
 }
 
+export type DropDownType = {
+  icon: React.SVGAttributes<ReactNode>,
+  text: string,
+  editIcon?: React.SVGAttributes<ReactNode>,
+  options: OptionType[]
+  pipelineOptions?: string[]
+  textIcon: ReactNode
+}
+export type OptionType = {
+  value: string,
+  text: string,
+  icon: ReactNode
+}
 //
 //
 //

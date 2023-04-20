@@ -127,7 +127,7 @@ const Register = () => {
           {error ? (
             <>
               {errorAlert}
-              <p>]{errorText} </p>
+                <p> ]{errorText} </p>
             </>
           ) : null}
         </div>

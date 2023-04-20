@@ -1,0 +1,32 @@
+.pipeline-section-container {
+    .pipeline-header {
+        .pipeline-title {
+
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 1.4641288433382138vw;
+            line-height: 1.7569546120058566vw;
+            color: #444444;
+
+        }
+
+        .amount-deals {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 1.0248901903367496vw;
+            line-height: 1.2445095168374818vw;
+            color: #444444;
+        }
+
+        .card-container {
+            height: 17.93557833089312vw;
+            overflow: scroll;
+            margin-top: 1.47vw;
+            >:first-child {
+                margin-top: 0
+            }
+        }
+    }
+}
