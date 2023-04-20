@@ -11,6 +11,7 @@ import Confirmation from './pages/Confirmation/Confirmation';
 import NotFound from './pages/NotFound/NotFound';
 import SearchWorker from './pages/SearchWorker/SearchWorker';
 import Hierachy from './pages/hierarchy/Hierarchy';
+import Profile from './pages/profile/pofile';
 
 
 const Router: FC = () => {
@@ -26,6 +27,7 @@ const Router: FC = () => {
       <Route path="/hierarchy" element={<Hierachy />} />
       <Route path="/search_workers" element={<SearchWorker />} />
       <Route path="/chat" element={<Chat />} />
+      <Route path="/profile/*" element={<Profile />} />
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

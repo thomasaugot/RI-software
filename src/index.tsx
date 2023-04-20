@@ -5,16 +5,19 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ModalsProvider from './context/modalsContext'
 import ChatProvider from './context/chat/chatContext';
+import ProfileProvider from './context/profile/profileContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <ModalsProvider>
-      <ChatProvider>
+  <ModalsProvider>
+    <ChatProvider>
+      <ProfileProvider>
         <Router>
           <App />
         </Router>
-      </ChatProvider>
-    </ModalsProvider>
+      </ProfileProvider>
+    </ChatProvider>
+  </ModalsProvider>
 );
