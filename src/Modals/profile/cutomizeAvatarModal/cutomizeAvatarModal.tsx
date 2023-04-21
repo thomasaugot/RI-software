@@ -18,25 +18,24 @@ const CutomizeAvatarModal: FC = () => {
 
   const uploadedImageReference = useRef<HTMLImageElement>(null);
   const roundAreaReference = useRef<HTMLDivElement | null>(null)
-  const container = useRef<HTMLDivElement | null>(null)
+  const containerReference = useRef<HTMLDivElement | null>(null)
 
   const [zoomLevel, setZoomLevel] = useState(1);
   const [croppedImage, setCroppedImage] = useState<string | null>(null); // HERE CROPPED IMAGE
   const [isDragable, setIsDragable] = useState(false)
-  const [naturalSize, setNaturalSize] = useState<null | { width: number, height: number }>(null)
+  const [originalSize, setOriginalSize] = useState<null | { width: number, height: number }>(null)
   const [mouseStart, setMouseStart] = useState({ x: 0, y: 0 })
   const [imageStart, setImageStart] = useState({ x: 0, y: 0 })
   const [coords, setCoords] = useState({ x: 0, y: 0 })
   const [scaleImage, setScaleImage] = useState(1)
 
   const drag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (naturalSize) {
-      if (isDragable && container.current && uploadedImageReference.current) {
-        const deltaX = e.clientX - mouseStart.x;
-        const deltaY = e.clientY - mouseStart.y;
-        const newX = imageStart.x + deltaX;
-        const newY = imageStart.y + deltaY;
-        setCoords({ x: newX, y: newY })
+    if (originalSize) {
+      if (isDragable && containerReference.current && uploadedImageReference.current) {
+        setCoords({
+          x: imageStart.x + e.clientX - mouseStart.x,
+          y: imageStart.y + e.clientY - mouseStart.y
+        })
       }
     }
   }
@@ -65,7 +64,7 @@ const CutomizeAvatarModal: FC = () => {
     }
   }
 
-  const handleCropImage = () => {
+  const cropImage = () => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const image = uploadedImageReference.current!;
@@ -84,12 +83,12 @@ const CutomizeAvatarModal: FC = () => {
   };
 
   useEffect(() => {
-    if (!naturalSize || naturalSize.width === 0) {
+    if (!originalSize || originalSize.width === 0) {
       const img = new Image()
       img.src = imgUrl
-      setNaturalSize({ width: img.naturalWidth, height: img.naturalHeight })
+      setOriginalSize({ width: img.naturalWidth, height: img.naturalHeight })
     }
-  }, [imgUrl, naturalSize])
+  }, [imgUrl, originalSize])
 
 
   return (
@@ -104,9 +103,9 @@ const CutomizeAvatarModal: FC = () => {
         </div>
 
 
-        {!naturalSize || naturalSize.width === 0 ? null : <div
+        {!originalSize || originalSize.width === 0 ? null : <div
           className='image-cropper-container'
-          ref={container}
+          ref={containerReference}
           onMouseDown={(e) => {
             onDragStart(e)
           }}
@@ -119,8 +118,8 @@ const CutomizeAvatarModal: FC = () => {
             alt="img"
             ref={uploadedImageReference}
             style={{
-              width: `${naturalSize?.width}`,
-              height: `${naturalSize?.height}`,
+              width: `${originalSize?.width}`,
+              height: `${originalSize?.height}`,
               position: 'absolute',
               left: `${coords.x}px`,
               top: `${coords.y}px`,
@@ -158,7 +157,7 @@ const CutomizeAvatarModal: FC = () => {
         </div>
         <div className="buttons-container">
           <SubmitButton className="cancel-btn" type={buttonType.button} text='Cancel' onClick={cancelButtonHandler} />
-          <SubmitButton className='apply-btn' type={buttonType.submit} text='Apply' onClick={handleCropImage} />
+          <SubmitButton className='apply-btn' type={buttonType.submit} text='Apply' onClick={cropImage} />
         </div>
       </div>
     </Modal>

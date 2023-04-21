@@ -3,9 +3,9 @@ import './profile.scss';
 import BaseLayout from '../../layouts/BaseLayout/BaseLayout';
 import { ProfileContext } from '../../context/profile/profileContext';
 import ProfileInput from '../../components/profile/profileInput/ProfileInput';
-import { whitePencilFill } from '../../assets/Icons';
 import BrowseAvatarModal from '../../Modals/profile/browseAvatarModal/BrowseAvatarModal';
 import CutomizeAvatarModal from '../../Modals/profile/cutomizeAvatarModal/cutomizeAvatarModal';
+import { whitePencilFill } from '../../assets/profileIcons';
 
 
 const Profile = () => {

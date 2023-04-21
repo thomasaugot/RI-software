@@ -3,7 +3,7 @@ import './browseAvatarModal.scss';
 import { ProfileContext } from '../../../context/profile/profileContext';
 import InputField from '../../../components/general/inputField/inputField';
 import Modal from '../../../components/general/modal/modal';
-import { browseFile } from '../../../assets/Icons';
+import { browseFile } from '../../../assets/profileIcons';
 
 
 const BrowseAvatarModal: FC = () => {
@@ -32,7 +32,7 @@ const BrowseAvatarModal: FC = () => {
     setDragging(true);
   };
 
-  const handleDrop = (event: any) => {
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setDragging(false)
 

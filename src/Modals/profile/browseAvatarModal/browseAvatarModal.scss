@@ -6,13 +6,13 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    padding: calc(12.155vh - 2vw) 6.58857vw calc(12.155vh - 2vw) 2.92825vw;
+    padding: 6.2552083333333335vw 3.2552083333333335vw 6.2552083333333335vw 0vw;
 
     .dropped-img {
       width: 18.301vw;
-      height: 40.5186vh;
+      height: 19.04585234375vw;
 
       margin: 1.8301vw;
 
@@ -21,7 +21,6 @@
     .drop-image {
       cursor: pointer;
 
-      margin: 1.8301vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -29,10 +28,6 @@
 
       border: 1px dashed #4970B5;
       padding: 3.8799414348462666vw;
-
-      .drop-image-icon {
-        border-radius: 99px;
-      }
 
       .drop-image-text {
 
@@ -48,14 +43,12 @@
     }
 
     .or {
-      margin: 1.8301610541727673vw;
 
       font-family: 'Poppins';
       font-style: normal;
       font-weight: 400;
       font-size: 1.171303074670571vw;
       line-height: 1.7569546120058566vw;
-      /* identical to box height */
 
 
       color: #000000;
@@ -63,7 +56,6 @@
     }
 
     .browse-file-input {
-      margin: 1.8301610541727673vw;
 
       .input-field-container {
         display: none;
@@ -73,7 +65,7 @@
         cursor: pointer;
         border: 2px solid transparent;
         display: block;
-        padding: 1.2965964343598055vh 2.342606149341142vw;
+        padding: 0.6094678552133982vw 2.342606149341142vw;
         font-family: 'Poppins';
         font-style: normal;
         font-weight: 400;

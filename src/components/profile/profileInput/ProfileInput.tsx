@@ -1,14 +1,14 @@
 import './profileInput.scss';
-import { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import ProfileButton from '../profileButton/ProfileButton';
 import { cross } from '../../../assets/chatIcons';
-import { checkMark, pencilFill } from '../../../assets/Icons';
-
-const ProfileInput: FC<{ inputName: string, value: string, keyName: string, type: string }> = ({ inputName, value, keyName, type }) => {
+import { profileInputProps } from '../../../types/profile/profileTypes';
+import { checkMark, pencilFill } from '../../../assets/profileIcons';
+const ProfileInput: FC<profileInputProps> = ({ inputName, value, keyName, type }) => {
   const [profileinputEditStatus, setProfileInputEditStatus] = useState(false);
   const [inputValue, setInputValue] = useState(value);
 
-  const onInputChangeHandler = (e: any) => {
+  const onInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
   }
 
