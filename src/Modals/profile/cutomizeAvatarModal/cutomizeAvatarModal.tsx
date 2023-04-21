@@ -5,6 +5,8 @@ import SubmitButton from '../../../components/general/submitButton/submitButton'
 import { buttonType } from '../../../types/general/generalTypes';
 import { ProfileContext } from '../../../context/profile/profileContext';
 import InputField from '../../../components/general/inputField/inputField';
+import { editProfileUrl } from '../../../utils/network';
+import { authorizedRequest } from '../../../utils/queries';
 
 
 const CutomizeAvatarModal: FC = () => {
@@ -64,7 +66,7 @@ const CutomizeAvatarModal: FC = () => {
     }
   }
 
-  const cropImage = () => {
+  const cropImage = async () => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     const image = uploadedImageReference.current!;
@@ -77,7 +79,10 @@ const CutomizeAvatarModal: FC = () => {
       canvas.height = height
       ctx?.drawImage(image, Math.abs(imagex - x), Math.abs(imagey - y), width, height, 0, 0, width, height)
       setCroppedImage(canvas.toDataURL())
-      localStorage.setItem('avatar', canvas.toDataURL())
+      await authorizedRequest(editProfileUrl, 'PUT', 'accessToken', {
+        "key": "avatar",
+        "value": canvas.toDataURL()
+      })
       closeModal()
     }
   };
