@@ -29,11 +29,21 @@ const CutomizeAvatarModal: FC = () => {
   const [mouseStart, setMouseStart] = useState({ x: 0, y: 0 })
   const [imageStart, setImageStart] = useState({ x: 0, y: 0 })
   const [coords, setCoords] = useState({ x: 0, y: 0 })
-  const [scaleImage, setScaleImage] = useState(1)
 
   const drag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (originalSize) {
       if (isDragable && containerReference.current && uploadedImageReference.current) {
+        const imageY = uploadedImageReference.current!.getBoundingClientRect().y
+        const imageX = uploadedImageReference.current!.getBoundingClientRect().x
+        const roundAreaY = roundAreaReference.current!.getBoundingClientRect().y
+        const roundAreaX = roundAreaReference.current!.getBoundingClientRect().x
+        console.log(imageY, roundAreaY)
+        if (imageY === roundAreaY) {
+          console.log('y')
+        }
+        if (imageX === roundAreaX) {
+          console.log('x')
+        }
         setCoords({
           x: imageStart.x + e.clientX - mouseStart.x,
           y: imageStart.y + e.clientY - mouseStart.y
@@ -54,17 +64,7 @@ const CutomizeAvatarModal: FC = () => {
     setZoomLevel(parseFloat(e.target.value));
   };
 
-  const wheelScale = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (e.deltaY > 0) {
-      setScaleImage(zoomLevel > 4
-        ? scaleImage
-        : scaleImage - 0.01)
-    } else {
-      setScaleImage(zoomLevel < 0
-        ? scaleImage
-        : scaleImage + 0.01)
-    }
-  }
+
 
   const cropImage = async () => {
     const canvas = document.createElement('canvas');
@@ -75,9 +75,16 @@ const CutomizeAvatarModal: FC = () => {
       const { x, y, width, height } = roundAreaReference.current.getBoundingClientRect()
       const imagex = uploadedImageReference.current!.getBoundingClientRect().x
       const imagey = uploadedImageReference.current!.getBoundingClientRect().y
-      canvas.width = width
-      canvas.height = height
-      ctx?.drawImage(image, Math.abs(imagex - x), Math.abs(imagey - y), width, height, 0, 0, width, height)
+      canvas.width = width / zoomLevel
+      canvas.height = height / zoomLevel
+      ctx?.drawImage(image,
+        (Math.abs(imagex - x)) / zoomLevel,
+        (Math.abs(imagey - y)) / zoomLevel,
+        width / zoomLevel,
+        height / zoomLevel,
+        0, 0,
+        canvas.width,
+        canvas.height)
       setCroppedImage(canvas.toDataURL())
       await authorizedRequest(editProfileUrl, 'PUT', 'accessToken', {
         "key": "avatar",
@@ -118,7 +125,6 @@ const CutomizeAvatarModal: FC = () => {
           onMouseUp={() => setIsDragable(false)}
           onMouseMove={(e) => { drag(e) }}
           onMouseLeave={() => setIsDragable(false)}
-          onWheel={(e) => { wheelScale(e) }}
         >
           <img crossOrigin="anonymous" src={imgUrl}
             alt="img"
@@ -129,7 +135,7 @@ const CutomizeAvatarModal: FC = () => {
               position: 'absolute',
               left: `${coords.x}px`,
               top: `${coords.y}px`,
-              zoom: `${scaleImage}`
+              transform: `scale(${zoomLevel})`,
             }}
 
           />
@@ -141,7 +147,7 @@ const CutomizeAvatarModal: FC = () => {
               left: '50%',
               borderRadius: '50%',
               transform: 'translate(-50%, -50%)',
-              height: `${100 / zoomLevel}%`,
+              height: `13.020833333333334vw`,
               maxHeight: `${Math.min(uploadedImageReference.current?.width as number, uploadedImageReference.current?.height as number)}px`,
               maxWidth: `${Math.min(uploadedImageReference.current?.width as number, uploadedImageReference.current?.height as number)}px`,
               aspectRatio: '1/1',
@@ -157,7 +163,7 @@ const CutomizeAvatarModal: FC = () => {
         <div className="cropper-section">
           <div className="input-container">
             <div className="minus" onClick={() => setZoomLevel(zoomLevel - 1 < 1 ? zoomLevel : zoomLevel - 1)}>-</div>
-            <InputField name='input-range' className='avatar-input-range' type="range" min="1" max="4" step="0.01" value={zoomLevel} onChange={handleZoomChange} />
+            <InputField name='input-range' className='avatar-input-range' type="range" min="0.5" max="4" step="0.01" value={zoomLevel} onChange={handleZoomChange} />
             <div className="plus" onClick={() => setZoomLevel(zoomLevel + 1 > 4 ? zoomLevel : zoomLevel + 1)}>+</div>
           </div>
         </div>
