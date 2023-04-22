@@ -83,6 +83,7 @@ const CutomizeAvatarModal: FC = () => {
         "key": "avatar",
         "value": canvas.toDataURL()
       })
+      localStorage.setItem('avatar', canvas.toDataURL())
       closeModal()
     }
   };
