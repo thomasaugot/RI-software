@@ -33,17 +33,6 @@ const CutomizeAvatarModal: FC = () => {
   const drag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (originalSize) {
       if (isDragable && containerReference.current && uploadedImageReference.current) {
-        const imageY = uploadedImageReference.current!.getBoundingClientRect().y
-        const imageX = uploadedImageReference.current!.getBoundingClientRect().x
-        const roundAreaY = roundAreaReference.current!.getBoundingClientRect().y
-        const roundAreaX = roundAreaReference.current!.getBoundingClientRect().x
-        console.log(imageY, roundAreaY)
-        if (imageY === roundAreaY) {
-          console.log('y')
-        }
-        if (imageX === roundAreaX) {
-          console.log('x')
-        }
         setCoords({
           x: imageStart.x + e.clientX - mouseStart.x,
           y: imageStart.y + e.clientY - mouseStart.y
@@ -151,9 +140,7 @@ const CutomizeAvatarModal: FC = () => {
               maxHeight: `${Math.min(uploadedImageReference.current?.width as number, uploadedImageReference.current?.height as number)}px`,
               maxWidth: `${Math.min(uploadedImageReference.current?.width as number, uploadedImageReference.current?.height as number)}px`,
               aspectRatio: '1/1',
-              border: '2px solid #376ABE',
               zIndex: 1,
-              background: 'rgb(55 106 190 / 35%)'
             }}
           />
           <div className='cropper-blur'></div>
