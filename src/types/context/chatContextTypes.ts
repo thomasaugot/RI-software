@@ -2,6 +2,7 @@ import { actions, actionType } from './../chats/actionsType';
 import { Dispatch, SetStateAction } from "react";
 import { userMessageType } from '../chats/messagesTypes';
 import { chatMembersType } from '../chats/generalTypes';
+import { chatInfoType } from '../chats/chatInfoSliderTypes';
 
 export type contextMenuType = {
   display: boolean,
@@ -20,7 +21,11 @@ export type chat = {
   actionType: actionType,
   setActionType: Dispatch<SetStateAction<actionType>>,
   chatMembers: chatMembersType[],
-  setChatMembers: Dispatch<SetStateAction<chatMembersType[]>>
+  setChatMembers: Dispatch<SetStateAction<chatMembersType[]>>,
+  chatInfoSliderIsOpened: boolean,
+  setChatInfoSliderIsOpened: Dispatch<SetStateAction<boolean>>,
+  chatInfo: chatInfoType,
+  setChatInfo: Dispatch<SetStateAction<chatInfoType>>
 }
 
 export type chatProviderProps = {

@@ -183,8 +183,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    max-width: 45%;
-    width: fit-content;
+    max-width: 50%;
     padding: 0.7vw;
     margin-bottom: 2vw;
     border-radius: 0.35vw;
@@ -214,7 +213,7 @@
 
     .chat-message-files-container{
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       flex-wrap: wrap;
     }
 

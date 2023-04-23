@@ -9,6 +9,7 @@ import { mockMessages } from './messageArea/mockMessagesData';
 import { actions, actionType } from '../../../types/chats/actionsType';
 import { userMessageType } from '../../../types/chats/messagesTypes';
 import { useInfiniteScroll } from '../../../customHooks/useInfiniteScroll';
+import ChatInfoSlider from './chatInfoSlider/chatInfoSlider';
 
 const ChatDesktop: FC = () => {
   const [chatHeader, setChatHeader] = useState<chatHeaderProps>({
@@ -27,10 +28,9 @@ const ChatDesktop: FC = () => {
     console.log(messageAreaContainer)
   }
 
-
-  const { chatId, setChatMembers } = useContext(ChatContext);
-
+  const { chatId, setChatMembers, chatInfoSliderIsOpened, setChatInfo } = useContext(ChatContext);
   const [messages, setMessages] = useState(mockMessages);
+
   const [needToAnimateBlock, setNeedToAnimateBlock] = useState<{ messageId: number | null | undefined, firstLoad: boolean }>({
     messageId: null,
     firstLoad: true
@@ -49,7 +49,15 @@ const ChatDesktop: FC = () => {
       setChatMembers([
         {employeeId: 1, avatar: 'sss', name: 'sd22'}, 
         {employeeId: 2, avatar: null, name: 'sd22333'}, 
-        ])
+      ])
+      
+      setChatInfo({
+        name: 'sdfds',
+        description: 'safsaf',
+        avatar: null,
+        group: true
+      })
+
     }
   }, [chatId])
 
@@ -85,16 +93,19 @@ const ChatDesktop: FC = () => {
         name={chatHeader.name}
         status={chatHeader.status}
       />
-
-      <MessageArea
-        loading={loading}
-        // blocksCount={count}
-        messageAreaContainer={messageAreaContainer}
-        scrollHandler={scrollHandler}
-        messages={messages}
-      />
-
-      <ChatInput submitMessage={submitMessage} messages={messages} />
+      <div className="chat-desktop-container">
+        <div className="chat-desktop-message-area-container" style={chatInfoSliderIsOpened ? {maxWidth: '50%'} : {}}>
+          <MessageArea
+            loading={loading}
+            // blocksCount={count}
+            messageAreaContainer={messageAreaContainer}
+            scrollHandler={scrollHandler}
+            messages={messages}
+          />
+          <ChatInput submitMessage={submitMessage} messages={messages} />
+        </div>
+        <ChatInfoSlider/>
+      </div>
     </div>
   )
 }
