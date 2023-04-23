@@ -111,7 +111,7 @@ const CutomizeAvatarModal: FC = () => {
     <Modal
       closeModal={() => { closeModal() }}
       open={isCutomizeAvatarModalOpen}
-      additionalClass='customize-avatar'
+      additionalClass={`customize-avatar ${originalSize && originalSize.width > originalSize.height - 100 ? '' : 'customize-avatar-rectangle'} `}
     >
       <div className="selected-image-container">
         <div className="update-profile-pic">
@@ -121,6 +121,14 @@ const CutomizeAvatarModal: FC = () => {
 
         {!originalSize || originalSize.width === 0 ? null : <div
           className='image-cropper-container'
+          style={{
+            width: `${originalSize.width > originalSize.height - 100
+              ? '26.041666666666668vw'
+              : '21.041667vw'}`,
+            height: `${originalSize.width > originalSize.height - 100
+              ? '13.020833333333334vw'
+              : '28.020833vw'}`
+          }}
           ref={containerReference}
           onMouseDown={(e) => {
             onDragStart(e)
@@ -169,8 +177,8 @@ const CutomizeAvatarModal: FC = () => {
           </div>
         </div>
         <div className="buttons-container">
-          <SubmitButton className="cancel-btn" type={buttonType.button} text='Cancel' onClick={cancelButtonHandler} />
-          <SubmitButton className='apply-btn' type={buttonType.submit} text='Apply' onClick={cropImage} />
+          <SubmitButton type={buttonType.button} text='Cancel' onClick={cancelButtonHandler} />
+          <SubmitButton type={buttonType.submit} text='Apply' onClick={cropImage} />
         </div>
       </div>
     </Modal>

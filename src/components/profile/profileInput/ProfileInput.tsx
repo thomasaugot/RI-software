@@ -1,17 +1,31 @@
 import './profileInput.scss';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import ProfileButton from '../profileButton/ProfileButton';
 import { cross } from '../../../assets/chatIcons';
 import { profileInputProps } from '../../../types/profile/profileTypes';
 import { checkMark, pencilFill } from '../../../assets/profileIcons';
 import { editProfileUrl } from '../../../utils/network';
 import { authorizedRequest } from '../../../utils/queries';
+import { ProfileContext } from '../../../context/profile/profileContext';
 const ProfileInput: FC<profileInputProps> = ({ inputName, value, keyName, type }) => {
+  const { setUserProfileData, userProfileData } = useContext(ProfileContext)
   const [profileinputEditStatus, setProfileInputEditStatus] = useState(false);
   const [inputValue, setInputValue] = useState(value);
 
   const onInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
+    if (keyName === 'first_name') {
+      setUserProfileData(prevState => ({
+        ...prevState,
+        firstName: e.target.value
+      }))
+    }
+    if (keyName === 'last_name') {
+      setUserProfileData(prevState => ({
+        ...prevState,
+        lastName: e.target.value
+      }))
+    }
   }
 
   const changeProfileData = async () => {
