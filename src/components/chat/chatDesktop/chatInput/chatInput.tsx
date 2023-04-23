@@ -131,12 +131,7 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
 
   return (
     <form onSubmit={handleSubmit} className='chat-input-wrapper'>
-      {
-        actionType.actionType === actions.REPLY || actionType.actionType === actions.EDIT ?
-          <ActionBanner text={actionMessage.text} sender={sender.name ? sender.name : ''} />
-          :
-          null
-      }
+      <ActionBanner text={actionMessage ? actionMessage.text : ''} sender={sender && sender.name ? sender.name : ''} />
       <div className={`chat-input-container ${actionType.actionType !== actions.SEND ? 'chat-input-container-action' : ''}`}>
 
         {isRecordingAudio
