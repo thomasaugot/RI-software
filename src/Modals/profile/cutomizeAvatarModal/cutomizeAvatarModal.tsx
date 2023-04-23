@@ -33,13 +33,27 @@ const CutomizeAvatarModal: FC = () => {
   const drag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (originalSize) {
       if (isDragable && containerReference.current && uploadedImageReference.current) {
-        setCoords({
-          x: imageStart.x + e.clientX - mouseStart.x,
-          y: imageStart.y + e.clientY - mouseStart.y
-        })
+        const containerRect = containerReference.current.getBoundingClientRect();
+        const imageRect = uploadedImageReference.current.getBoundingClientRect();
+        const newX = (imageStart.x + (e.clientX - mouseStart.x) / zoomLevel);
+        const newY = (imageStart.y + (e.clientY - mouseStart.y) / zoomLevel);
+
+        if (newX > 0) {
+          setCoords({ x: 0, y: newY });
+        } else if (newX + imageRect.width < containerRect.width) {
+          setCoords({ x: containerRect.width - imageRect.width, y: newY });
+        } else if (newY > 0) {
+          setCoords({ x: newX, y: 0 });
+        } else if (newY + imageRect.height < containerRect.height) {
+          setCoords({ x: newX, y: containerRect.height - imageRect.height });
+        } else {
+          setCoords({ x: newX, y: newY });
+        }
       }
     }
-  }
+  };
+
+
 
   const onDragStart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (uploadedImageReference.current) {
