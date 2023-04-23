@@ -2,16 +2,16 @@
 import { FC, useState, useEffect, useContext, useRef } from "react";
 import "./hierarchy.scss";
 import HierarchyUserCard from "../../components/hierarchy/hierarchyUserCard/hierarchyUserCard";
-import BaseLayout from "../../layouts/BaseLayout/BaseLayout";
+import BaseLayout from "../../layouts/baseLayout/baseLayout";
 import { hierarchyItem } from '../../types/hierarchy/generalTypes';
 import { hireEmployeeButton } from '../../assets/hierarchyIcons';
 import { authorizedRequest } from '../../utils/queries'
 import { fetchOwnersUrl, fetchEmployeesUrl, fetchLeadersUrl, fetchTheLeaderUrl } from "../../utils/network";
 import { ModalsContext } from "../../context/modalsContext";
-import HireWorker from '../../Modals/hierarchy/hireWorker/hireWorker';
-import FireWorker from '../../Modals/hierarchy/fireWorker/fireWorker';
-import MoveWorker from '../../Modals/hierarchy/moveWorker/moveWorker';
-import MoveWorkerConfirmation from '../../Modals/hierarchy/moveWorker/moveWorkerConfirmation/moveWorkerConfirmation';
+import HireWorker from '../../modals/hierarchy/hireWorker/hireWorker';
+import FireWorker from '../../modals/hierarchy/fireWorker/fireWorker';
+import MoveWorker from '../../modals/hierarchy/moveWorker/moveWorker';
+import MoveWorkerConfirmation from '../../modals/hierarchy/moveWorker/moveWorkerConfirmation/moveWorkerConfirmation';
 
 
 const Hierachy: FC = () => {

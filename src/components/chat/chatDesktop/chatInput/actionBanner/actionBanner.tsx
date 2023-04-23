@@ -5,10 +5,8 @@ import { cross } from '../../../../../assets/chatIcons'
 import { ChatContext } from '../../../../../context/chat/chatContext'
 
 const ActionBanner: FC<actionBannerProps> = ({ text, sender }) => {
-  const { setContextMenu, setActionType } = useContext(ChatContext)
-  const [displayActionBanner, setDisplayActionBanner] = useState(true)
+  const { actionType, setActionType, setContextMenu } = useContext(ChatContext)
   const closeBanner = () => {
-    setDisplayActionBanner(false)
     setTimeout(() => {
       setContextMenu(null)
       setActionType({ actionType: actions.SEND, messageId: undefined })
@@ -16,7 +14,7 @@ const ActionBanner: FC<actionBannerProps> = ({ text, sender }) => {
   }
 
   return (
-    <div className={`action-banner ${!displayActionBanner ? 'action-banner-deplay-before-hidding' : ''}`} >
+    <div className={`action-banner ${actionType.actionType === actions.REPLY || actionType.actionType === actions.EDIT ? '' : 'action-banner-deplay-before-hidding'}`} >
       <div className="action-banner-container">
         <div className="action-banner-sender-info">
           <div className="action-banner-sender">{sender}</div>

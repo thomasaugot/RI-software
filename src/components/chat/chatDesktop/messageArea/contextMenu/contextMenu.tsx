@@ -23,18 +23,18 @@ const ContextMenu: FC = () => {
 
   return (
     <div ref={contextMenuReference} className='context-menu' style={{ top: contextMenu?.coords.y, left: contextMenu?.coords.x }}>
-      <div className="context-menu-container">
-        <div className="context-menu-item">
+      {/* <div className="context-menu-container"> */}
+        <div className="context-menu-item" onClick={() => { setActionType({ actionType: actions.REPLY, messageId: contextMenu?.message.messageId }) }}>
           <div className="context-menu-icon">{replyMessageIcon}</div>
-          <div className="context-menu-action" onClick={() => { setActionType({ actionType: actions.REPLY, messageId: contextMenu?.message.messageId }) }}>Reply</div>
+          <div className="context-menu-action">Reply</div>
         </div>
-        <div className="context-menu-item">
+        <div className="context-menu-item" onClick={() => { console.log('edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!'); setActionType({ actionType: actions.EDIT, messageId: contextMenu?.message.messageId }) }}>
           <div className="context-menu-icon">{editMessageIcon}</div>
-          <div className="context-menu-action" onClick={() => { setActionType({ actionType: actions.EDIT, messageId: contextMenu?.message.messageId },) }}>Edit</div>
+          <div className="context-menu-action">Edit</div>
         </div>
-        <div className="context-menu-item">
+        <div className="context-menu-item" onClick={() => { setActionType({ actionType: actions.COPY, messageId: undefined }) }}>
           <div className="context-menu-icon">{copyMessageIcon}</div>
-          <div className="context-menu-action" onClick={() => { setActionType({ actionType: actions.COPY, messageId: undefined }) }}>Copy</div>
+          <div className="context-menu-action">Copy</div>
         </div>
         <div className="context-menu-item">
           <div className="context-menu-icon">{forwardMessageIcon}</div>
@@ -48,7 +48,7 @@ const ContextMenu: FC = () => {
           <div className="context-menu-icon">{deleteMessageIcon}</div>
           <div className="context-menu-action">Delete for me</div>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   )
 }
