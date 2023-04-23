@@ -4,7 +4,7 @@ import BaseLayout from "../../layouts/baseLayout/baseLayout";
 import InputField from '../../components/general/inputField/inputField'
 import PaginationButtons from '../../components/general/paginationButtons/paginationButtons';
 import { ChangeEvent, useState, useEffect } from 'react';
-import { SearchWorkerFetch } from '../../queries/SearchWorkers.utils';
+import { SearchWorkerFetch } from '../../queries/searchWorkers.utils';
 import { workerResponse } from '../../types/types';
 
 

@@ -127,6 +127,7 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
   //     setChatInputValue(popupActionType.value)
   //   }
   // }, [popupActionType.value])
+  console.log(actionType)
 
   return (
     <form onSubmit={handleSubmit} className='chat-input-wrapper'>
