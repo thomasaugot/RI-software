@@ -2,7 +2,7 @@ import './chatInput.scss'
 import { FC, useContext, useEffect, useState } from 'react'
 import ActionBanner from './actionBanner/actionBanner'
 import { chatInputProps } from '../../../../types/chats/chatInputTypes'
-import { userMessageType, messageTypes } from '../../../../types/chats/messagesTypes'
+import { userMessageType, messageTypes, messageStatus } from '../../../../types/chats/messagesTypes'
 import { actions } from '../../../../types/chats/actionsType'
 import ChatAudioRecorder from './chatAudioRecorder/chatAudioRecorder'
 import ChatInputMessage from './chatInputMessage/chatInputMessage'
@@ -13,7 +13,7 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
   // Determines whether the edit component is currently displayed
   // const [displayEditComponent, setDisplayEditComponent] = useState(true);
 
-  const { actionType, setActionType } = useContext(ChatContext)
+  const { actionType, setActionType, chatMembers } = useContext(ChatContext)
 
   // Stores the current value of the chat input field
   const [chatInputValue, setChatInputValue] = useState('');
@@ -27,6 +27,8 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
 
   const actionMessageIndex = messages.findIndex((item) => item.messageId === actionType.messageId);
   const actionMessage = messages[actionMessageIndex];
+
+  const sender = chatMembers[chatMembers.findIndex((member) => member.employeeId === actionMessage.senderId)];
 
   // Function to close edit popup
   // const handleCloseEditPopup = () => {
@@ -59,13 +61,14 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
       const body: userMessageType = {
         messageId: undefined,
         type: messageTypes.USER,
-        senderName: "You",
+        senderId: undefined,
         time: '',
         text: chatInputValue,
         file: [],
         edited: false,
         forwarded: null,
-        replied: null
+        replied: null,
+        status: messageStatus.SENDING
       }
 
       // If there is a reply action, add forwarded message data to message body
@@ -100,13 +103,14 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
         const body: userMessageType = {
           messageId: undefined,
           type: messageTypes.USER,
-          senderName: "You",
+          senderId: undefined,
           time: '',
           text: '',
           file: [{ file: recordingAudioBlob.recordingAudioBlob, fileName: '', fileType: 'audio' }],
           edited: false,
           forwarded: null,
-          replied: null
+          replied: null,
+          status: messageStatus.SENDING
         }
         submitMessage(actions.SEND, body)
         // Clear audio blob and chat input value, and reset edit message state
@@ -128,14 +132,12 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
     <form onSubmit={handleSubmit} className='chat-input-wrapper'>
       {
         actionType.actionType === actions.REPLY || actionType.actionType === actions.EDIT ?
-          <ActionBanner text={actionMessage.text} sender={actionMessage.senderName ? actionMessage.senderName : ''} />
+          <ActionBanner text={actionMessage.text} sender={sender.name ? sender.name : ''} />
           :
           null
       }
-      <div className={`chat-input-container
-        ${actionType.actionType === actions.EDIT || actionType.actionType === actions.REPLY
-          ? 'chat-input-container-edit'
-          : ''}`}>
+      <div className={`chat-input-container ${actionType.actionType !== actions.SEND ? 'chat-input-container-action' : ''}`}>
+
         {isRecordingAudio
           ? <ChatAudioRecorder handleSubmit={handleSubmit} isRecordingAudio={isRecordingAudio} setIsRecordingAudio={setIsRecordingAudio} handleAddAudioBlob={handleAddAudioBlob} />
           : <ChatInputMessage chatInputValue={chatInputValue} setChatInputValue={setChatInputValue} setIsRecordingAudio={setIsRecordingAudio} />}

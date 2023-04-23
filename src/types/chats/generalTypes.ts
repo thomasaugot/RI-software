@@ -69,3 +69,9 @@ export type chatInputProps = {
   handleMessages: (action: string, body: chatMessageType) => void,
   messages: chatMessageType[]
 }
+
+export type chatMembersType = {
+  employeeId: number,
+  avatar: string | null,
+  name: string
+}

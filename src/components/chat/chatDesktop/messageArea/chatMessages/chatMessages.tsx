@@ -3,13 +3,20 @@ import { chatMessagePropsType } from '../../../../../types/chats/generalTypes';
 import { FC, useContext, useEffect, useRef, useState } from 'react';
 import ForwardComponent from '../../../forwardComponent/forwardComponent';
 import FileMessage from './fileMessage/fileMessage'
-import { messageTypes } from '../../../../../types/chats/messagesTypes';
+import { messageStatus, messageTypes } from '../../../../../types/chats/messagesTypes';
 import { ChatContext } from '../../../../../context/chat/chatContext';
+import { sentStatusIcon, readStatusIcon } from '../../../../../assets/chatIcons';
+import ChatMessageLoadingIcon from '../../../chatMessageLoadingIcon/chatMessageLoadingIcon';
+import { profile } from '../../../../../assets/Icons';
 import ContextMenu from '../contextMenu/contextMenu';
 
 const ChatMessages: FC<chatMessagePropsType> = ({ message }) => {
-  const { forwarded, edited } = message
+
+  const { file, text, time, forwarded, edited } = message
   // const {messageId, firstLoad} = needToAnimateBlock
+  const { setContextMenu, contextMenu, chatMembers } = useContext(ChatContext)
+
+  const sender = chatMembers[chatMembers.findIndex((elem) => elem.employeeId === message.senderId)];
 
   const { setContextMenu, contextMenu } = useContext(ChatContext)
 
@@ -46,9 +53,10 @@ const ChatMessages: FC<chatMessagePropsType> = ({ message }) => {
     }
     return null;
   };
-  //if message eddited field function will return eddited block if there is no eddited field, the function returns nothing
+  
   return (
     <div className={`chat-message-container ${message.type === messageTypes.USER ? 'user-message-container' : 'stranger-message-container'}`}>
+      {message.type === messageTypes.STRANGER ? <div className='chat-message-avatar-container'>{sender?.avatar ? sender?.avatar : profile}</div> : null}
       <div
         ref={messageBlockRef}
         key={message.messageId}
@@ -57,7 +65,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({ message }) => {
       >
         {contextMenu ? <ContextMenu /> : null}
         <div className="chat-message-data-container">
-          <p className="sender">{message.senderName}</p>
+          <p className="sender">{message.type === messageTypes.USER ? 'You' : sender?.name}</p>
           <p className="time">{message.time}</p>
         </div>
         <div className="chat-message-files-container">
@@ -68,6 +76,12 @@ const ChatMessages: FC<chatMessagePropsType> = ({ message }) => {
         <p className="chat-message-text">
           {message.text}
         </p>
+        {
+          message.type === messageTypes.USER ? 
+          <div className="chat-message-status">
+            {message.status === messageStatus.SENT ? sentStatusIcon : message.status === messageStatus.READ ? readStatusIcon : message.status === messageStatus.SENDING ? <ChatMessageLoadingIcon/> : null}
+          </div> : null
+        }
       </div>
     </div>
   );
