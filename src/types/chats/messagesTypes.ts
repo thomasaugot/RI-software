@@ -10,8 +10,14 @@ export type chatFile = {
   fileType: string
 }
 
+export enum messageStatus {
+  SENDING = 'SENDING',
+  SENT = 'SENT',
+  READ = 'READ'
+}
+
 export type userMessageType = {
-  senderName: string,
+  senderId: number | undefined,
   time: string,
   text: string,
   file: chatFile[],
@@ -25,11 +31,12 @@ export type userMessageType = {
     toMessageId: number,
     message: string,
   } | null,
-  type: messageTypes
+  type: messageTypes,
+  status: messageStatus
 }
 
 export type systemMessageType = {
-  senderName: null,
+  senderId: undefined,
   messageId: number | undefined,
   text: string,
   type: messageTypes

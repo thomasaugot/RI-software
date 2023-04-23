@@ -1,4 +1,4 @@
-import BaseLayout from '../../layouts/BaseLayout/BaseLayout'
+import BaseLayout from '../../layouts/baseLayout/baseLayout'
 import './notFound.scss'
 
 function NotFound() {

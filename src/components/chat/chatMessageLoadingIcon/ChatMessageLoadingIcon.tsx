@@ -1,5 +1,5 @@
 import './chatMessageLoadingIcon.scss'
-function ChatMessageLoadingIcon() {
+const ChatMessageLoadingIcon = () => {
   return (
     <div className="box"></div>
   )

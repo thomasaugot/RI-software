@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import { profile } from '../../../assets/Icons'
-import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/ChatMessageLoadingIcon'
+import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/chatMessageLoadingIcon'
 import { getFile } from '../../../queries/chat.queries'
 import AudioPlayer from '../audioMessagePlayButton/audioMessagePlayButton'
 import './chatMessagesTypeAudioMessage.scss'
@@ -10,7 +10,7 @@ import { chatAudioMessageProps } from '../../../types/chats/audioMessageType'
 import { messageTypes } from '../../../types/chats/messagesTypes'
 
 const ChatMessagesTypeAudioMessage: FC<chatAudioMessageProps> = ({ message, needToDisplayMiniPopupWithoutFile, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick }) => {
-  const { file, text, senderName, type, time, forwarded } = message
+  const { file, text, type, time, forwarded } = message
   const [playingAudioTime, setPlayingAudioTime] = useState<number>(0)
   const [audioLevels, setAudioLevels] = useState<number[]>([0, 0, 0, 0])
   const [loading, setLoading] = useState(false)

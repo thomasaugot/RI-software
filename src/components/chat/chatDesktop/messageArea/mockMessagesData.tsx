@@ -1,15 +1,15 @@
-import { userMessageType, systemMessageType, messageTypes } from '../../../../types/chats/messagesTypes'
+import { userMessageType, systemMessageType, messageTypes, messageStatus } from '../../../../types/chats/messagesTypes'
 
 export const mockMessages: Array<userMessageType | systemMessageType> = [
     
     {
-      senderName: null,
+      senderId: undefined,
       messageId: undefined,
       type: messageTypes.DATE,
       text: "Today"
     },
     {
-      senderName: 'You',
+      senderId: 1,
       time: '21:21',
       text: 'Hello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guysHello guys',
       file: [{file: 'some', fileName: 'randomFile.word', fileType: 'word'}, {file: 'some', fileName: 'randomFile.word', fileType: 'word'}, {file: 'some', fileName: 'randomFile.word', fileType: 'word'}, {file: 'some', fileName: 'randomFile.word', fileType: 'word'}],
@@ -17,28 +17,43 @@ export const mockMessages: Array<userMessageType | systemMessageType> = [
       edited: false,
       forwarded: null,
       replied: null,
-      type: messageTypes.USER
+      type: messageTypes.USER,
+      status: messageStatus.SENDING
     },
     {
-      senderName: 'not you',
+      senderId: 2,
       time: '21:21',
       text: '333ddd',
       file: [{file: 'some', fileName: 'randomFile.pdf', fileType: 'pdf'}],
-      messageId: 1,
+      messageId: 2,
       edited: false,
       forwarded: null,
       replied: null,
-      type: messageTypes.STRANGER
+      type: messageTypes.STRANGER,
+      status: messageStatus.SENT
     },
     {
-      senderName: 'not you',
+      senderId: 2,
       time: '21:21',
       text: '333ddd',
       file: [{file: 'some', fileName: 'randomFile.pdf', fileType: 'pdf'}],
-      messageId: 1,
+      messageId: 3,
       edited: false,
       forwarded: null,
       replied: null,
-      type: messageTypes.STRANGER
+      type: messageTypes.STRANGER,
+      status: messageStatus.SENDING
+    },
+    {
+      senderId: 1,
+      time: '21:21',
+      text: 'some',
+      file: [],
+      messageId: 4,
+      edited: false,
+      forwarded: null,
+      replied: null,
+      type: messageTypes.USER,
+      status: messageStatus.SENT
     },
   ]
