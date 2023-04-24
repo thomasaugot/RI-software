@@ -1,4 +1,4 @@
-import './chatMessageLoadingIcon.scss'
+import '../chatMessageLoadingIcon/сhatMessageLoadingIcon.scss'
 const ChatMessageLoadingIcon = () => {
   return (
     <div className="box"></div>
