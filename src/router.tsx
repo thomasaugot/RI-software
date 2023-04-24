@@ -1,9 +1,7 @@
-import { FC } from "react";
-import { Route, Routes } from "react-router-dom";
-import Register from "./pages/register/register";
 import AcceptInvitationRegister from "./pages/acceptInvintation/register/register";
 import AcceptInvitationLogin from "./pages/acceptInvintation/login/login";
 import AcceptInvitationConfirmation from "./pages/acceptInvintation/confirmation/confirmation"
+
 import Home from "./pages/home/home";
 import Login from './pages/login/login';
 import Chat from './pages/chat/chat';
@@ -11,6 +9,8 @@ import Confirmation from './pages/confirmation/confirmation';
 import NotFound from './pages/notFound/notFound';
 import SearchWorker from './pages/searchWorker/searchWorker';
 import Hierachy from './pages/hierarchy/hierarchy';
+import Profile from './pages/profile/pofile';
+import Register from "./pages/register/register";
 
 
 const Router: FC = () => {
@@ -26,6 +26,7 @@ const Router: FC = () => {
       <Route path="/hierarchy" element={<Hierachy />} />
       <Route path="/search_workers" element={<SearchWorker />} />
       <Route path="/chat" element={<Chat />} />
+      <Route path="/profile/*" element={<Profile />} />
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

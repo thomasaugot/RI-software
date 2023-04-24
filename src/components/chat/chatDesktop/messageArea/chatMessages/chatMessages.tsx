@@ -6,7 +6,7 @@ import FileMessage from './fileMessage/fileMessage'
 import { messageStatus, messageTypes } from '../../../../../types/chats/messagesTypes';
 import { ChatContext } from '../../../../../context/chat/chatContext';
 import { sentStatusIcon, readStatusIcon } from '../../../../../assets/chatIcons';
-import ChatMessageLoadingIcon from '../../../chatMessageLoadingIcon/chatMessageLoadingIcon';
+import ChatMessageLoadingIcon from '../../../chatMessageLoadingIcon/сhatMessageLoadingIcon';
 import { profile } from '../../../../../assets/Icons';
 import ContextMenu from '../contextMenu/contextMenu';
 
@@ -51,7 +51,7 @@ const ChatMessages: FC<chatMessagePropsType> = ({ message }) => {
     }
     return null;
   };
-  
+
   return (
     <div className={`chat-message-container ${type === messageTypes.USER ? 'user-message-container' : 'stranger-message-container'}`}>
       {type === messageTypes.STRANGER ? <div className='chat-message-avatar-container'>{sender?.avatar ? sender?.avatar : profile}</div> : null}
@@ -75,10 +75,10 @@ const ChatMessages: FC<chatMessagePropsType> = ({ message }) => {
           {text}
         </p>
         {
-          type === messageTypes.USER ? 
-          <div className="chat-message-status">
-            {status === messageStatus.SENT ? sentStatusIcon : status === messageStatus.READ ? readStatusIcon : status === messageStatus.SENDING ? <ChatMessageLoadingIcon/> : null}
-          </div> : null
+          type === messageTypes.USER ?
+            <div className="chat-message-status">
+              {status === messageStatus.SENT ? sentStatusIcon : status === messageStatus.READ ? readStatusIcon : status === messageStatus.SENDING ? <ChatMessageLoadingIcon /> : null}
+            </div> : null
         }
       </div>
     </div>

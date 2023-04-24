@@ -19,3 +19,4 @@ export const fetchTheLeaderUrl = (companyId: number, employeeId: number) => base
 export const chatInfoById = (chatId: number) => baseUrl + `api/chats/get/chat/${chatId}`
 export const sendChatMessageUrl = (chatId: string, chatMessage: string) => baseUrl + chatId // we do not have an endpoint for sending messages
 export const fireEmployeeUrl = baseUrl + 'api/hierarchy/fire';
+export const editProfileUrl = baseUrl + 'api/edit/profile'

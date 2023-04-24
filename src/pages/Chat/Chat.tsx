@@ -17,8 +17,8 @@ import { ChatContext } from '../../context/chat/chatContext';
 
 const Chat = () => {
   const [userChat, setUserChat] = useState<chatByIdResponse>();
-  const [ messages, SetMessages ] = useState<chatMessageType[]>()
-  const [ chatHeader, setChatHeader ] = useState<chatHeaderProps>();
+  const [messages, SetMessages] = useState<chatMessageType[]>()
+  const [chatHeader, setChatHeader] = useState<chatHeaderProps>();
   const [currentUserHeight, setCurrentUserHeight] = useState<number>(0)
   const messagesScrollHeight = useRef<HTMLDivElement>(null)
   const blockHeight = messagesScrollHeight.current !== null ? messagesScrollHeight.current.scrollHeight : 100000
@@ -39,17 +39,17 @@ const Chat = () => {
   return (
     <ChatBaseLayout>
       <div className="chat-container">
-          <div className='chat-container-layout'>
-            {
-              chatId ? 
-                <ChatDesktop/>
+        <div className='chat-container-layout'>
+          {
+            chatId ?
+              <ChatDesktop />
               :
-                null
-            }
-          </div>
-          <ChatBar />
+              null
+          }
+        </div>
+        <ChatBar />
       </div>
-      <CreateGroupChat/>
+      <CreateGroupChat />
     </ChatBaseLayout>
   );
 };
