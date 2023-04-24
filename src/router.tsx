@@ -2,7 +2,6 @@ import AcceptInvitationRegister from "./pages/acceptInvintation/register/registe
 import AcceptInvitationLogin from "./pages/acceptInvintation/login/login";
 import AcceptInvitationConfirmation from "./pages/acceptInvintation/confirmation/confirmation"
 
-import Home from "./pages/home/home";
 import Login from './pages/login/login';
 import Chat from './pages/chat/chat';
 import Confirmation from './pages/confirmation/confirmation';
@@ -11,6 +10,9 @@ import SearchWorker from './pages/searchWorker/searchWorker';
 import Hierachy from './pages/hierarchy/hierarchy';
 import Profile from './pages/profile/pofile';
 import Register from "./pages/register/register";
+import { FC } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/home/Home';
 
 
 const Router: FC = () => {
