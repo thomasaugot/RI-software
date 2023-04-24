@@ -41,7 +41,7 @@ const Chat = () => {
       <div className="chat-container">
         <div className='chat-container-layout'>
           {
-            chatId ? 
+            chatId ?
               <ChatDesktop />
               :
               null

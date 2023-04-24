@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 
 export type whoAmIType = {
   id: number
@@ -45,7 +45,7 @@ export type inputFieldProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<any, Element>) => void;
   label?: string | null;
-};
+} & InputHTMLAttributes<HTMLInputElement>
 
 export enum buttonType {
   button = "button",
@@ -57,7 +57,7 @@ export type submitbuttonProps = {
   text: string;
   type?: buttonType;
   onClick?: () => void;
-};
+} & InputHTMLAttributes<HTMLButtonElement>;
 
 export type textProps = {
   text: string;

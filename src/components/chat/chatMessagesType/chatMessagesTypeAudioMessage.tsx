@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import { profile } from '../../../assets/Icons'
-import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/chatMessageLoadingIcon'
+import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/сhatMessageLoadingIcon'
 import { getFile } from '../../../queries/chat.queries'
 import AudioPlayer from '../audioMessagePlayButton/audioMessagePlayButton'
 import './chatMessagesTypeAudioMessage.scss'

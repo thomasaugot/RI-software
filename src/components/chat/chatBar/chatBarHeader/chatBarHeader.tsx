@@ -5,11 +5,11 @@ import { ModalsContext } from '../../../../context/modalsContext';
 
 
 const ChatBarHeader = () => {
-  const { setCreateGroupChatIsOpen } = useContext(ModalsContext);
+  const { setCreateGroupChatIsOpen, setChatSearchInput } = useContext(ModalsContext);
   return (
     <div className='chat-bar-header-wrapper'>
-      <input type="text" placeholder='Search' className='chat-bar-header-input' />
-      <div className='chat-bar-header-button' onClick={ () => setCreateGroupChatIsOpen(true)}>
+      <input type="text" placeholder='Search' onChange={(e) => { setChatSearchInput(e.target.value) }} className='chat-bar-header-input' />
+      <div className='chat-bar-header-button' onClick={() => setCreateGroupChatIsOpen(true)}>
         {addChat}
       </div>
     </div>

@@ -13,9 +13,11 @@ export const useInfiniteScroll = (
   const [count, setCount] = useState(itemsIncrement)
 
   // Check if the user has scrolled to a certain point, and if not already loading and has scrolled in any direction
-  if (Math.abs(currentUserHeight) > blockHeight - 1000 && !loading && currentUserHeight !== 0) {
-    setLoading(true) // Set the loading state to true to indicate that more items should be loaded
-  }
+  useEffect(() => {
+    if (Math.abs(currentUserHeight) > blockHeight && !loading && currentUserHeight !== 0 && count + itemsIncrement <= numberOfItems) {
+      setLoading(true) // Set the loading state to true to indicate that more items should be loaded
+    }
+  }, [blockHeight, currentUserHeight, loading])
 
   // Use the useEffect hook to update the count and loading status when the loading state changes
   useEffect(() => {
@@ -27,7 +29,9 @@ export const useInfiniteScroll = (
       }
       setLoading(false) // Reset the loading state to false when the new items have been loaded
     }
-  }, [count, loading])
+  }, [count, loading, itemsIncrement, numberOfItems])
+
+
 
   // Return an object containing the current count and loading status
   return { count, loading }
