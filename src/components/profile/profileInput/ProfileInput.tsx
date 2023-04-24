@@ -1,6 +1,6 @@
 import './profileInput.scss';
 import React, { FC, useContext, useEffect, useState } from 'react';
-import ProfileButton from '../profileButton/ProfileButton';
+import ProfileButton from '../profileButton/profileButton';
 import { cross } from '../../../assets/chatIcons';
 import { profileInputProps } from '../../../types/profile/profileTypes';
 import { checkMark, pencilFill } from '../../../assets/profileIcons';

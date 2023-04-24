@@ -3,7 +3,7 @@ import { profile } from '../../../assets/Icons'
 import { getFile } from '../../../queries/chat.queries'
 import { ChatFileMessageProps } from '../../../types/chats/audioMessageType'
 import { messageTypes } from '../../../types/chats/messagesTypes'
-import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/chatMessageLoadingIcon'
+import ChatMessageLoadingIcon from '../chatMessageLoadingIcon/сhatMessageLoadingIcon'
 
 const ChatMessagesTypeFileMessage: FC<ChatFileMessageProps> = ({ message, needToDisplayMiniPopup, needToDisplayForwardMessage, needToDisplayEdditedMessage, handleRightClick }) => {
   const { file, text, type, time, forwarded, edited } = message

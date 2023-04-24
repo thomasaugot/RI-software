@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import './profile.scss';
-import BaseLayout from '../../layouts/BaseLayout/BaseLayout';
+import BaseLayout from '../../layouts/baseLayout/baseLayout';
 import { ProfileContext } from '../../context/profile/profileContext';
-import ProfileInput from '../../components/profile/profileInput/ProfileInput';
+import ProfileInput from '../../components/profile/profileInput/profileInput';
 import BrowseAvatarModal from '../../Modals/profile/browseAvatarModal/BrowseAvatarModal';
 import CutomizeAvatarModal from '../../Modals/profile/cutomizeAvatarModal/cutomizeAvatarModal';
 import { whitePencilFill } from '../../assets/profileIcons';
