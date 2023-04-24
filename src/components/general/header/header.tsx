@@ -8,10 +8,10 @@ const Header = () => {
 
   return (
     <div className='header-container'>
-      <Link className="navbar-link" to={`/profile/${id}`}>
-      {
-        avatar && avatar != 'null' ? <img className='img' src={avatar} alt="" /> : basicUserAvatar
-      }
+      <Link className="navbar-link" to={`/profile/`}>
+        {
+          avatar && avatar != 'null' ? <img className='img' src={avatar} alt="" /> : basicUserAvatar
+        }
 
       </Link>
     </div>
