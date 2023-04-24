@@ -18,6 +18,19 @@ export type MoveWorkerFetchTypes = {
   employeeToBeMovedUserId: number
 }
 
+export type DropDownType = {
+  icon: React.SVGAttributes<ReactNode>,
+  text: string,
+  editIcon?: React.SVGAttributes<ReactNode>,
+  options: OptionType[]
+  pipelineOptions?: string[]
+  textIcon: ReactNode
+}
+export type OptionType = {
+  value: string,
+  text: string,
+  icon: ReactNode
+}
 //
 //
 //

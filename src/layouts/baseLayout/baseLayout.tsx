@@ -8,12 +8,12 @@ import CreateCompany from '../../Modals/createCompany/createCompany';
 const BaseLayout: FC<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 > = ({ children }) => {
-
   return (
     <div className="base-layout">
       <div>
         <NavBar />
       </div>
+
       <div className="base-layout-content">
         <Header />
         <div className="base-layout-container">

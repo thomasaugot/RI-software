@@ -1,0 +1,204 @@
+.pipeline-wrapper {
+    margin: 1.8301610541727673vw;
+    margin-bottom: 0.29282576866764276vw;
+    position: relative;
+    height: 35.63784773060029vw;
+
+    .pipeline-page-title {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.7569546120058566vw;
+        line-height: 2.12298682284041vw;
+        margin-bottom: 1.8301610541727673vw;
+        color: #444444;
+    }
+
+    .pipeline-page-header {
+        justify-content: space-between;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+
+        .left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .submit-button {
+                padding-left: 1.9033674963396778vw;
+                padding-right: 1.8301610541727673vw;
+            }
+
+            .layout-options {
+                display: flex;
+                flex-direction: row;
+                margin-right: 1.4641288433382138vw;
+
+                .bar {
+                    svg {
+                        width: 1.0739385065885798vw;
+                    }
+
+                    display: flex;
+                    flex-direction: row;
+                    padding: 0.9275256222547584vw;
+                    align-items: center;
+
+                    border: 0.036603221083455345vw solid #8F8F8F;
+                    border-radius: 0.14641288433382138vw 0px 0px 0.14641288433382138vw;
+
+                }
+
+                .justify {
+                    svg {
+                        width: 1.3177159590043923vw;
+                    }
+
+                    align-items: center;
+
+                    display: flex;
+                    flex-direction: row;
+                    padding: 1.0248901903367496vw 0.8052708638360175vw;
+
+                    border: 0.036603221083455345vw solid #8F8F8F;
+                    border-left: none;
+                    border-right: none;
+                }
+
+                .price {
+                    svg {
+                        width: 1.610541727672035vw;
+                    }
+
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 0.6588579795021962vw;
+
+                    border: 0.036603221083455345vw solid #8F8F8F;
+                    border-radius: 0px 0.14641288433382138vw 0.14641288433382138vw 0px;
+                }
+
+                .active {
+                    background: #E2E2E2;
+                }
+            }
+        }
+
+        .middle {
+
+            .amount-deals {
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 1.171303074670571vw;
+                line-height: 1.390922401171303vw;
+                color: #444444;
+            }
+        }
+
+        .right {
+            display: flex;
+            flex-direction: row;
+
+            .pipeline-dropdown {
+                margin-right: 0.7320644216691069vw;
+            }
+
+            .user-dropdown {
+                .icon {
+                    margin-right: 0.5124450951683748vw;
+                }
+
+                .select-container {
+                    margin-right: 0.36603221083455345vw;
+
+                    .dropdown-select {
+                        padding: 0.9516837481698389vw 1.4641288433382138vw 0.9516837481698389vw 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .projects-section {
+        margin-top: 3.6603221083234994vw;
+        overflow: scroll;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 0.8784773060029283vw;
+    }
+
+    .list-section {
+        height: 21.183967789165447vw;
+    }
+
+    .pipeline-button-container {
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .drag-drop-section {
+            color: #fff;
+            width: 100%;
+            height: 3.47vw;
+            background: none;
+            color: #444444;
+            font-size: 1.1vw;
+            font-weight: 400;
+            border: 2px solid #4970b5;
+            border-radius: 10px;
+            padding: 0.88vw 0;
+            font-family: "Poppins", sans-serif;
+            transition: 0.4s ease;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+            width: 17.661054172767205vw;
+        }
+
+        .delete-div {
+
+            border: 0.14641288433382138vw solid #FA7070;
+
+            &:hover {
+                background-color: #FA7070 !important;
+            }
+        }
+
+        .failed-div {
+
+            border: 0.14641288433382138vw solid #ECD613;
+
+            &:hover {
+                background-color: #ECD613;
+            }
+        }
+
+        .success-div {
+
+            border: 0.14641288433382138vw solid #1DB954;
+
+            &:hover {
+                background-color: #1DB954;
+            }
+        }
+
+        .move-to-div {
+
+            border: 0.14641288433382138vw solid #376ABE;
+
+            &:hover {
+                background-color: #376ABE;
+            }
+        }
+    }
+}

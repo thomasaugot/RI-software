@@ -13,9 +13,9 @@ const Header = () => {
           avatar && avatar != 'null' ? <img className='img' src={avatar} alt="" /> : basicUserAvatar
         }
 
-      </Link>
-    </div>
-  )
+        </Link>
+      </div>
+    )
 }
 
 export default Header

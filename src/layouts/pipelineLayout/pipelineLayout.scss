@@ -1,0 +1,48 @@
+.pipeline-layout {
+    display: flex;
+
+    .pipeline-layout-content {
+        .header-with-searchbar {
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            align-items: center;
+
+            .middle-searcBar {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                .input-field-container{
+                    height: 3.294289897510981vw;
+                    margin-right: 1.0248901903367496vw;
+                    width: 34.333821376281115vw;
+                }
+
+                .addIcon {
+                    padding: 0.7928257686676428vw 1.0856515373352855vw 0.7928257686676428vw 1.0124450951683748vw;
+                    height: 3.294289897510981vw;
+                    width: 3.294289897510981vw;
+                    background-color: #4970B5;
+                    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.1);
+                    border-radius: 5px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    margin-right: calc(17.715959004392385vw - 3.47vw);
+
+                    path {
+                        stroke: #fff;
+                    }
+                }
+            }
+        }
+
+        flex: 1;
+
+        .pipeline-layout-container {
+            width: 100%;
+        }
+    }
+}
