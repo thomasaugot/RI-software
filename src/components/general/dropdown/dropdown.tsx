@@ -1,72 +1,74 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useEffect, useRef, useState } from "react";
 import './dropdown.scss'
 import { DropDownType } from "../../../types/general/generalTypes";
-import { dropdownIcon } from "../../../assets/pipelineIcons";
+import { dropdownIcon, tickIcon } from "../../../assets/pipelineIcons";
 
 const Dropdown: FC<DropDownType> = ({
     icon,
     text,
-    editIcon,
     options,
     pipelineOptions = [],
-    textIcon,
 }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState<string | undefined>(
-        undefined
-    );
+    const [selectedOption, setSelectedOption] = useState(text);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropdownRef]);
 
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
         setIsOpen(false);
     };
 
-    const handleDropdownClick = () => {
-        setIsOpen(!isOpen);
-    };
+    const handleDropdownClick = () => setIsOpen(!isOpen);
 
     return (
-        <div className="dropdown">
-            <div
-                className={`dropdown-icon-section ${!editIcon && "edit-notallow"}`}
-                onClick={handleDropdownClick}
-            >
-                <div className="icon">{icon as ReactNode}</div>
-                <div className="selected-option">{selectedOption ?? text}</div>
-                <div className={`${!editIcon ? "no-edit-icon" : ''} dropdown-icon`}>
-                    {dropdownIcon}
-                </div>
+        <div className="dropdown" ref={dropdownRef}  onClick={handleDropdownClick}>
+            <div className="dropdown-header">
+                <div className="dropdown-header-main-icon">{icon as ReactNode}</div>
+                <p className="selected-option">{selectedOption ?? text}</p>
+                <div className="dropdown-header-icon">{dropdownIcon}</div>
             </div>
-            <div className={`dropdown-options ${!editIcon ? "noedit-icon-options" : ""} ${isOpen ? "dropdown-options-open" : ""}`}>
-                <div className="dropdown-options-head">
-                    <div className="title-row">
-                        <div className="dropdown-options-title">{text}</div>
-                        <div className="dropdown-header-icon">
-                            {textIcon}
+
+            <div className={`dropdown-options-container ${!isOpen ? "" : "open"}`}>
+                <div className="dropdown-main-options">
+                    <div className="selected-option">
+                        <div className="selected-option-text">{selectedOption}</div>
+                        <div className="selected-option-icon">
+                            {tickIcon}
                         </div>
                     </div>
                     {
                         pipelineOptions.map((pipeline: string) =>
-                            <div className="dropdown-options-headline"
+                            <div className="dropdown-options"
                                 key={pipeline}
                                 onClick={() => handleOptionClick(pipeline)}
                             >{pipeline}</div>
                         )
                     }
-
                 </div>
-                <div className="options">
+                <div className="dropdown-actions-options">
                     {options.map((option) => (
-                        <div className="option-row">
-                            <div className="option-icon">{option.icon}</div>
-                            <p className="dropdown-option" >
+                        <div className="dropdown-action-option">
+                            <div className="dropdown-action-option-icon">{option.icon}</div>
+                            <p className="dropdown-action-option-text" >
                                 {option.text}
                             </p>
                         </div>
                     ))}
                 </div>
             </div>
-            {editIcon && <div className="edit">{editIcon as ReactNode}</div>}
         </div>
     );
 };

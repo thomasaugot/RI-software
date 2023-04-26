@@ -21,7 +21,7 @@ const ProfileProvider: FC<profileProviderProps> = ({ children }) => {
   useEffect(() => {
     setLoadingProfileData(true)
     authorizedRequest(whoAmIUrl, 'GET').then((data) => {
-      const userDataResponse: any = data.result
+      const userDataResponse: any = data?.result
       setUserProfileData({
         firstName: userDataResponse.first_name,
         lastName: userDataResponse.last_name,
@@ -31,6 +31,7 @@ const ProfileProvider: FC<profileProviderProps> = ({ children }) => {
         location: 'e.g New York, USA'
       })
       setLoadingProfileData(false)
+
     })
   }, [])
   return (

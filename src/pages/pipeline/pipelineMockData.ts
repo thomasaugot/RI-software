@@ -7,7 +7,27 @@ export const projects = [
         stage: 'Lead In'
     },
     {
-        id: 123,
+        id: 123121,
+        title: 'Research and Development',
+        organisation: 'Wayne Enterprises',
+        amount: 250.000,
+        stage: 'Dummy Stage'
+    }, {
+        id: 12343,
+        title: 'Research and Development',
+        organisation: 'Wayne Enterprises',
+        amount: 250.000,
+        stage: 'Dummy Stage'
+    },
+    {
+        id: 1231243,
+        title: 'Research and Development',
+        organisation: 'Wayne Enterprises',
+        amount: 250.000,
+        stage: 'Dummy Stage'
+    },
+    {
+        id: 1239,
         title: 'Research and Development',
         organisation: 'Wayne Enterprises',
         amount: 250.000,
