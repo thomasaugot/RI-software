@@ -28,7 +28,7 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
   const actionMessageIndex = messages.findIndex((item) => item.messageId === actionType.messageId);
   const actionMessage = messages[actionMessageIndex];
 
-  const sender = chatMembers[chatMembers.findIndex((member) => member.employeeId === actionMessage.senderId)];
+  const sender = chatMembers[chatMembers.findIndex((member) => member.employeeId === actionMessage?.senderId)];
 
   // Function to close edit popup
   // const handleCloseEditPopup = () => {
@@ -62,13 +62,14 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
         messageId: undefined,
         type: messageTypes.USER,
         senderId: undefined,
-        time: '',
+        date: new Date(),
         text: chatInputValue,
         file: [],
         edited: false,
         forwarded: null,
         replied: null,
-        status: messageStatus.SENDING
+        status: messageStatus.SENDING,
+        block: null
       }
 
       // If there is a reply action, add forwarded message data to message body
@@ -104,13 +105,14 @@ const ChatInput: FC<chatInputProps> = ({ submitMessage, messages }) => {
           messageId: undefined,
           type: messageTypes.USER,
           senderId: undefined,
-          time: '',
+          date: new Date(),
           text: '',
           file: [{ file: recordingAudioBlob.recordingAudioBlob, fileName: '', fileType: 'audio' }],
           edited: false,
           forwarded: null,
           replied: null,
-          status: messageStatus.SENDING
+          status: messageStatus.SENDING,
+          block: null
         }
         submitMessage(actions.SEND, body)
         // Clear audio blob and chat input value, and reset edit message state

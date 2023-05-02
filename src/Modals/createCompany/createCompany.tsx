@@ -30,7 +30,7 @@ const CreateCompany = () => {
 
                 <div className="create-company-container">
                     <div className="create-company-input-container">
-                        <label htmlFor="companyName">Wage</label>
+                        <label htmlFor="companyName">Company Name</label>
                         <InputField
                             type="text"
                             name="companyName"
@@ -41,7 +41,7 @@ const CreateCompany = () => {
                         />
                     </div>
                     <div className="create-company-input-container">
-                        <label htmlFor="companyLegalName">Wage</label>
+                        <label htmlFor="companyLegalName">Company Legal Name</label>
                         <InputField
                             type="text"
                             name="companyLegalName"
@@ -52,7 +52,7 @@ const CreateCompany = () => {
                         />
                     </div>
                     <div className="create-company-input-container">
-                        <label htmlFor="phoneNumber">Wage</label>
+                        <label htmlFor="phoneNumber">Company Phone Number</label>
                         <InputField
                             type="text"
                             name="phoneNumber"
@@ -63,7 +63,7 @@ const CreateCompany = () => {
                         />
                     </div>
                     <div className="create-company-input-container">
-                        <label htmlFor="email">Wage</label>
+                        <label htmlFor="email">Company Email</label>
                         <InputField
                             type="text"
                             name="email"

@@ -2,8 +2,8 @@ import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
 import "./pipelineLayout.scss";
 import NavBar from "../../components/general/navBar/navBar";
 import Header from "../../components/general/header/header";
-import CompaniesList from '../../Modals/companiesList/companiesList';
-import CreateCompany from '../../Modals/createCompany/createCompany';
+import CompaniesList from "../../modals/companiesList/companiesList";
+import CreateCompany from '../../modals/createCompany/createCompany';
 import InputField from "../../components/general/inputField/inputField";
 import { addPipelineIcon } from "../../assets/pipelineIcons";
 

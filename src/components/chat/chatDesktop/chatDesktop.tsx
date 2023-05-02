@@ -4,51 +4,175 @@ import MessageArea from './messageArea/messageArea';
 import ChatHeader from './chatHeader/chatHeader';
 import ChatInput from './chatInput/chatInput';
 import { ChatContext } from '../../../context/chat/chatContext';
-import { chatHeaderProps } from '../../../types/chats/chatHeaderTypes';
-import { mockMessages } from './messageArea/mockMessagesData';
 import { actions, actionType } from '../../../types/chats/actionsType';
 import { userMessageType } from '../../../types/chats/messagesTypes';
 import { useInfiniteScroll } from '../../../customHooks/useInfiniteScroll';
 import ChatInfoSlider from './chatInfoSlider/chatInfoSlider';
+import { authorizedRequest } from '../../../utils/queries';
+import { getChatMessagesUrl, getChatInfoUrl, readMessageUrl } from '../../../utils/network';
+import { messageTypes, messageStatus } from '../../../types/chats/messagesTypes';
 
 const ChatDesktop: FC = () => {
-  const [chatHeader, setChatHeader] = useState<chatHeaderProps>({
-    avatar: null,
-    name: '',
-    status: ''
-  });
+
+  const employeeId = parseInt(localStorage.getItem('employeeId') || '-1')
 
 
   // const { count, loading } = useInfiniteScroll(blockHeight, currentUserHeight, 100, 20);
 
   const [loading, setLoading] = useState(false);
+  const [ date, setDate ] = useState<Date | null>(null);
   const messageAreaContainer = useRef<null | HTMLDivElement>(null); // horizontal scrolling element
+  const [needToScrollDown, setNeedToScrollDown] = useState(false)
+
+  const { chatId, setChatMembers, chatInfoSliderIsOpened, setChatInfo, messages, setMessages } = useContext(ChatContext);
+  // const [ messages, setMessages ] = useState<userMessageType[]>([]);
+  const [ messagesPage, setMessagesPage ] = useState(1);
+  const [ difference, setDifference ] = useState(0);
+
+  // const [needToAnimateBlock, setNeedToAnimateBlock] = useState<{ messageId: number | null | undefined, firstLoad: boolean }>({
+  //   messageId: null,
+  //   firstLoad: true
+  // })
+
+  
+  const [dateTimeout, setDateTimeout] = useState<any>(null)
 
   const scrollHandler = () => {
-    console.log(messageAreaContainer)
+    const messagesInView = messages.filter((elem) => {
+      const elementBlock = elem.block;
+      const messageArea = messageAreaContainer.current;
+
+
+
+      if(messageArea && elementBlock){
+        return elementBlock.offsetTop-90 >= messageArea.scrollTop 
+      }
+      return false
+    })
+    // console.log(messages)
+    console.log(messagesInView)
+    
+    messages.forEach((elem, index) => {
+      const elementBlock = elem.block;
+      const messageArea = messageAreaContainer.current;
+
+      if(elementBlock && messageArea && elem.status != messageStatus.READ){
+        if(elementBlock.offsetTop-90 >= messageArea.scrollTop && elementBlock.offsetTop-90+elementBlock.clientHeight <= messageArea.scrollTop+messageArea.clientHeight){
+          authorizedRequest(readMessageUrl(chatId || -1), 'PATCH', 'accessToken', {message_id: elem.messageId})
+          .then((responce) => {
+            console.log(responce)
+            messages[index].status = messageStatus.READ
+            setMessages([...messages])
+          })
+        }
+      }
+    })
+
+    if(messagesInView[0]){
+      setDate(messagesInView[0].date);
+    }else{
+      setDate(null)
+    }
+    clearTimeout(dateTimeout);
+    setDateTimeout(setTimeout(() => {
+      setDate(null)
+    }, 3000))
+
+    if(messageAreaContainer?.current && messageAreaContainer?.current.scrollTop < 500 && chatId && !loading){
+      getMessages(chatId, messagesPage+1, 10, false)
+    }
+
+    if(messageAreaContainer?.current){
+
+      for(let i=0; i<messages.length; i++){
+
+        const messageArea = messageAreaContainer.current;
+        const docViewTop = messageArea.scrollTop;
+        const docViewBottom = docViewTop + messageArea.clientHeight;
+  
+        const elem = messages[i].block
+        if(elem){
+          const elemTop = elem.offsetTop;
+          const elemBottom = elemTop + elem.clientHeight;
+          if((elemBottom <= docViewBottom) && (elemTop >= docViewTop)){
+            console.log(messages[i].date)
+          } 
+        }
+      }
+    }
+
+
   }
 
-  const { chatId, setChatMembers, chatInfoSliderIsOpened, setChatInfo } = useContext(ChatContext);
-  const [messages, setMessages] = useState(mockMessages);
+  const getMessages = (chatId: number, page: number, amountPerPage: number, initial: boolean) => {
+    authorizedRequest(getChatMessagesUrl(chatId, page, amountPerPage), 'GET')
+    .then((data) => {
+      setLoading(true)
 
-  const [needToAnimateBlock, setNeedToAnimateBlock] = useState<{ messageId: number | null | undefined, firstLoad: boolean }>({
-    messageId: null,
-    firstLoad: true
-  })
+      const result = data.result.reverse();
+      console.log(result)
+      const messagesData: userMessageType[] = [];
+      for(let i=0; i<result.length; i++){
+        const message = result[i];
+        const messageDate = new Date(message.date);
 
+        messagesData.push(
+          {
+            senderId: message.sender_id,
+            date: messageDate,
+            text: message.text,
+            file: message.files,
+            messageId: message.message_id,
+            edited: false,
+            forwarded: null,
+            replied: message.reply_to_msg_id,
+            type: message.sender_id === employeeId ? messageTypes.USER : messageTypes.STRANGER,
+            status: message.is_read ? messageStatus.READ : messageStatus.SENT,
+            block: null
+          }
+        )
+      }
+
+      if(messageAreaContainer.current){
+        // messageAreaContainer.current.classList.add('message-area-block-scroll');
+        var initialScrollHeight = messageAreaContainer.current.scrollHeight
+        console.log(messageAreaContainer.current.scrollHeight)
+      }
+      setMessages([...messagesData, ...messages])
+      
+      setMessagesPage(page);
+      setLoading(false)
+      setTimeout(() => {
+
+        if(messageAreaContainer.current){
+          console.log(messageAreaContainer.current.scrollHeight - initialScrollHeight)
+          setDifference(messageAreaContainer.current.scrollHeight - initialScrollHeight)
+        }
+      }, 500)
+
+      // if(initial){
+      //   setNeedToScrollDown(initial);
+      // }
+      
+
+    })
+  }
+
+  useEffect(() => {
+    console.log(difference)
+    if(messageAreaContainer.current){
+      console.log(messageAreaContainer.current.scrollHeight)
+      messageAreaContainer.current.scrollTop += difference;
+    }
+  }, [difference])
 
 
   useEffect(() => {
     if (chatId) {
-      setChatHeader({
-        avatar: null,
-        name: 'randomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandomrandom',
-        status: 'offline'
-      })
 
       setChatMembers([
         {employeeId: 1, avatar: 'sss', name: 'sd22'}, 
-        {employeeId: 2, avatar: null, name: 'sd22333'}, 
+        {employeeId: 5, avatar: null, name: 'sd22333'}, 
       ])
       
       setChatInfo({
@@ -58,41 +182,80 @@ const ChatDesktop: FC = () => {
         group: true
       })
 
+      // authorizedRequest(`http://127.0.0.1:5000/api/company/${localStorage.getItem('companyId')}/chats`, 'GET')
+      // .then((responce) => {
+      //   console.log(responce)
+      // })
+
+      authorizedRequest(getChatInfoUrl(chatId), 'GET')
+      .then((responce) => {
+        console.log(responce)
+        const result = responce.result;
+        // setChatMembers([
+
+        // ])
+
+        setChatInfo({
+          name: result.name,
+          description: 'safsaf',
+          avatar: result.avatar,
+          group: result.is_group
+        })
+
+      })
+
+      setMessages([])
+      getMessages(chatId, messagesPage, 10, true)
+      // setTimeout(() => setNeedToScrollDown(true), 100)
     }
   }, [chatId])
+
+  // useEffect(() => {
+  //   if(messageAreaContainer.current){
+  //     if(needToScrollDown){
+    
+  //       messageAreaContainer.current.scrollTop += messageAreaContainer.current.scrollHeight;
+  //       setNeedToScrollDown(false)
+  //     }else{
+  //       messageAreaContainer.current.classList.remove('message-area-block-scroll')
+  
+  //     }
+  //   }
+  // }, [needToScrollDown])
+
+
+  // useEffect(() => {
+  //   if(showDate){
+
+  //   }
+  // }, [showDate])
 
   // Handle editing of messages
 
   // Handle adding, deleting, and editing of messages
   const submitMessage = (action: actions, message: userMessageType) => {
     if (action === actions.SEND || action === actions.REPLY) {
-      setNeedToAnimateBlock({ messageId: message.messageId, firstLoad: false })
-      setMessages([message, ...messages])
+      // setNeedToAnimateBlock({ messageId: message.messageId, firstLoad: false })
+      setMessages([...messages, message])
+      setNeedToScrollDown(true);
     }
-    if (action === actions.DELETE) {
-      setMessages(messages.filter((item) => item.messageId !== message.messageId))
-      setNeedToAnimateBlock({ messageId: message.messageId, firstLoad: false })
-    }
+    // if (action === actions.DELETE) {
+    //   console.log(messages.filter((item) => item.messageId !== message.messageId))
+    //   setMessages([...messages.filter((item) => item.messageId !== message.messageId)])
+    //   // setNeedToAnimateBlock({ messageId: message.messageId, firstLoad: false })
+    // }
     if (action === actions.EDIT) {
-      setMessages(messages.map((item) => {
-        if (item.messageId === message.messageId) {
-          setNeedToAnimateBlock({ messageId: message.messageId, firstLoad: false })
-          return message
-        } else {
-          return item
-        }
-      }))
+      const currentMessage = messages[messages.findIndex((item) => item.messageId === message.messageId)]
+      currentMessage.text = message.text
+      currentMessage.edited = true
+      setMessages([...messages])
     }
 
   }
 
   return (
     <div className="chat-desktop">
-      <ChatHeader
-        avatar={chatHeader.avatar}
-        name={chatHeader.name}
-        status={chatHeader.status}
-      />
+      <ChatHeader/>
       <div className="chat-desktop-container">
         <div className="chat-desktop-message-area-container" style={chatInfoSliderIsOpened ? {maxWidth: '50%'} : {}}>
           <MessageArea
@@ -101,6 +264,7 @@ const ChatDesktop: FC = () => {
             messageAreaContainer={messageAreaContainer}
             scrollHandler={scrollHandler}
             messages={messages}
+            date={date}
           />
           <ChatInput submitMessage={submitMessage} messages={messages} />
         </div>

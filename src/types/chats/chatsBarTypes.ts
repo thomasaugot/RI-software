@@ -1,9 +1,10 @@
 
-export type chatBarCardProps = {
-    avatar: string | undefined | null,
-    text: string,
-    name: string,
-    notifications?: number | undefined | null,
-    chatId: number
-  }
-  
+export type chatBarCardProps = chatBarCardType;
+
+export type chatBarCardType = {
+  avatar: string | null,
+  lastMessage: string,
+  name: string,
+  unreadMessages: number | undefined | null,
+  chatId: number
+}
