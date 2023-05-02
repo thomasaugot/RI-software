@@ -1,14 +1,15 @@
 .project-card {
     display: flex;
     flex-direction: row;
-
+    width: 17.057vw;
+    height: 8.78477vw;
     background: #FAFAFA;
-    box-shadow: 0.21961932650073207vw 0.14641288433382138vw 0.7320644216691069vw rgba(0, 0, 0, 0.1);
-    padding: 1.0980966325036603vw;
-    margin: 0.7320644216691069vw 0;
+    box-shadow: 0.2196vw 0.1464vw 0.732vw rgba(0, 0, 0, 0.1);
+    padding: 1.09809vw;
+    margin: 0.732vw 0;
 
-    .title-org-amount {
-        gap: 0.36603221083455345vw;
+    .project-info {
+        gap: 0.366vw;
         display: flex;
         flex-direction: column;
 
@@ -17,8 +18,8 @@
             font-family: 'Inter';
             font-style: normal;
             font-weight: 500;
-            font-size: 1.171303074670571vw;
-            line-height: 1.390922401171303vw;
+            font-size: 1.1713vw;
+            line-height: 1.3909vw;
             color: #000000;
         }
 
@@ -26,8 +27,8 @@
             font-family: 'Inter';
             font-style: normal;
             font-weight: 400;
-            font-size: 1.0248901903367496vw;
-            line-height: 17px;
+            font-size: 1.02489vw;
+            line-height: 1.2445vw;
             color: #444444;
         }
 
@@ -35,27 +36,31 @@
             font-family: 'Inter';
             font-style: normal;
             font-weight: 400;
-            font-size: 1.0248901903367496vw;
-            line-height: 17px;
+            font-size: 1.02489vw;
+            line-height: 1.2445vw;
             color: #444444;
         }
     }
 
-    .avatar-forward-section {
+    .project-actions {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
-        .avatar {}
-
         .forward-icon {
+
             display: flex;
-            width: 1.8060029282576866vw;
-            height: 1.8060029282576866vw;
+            width: 1.806vw;
+            height: 1.806vw;
             background: #376ABE;
             border-radius: 50%;
             justify-content: center;
             align-items: center;
+            
+            svg {
+                width: 0.407vw;
+                height: 0.7137vw;
+            }
         }
     }
 }

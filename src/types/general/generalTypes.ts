@@ -21,10 +21,8 @@ export type MoveWorkerFetchTypes = {
 export type DropDownType = {
   icon: React.SVGAttributes<ReactNode>,
   text: string,
-  editIcon?: React.SVGAttributes<ReactNode>,
   options: OptionType[]
   pipelineOptions?: string[]
-  textIcon: ReactNode
 }
 export type OptionType = {
   value: string,
@@ -91,4 +89,8 @@ export type confirmationModalProps = {
   buttons: confirmationModalButton[],
   isOpen: boolean,
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export type childrenProps = {
+  children: ReactNode
 }
