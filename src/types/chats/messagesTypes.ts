@@ -18,7 +18,7 @@ export enum messageStatus {
 
 export type userMessageType = {
   senderId: number | undefined,
-  time: string,
+  date: Date,
   text: string,
   file: chatFile[],
   messageId: number | undefined,
@@ -32,7 +32,8 @@ export type userMessageType = {
     message: string,
   } | null,
   type: messageTypes,
-  status: messageStatus
+  status: messageStatus,
+  block: HTMLDivElement | null
 }
 
 export type systemMessageType = {

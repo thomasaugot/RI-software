@@ -28,7 +28,7 @@ const ContextMenu: FC = () => {
           <div className="context-menu-icon">{replyMessageIcon}</div>
           <div className="context-menu-action">Reply</div>
         </div>
-        <div className="context-menu-item" onClick={() => { console.log('edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!edit!!!!!!!!!!!'); setActionType({ actionType: actions.EDIT, messageId: contextMenu?.message.messageId }) }}>
+        <div className="context-menu-item" onClick={() => { setActionType({ actionType: actions.EDIT, messageId: contextMenu?.message.messageId }) }}>
           <div className="context-menu-icon">{editMessageIcon}</div>
           <div className="context-menu-action">Edit</div>
         </div>

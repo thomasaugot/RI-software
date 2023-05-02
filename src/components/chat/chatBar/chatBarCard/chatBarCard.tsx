@@ -4,7 +4,7 @@ import { chatBarCardProps } from '../../../../types/chats/chatsBarTypes';
 import { profile } from '../../../../assets/Icons';
 import { ChatContext } from '../../../../context/chat/chatContext';
 
-const ChatBarCard: FC<chatBarCardProps> = ({avatar, name, text, notifications, chatId}) => {
+const ChatBarCard: FC<chatBarCardProps> = ({avatar, name, lastMessage, unreadMessages, chatId}) => {
 
     const { setChatId } = useContext(ChatContext);
 
@@ -20,13 +20,13 @@ const ChatBarCard: FC<chatBarCardProps> = ({avatar, name, text, notifications, c
             <div className="chat-card-information-container">
                 <p className="name">{name}</p>
                 <div className="chat-card-message-container">
-                    <p className="message">{text}</p>
+                    <p className="message">{lastMessage}</p>
                 </div>
             </div>
 
-                {notifications ? 
+                {unreadMessages ? 
                     <div className="notifications-container">
-                        <p className="notifications">{notifications}</p> 
+                        <p className="notifications">{unreadMessages}</p> 
                     </div>
                 :
                 null}

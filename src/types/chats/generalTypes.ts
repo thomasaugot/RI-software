@@ -26,6 +26,7 @@ export type messageAreaProps = {
   // blocksCount: number,
   loading: boolean,
   messages: chatMessageType[],
+  date: Date | null
 }
 
 export type chatByIdResponse = {

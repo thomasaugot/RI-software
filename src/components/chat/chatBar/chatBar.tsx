@@ -1,37 +1,65 @@
-import { useContext, useEffect, useRef, useState } from 'react';
 import './chatBar.scss';
 import ChatBarCard from './chatBarCard/chatBarCard';
 import ChatBarHeader from './chatBarHeader/chatBarHeader';
-import { ModalsContext } from '../../../context/modalsContext';
-import { useInfiniteScroll } from '../../../customHooks/useInfiniteScroll';
-import { chats } from './chatBarHeader/mockChats';
+import { getChatListUrl } from '../../../utils/network';
+import { authorizedRequest } from '../../../utils/queries';
+import { useEffect, useState } from 'react';
+import { chatBarCardType } from '../../../types/chats/chatsBarTypes';
 
 const ChatBar = () => {
-  const { chatSearchInput } = useContext(ModalsContext)
-  const [userScrollPosition, setUserScrollPostion] = useState(0)
-  const [chatsConteinerHeight, setChatsConteinerHeight] = useState(0)
-  const chatsConteiner = useRef<HTMLDivElement>(null)
-  const { count, loading } = useInfiniteScroll(chatsConteinerHeight, userScrollPosition, 100, 20)
-  useEffect(() => {
-    if (chatsConteiner && chatsConteiner.current) {
-      setChatsConteinerHeight(chatsConteiner.current.scrollHeight - 1500)
-    }
-  }, [count])
-  return (
-    <div className="chat-bar-container">
-      <ChatBarHeader />
-      <div ref={chatsConteiner} onScroll={(e: React.UIEvent<HTMLDivElement>) => setUserScrollPostion((e.target as HTMLDivElement).scrollTop)} className="chat-bar-chats-container">
-        {loading ? 'loading...' : chats.slice(0, count)
-          .filter((chat) => chat.name.toLowerCase().includes(chatSearchInput.toLowerCase()) || chat.text.toLowerCase().includes(chatSearchInput.toLowerCase()))
-          .map((chat) => <ChatBarCard
-            avatar={chat.avatar}
-            name={chat.name}
-            text={chat.text}
-            notifications={chat.notifications}
-            chatId={chat.chatId} />,)}
-      </div>
-    </div>
-  );
+    const companyId = parseInt(localStorage.getItem('companyId') || '-1');
+    const [ chatList, setChatList ] = useState<chatBarCardType[]>([]);
+
+    useEffect(() => {
+        authorizedRequest(getChatListUrl(companyId), 'GET')
+        .then((respose) => {
+            const result = respose.result;
+            console.log(result)
+            const chatList: chatBarCardType[] = [];
+            for(let i=0; i<result.length; i++){
+                chatList.push({
+                    avatar: result[i].avatar,
+                    lastMessage: result[i].lastMessage,
+                    name: result[i].name,
+                    unreadMessages: result[i].unread_count,
+                    chatId: result[i].chat_id
+                })
+            }
+
+            setChatList(chatList);
+        })
+    }, [])
+
+    return (
+        <div className="chat-bar-container">
+            <ChatBarHeader />
+            <div className="chat-bar-chats-container">
+                {
+                    chatList.map(({avatar, name, lastMessage, unreadMessages, chatId}) => {
+                        return <ChatBarCard avatar={avatar} name={name} lastMessage={lastMessage} unreadMessages={unreadMessages} chatId={chatId} key={`chat-bar-card-${chatId}`}/>
+                    })
+                }
+                {/* <ChatBarCard avatar={null} name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" unreadMessages={1} chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/>
+                <ChatBarCard avatar="cdjk" name="Ivan" lastMessage="Blalmd vmd vmd md cmsd cala" chatId={1}/> */}
+            </div>
+        </div>
+    );
 };
 
 export default ChatBar;

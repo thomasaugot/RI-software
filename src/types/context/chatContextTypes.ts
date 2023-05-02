@@ -16,6 +16,8 @@ export type contextMenuType = {
 export type chat = {
   chatId: number | undefined,
   setChatId: Dispatch<SetStateAction<number | undefined>>,
+  messages: userMessageType[],
+  setMessages: Dispatch<SetStateAction<userMessageType[]>>,
   contextMenu: contextMenuType | null,
   setContextMenu: Dispatch<SetStateAction<contextMenuType | null>>,
   actionType: actionType,

@@ -34,8 +34,6 @@ const CompaniesList = () => {
           <p className="copanies-list-title">Your companies</p>
           <div className="copanies-list-container">
             {comapniesList.map((company: companiesList) =>{
-                console.log(company)
-                console.log(company.name)
                 return (
                     <div className="company-card" key={`company-card-${company.company_id}`} onClick={() => {
                         localStorage.setItem("companyId", `${company.company_id}`);

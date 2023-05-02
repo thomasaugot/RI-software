@@ -27,8 +27,8 @@ export const authorizedRequest = async (url: string, method: string, tokenType: 
   if (response.status === 200 || response.status === 201) {
     return await response.json();
   }else{
-    window.location.href = 'http://127.0.0.1:3000/';
-    localStorage.setItem(tokenType, '');
+    // window.location.href = 'http://127.0.0.1:3000/';
+    // localStorage.setItem(tokenType, '');
     return response.status;
   }
 

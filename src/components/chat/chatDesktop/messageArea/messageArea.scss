@@ -6,6 +6,25 @@
   overflow-y: scroll;
   padding: 0 1.736vw;
 
+  .date-banner{
+    width: 12vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border-radius: 3vw;
+    position: absolute;
+    left: calc(50% - 6vw);
+    top: 7vw;
+    transition: all ease 0.3s;
+    opacity: 1;
+  }
+
+  .hidden-date-banner{
+    opacity: 0;
+  }
+  
   .loading-messages .box::before {
     background: #caddff;
   }

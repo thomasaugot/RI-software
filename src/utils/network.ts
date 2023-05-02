@@ -20,3 +20,7 @@ export const chatInfoById = (chatId: number) => baseUrl + `api/chats/get/chat/${
 export const sendChatMessageUrl = (chatId: string, chatMessage: string) => baseUrl + chatId // we do not have an endpoint for sending messages
 export const fireEmployeeUrl = baseUrl + 'api/hierarchy/fire';
 export const editProfileUrl = baseUrl + 'api/edit/profile'
+export const getChatMessagesUrl = (chatId: number, page: number, perPage: number) => baseUrl + `api/chats/${chatId}/messages?page=${page}&per_page=${perPage}`;
+export const getChatListUrl = (companyId: number) => baseUrl + `api/company/${companyId}/chats`;
+export const getChatInfoUrl = (chatId: number) => baseUrl + `api/chats/${chatId}`;
+export const readMessageUrl = (chatId: number) => baseUrl + `api/chats/${chatId}/read/messages`
