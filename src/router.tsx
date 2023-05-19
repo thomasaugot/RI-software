@@ -1,20 +1,20 @@
 import AcceptInvitationRegister from "./pages/acceptInvintation/register/register";
 import AcceptInvitationLogin from "./pages/acceptInvintation/login/login";
-import AcceptInvitationConfirmation from "./pages/acceptInvintation/confirmation/confirmation"
+import AcceptInvitationConfirmation from "./pages/acceptInvintation/confirmation/confirmation";
 
-import Login from './pages/login/login';
-import Chat from './pages/chat/chat';
-import Confirmation from './pages/confirmation/confirmation';
-import NotFound from './pages/notFound/notFound'
-import SearchWorker from './pages/searchWorker/searchWorker';
-import Hierachy from './pages/hierarchy/hierarchy';
-import Pipeline from './pages/pipeline/pipeline'
-import Profile from './pages/profile/pofile';
+import Login from "./pages/login/login";
+import Chat from "./pages/chat/chat";
+import Confirmation from "./pages/confirmation/confirmation";
+import NotFound from "./pages/notFound/notFound";
+import SearchWorker from "./pages/searchWorker/searchWorker";
+import Hierachy from "./pages/hierarchy/hierarchy";
+import Pipeline from "./pages/pipeline/pipeline";
+import Profile from "./pages/profile/pofile";
 import Register from "./pages/register/register";
-import { FC } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/home/home';
-
+import { FC } from "react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/home";
+import TaskBoard from "./components/taskBoard/taskBoard";
 
 const Router: FC = () => {
   return (
@@ -23,7 +23,10 @@ const Router: FC = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/accept-invitation/register/:token" element={<AcceptInvitationRegister />} />
       <Route path="/accept-invitation/login/:token" element={<AcceptInvitationLogin />} />
-      <Route path="/accept-invitation/confirmation/:email/:token" element={<AcceptInvitationConfirmation />} />
+      <Route
+        path="/accept-invitation/confirmation/:email/:token"
+        element={<AcceptInvitationConfirmation />}
+      />
       <Route path="/confirm" element={<Confirmation />} />
       <Route path="/confirmation/:email" element={<Confirmation />} />
       <Route path="/hierarchy" element={<Hierachy />} />
@@ -33,6 +36,8 @@ const Router: FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/pipeline" element={<Pipeline />} />
+      {/* <Route path="/project/:id/timeline" element={<Pipeline />} /> */}
+      <Route path="/project/:id/taskboard" element={<TaskBoard />} />
     </Routes>
   );
 };
