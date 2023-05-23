@@ -4,7 +4,7 @@ interface TabLayoutProps {
   tabs: string[]; // Array of tab names
   activeTab: string; // Currently active tab
   onTabChange: (tab: string) => void; // Callback function when a tab is clicked
-  children: React.ReactNode; // Content to be displayed within the tabs
+  children: React.ReactNode; // Content to be displayed within the tab
 }
 
 const TabLayout: React.FC<TabLayoutProps> = ({ tabs, activeTab, onTabChange, children }) => {
