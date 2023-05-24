@@ -21,7 +21,7 @@ const TabLayout: React.FC<TabLayoutProps> = ({ tabs, activeTab, onTabChange, chi
         {tabs.map((tab) => (
           <li
             key={tab}
-            className={tab === activeTab ? "active" : ""}
+            className={tab === activeTab ? "active" : " "}
             onClick={() => handleTabChange(tab)}
           >
             {tab}
