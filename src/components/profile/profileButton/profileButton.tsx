@@ -4,7 +4,7 @@ import { profileButtonProps } from "../../../types/profile/profileTypes";
 
 const ProfileButton: FC<profileButtonProps> = ({ onClick, children }) => {
   return (
-    <button className="profile-input-button " onClick={onClick}>
+    <button className="profile-input-button" onClick={onClick}>
       {children}
     </button>
   );
