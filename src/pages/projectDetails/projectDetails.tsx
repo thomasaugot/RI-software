@@ -11,7 +11,7 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div>
-      {/* <h1>{project.name}</h1> */}
+      <h1>{project.name}</h1>
       <TabLayout
         tabs={["Timeline", "Task Board", "List", "Statistics", "Project Statistics", "Settings"]}
         activeTab={activeTab}
