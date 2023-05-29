@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import TabLayout from "../../layouts/tabsLayout/tabslayout";
 import TaskBoard from "../../components/taskBoard/taskBoard";
+import { project } from "../../assets/Icons";
 
 const ProjectDetails: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Timeline");
